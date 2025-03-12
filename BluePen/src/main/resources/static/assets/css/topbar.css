@@ -1,0 +1,41 @@
+/* 전체 레이아웃 설정 */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+
+/* 상단바 스타일 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1001;
+}
+
+/* 로고 스타일 */
+.logo h2 {
+  margin-top: 12px;
+  margin-left: -8px;
+  font-size: 24px;
+  color: #205781;
+}
+
+/* 네비게이션 스타일 */
+.navigation {
+  display: flex;
+  gap: 15px;
+  margin-right: 40px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}

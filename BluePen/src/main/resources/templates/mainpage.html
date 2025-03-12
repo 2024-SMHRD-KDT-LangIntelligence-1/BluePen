@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mainpage</title>
+	<link rel="stylesheet" href="assets/css/mainpage.css" />
+  <body>
+    <!-- 상단바, 사이드바 -->
+    <header class="topbar" th:replace="~{/topbar}"></header>
+    <div class="sidebar" th:replace="~{/sidebar}"></div>
+    <div class="cover">
+      <!-- 뉴스 Top 10 -->
+      <!-- 대화 프롬프트 -->
+      <!-- 추천 검색어 -->
+      <!-- 캘린더 -->
+      <!-- 일정정리스트 -->
+    </div>
+    <script src="assets/js/mainpage.js"></script>
+  </body>
+</html>
