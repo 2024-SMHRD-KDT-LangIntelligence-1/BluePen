@@ -64,6 +64,14 @@ body {
   align-self: flex-start;
 }
 
+.user-message {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  margin-left: auto; /* 왼쪽 마진을 auto로 설정해서 오른쪽 정렬 */
+}
+
 .input-container {
   position: relative;
   display: flex;
