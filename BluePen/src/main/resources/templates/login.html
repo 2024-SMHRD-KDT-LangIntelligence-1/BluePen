@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - BluePen</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🖋️BLUE PEN</div>
+        <input type="text" id="userId" placeholder="아이디">
+        <input type="password" id="password" placeholder="비밀번호">
+        <button class="btn" onclick="login()">로그인</button>
+
+        <div class="link-container">
+            <a href="register.html">회원가입</a> | 
+            <a href="#" onclick="findUserId()">아이디 찾기</a> | 
+            <a href="#" onclick="findPassword()">비밀번호 찾기</a>
+        </div>
+    </div>
+
+    <script src="assets/js/login.js"></script>
+
+    
+</body>
+</html>

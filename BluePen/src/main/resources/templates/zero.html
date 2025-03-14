@@ -3,27 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 - BluePen</title>
-    <link rel="stylesheet" href="/css/login.css">
-
+    <title>관심사 선택 - BLUE PEN</title>
+    <link rel="stylesheet" href="assets/css/zero.css">
     
 </head>
 <body>
+
     <div class="container">
-        <div class="logo">🖋️BLUE PEN</div>
-        <input type="text" id="userId" placeholder="아이디">
-        <input type="password" id="password" placeholder="비밀번호">
-        <button class="btn" onclick="login()">로그인</button>
-
-        <div class="link-container">
-            <a href="register.html">회원가입</a> | 
-            <a href="#" onclick="findUserId()">아이디 찾기</a> | 
-            <a href="#" onclick="findPassword()">비밀번호 찾기</a>
+        <div class="logo-container">
+            <div class="logo">🖋️BLUE PEN</div>
         </div>
+
+        <p class="title">BluePen 님, 관심가는 항목을 선택하세요.</p>
+
+        <button class="next-btn" onclick="submitSelection()">다음</button>
+
+        <div class="category">관심 직종</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="jobs"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('jobs')">></div>
+        </div>
+
+        <div class="category">관심 자격증</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="certificates"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('certificates')">></div>
+        </div>
+
+        <div class="category">희망 지역</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="locations"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('locations')">></div>
+        </div>
+
     </div>
-
-    <script src="/js/login.js"></script>
-
-    
+    <script src="/js/zero.js"></script>
 </body>
 </html>
