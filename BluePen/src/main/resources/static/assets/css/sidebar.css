@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container {
@@ -17,23 +17,31 @@ body {
   background-color: #f7f7f7;
   color: black;
   transition: left 0.3s ease-in-out;
-  padding-top: 20;
+  padding-top: 20px; /* px 단위 추가 */
   overflow-y: auto; /* 세로 스크롤 추가 */
-  padding-bottom: 60px; /* 하단에 여백 추가 */
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  box-sizing: border-box; /* 패딩 포함한 크기 조정 */
 }
 
 /* 토글 버튼 스타일 */
 .toggle-btn {
   position: fixed;
   top: 50%;
-  left: 240px; /* 기본적으로 사이드바 옆에 위치 */
+  left: 8px; /* 기본적으로 사이드바 옆에 위치 */
   border: none;
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
   transition: left 0.3s ease-in-out;
   font-size: 18px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0); /* 배경 투명*/
+  color: #19335A;
+}
+
+/* 사이드바가 열린 상태일 때 토글 버튼의 위치 이동 */
+.sidebar.opened .toggle-btn {
+  left: 240px; /* 사이드바가 열린 상태에서 240px 만큼 이동 */
 }
 
 /* 사이드바가 닫힐 때 */
@@ -45,23 +53,32 @@ body {
   left: 8px;
 }
 
+/* 로고 스타일 */
+.sidebar-logo h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #19335A;
+  margin-left: 20px; /* 오른쪽에 여백을 추가하여 이동 */
+}
+
 /* 리스트 스타일 */
 .sidebar-list {
   margin-top: 10px;
   margin-left: 20px;
   font-size: 13px;
-  max-height: 480px; /* 원하는 높이 설정 */
+  max-height: 500px; /* 원하는 높이 설정 */
   overflow-y: auto; /* 세로 스크롤을 활성화 */
   overflow-x: hidden; /* 리스트에서 가로 스크롤 제거 */
   white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
   padding-top: 30px;
   position: relative; /* 상대적 위치 지정 */
-  top: 75px; /* 아래로 이동 */
+  top: 40px; /* 아래로 이동 */
 }
 
 /* 스크롤바 전체 */
 .sidebar-list::-webkit-scrollbar {
   width: 8px; /* 스크롤바 너비 */
+  margin-right: 0;
 }
 
 /* 스크롤바 배경 */
@@ -72,7 +89,7 @@ body {
 
 /* 스크롤바 썸 (슬라이드 바) */
 .sidebar-list::-webkit-scrollbar-thumb {
-  background-color: #205781; /* 썸 색상 */
+  background-color: #19335A; /* 썸 색상 */
   border-radius: 10px; /* 둥근 모서리 */
 }
 
@@ -80,6 +97,10 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+#today strong {
+  margin: 0;
 }
 
 .sidebar-list li strong {
@@ -96,7 +117,11 @@ body {
   overflow: hidden; /* 넘치는 부분 숨기기 */
   width: 90%;
   position: relative; /* 상대적 위치 지정 */
-  top: -35px; /* 20px만큼 아래로 이동 */
+  top: -35px; /* 아래로 이동 */
+}
+
+.task-checkbox {
+  margin-right: 8px; /* 체크박스와 텍스트 사이 간격 */
 }
 
 /* 마우스 올렸을 때 효과 (단, strong 제외) */
@@ -113,16 +138,16 @@ body {
 /* 사이드바 하단 (마이페이지 & 로그아웃) */
 .sidebar-footer {
   position: absolute;
-  bottom: 70px;
+  bottom: 20px;
   left: 20px;
-  width: 100%;
+  width: 150px;
   display: flex;
   flex-direction: column;
 }
 
 /* 마이페이지 & 로그아웃 공통 스타일 */
 .sidebar-footer a {
-  color: #205781;
+  color: #19335A;
   font-size: 12px;
   font-weight: bold;
   text-decoration: none;
@@ -142,10 +167,12 @@ body {
 /* 휴지통 아이콘 */
 .trash {
   position: absolute;
-  color: #205781;
-  bottom: 70px; /*아래에서 떨어지게 */
+  color: #19335A;
+  bottom: 20px; /*아래에서 떨어지게 */
   left: 195px; /* 왼쪽에서 떨어지게 */
 }
+
+
 
 /* 전체선택 체크박스를 오른쪽 정렬 */
 #select-all-container {
@@ -153,7 +180,6 @@ body {
   justify-content: flex-end; /* 오른쪽 정렬 */
   margin-left: 120px;
   position: relative; /* 상대적 위치 지정 */
-  top: 20px; /* 20px만큼 아래로 이동 */
 }
 
 /* 전체선택 체크박스 스타일 */
@@ -163,8 +189,13 @@ body {
   font-size: 14px; /* 글자 크기 */
 }
 
+#select-all-container strong {
+  margin: 0;
+  padding: 0;
+}
+
 #select-all-container input[type="checkbox"] {
-  margin-bottom: -15px; /* 체크박스와 텍스트 간 간격 */
+  margin-bottom: 0; /* 체크박스와 텍스트 간 간격 */
   margin-left: 8px;
 }
 

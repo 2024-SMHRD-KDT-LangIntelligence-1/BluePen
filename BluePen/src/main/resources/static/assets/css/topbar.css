@@ -3,8 +3,8 @@ body,
 html {
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans KR", sans-serif;
   box-sizing: border-box;
+  font-family:'Noto Sans KR', sans-serif;
 }
 
 /* 상단바 스타일 */
@@ -12,30 +12,67 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 15px 20px;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1001;
+  background-color: white;
 }
 
 /* 로고 스타일 */
 .logo h2 {
-  margin-top: 12px;
-  margin-left: -8px;
   font-size: 24px;
-  color: #205781;
+  font-weight: bold;
+  color: #19335A;
 }
 
 /* 네비게이션 스타일 */
 .navigation {
   display: flex;
-  gap: 15px;
-  margin-right: 40px;
 }
 
+/* 네비게이션 링크 스타일 */
 .nav-link {
   text-decoration: none;
-  color: black;
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #19335A;
 }
+
+/* 아이콘 스타일 */
+.nav-link i {
+  font-size: 24px;
+  margin: 10px;
+  margin-right: 20px;
+}
+
+/* 기본적으로 텍스트 숨김 */
+.icon-text {
+  display: none;
+  font-size: 12px;
+  color: #19335A;
+  margin-top: 5px;
+  text-align: center;
+  position: absolute;
+  bottom: -20px;
+  left: 53%; /* 아이콘 중앙아래 위치 */
+  transform: translateX(-50%);
+  width: 60px;
+}
+
+/* 네비게이션 아이템에 호버하면 텍스트가 보이도록 */
+.nav-link:hover .icon-text {
+  display: block;
+}
+
+/* 네비게이션 아이콘의 위치를 상대적으로 설정하여 텍스트와 겹치지 않도록 함 */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
