@@ -29,4 +29,10 @@ public class MainController {
 
 		return "topbar";
 	}
+	
+	@GetMapping("/signup")
+	public String signup() {
+
+		return "signup";
+	}
 }
