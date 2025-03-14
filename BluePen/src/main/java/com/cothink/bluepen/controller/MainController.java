@@ -46,4 +46,10 @@ public class MainController {
 		return "zero";
 	}
 	
+	@GetMapping("/calendar")
+	public String calendar() {
+
+		return "calendar";
+	}
+	
 }
