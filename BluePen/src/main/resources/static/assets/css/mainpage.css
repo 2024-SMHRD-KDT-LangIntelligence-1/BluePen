@@ -52,12 +52,11 @@ body {
 }
 
 .chat-box {
-  display: none; /* 처음엔 안 보이게 설정 */
+  display: flex; /* flex로 설정 */
+  flex-direction: column; /* 세로로 정렬 */
   width: 600px;
-  padding: 20px;
-  overflow-y: none;
-  flex-direction: column;
-  border: 2px solid #3498db; /* 파란색 테두리 */
+  padding: 0;
+  overflow-y: auto;
 }
 
 .chat-message {
@@ -69,15 +68,36 @@ body {
 }
 
 .bot-message {
-  align-self: flex-start;
+  align-self: flex-start; /* 왼쪽 정렬 */
 }
 
 .user-message {
+  display: flex; /* flex로 설정하여 오른쪽 정렬 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  padding: 10px;
+  border-radius: 10px;
+  text-align: right; /* 텍스트 오른쪽 정렬 */
+  margin-left: auto; /* 오른쪽 정렬 유지 */
+  align-self: flex-end; /* 오른쪽 정렬 유지 */
+}
+
+/* 사용자 메시지 스타일 */
+.user-message-p {
   display: inline-block;
   padding: 10px;
   border-radius: 10px;
+  background-color: #DEECFF;
+  text-align: right;
+  word-wrap: break-word;
   max-width: 70%;
-  margin-left: auto; /* 왼쪽 마진을 auto로 설정해서 오른쪽 정렬 */
+}
+
+/* 봇 메시지 스타일 */
+.bot-message-p {
+  display: inline-block;
+  padding: 10px;
+  word-wrap: break-word;
+  max-width: 70%;
 }
 
 .input-container {
@@ -85,23 +105,27 @@ body {
   display: flex;
   flex-direction: column;
   width: 800px;
-  height: 80px;
-  display: flex;
+  height: 130px;
   padding: 20px;
   justify-content: center; /* 수직 중앙 정렬 */
   align-items: center; /* 수평 중앙 정렬 */
 }
 
-input[type="text"] {
+#user-input {
   width: 80%;
-  height: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  padding: 0px 30px 40px 30px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
+  margin: 0;
+  border-radius: 25px;
+  border: none; /* 테두리 제거 */
+  height: 130px;
+  font-size: 15px; /* 글씨 크기 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 -1px 3px rgba(0, 0, 0, 0.1), 1px 0 3px rgba(0, 0, 0, 0.1), -1px 0 3px rgba(0, 0, 0, 0.1); /* 모든 방향에 그림자 추가 */
 }
 
-user-input {
-	width: 600px;
+
+/* 포커스된 상태에서의 스타일 */
+input[type="text"]:focus {
+  outline: none; /* 기본 포커스 아웃라인 제거 */
 }
 
 .suggestions {

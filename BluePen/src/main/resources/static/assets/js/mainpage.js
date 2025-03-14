@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
   let userInput = document.getElementById("user-input");
 
@@ -66,8 +65,19 @@ function addMessage(message, sender) {
 
   const messageDiv = document.createElement("div");
   messageDiv.classList.add("chat-message", sender + "-message");
-  messageDiv.innerHTML = `<p>${message}</p>`;
 
+  // 사용자와 봇을 구분하여 p 태그 스타일 다르게 적용
+  const pTag = document.createElement("p");
+  pTag.textContent = message;
+
+  // 사용자 메시지와 봇 메시지 구분
+  if (sender === "user") {
+    pTag.classList.add("user-message-p");
+  } else {
+    pTag.classList.add("bot-message-p");
+  }
+
+  messageDiv.appendChild(pTag);
   chatBox.appendChild(messageDiv);
 
   // 스크롤을 자동으로 맨 아래로 이동
