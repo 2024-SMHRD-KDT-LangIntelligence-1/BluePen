@@ -5,6 +5,9 @@ document.getElementById("user-input").addEventListener("keydown", function(event
     if (userInput.trim() === "") {
       return; // 빈 입력 방지
     }
+	
+	// 대화가 시작되면 h2 숨기기
+	document.querySelector(".chat-container h2").style.display = "none";
 
     // 사용자 메시지 추가
     addMessage(userInput, "user");
