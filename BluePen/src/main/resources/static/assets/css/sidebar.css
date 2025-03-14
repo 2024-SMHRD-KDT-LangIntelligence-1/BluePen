@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container {
@@ -19,7 +19,6 @@ body {
   transition: left 0.3s ease-in-out;
   padding-top: 20;
   overflow-y: auto; /* 세로 스크롤 추가 */
-  padding-bottom: 60px; /* 하단에 여백 추가 */
 }
 
 /* 토글 버튼 스타일 */
@@ -33,7 +32,7 @@ body {
   border-radius: 50%;
   transition: left 0.3s ease-in-out;
   font-size: 18px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0); /* 배경 투명*/
 }
 
 /* 사이드바가 닫힐 때 */
@@ -50,7 +49,7 @@ body {
   margin-top: 10px;
   margin-left: 20px;
   font-size: 13px;
-  max-height: 480px; /* 원하는 높이 설정 */
+  max-height: 500px; /* 원하는 높이 설정 */
   overflow-y: auto; /* 세로 스크롤을 활성화 */
   overflow-x: hidden; /* 리스트에서 가로 스크롤 제거 */
   white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
@@ -82,6 +81,10 @@ body {
   padding: 0;
 }
 
+#today strong {
+  margin: 0;
+}
+
 .sidebar-list li strong {
   display: block; /* 블록 요소로 만들어 줄 간격 확보 */
   margin-top: 18px; /* 아래쪽 여백 추가 */
@@ -99,6 +102,10 @@ body {
   top: -35px; /* 20px만큼 아래로 이동 */
 }
 
+.task-checkbox {
+  margin-right: 8px; /* 체크박스와 텍스트 사이 간격 */
+}
+
 /* 마우스 올렸을 때 효과 (단, strong 제외) */
 .sidebar-list li:not(:has(strong)):hover {
   background-color: #daeaf1;
@@ -113,7 +120,7 @@ body {
 /* 사이드바 하단 (마이페이지 & 로그아웃) */
 .sidebar-footer {
   position: absolute;
-  bottom: 70px;
+  bottom: 20px;
   left: 20px;
   width: 100%;
   display: flex;
@@ -143,9 +150,11 @@ body {
 .trash {
   position: absolute;
   color: #205781;
-  bottom: 70px; /*아래에서 떨어지게 */
+  bottom: 20px; /*아래에서 떨어지게 */
   left: 195px; /* 왼쪽에서 떨어지게 */
 }
+
+
 
 /* 전체선택 체크박스를 오른쪽 정렬 */
 #select-all-container {
@@ -153,7 +162,6 @@ body {
   justify-content: flex-end; /* 오른쪽 정렬 */
   margin-left: 120px;
   position: relative; /* 상대적 위치 지정 */
-  top: 20px; /* 20px만큼 아래로 이동 */
 }
 
 /* 전체선택 체크박스 스타일 */
@@ -163,8 +171,13 @@ body {
   font-size: 14px; /* 글자 크기 */
 }
 
+#select-all-container strong {
+  margin: 0;
+  padding: 0;
+}
+
 #select-all-container input[type="checkbox"] {
-  margin-bottom: -15px; /* 체크박스와 텍스트 간 간격 */
+  margin-bottom: 0; /* 체크박스와 텍스트 간 간격 */
   margin-left: 8px;
 }
 

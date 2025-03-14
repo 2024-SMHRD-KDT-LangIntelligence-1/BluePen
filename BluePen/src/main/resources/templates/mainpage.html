@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <title>Mainpage</title>
 	<link rel="stylesheet" href="assets/css/mainpage.css" />
   <body>
@@ -11,7 +12,18 @@
     <div class="sidebar" th:replace="~{/sidebar}"></div>
     <div class="cover">
       <!-- 뉴스 Top 10 -->
+      
       <!-- 대화 프롬프트 -->
+      <div class="chat-container">
+      <h2> CoThink님 취뽀 가보자고요</h2>
+    <div class="chat-box" id="chat-box">
+      <div class="chat-message bot-message">
+      </div>
+    </div>
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="무엇이든 물어보세요" />
+    </div>
+  </div>
       <!-- 추천 검색어 -->
       <!-- 캘린더 -->
       <!-- 일정정리스트 -->
