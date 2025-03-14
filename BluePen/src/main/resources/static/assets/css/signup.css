@@ -1,10 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #3b6fd9;
+    background-color: white;
+    box-sizing: border-box;
 }
 .container {
     background-color: white;
@@ -15,8 +16,7 @@ body {
 }
 .logo {
     font-size: 24px;
-    color: #3b6fd9;
-    font-style: oblique;
+    color: #19335A;
     font-weight: bold;
     margin-bottom: 15px;
     text-align: center; /* 중앙 정렬 */
@@ -37,8 +37,8 @@ border-radius: 5px;
 box-sizing: border-box; /* 박스 크기를 패딩과 보더까지 포함하여 조절 */
 }
 .btn {
-    background-color: #3b6fd9;
-    color: white;
+    background-color: #4675C0;
+    color: black;
     border: 1px solid #ccc;
     padding: 10px;
     width: 100%;
