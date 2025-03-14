@@ -1,4 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.querySelector(".sidebar");
+  const toggleBtn = document.querySelector("#sidebar-toggle");
+  const icon = toggleBtn.querySelector("i");
+  const chatContainer = document.querySelector(".chat-container");
+
+  // 기본적으로 열린 상태
+  sidebar.classList.add("opened");
+  icon.classList.add("fa-angle-left"); // 열린 상태 아이콘
+
+  toggleBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("closed");
+    sidebar.classList.toggle("opened");
+
+    // 아이콘 변경
+    if (sidebar.classList.contains("closed")) {
+      icon.classList.remove("fa-angle-left");
+      icon.classList.add("fa-angle-right"); // 닫힌 상태면 >
+    } else {
+      icon.classList.remove("fa-angle-right");
+      icon.classList.add("fa-angle-left"); // 열린 상태면 <
+    }
+
+    // 대화 프롬프트 위치 조정
+    if (sidebar.classList.contains("opened")) {
+      chatContainer.style.marginLeft = "250px"; // 사이드바 너비만큼 이동
+    } else {
+      chatContainer.style.marginLeft = "0"; // 원래 위치로 복귀
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
   let userInput = document.getElementById("user-input");
 
   userInput.addEventListener("keydown", function (event) {

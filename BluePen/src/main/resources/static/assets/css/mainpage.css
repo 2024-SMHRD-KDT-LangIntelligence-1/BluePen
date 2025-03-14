@@ -26,7 +26,6 @@ body {
 }
 
 /*----------------------------------------------------------------------------------------------------*/
-
 .chat-container {
   width: 800px;
   height: 100vh; /* 화면 높이 꽉 채우기 */
@@ -34,6 +33,15 @@ body {
   flex-direction: column;
   justify-content: center; /* 수직 중앙 정렬 */
   align-items: center; /* 수평 중앙 정렬 */
+  transition: margin-left 0.3s ease; /* 부드럽게 이동 */
+}
+
+.sidebar.opened ~ .cover .chat-container {
+  margin-left: 250px; /* 사이드바 너비만큼 이동 */
+}
+
+.sidebar.closed ~ .cover .chat-container {
+  margin-left: 0;
 }
 
 .chat-container h2 {
