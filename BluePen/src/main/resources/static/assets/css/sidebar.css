@@ -14,7 +14,7 @@ body {
   left: 0; /* 기본값: 열려 있음 */
   width: 240px;
   height: 100vh;
-  background-color: #f7f7f7;
+  background-color: #F3F8FF;
   color: black;
   transition: left 0.3s ease-in-out;
   padding-top: 20px; /* px 단위 추가 */
@@ -126,7 +126,7 @@ body {
 
 /* 마우스 올렸을 때 효과 (단, strong 제외) */
 .sidebar-list li:not(:has(strong)):hover {
-  background-color: #daeaf1;
+  background-color: #C6E7FF;
   width: 90%;
 }
 

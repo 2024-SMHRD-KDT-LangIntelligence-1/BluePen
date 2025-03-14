@@ -15,17 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedTasks = [];
 
   // 1. 사이드바 토글 버튼
-  // 초기 상태에서 사이드바와 토글 버튼 설정
-  sidebar.classList.add("closed");
-  icon.classList.remove("fa-angle-left");
-  icon.classList.add("fa-angle-right"); // 닫힌 상태면 >
+  // 초기 상태에서 사이드바를 '열린 상태'로 설정
+  sidebar.classList.add("opened"); // 열린 상태로 시작
+  icon.classList.remove("fa-angle-right");
+  icon.classList.add("fa-angle-left"); // 열린 상태면 <
 
+  // 토글 버튼 클릭 이벤트
   toggleBtn.addEventListener("click", function () {
-    // 사이드바와 토글 버튼 상태 바꿔주기
+    // 사이드바 상태 토글
     sidebar.classList.toggle("closed");
-    sidebar.classList.toggle("opened"); // 열린 상태 추가
+    sidebar.classList.toggle("opened");
 
-    // 아이콘 바꾸기
+    // 아이콘 변경
     if (sidebar.classList.contains("closed")) {
       icon.classList.remove("fa-angle-left");
       icon.classList.add("fa-angle-right"); // 닫힌 상태면 >
