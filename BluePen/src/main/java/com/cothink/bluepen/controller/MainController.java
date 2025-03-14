@@ -35,4 +35,15 @@ public class MainController {
 
 		return "signup";
 	}
+	@GetMapping("/login")
+	public String login() {
+
+		return "login";
+	}
+	@GetMapping("/zero")
+	public String zero() {
+
+		return "zero";
+	}
+	
 }

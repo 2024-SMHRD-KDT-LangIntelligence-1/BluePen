@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관심사 선택 - BLUE PEN</title>
+    <link rel="stylesheet" href="assets/css/zero.css">
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">🖋️BLUE PEN</div>
+        </div>
+
+        <p class="title">BluePen 님, 관심가는 항목을 선택하세요.</p>
+
+        <button class="next-btn" onclick="submitSelection()">다음</button>
+
+        <div class="category">관심 직종</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="jobs"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('jobs')">></div>
+        </div>
+
+        <div class="category">관심 자격증</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="certificates"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('certificates')">></div>
+        </div>
+
+        <div class="category">희망 지역</div>
+        <div class="selection-container">
+            <div class="options-wrapper">
+                <div class="options" id="locations"></div>
+            </div>
+            <div class="arrow" onclick="nextSlide('locations')">></div>
+        </div>
+
+    </div>
+    <script src="assets/js/zero.js"></script>
+</body>
+</html>
