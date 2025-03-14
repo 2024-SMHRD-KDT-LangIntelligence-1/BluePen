@@ -94,3 +94,26 @@ function getBotResponse(input) {
     return "죄송합니다, 이해하지 못했어요. 다시 시도해 주세요.";
   }
 }
+
+document.getElementById('user-input').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    // 메시지 입력 후 30px 위로 이동
+    document.querySelector('.input-container').style.bottom = '60px';
+    
+    // 입력된 메시지 처리 부분 (필요시 여기에 메시지 추가하는 코드 작성)
+    const userInput = event.target.value;
+    // 예: 메시지를 chat-box에 추가하는 코드
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message', 'user-message');
+    messageElement.textContent = userInput;
+    document.getElementById('chat-box').appendChild(messageElement);
+    
+    // 메시지 입력 후 input 필드 비우기
+    event.target.value = '';
+    
+    // 입력 후 채팅창 스크롤을 맨 아래로 이동 (기본적으로 새 메시지가 아래로 추가되게)
+    const chatBox = document.getElementById('chat-box');
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+});
+
