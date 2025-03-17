@@ -21,14 +21,17 @@ document.addEventListener("DOMContentLoaded", function () {
       icon.classList.add("fa-angle-left"); // 열린 상태면 <
     }
 
-    // 대화 프롬프트 위치 조정
-    if (sidebar.classList.contains("opened")) {
-      chatContainer.style.marginLeft = "250px"; // 사이드바 너비만큼 이동
-    } else {
-      chatContainer.style.marginLeft = "0"; // 원래 위치로 복귀
-    }
   });
 });
+
+function handleEnterKey(event) {
+        if (event.key === "Enter") {
+            document.querySelector('form').submit();
+            return false; // Enter 키가 제출 외의 기본 동작을 수행하지 않도록 방지
+        }
+    }
+
+    document.getElementById('text').addEventListener("keypress", handleEnterKey);
 
 document.addEventListener("DOMContentLoaded", function () {
   let userInput = document.getElementById("user-input");
@@ -97,7 +100,7 @@ function getBotResponse(input) {
 
 document.getElementById('user-input').addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
-    // 메시지 입력 후 30px 위로 이동
+    // 메시지 입력 후 위로 이동
     document.querySelector('.input-container').style.bottom = '60px';
     
     // 입력된 메시지 처리 부분 (필요시 여기에 메시지 추가하는 코드 작성)
@@ -115,5 +118,7 @@ document.getElementById('user-input').addEventListener('keypress', function(even
     const chatBox = document.getElementById('chat-box');
     chatBox.scrollTop = chatBox.scrollHeight;
   }
-});
+}); 
+
+
 

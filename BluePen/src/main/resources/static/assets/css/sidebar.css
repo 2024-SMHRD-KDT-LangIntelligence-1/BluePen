@@ -147,6 +147,7 @@ body {
 
 /* 마이페이지 & 로그아웃 공통 스타일 */
 .sidebar-footer a {
+  width: 80px;
   color: #19335A;
   font-size: 12px;
   font-weight: bold;
