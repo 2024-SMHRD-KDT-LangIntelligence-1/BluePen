@@ -53,6 +53,13 @@ public class MainController {
 
 		return "calendar";
 	}
+	
+	@GetMapping("/flasktest")
+	public String flasktest() {
+
+		return "flasktest";
+	}
+
 
 	@GetMapping("/list")
 	public String list() {

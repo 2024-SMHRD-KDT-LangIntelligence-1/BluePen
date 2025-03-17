@@ -24,6 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function handleEnterKey(event) {
+        if (event.key === "Enter") {
+            document.querySelector('form').submit();
+            return false; // Enter 키가 제출 외의 기본 동작을 수행하지 않도록 방지
+        }
+    }
+
+    document.getElementById('text').addEventListener("keypress", handleEnterKey);
+
 document.addEventListener("DOMContentLoaded", function () {
   let userInput = document.getElementById("user-input");
 
