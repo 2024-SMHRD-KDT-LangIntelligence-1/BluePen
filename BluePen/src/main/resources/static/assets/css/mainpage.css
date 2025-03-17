@@ -114,9 +114,21 @@ body {
   max-width: 70%;
 }
 
-.input-container {
+ .input-container {
   position: fixed; /* 화면 하단에 고정 */
   bottom: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 150px;
+  padding: 20px;
+  justify-content: center; /* 수직 중앙 정렬 */
+  align-items: center; /* 수평 중앙 정렬 */
+}
+
+form {
+  position: fixed; /* 화면 하단에 고정 */
   position: relative;
   display: flex;
   flex-direction: column;

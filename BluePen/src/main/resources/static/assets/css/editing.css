@@ -1,0 +1,28 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 헤더 스타일 */
+.topbar {
+  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
+  z-index: 1002; /* chat-container보다 위로 오도록 z-index 값 설정 */
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
+  z-index: 1001; /* chat-container보다 위로 오도록 z-index 값 설정 */
+}
+
+/*----------------------------------------------------------------------------------------------------*/

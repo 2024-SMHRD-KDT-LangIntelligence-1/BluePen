@@ -87,17 +87,6 @@ function addMessage(message, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// 챗봇 응답 함수 (간단한 예제)
-function getBotResponse(input) {
-  if (input.includes("하이")) {
-    return "좋은 하루예요! 오늘 서류 제출 일정 확인하셨나요?";
-  } else if (input.includes("면접일정")) {
-    return "스마트인재개발원 면접은 4월 9일, 합격발표는 4월 10일입니다.";
-  } else {
-    return "죄송합니다, 이해하지 못했어요. 다시 시도해 주세요.";
-  }
-}
-
 document.getElementById('user-input').addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
     // 메시지 입력 후 위로 이동

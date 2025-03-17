@@ -39,6 +39,12 @@ body {
   color: #19335A;
 }
 
+/* 호버 상태에서의 스타일 제거 */
+.toggle-btn:hover {
+  background-color: rgba(0, 0, 0, 0); /* 호버시 배경이 바뀌지 않게 설정 */
+  color: #19335A; /* 호버 시 색상 변경이 없게 설정 */
+}
+
 /* 사이드바가 열린 상태일 때 토글 버튼의 위치 이동 */
 .sidebar.opened .toggle-btn {
   left: 240px; /* 사이드바가 열린 상태에서 240px 만큼 이동 */
@@ -59,6 +65,12 @@ body {
   font-weight: bold;
   color: #19335A;
   margin-left: 20px; /* 오른쪽에 여백을 추가하여 이동 */
+  text-decoration: none;
+}
+
+.sidebar-logo a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* 리스트 스타일 */
@@ -172,8 +184,6 @@ body {
   bottom: 20px; /*아래에서 떨어지게 */
   left: 195px; /* 왼쪽에서 떨어지게 */
 }
-
-
 
 /* 전체선택 체크박스를 오른쪽 정렬 */
 #select-all-container {
