@@ -84,5 +84,12 @@ public class MainController {
 
 		return "mypage";
 	}
+	
+	@GetMapping("/resume")
+	public String resume() {
+
+		return "resume";
+	}
+
 
 }

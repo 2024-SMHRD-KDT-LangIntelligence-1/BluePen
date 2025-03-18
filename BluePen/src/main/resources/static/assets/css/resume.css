@@ -1,0 +1,223 @@
+body {
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+}
+.container {
+    max-width: 700px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.header div {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+}
+.inactive {
+    color: gray;
+}
+.active {
+    color: black;
+    background: #34568B;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+}
+.section {
+    display: none;
+}
+.visible {
+    display: block;
+}
+.form-section {
+    display: flex;
+    gap: 20px;
+}
+.photo-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 세로 가운데 정렬 */
+    align-items: center; /* 가로 가운데 정렬 */
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 140px;
+    height: 170px;
+    margin: 20px auto; /* 중앙 정렬 */
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+.photo-upload span {
+    display: block; /* 한 줄 아래로 이동 */
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px; /* 간격 조정 */
+}
+.photo-upload input {
+    display:contents;
+}
+.photo-upload label {
+    cursor: pointer;
+    color: #007bff;
+}
+.input-group-container {
+    width: 70%;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.input-group input, .input-group textarea {
+    width: 97%;
+    padding: 8px;
+    height: 25px; /* 학력 사항 입력란과 동일한 높이 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* PDF 업로드 영역 */
+.file-upload {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.file-upload input {
+    display: none;
+}
+.file-upload label {
+    font-size: 16px;
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+}
+.file-upload span {
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+/* 고정 버튼 */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+.submit-next1-btn {
+    background: #b0b1b3;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 48%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.submit-next2-btn {
+    background: #34568B;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 48%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.submit-next2-btn:hover {
+    background: #2c4778;
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+textarea {
+    min-height: 150px;
+    max-height: 150px;
+    overflow-y: auto;
+    resize: none;
+}
+.education-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    border: 1px solid #ddd;
+}
+.education-header {
+    display: flex;
+    font-weight: bold;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.education-header span {
+    font-size: 16px;
+    font-weight: bold;
+}
+.remove-btn {
+    background: #EAEAEA;
+    color: black;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.remove-btn:hover {
+    background: #d6d6d6;
+}
+.education-group {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+.education-group label {
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+}
+.education-group input, .education-group select {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 14px;
+}
+.gpa-group {
+    width: 48.5%; /* 학점 입력란이 다른 공간을 넘어가지 않도록 50%로 조정 */
+}
+.add-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border: 1px dashed #007bff;
+    background: transparent;
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.add-btn:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
