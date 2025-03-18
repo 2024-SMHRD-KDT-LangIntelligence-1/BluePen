@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAINPAGE</title>
+    <title>Mainpage</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
@@ -15,11 +15,34 @@
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
 
+    <div class="cover">
       <!-- 대화 프롬프트, 추천 검색어 -->
-      <div class="main-container">
+      <div class="chat-container">
         <h2>CoThink님 취뽀 가보자고요</h2>
-        <div class="prompt" th:replace="~{/prompt}"></div>
+        <div class="chat-box" id="chat-box">
+          <div class="chat-message bot-message"></div>
+        </div>
+        <div class="input-container">
+        <form action="/flasktest.do" method="get" onsubmit="return handleEnterKey(event)">
+          <input
+            type="text"
+            id="user-input"
+            name="text"
+            placeholder="무엇이든 물어보세요"
+          />
+        </form>
+        <div class="suggestions" id="suggestions">
+          <span class="suggestion">스마트인재개발원</span>
+          <span class="suggestion">면접일정</span>
+          <span class="suggestion">자격증일정</span>
+          <span class="suggestion">추천기업</span>
+        </div>
+        </div>
+      </div>
+      <!-- 달력 -->
+      <!-- 일정 리스트 -->
     </div>
     <script src="assets/js/mainpage.js"></script>
   </body>
 </html>
+

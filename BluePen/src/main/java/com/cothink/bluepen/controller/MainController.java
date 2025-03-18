@@ -89,4 +89,11 @@ public class MainController {
 
 		return "prompt";
 	}
+
+	@GetMapping("/resume")
+	public String resume() {
+
+		return "resume";
+	}
+
 }
