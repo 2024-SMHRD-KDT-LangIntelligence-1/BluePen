@@ -1,29 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector(".sidebar");
-  const toggleBtn = document.querySelector("#sidebar-toggle");
-  const icon = toggleBtn.querySelector("i");
-  const chatContainer = document.querySelector(".chat-container");
-
-  // 기본적으로 열린 상태
-  sidebar.classList.add("opened");
-  icon.classList.add("fa-angle-left"); // 열린 상태 아이콘
-
-  toggleBtn.addEventListener("click", function () {
-    sidebar.classList.toggle("closed");
-    sidebar.classList.toggle("opened");
-
-    // 아이콘 변경
-    if (sidebar.classList.contains("closed")) {
-      icon.classList.remove("fa-angle-left");
-      icon.classList.add("fa-angle-right"); // 닫힌 상태면 >
-    } else {
-      icon.classList.remove("fa-angle-right");
-      icon.classList.add("fa-angle-left"); // 열린 상태면 <
-    }
-
-  });
-});
-
 function handleEnterKey(event) {
         if (event.key === "Enter") {
             document.querySelector('form').submit();
