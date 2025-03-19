@@ -1,68 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("side-modal");
+  const modalYesBtn = document.getElementById("modal-yes-btn");
+  const modalNoBtn = document.getElementById("modal-no-btn");
   const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("side-toggle-btn"); 
-  const trashBtn = document.getElementById("side-trash-btn"); 
-  const modal = document.getElementById("side-confirmation-modal");
-  const confirmBtn = document.getElementById("side-confirm-btn"); 
-  const cancelBtn = document.getElementById("side-cancel-btn");
-  const selectAllContainer = document.getElementById("side-select-all-container");
-  const selectAllCheckbox = document.getElementById("side-select-all"); 
-  const taskList1 = document.getElementById("side-task-list1"); 
-  const taskList2 = document.getElementById("side-task-list2"); 
+  const toggleBtn = document.getElementById("side-toggle-btn");
+  const trashBtn = document.getElementById("side-trash-btn");
+  const selectAllContainer = document.getElementById(
+    "side-select-all-container"
+  );
+  const selectAllCheckbox = document.getElementById("side-select-all");
+  const taskLists = [
+    document.getElementById("side-task-list1"),
+    document.getElementById("side-task-list2"),
+  ];
   const icon = toggleBtn.querySelector("i");
 
   let checkboxesCreated = false;
-  let selectedTasks = [];
 
-  // 1. 사이드바 토글 버튼
-  // 초기 상태에서 사이드바를 '열린 상태'로 설정
-  sidebar.classList.add("opened"); // 열린 상태로 시작
-  icon.classList.remove("fa-angle-right");
-  icon.classList.add("fa-angle-left"); // 열린 상태면 <
+  // 모달을 처음에 숨김
+  modal.style.display = "none";
 
-  // 토글 버튼 클릭 이벤트
-  toggleBtn.addEventListener("click", function () {
-    // 사이드바 상태 토글
+  // 사이드바 초기 상태 설정
+  sidebar.classList.add("opened");
+  icon.classList.replace("fa-angle-right", "fa-angle-left");
+
+  // 사이드바 토글 버튼 클릭 이벤트
+  toggleBtn.addEventListener("click", () => {
     sidebar.classList.toggle("closed");
     sidebar.classList.toggle("opened");
-
-    // 아이콘 변경
-    if (sidebar.classList.contains("closed")) {
-      icon.classList.remove("fa-angle-left");
-      icon.classList.add("fa-angle-right"); // 닫힌 상태면 >
-    } else {
-      icon.classList.remove("fa-angle-right");
-      icon.classList.add("fa-angle-left"); // 열린 상태면 <
-    }
+    icon.classList.toggle("fa-angle-right");
+    icon.classList.toggle("fa-angle-left");
   });
 
-  // 2. 휴지통 버튼 클릭 시 체크박스 생성/제거 및 모달 표시
-  trashBtn.addEventListener("click", function () {
-    const listItems = document.querySelectorAll("#side-task-list1 li, #side-task-list2 li"); // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
-    let hasCheckbox = listItems[0]?.querySelector("input[type='checkbox']");
+  // 휴지통 버튼 클릭 시 체크박스 생성/제거 및 모달 표시
+  trashBtn.addEventListener("click", () => {
+    const listItems = document.querySelectorAll(
+      "#side-task-list1 li, #side-task-list2 li"
+    );
+    const hasCheckbox = listItems[0]?.querySelector("input[type='checkbox']");
 
     if (hasCheckbox) {
       const checkedItems = document.querySelectorAll(
-        "#side-task-list1 li input[type='checkbox']:checked, #side-task-list2 li input[type='checkbox']:checked" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
+        "#side-task-list1 li input[type='checkbox']:checked, #side-task-list2 li input[type='checkbox']:checked"
       );
 
       if (checkedItems.length > 0) {
-        // 체크된 항목이 있으면 모달 표시
-        modal.style.display = "block";
-        modal.style.position = "fixed";
-        modal.style.zIndex = 9999;
+        modal.style.display = "flex"; // 모달을 보이도록 설정
       } else {
-        // 체크된 항목이 없으면 체크박스 제거
         listItems.forEach((li) => {
           const checkbox = li.querySelector("input[type='checkbox']");
           if (checkbox) checkbox.remove();
         });
 
-        selectAllContainer.style.display = "none"; // 전체 선택 숨기기
-        checkboxesCreated = false; // 체크박스 상태 업데이트
+        selectAllContainer.style.display = "none";
+        checkboxesCreated = false;
       }
     } else {
-      // 체크박스 추가
       listItems.forEach((li) => {
         const newCheckbox = document.createElement("input");
         newCheckbox.type = "checkbox";
@@ -70,106 +63,97 @@ document.addEventListener("DOMContentLoaded", function () {
         li.prepend(newCheckbox);
       });
 
-      selectAllContainer.style.display = "block"; // 전체 선택 보이기
+      selectAllContainer.style.display = "block";
       checkboxesCreated = true;
     }
 
-    updateSelectAllCheckboxState(); // 전체 선택 체크박스 상태 업데이트
+    updateSelectAllCheckboxState();
   });
 
-  // 3. 전체선택 체크박스 클릭 시
-  selectAllCheckbox.addEventListener("change", function () {
+  // 전체선택 체크박스 클릭 시
+  selectAllCheckbox.addEventListener("change", () => {
     const isChecked = selectAllCheckbox.checked;
     const listItems = document.querySelectorAll(
-      "#side-task-list1 li input[type='checkbox'], #side-task-list2 li input[type='checkbox']" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
+      "#side-task-list1 li input[type='checkbox'], #side-task-list2 li input[type='checkbox']"
     );
     listItems.forEach((checkbox) => {
-      checkbox.checked = isChecked; // 체크박스를 모두 선택하거나 해제
+      checkbox.checked = isChecked;
     });
   });
 
-  // 4. 개별 체크박스 상태에 맞게 전체 선택 체크박스의 상태를 업데이트
+  // 개별 체크박스 상태에 맞게 전체 선택 체크박스 상태 업데이트
   function updateSelectAllCheckboxState() {
     const taskCheckboxes = document.querySelectorAll(".side-task-checkbox");
-    const selectAllCheckbox = selectAllContainer.querySelector(
-      "input[type='checkbox']"
-    );
-
     const totalCheckboxes = taskCheckboxes.length;
     const checkedCheckboxes = Array.from(taskCheckboxes).filter(
       (checkbox) => checkbox.checked
     ).length;
 
-    if (totalCheckboxes === 0) {
-      selectAllCheckbox.checked = false;
-      selectAllCheckbox.disabled = true;
-    } else {
-      selectAllCheckbox.disabled = false;
-      if (checkedCheckboxes === totalCheckboxes) {
-        selectAllCheckbox.checked = true;
-      } else {
-        selectAllCheckbox.checked = false;
-      }
-    }
+    selectAllCheckbox.disabled = totalCheckboxes === 0;
+    selectAllCheckbox.checked = checkedCheckboxes === totalCheckboxes;
   }
 
-  // 5. li 클릭 시 체크박스 상태 변경
+  // li 클릭 시 체크박스 상태 변경
   function handleTaskClick(event) {
-    const li = event.target.closest("li"); // 클릭한 요소가 li인지 확인
+    const li = event.target.closest("li");
     const checkbox = li.querySelector("input[type='checkbox']");
-
     if (checkbox) {
-      checkbox.checked = !checkbox.checked; // 체크박스 상태를 반전시킴
+      checkbox.checked = !checkbox.checked;
     }
-
-    if (checkbox.checked) {
-      selectedTasks.push(li);
-    } else {
-      selectedTasks = selectedTasks.filter((task) => task !== li);
-    }
-
     updateSelectAllCheckboxState();
   }
 
-  taskList1.addEventListener("click", function (event) {
-    if (event.target.tagName === "LI" || event.target.closest("li")) {
-      handleTaskClick(event);
-    }
+  // task list 클릭 이벤트
+  taskLists.forEach((taskList) => {
+    taskList.addEventListener("click", (event) => {
+      if (event.target.tagName === "LI" || event.target.closest("li")) {
+        handleTaskClick(event);
+      }
+    });
   });
 
-  taskList2.addEventListener("click", function (event) {
-    if (event.target.tagName === "LI" || event.target.closest("li")) {
-      handleTaskClick(event);
-    }
-  });
-  
-  selectAllContainer.addEventListener("click", function (event) {
+  // 전체 선택 컨테이너 클릭 시
+  selectAllContainer.addEventListener("click", (event) => {
     const checkbox = selectAllContainer.querySelector("input[type='checkbox']");
-    if (checkbox && (event.target.tagName === "STRONG" || event.target === selectAllContainer)) {
+    if (
+      checkbox &&
+      (event.target.tagName === "STRONG" || event.target === selectAllContainer)
+    ) {
       checkbox.checked = !checkbox.checked;
-      selectAllCheckbox.dispatchEvent(new Event("change")); // 체크박스 변경 이벤트 트리거
+      selectAllCheckbox.dispatchEvent(new Event("change"));
     }
   });
 
-  // 6. 모달 확인 버튼 클릭 시 체크된 항목 삭제
-  confirmBtn.addEventListener("click", function () {
-    selectedTasks.forEach((task) => task.remove());
-    modal.style.display = "none";
-    selectedTasks = []; // 선택 초기화
+  // "예" 버튼 클릭 시 모달 닫기
+  modalYesBtn.addEventListener("click", () => {
+    console.log("삭제 완료");
+    modal.style.display = "none"; // 모달을 숨기기
   });
 
-  // 7. 모달 취소 버튼 클릭 시 체크박스 제거 및 모달 꺼짐
-  cancelBtn.addEventListener("click", function () {
-    // 체크박스를 제거
+  // "아니오" 버튼 클릭 시 모달 닫기 및 체크박스 제거
+  modalNoBtn.addEventListener("click", () => {
+    console.log("모달 닫기");
+
+    // 체크박스 제거
     const listItems = document.querySelectorAll(
-      "#side-task-list1 li input[type='checkbox'], #side-task-list2 li input[type='checkbox']" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
+      "#side-task-list1 li, #side-task-list2 li"
     );
-    listItems.forEach((checkbox) => {
-      checkbox.remove(); // 체크박스 제거
+    listItems.forEach((li) => {
+      const checkbox = li.querySelector("input[type='checkbox']");
+      if (checkbox) checkbox.remove();
     });
 
-    selectAllContainer.style.display = "none"; // 전체 선택 체크박스 숨기기
-    modal.style.display = "none"; // 모달 숨기기
-    selectedTasks = []; // 선택 초기화
+    selectAllContainer.style.display = "none"; // 전체 선택 컨테이너 숨기기
+    checkboxesCreated = false; // 체크박스 생성 상태 초기화
+
+    modal.style.display = "none"; // 모달을 숨기기
+  });
+
+  // 모달 바깥 클릭 시 닫기
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      console.log("모달 바깥 클릭");
+      modal.style.display = "none"; // 모달 바깥 클릭 시 모달 숨기기
+    }
   });
 });
