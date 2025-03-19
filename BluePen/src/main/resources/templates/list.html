@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>list</title>
-</head>
-<body>
-  
-</body>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
+    <link rel="stylesheet" href="assets/css/list.css" />
+  </head>
+  <body>
+      <!-- 상단바, 사이드바 -->
+    <header class="topbar" th:replace="~{/topbar}"></header>
+    <div class="sidebar" th:replace="~{/sidebar}"></div>
+    <div class="prompt" th:replace="~{/prompt}"></div>
+    <script src="assets/js/list.js"></script>
+  </body>
 </html>

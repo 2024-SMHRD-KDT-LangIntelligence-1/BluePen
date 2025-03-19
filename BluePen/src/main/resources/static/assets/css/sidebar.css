@@ -3,7 +3,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-.container {
+.side-container {
   position: relative;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 /* 토글 버튼 스타일 */
-.toggle-btn {
+.side-toggle-btn {
   position: fixed;
   top: 50%;
   left: 8px; /* 기본적으로 사이드바 옆에 위치 */
@@ -40,13 +40,13 @@ body {
 }
 
 /* 호버 상태에서의 스타일 제거 */
-.toggle-btn:hover {
+.side-toggle-btn:hover {
   background-color: rgba(0, 0, 0, 0); /* 호버시 배경이 바뀌지 않게 설정 */
   color: #19335A; /* 호버 시 색상 변경이 없게 설정 */
 }
 
 /* 사이드바가 열린 상태일 때 토글 버튼의 위치 이동 */
-.sidebar.opened .toggle-btn {
+.sidebar.opened .side-toggle-btn {
   left: 240px; /* 사이드바가 열린 상태에서 240px 만큼 이동 */
 }
 
@@ -55,7 +55,7 @@ body {
   left: -240px;
 }
 
-.toggle-btn.closed {
+.side-toggle-btn.closed {
   left: 8px;
 }
 
@@ -111,7 +111,7 @@ body {
   padding: 0;
 }
 
-#today strong {
+#side-today strong {
   margin: 0;
 }
 
@@ -132,7 +132,7 @@ body {
   top: -35px; /* 아래로 이동 */
 }
 
-.task-checkbox {
+.side-task-checkbox {
   margin-right: 8px; /* 체크박스와 텍스트 사이 간격 */
 }
 
@@ -169,7 +169,7 @@ body {
 }
 
 /* 아이콘 버튼 기본 스타일 */
-.icon-btn {
+.side-icon-btn {
   background: none;
   border: none;
   color: #205781;
@@ -178,7 +178,7 @@ body {
 }
 
 /* 휴지통 아이콘 */
-.trash {
+.side-trash {
   position: absolute;
   color: #19335A;
   bottom: 20px; /*아래에서 떨어지게 */
@@ -186,7 +186,7 @@ body {
 }
 
 /* 전체선택 체크박스를 오른쪽 정렬 */
-#select-all-container {
+#side-select-all-container {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   margin-left: 120px;
@@ -194,24 +194,24 @@ body {
 }
 
 /* 전체선택 체크박스 스타일 */
-#select-all-container li {
+#side-select-all-container li {
   display: flex;
   align-items: center; /* 수직 가운데 정렬 */
   font-size: 14px; /* 글자 크기 */
 }
 
-#select-all-container strong {
+#side-select-all-container strong {
   margin: 0;
   padding: 0;
 }
 
-#select-all-container input[type="checkbox"] {
+#side-select-all-container input[type="checkbox"] {
   margin-bottom: 0; /* 체크박스와 텍스트 간 간격 */
   margin-left: 8px;
 }
 
 /* 모달 팝업 스타일 */
-.modal {
+.side-modal {
   display: none; /* 기본적으로 숨겨져 있어야 함 */
   position: fixed;
   top: 50%;
@@ -223,7 +223,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.modal-content {
+.side-modal-content {
   background-color: #fff;
   color: #000;
   padding: 20px;
@@ -231,7 +231,7 @@ body {
   text-align: center;
 }
 
-.modal button {
+.side-modal button {
   margin: 10px;
   padding: 10px;
   background-color: #205781;
@@ -241,6 +241,6 @@ body {
   cursor: pointer;
 }
 
-.modal button:hover {
+.side-modal button:hover {
   background-color: #1c4a6f;
 }

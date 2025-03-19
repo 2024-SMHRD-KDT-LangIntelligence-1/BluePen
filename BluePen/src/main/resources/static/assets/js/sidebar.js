@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("toggle-btn");
-  const trashBtn = document.getElementById("trash-btn");
-  const modal = document.getElementById("confirmation-modal");
-  const confirmBtn = document.getElementById("confirm-btn");
-  const cancelBtn = document.getElementById("cancel-btn");
-  const selectAllContainer = document.getElementById("select-all-container");
-  const selectAllCheckbox = document.getElementById("select-all");
-  const taskList1 = document.getElementById("task-list1");
-  const taskList2 = document.getElementById("task-list2");
+  const toggleBtn = document.getElementById("side-toggle-btn"); 
+  const trashBtn = document.getElementById("side-trash-btn"); 
+  const modal = document.getElementById("side-confirmation-modal");
+  const confirmBtn = document.getElementById("side-confirm-btn"); 
+  const cancelBtn = document.getElementById("side-cancel-btn");
+  const selectAllContainer = document.getElementById("side-select-all-container");
+  const selectAllCheckbox = document.getElementById("side-select-all"); 
+  const taskList1 = document.getElementById("side-task-list1"); 
+  const taskList2 = document.getElementById("side-task-list2"); 
   const icon = toggleBtn.querySelector("i");
 
   let checkboxesCreated = false;
@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 2. 휴지통 버튼 클릭 시 체크박스 생성/제거 및 모달 표시
   trashBtn.addEventListener("click", function () {
-    const listItems = document.querySelectorAll("#task-list1 li, #task-list2 li");
+    const listItems = document.querySelectorAll("#side-task-list1 li, #side-task-list2 li"); // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
     let hasCheckbox = listItems[0]?.querySelector("input[type='checkbox']");
 
     if (hasCheckbox) {
       const checkedItems = document.querySelectorAll(
-        "#task-list1 li input[type='checkbox']:checked, #task-list2 li input[type='checkbox']:checked"
+        "#side-task-list1 li input[type='checkbox']:checked, #side-task-list2 li input[type='checkbox']:checked" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
       );
 
       if (checkedItems.length > 0) {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       listItems.forEach((li) => {
         const newCheckbox = document.createElement("input");
         newCheckbox.type = "checkbox";
-        newCheckbox.classList.add("task-checkbox");
+        newCheckbox.classList.add("side-task-checkbox");
         li.prepend(newCheckbox);
       });
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
   selectAllCheckbox.addEventListener("change", function () {
     const isChecked = selectAllCheckbox.checked;
     const listItems = document.querySelectorAll(
-      "#task-list1 li input[type='checkbox'], #task-list2 li input[type='checkbox']"
+      "#side-task-list1 li input[type='checkbox'], #side-task-list2 li input[type='checkbox']" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
     );
     listItems.forEach((checkbox) => {
       checkbox.checked = isChecked; // 체크박스를 모두 선택하거나 해제
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 4. 개별 체크박스 상태에 맞게 전체 선택 체크박스의 상태를 업데이트
   function updateSelectAllCheckboxState() {
-    const taskCheckboxes = document.querySelectorAll(".task-checkbox");
+    const taskCheckboxes = document.querySelectorAll(".side-task-checkbox");
     const selectAllCheckbox = selectAllContainer.querySelector(
       "input[type='checkbox']"
     );
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
   cancelBtn.addEventListener("click", function () {
     // 체크박스를 제거
     const listItems = document.querySelectorAll(
-      "#task-list1 li input[type='checkbox'], #task-list2 li input[type='checkbox']"
+      "#side-task-list1 li input[type='checkbox'], #side-task-list2 li input[type='checkbox']" // 'task-list1' -> 'side-task-list1', 'task-list2' -> 'side-task-list2' 수정
     );
     listItems.forEach((checkbox) => {
       checkbox.remove(); // 체크박스 제거

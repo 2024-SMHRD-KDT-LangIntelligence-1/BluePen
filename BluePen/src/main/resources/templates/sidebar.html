@@ -16,35 +16,33 @@
     <link rel="stylesheet" href="assets/css/sidebar.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="side-container">
       <!-- 사이드바 -->
       <div id="sidebar" class="sidebar">
-      	<!-- 로고 추가 -->
+        <!-- 로고 추가 -->
         <div class="sidebar-logo">
-        <a href="/mainpage">
-          <h2>🖋️BLUE PEN</h2>
-        </a>
-      </div>
+          <a href="/mainpage">
+            <h2>🖋️BLUE PEN</h2>
+          </a>
+        </div>
         <!-- 오늘과 지난 7일 리스트 -->
         <div class="sidebar-list">
           <!-- 전체선택 체크박스 -->
-          <ul id="select-all-container" style="display: none">
+          <ul id="side-select-all-container" style="display: none">
             <li>
               <strong>전체선택</strong>
-              <input type="checkbox" id="select-all" />
+              <input type="checkbox" id="side-select-all" />
             </li>
           </ul>
-          <ul id="today">
+          <ul id="side-today">
             <li><strong>오늘</strong></li>
           </ul>
-          <ul id="task-list1">
-            <li><span>연봉 많이주는 회사</span></li>
-            <li><span>자소서 잘 쓰는 방법</span></li>
+          <ul id="side-task-list1">
           </ul>
-          <ul id="before">
+          <ul id="side-before">
             <li><strong>지난 7일</strong></li>
           </ul>
-          <ul id="task-list2">
+          <ul id="side-task-list2">
             <li><span>초봉 3000이상 주는 회사</span></li>
             <li><span>면접일정</span></li>
             <li><span>공채일정</span></li>
@@ -67,29 +65,29 @@
         </div>
         <!-- 로그아웃 & 마이페이지 -->
         <div class="sidebar-footer">
-          <a href="/mypage" class="mypage-link"
-            ><i class="fa-solid fa-user"></i> 마이페이지</a
+          <a href="/mypage" class="side-mypage-link"
+            ><i class="fa-solid fa-user"></i> MYPAGE</a
           >
-          <a href="/startpage" class="logout-link"
+          <a href="/startpage" class="side-logout-link"
             ><i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃</a
           >
         </div>
         <!-- 휴지통 버튼 -->
-        <div class="trash">
-          <button id="trash-btn" class="icon-btn">
+        <div class="side-trash">
+          <button id="side-trash-btn" class="side-icon-btn">
             <i class="fas fa-trash"></i>
           </button>
         </div>
         <!-- 삭제 팝업 -->
-        <div id="confirmation-modal" class="modal">
-          <div class="modal-content">
+        <div id="side-confirmation-modal" class="side-modal">
+          <div class="side-modal-content">
             <p>정말 삭제하시겠습니까?</p>
-            <button id="confirm-btn">확인</button>
-            <button id="cancel-btn">취소</button>
+            <button id="side-confirm-btn">확인</button>
+            <button id="side-cancel-btn">취소</button>
           </div>
         </div>
         <!-- 사이드바 토글 버튼 -->
-        <button id="toggle-btn" class="toggle-btn">
+        <button id="side-toggle-btn" class="side-toggle-btn">
           <i class="fa-solid fa-angle-right"></i>
         </button>
       </div>

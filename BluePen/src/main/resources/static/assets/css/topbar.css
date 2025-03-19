@@ -4,11 +4,11 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* 상단바 스타일 */
-.header {
+.top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,25 +21,25 @@ html {
 }
 
 /* 로고 스타일 */
-.logo h2 {
+.top-logo h2 {
   font-size: 24px;
   font-weight: bold;
   color: #19335A;
   text-decoration: none;
 }
 
-.logo a {
+.top-logo a {
   text-decoration: none;
   color: inherit;
 }
 
 /* 네비게이션 스타일 */
-.navigation {
+.top-navigation {
   display: flex;
 }
 
 /* 네비게이션 링크 스타일 */
-.nav-link {
+.top-nav-link {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -50,14 +50,14 @@ html {
 }
 
 /* 아이콘 스타일 */
-.nav-link i {
+.top-nav-link i {
   font-size: 24px;
   margin: 10px;
   margin-right: 20px;
 }
 
 /* 기본적으로 텍스트 숨김 */
-.icon-text {
+.top-icon-text {
   display: none;
   font-size: 12px;
   color: #19335A;
@@ -71,14 +71,13 @@ html {
 }
 
 /* 네비게이션 아이템에 호버하면 텍스트가 보이도록 */
-.nav-link:hover .icon-text {
+.top-nav-link:hover .top-icon-text {
   display: block;
 }
 
 /* 네비게이션 아이콘의 위치를 상대적으로 설정하여 텍스트와 겹치지 않도록 함 */
-.nav-link {
+.top-nav-link {
   position: relative;
   display: inline-block;
   text-align: center;
 }
-
