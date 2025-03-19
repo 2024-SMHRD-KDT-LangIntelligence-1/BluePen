@@ -3,6 +3,10 @@ package com.cothink.bluepen.entity;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.cothink.bluepen.model.UserVO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -13,7 +17,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class TblUser {
+	
+	public TblUser(UserVO vo) {
+		userId = vo.getUser_id();
+		userPw = vo.getUser_pw();
+		userBirthdate = vo.getUser_birthdate();
+		userGender = vo.getUser_gender();
+		joinedAt = vo.getJoined_at();
+
+	}
+	
 	// 회원 아이디
 	@Id
 	private String userId;
@@ -28,5 +42,6 @@ public class UserEntity {
 	private String userGender;
 
 	// 회원 가입일자
+	@CreationTimestamp
 	private Timestamp joinedAt;
 }
