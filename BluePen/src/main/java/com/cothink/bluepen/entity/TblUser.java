@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TblUser {
 	
+	// 회원가입시 DB에 저장하기 위해
 	public TblUser(UserVO vo) {
 		userId = vo.getUser_id();
 		userPw = vo.getUser_pw();

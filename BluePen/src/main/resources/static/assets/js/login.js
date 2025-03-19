@@ -1,4 +1,4 @@
-document
+/*document
   .getElementById("login-form")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // 기본 제출 이벤트 방지
@@ -26,3 +26,4 @@ function showErrorMessage(message) {
   errorMessageDiv.textContent = message;
   errorMessageDiv.style.display = "block"; // 에러 메시지 표시
 }
+*/
