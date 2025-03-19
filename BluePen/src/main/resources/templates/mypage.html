@@ -15,7 +15,8 @@
     <div class="mypage-cover">
     <main class="mypage-container">
         <h2 class="mypage-title">MYPAGE</h2>
-        
+         <!-- form 태그 추가 -->
+        <form id="mypage-form">
         <div class="mypage-form-group">
             <label for="mypage-username">아이디 확인</label>
             <input type="text" id="mypage-username" disabled placeholder="아이디">
@@ -63,13 +64,14 @@
         <div class="mypage-submit">
             <button type="submit" id="mypage-submit-btn">수정완료</button>
         </div>
+        </form>
         <!-- 모달 -->
 		<div id="mypage-modal" class="modal">
 		    <div class="mypage-modal-content">
 		        <p>저장하시겠습니까?</p>
 		        <div class="mypage-modal-buttons">
 		            <button id="modal-yes-btn">예</button>
-		            <button id="modal-no-btn">아니오</button>
+					<button id="modal-no-btn">아니오</button>
 		        </div>
 		    </div>
 		</div>

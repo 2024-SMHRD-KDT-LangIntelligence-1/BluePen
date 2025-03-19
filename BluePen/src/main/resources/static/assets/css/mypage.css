@@ -237,3 +237,28 @@ body {
     margin-left: 20px;
 }
 
+#modal-yes-btn {
+    background-color: #3B74CB;
+    color: white;
+    width: 88px;
+    height: 42px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 변화 */
+}
+
+#modal-yes-btn:hover {
+    background-color: #2a5e99; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
+}
+
+#modal-no-btn {
+    background-color: #e0e0e0;
+    width: 88px;
+    height: 42px;
+    margin-left: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 변화 */
+}
+
+#modal-no-btn:hover {
+    background-color: #c0c0c0; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
+}

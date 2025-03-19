@@ -78,14 +78,16 @@
             <i class="fas fa-trash"></i>
           </button>
         </div>
-        <!-- 삭제 팝업 -->
-        <div id="side-confirmation-modal" class="side-modal">
-          <div class="side-modal-content">
-            <p>정말 삭제하시겠습니까?</p>
-            <button id="side-confirm-btn">확인</button>
-            <button id="side-cancel-btn">취소</button>
-          </div>
-        </div>
+        <!-- 모달 -->
+		<div id="side-modal" class="modal">
+		    <div class="side-modal-content">
+		        <p>삭제하시겠습니까?</p>
+		        <div class="side-modal-buttons">
+		            <button id="modal-yes-btn">예</button>
+		            <button id="modal-no-btn">아니오</button>
+		        </div>
+		    </div>
+		</div>
         <!-- 사이드바 토글 버튼 -->
         <button id="side-toggle-btn" class="side-toggle-btn">
           <i class="fa-solid fa-angle-right"></i>
