@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 - BluePen</title>
+    <link rel="stylesheet" href="assets/css/join.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">🖋️BLUE PEN</div>
+      <div class="input-group">
+        <input type="text" id="userId" placeholder="아이디" />
+        <button class="btn small-btn" onclick="checkDuplicate()">
+          중복확인
+        </button>
+      </div>
+      <input type="password" id="password" placeholder="비밀번호" />
+      <input type="password" id="confirmPassword" placeholder="비밀번호 확인" />
+      <select id="gender">
+        <option value="">성별</option>
+        <option value="male">남성</option>
+        <option value="female">여성</option>
+      </select>
+      <div class="birth-group">
+        <input type="text" id="year" placeholder="YYYY" maxlength="4" />
+        <input type="text" id="month" placeholder="MM" maxlength="2" />
+        <input type="text" id="day" placeholder="DD" maxlength="2" />
+      </div>
+      <button class="btn" onclick="register()">회원가입</button>
+    </div>
+
+    <script src="assets/js/join.js"></script>
+  </body>
+</html>

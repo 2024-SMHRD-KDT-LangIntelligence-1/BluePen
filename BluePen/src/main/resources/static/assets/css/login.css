@@ -1,57 +1,136 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: white;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 320px;
-        }
-        .logo {
-            font-size: 24px;
-            color: #19335A;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        input {
-            width: 100%; /* 로그인 버튼과 너비 맞춤 */
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .btn {
-            background-color: #4675C0;
-            color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background-color: #335bb5;
-        }
-        .link-container {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .link-container a {
-            color: #0c0c0c;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
-        }
-        .link-container a:hover {
-            text-decoration: underline;
-        }
+body {
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 로그인 폼 스타일 */
+.login-container {
+  position: absolute;
+  width: 380px;
+  height: auto;
+  top: 170px;
+  margin-bottom: 50px;
+  padding: 10px 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 
+              0 -1px 3px rgba(0, 0, 0, 0.1), 
+              1px 0 3px rgba(0, 0, 0, 0.1), 
+              -1px 0 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h2 {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-right: 15px;
+  margin-bottom: 70px;
+  color: #19335a;
+  font-weight: bold;
+}
+
+/* 입력 그룹 스타일 */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-top: 8px;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border: 1px solid #3364af;
+  outline: none;
+}
+
+/* 로그인 버튼 스타일 */
+.btn {
+  width: 80px;
+  height: 35px;	
+  background-color: #19335a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #3364af;
+}
+
+.btn:active {
+  background-color: #285a8b;
+}
+
+/* 하단 링크 스타일 */
+.footer {
+  margin-top: 50px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.footer p {
+  margin: 5px 0;
+  padding-bottom: 8px;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:active {
+  color: #007bff; /* 클릭해도 원래 색상 유지 */
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active,
+a:visited {
+  color: #007bff; /* 클릭해도, 방문 후에도 색상 유지 */
+}
+
+#error-message{
+  font-size: 18px;
+  margin-bottom: 15px;
+}

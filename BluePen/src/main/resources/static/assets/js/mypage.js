@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+
+    // 사이드바가 존재하면 기본적으로 닫힌 상태로 설정
+    if (sidebar) {
+        sidebar.classList.add("closed"); // 'closed' 클래스를 추가하여 닫힌 상태로 설정
+    }
+});
+
 // 현재 연도 가져오기
 const currentYear = new Date().getFullYear();
 
@@ -139,4 +148,34 @@ Object.values(fields).forEach(field => {
     field.addEventListener("keydown", moveToNextInput);
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const submitBtn = document.getElementById("mypage-submit-btn");
+    const modal = document.getElementById("mypage-modal");
+    const modalYesBtn = document.getElementById("modal-yes-btn");
+    const modalNoBtn = document.getElementById("modal-no-btn");
+
+    // 수정완료 버튼 클릭 시 모달 표시
+    submitBtn.addEventListener("click", function () {
+        modal.style.display = "flex";
+    });
+
+    // "예" 버튼 클릭 시 저장 실행 (현재는 콘솔 출력)
+    modalYesBtn.addEventListener("click", function () {
+        console.log("저장 완료!"); // 실제 저장 로직 추가 가능
+        modal.style.display = "none";
+    });
+
+    // "아니오" 버튼 클릭 시 모달 닫기
+    modalNoBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // 모달 바깥 클릭 시 닫기
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
 

@@ -30,10 +30,10 @@ public class MainController {
 		return "topbar";
 	}
 
-	@GetMapping("/signup")
-	public String signup() {
+	@GetMapping("/join")
+	public String join() {
 
-		return "signup";
+		return "join";
 	}
 
 	@GetMapping("/login")
@@ -90,10 +90,10 @@ public class MainController {
 		return "prompt";
 	}
 
-	@GetMapping("/resume")
-	public String resume() {
+	@GetMapping("/startpage")
+	public String startpage() {
 
-		return "resume";
+		return "startpage";
 	}
 
 }
