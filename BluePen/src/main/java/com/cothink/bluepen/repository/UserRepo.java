@@ -8,4 +8,5 @@ import com.cothink.bluepen.entity.TblUser;
 @Repository
 public interface UserRepo extends JpaRepository<TblUser, String> {
 
+	TblUser findByUserId(String user_id);
 }
