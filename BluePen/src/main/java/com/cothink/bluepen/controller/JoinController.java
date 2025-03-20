@@ -24,7 +24,8 @@ public class JoinController {
 		System.out.println(userinfo.getUserBirthdate());
 		System.out.println(userinfo.getUserGender());
 		System.out.println(userinfo.getJoinedAt());
-		return "redirect:/login";
+		
+		return "redirect:/zero";
 	}
 	
 }
