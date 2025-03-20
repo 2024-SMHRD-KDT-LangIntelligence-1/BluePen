@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>회원가입 - BluePen</title>
-<link rel="stylesheet" href="assets/css/join.css" />
-</head>
-<body>
-	<div class="container">
-		<div class="logo">🖋️BLUE PEN</div>
-		<form action="join.do" method="post">
-			<div class="input-group">
-				<input type="text" id="user_id" name="user_id" placeholder="아이디"/>
-				<button class="btn small-btn" onclick="checkDuplicate()">
-					중복확인</button>
-			</div>
-			<input type="password" id="user_pw" name="user_pw" placeholder="비밀번호" />
-			<input
-				type="password" id="confirmPassword" placeholder="비밀번호 확인" />
-				
-			<select
-				id="user_gender" name="user_gender">
-				<option>성별</option>
-				<option value="m">남성</option>
-				<option value="f">여성</option>
-			</select>
-<!--			<div class="birth-group">
-  				<input type="text" id="year" placeholder="YYYY" maxlength="4" /> <input
-					type="text" id="month" placeholder="MM" maxlength="2" /> <input
-					type="text" id="day" placeholder="DD" maxlength="2" /> 				
-			</div>
--->
-				<input type="text" id="user_birthdate" name="user_birthdate"/>
-			<button class="btn" onclick="register()">회원가입</button>
-		</form>
-	</div>
-
-	<script src="assets/js/join.js"></script>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JOIN</title>
+	<link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/join.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">🖋️BLUE PEN</div>
+      <form action="join.do" method="post">
+        <div class="id-pw-input">
+          <div class="id-input">
+          <input type="text" id="user_id" name="user_id" placeholder="아이디" />
+          <div class="error-message" style="color: red;"></div>
+          <button type="button" class="small-btn" onclick="checkDuplicate()">중복확인</button>
+          </div>
+        <input
+          type="password"
+          id="user_pw"
+          name="user_pw"
+          placeholder="비밀번호"
+        />
+        <div class="error-message" style="color: red;"></div>
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="비밀번호 확인"
+        />
+        <div class="error-message" style="color: red;"></div>
+        </div>
+        <div class="mypage-form-group">
+          <label for="user_gender">성별</label>
+          <div id="user_gender" class="gender-buttons">
+            <button type="button" class="gender-btn" data-gender="m">
+              남성
+            </button>
+            <button type="button" class="gender-btn" data-gender="f">
+              여성
+            </button>
+          </div>
+        </div>
+        <div class="mypage-form-group">
+          <label for="mypage-birthday">생년월일</label>
+          <input type="date" id="user_birthdate" name="user_birthdate"/>
+        </div>
+        <button class="join-btn" onclick="register()">회원가입</button>
+      </form>
+    </div>
+    <script src="assets/js/join.js"></script>
+  </body>
 </html>

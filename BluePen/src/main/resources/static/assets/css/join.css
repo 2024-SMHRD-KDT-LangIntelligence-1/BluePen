@@ -1,63 +1,149 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: "Noto Sans KR", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: white;
-    box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 .container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
+  position: absolute;
+  width: 380px;
+  height: auto;
+  top: 170px;
+  margin-bottom: 50px;
+  padding: 10px 30px;
+  background: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 
+              0 -1px 3px rgba(0, 0, 0, 0.1), 
+              1px 0 3px rgba(0, 0, 0, 0.1), 
+              -1px 0 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
+
 .logo {
-    font-size: 24px;
-    color: #19335A;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center; /* 중앙 정렬 */
+  font-size: 30px;
+  margin-top: 20px;
+  margin-right: 15px;
+  margin-bottom: 70px;
+  color: #19335a;
+  font-weight: bold;
 }
-.input-group {
-    display: flex;
-    align-items: center;
+
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-bottom: 12px;
+  transition: border 0.3s ease;
 }
-.input-group input {
-    flex: 1;
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+  border: 1px solid #3364af;
+  outline: none;
 }
-input, select {
-width: 100%;
-padding: 10px;
-margin: 5px 0;
-border: 1px solid #ccc;
-border-radius: 5px;
-box-sizing: border-box; /* 박스 크기를 패딩과 보더까지 포함하여 조절 */
+
+.error-message {
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
 }
-.btn {
-    background-color: #4675C0;
-    color: black;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 5px;
+
+.id-pw-input {
+  width: 100%;
 }
-.btn:hover {
-    background-color: #335bb5;
+
+.id-input {
+  position: relative; /* 부모 요소 기준 */
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
+
+.id-input input {
+  padding-right: 110px; /* 버튼이 겹치지 않도록 여유 공간 확보 */
+}
+
 .small-btn {
-    width: auto;
-    padding: 10px;
-    margin-left: 5px;
-    white-space: nowrap;
+  position: absolute;
+  right: 6px; /* 입력 필드의 오른쪽 끝에 배치 */
+  top: 39%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #19335a;
+  color: white;
+  width: 85px;
+  height: 36px;
 }
-.birth-group {
-    display: flex;
-    justify-content: space-between;
+.small-btn:hover {
+  background-color: #1e4a8d;
 }
-.birth-group input {
-    width: 32%;
+
+label {
+  display: block;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.gender-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.gender-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.gender-btn.active {
+  background-color: #19335a;
+  color: white;
+}
+
+.gender-btn:hover {
+  background-color: #19335a;
+  color: white;
+}
+
+.join-btn {
+  width: 60%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #19335a;
+  color: white;
+  cursor: pointer;
+  margin-top: 80px;
+}
+
+.join-btn:hover {
+  background-color: #1e4a8d;
 }
