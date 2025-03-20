@@ -85,11 +85,11 @@ public class MainController {
 		return "editing";
 	}
 
-	@GetMapping("/mypage")
-	public String mypage() {
-
-		return "mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String mypage() {
+//
+//		return "mypage";
+//	}
 
 	@GetMapping("/prompt")
 	public String prompt() {
