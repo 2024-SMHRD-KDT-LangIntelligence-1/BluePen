@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MYPAGE</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/mypage.css">
 </head>
 <body class="mypage">
@@ -35,21 +38,20 @@
         </div>
         
         <div class="mypage-form-group">
-            <label>성별</label>
-            <div class="mypage-gender-group">
-                <button type="button" id="mypage-male-btn" class="mypage-gender-btn active" onclick="selectGender('male')">남성</button>
-                <button type="button" id="mypage-female-btn" class="mypage-gender-btn" onclick="selectGender('female')">여성</button>
-            </div>
+          <label for="user_gender">성별</label>
+          <div id="user_gender" class="gender-buttons">
+            <button type="button" class="gender-btn" data-gender="m">
+              남성
+            </button>
+            <button type="button" class="gender-btn" data-gender="f">
+              여성
+            </button>
+          </div>
         </div>
         
         <div class="mypage-form-group">
-            <label for="mypage-year">생년월일</label>
-            <div class="mypage-date-group">
-                <input type="text" id="mypage-year" placeholder="YYYY" maxlength="4">
-                <input type="text" id="mypage-month" placeholder="MM" maxlength="2">
-                <input type="text" id="mypage-day" placeholder="DD" maxlength="2">
-                
-            </div>
+          <label for="mypage-birthday">생년월일</label>
+          <input type="date" id="user_birthdate" name="user_birthdate" style="font-family:'Pretendard', sans-serif"/>
         </div>
         
         <div class="mypage-form-group">

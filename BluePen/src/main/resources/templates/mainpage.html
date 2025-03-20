@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mainpage</title>
+    <title>MAINPAGE</title>
+    <!-- Font Awesome CDN 추가 -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+	<link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/mainpage.css" />
   </head>
@@ -30,6 +35,9 @@
             name="text"
             placeholder="무엇이든 물어보세요"
           />
+        <a class="bookmark" onclick="saveBookmark()">
+		  <i class="fa-regular fa-bookmark" style="color: #C6E7FF;"></i>
+		</a>
         </form>
         <div class="suggestions" id="suggestions">
           <span class="suggestion">스마트인재개발원</span>

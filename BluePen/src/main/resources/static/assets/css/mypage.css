@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,12 +96,12 @@ body {
 }
 
 /* 성별 버튼 그룹 */
-.mypage-gender-group {
+.mypage-form-group .gender-buttons {
   display: flex;
   gap: 10px;
 }
 
-.mypage-gender-btn {
+.mypage-form-group .gender-btn {
   flex: 1;
   padding: 10px;
   font-size: 14px;
@@ -109,10 +109,16 @@ body {
   border-radius: 5px;
   cursor: pointer;
   background: #e0e0e0;
-  transition: background 0.3s;
 }
 
-.mypage-gender-btn.active {
+/* 호버 시 배경색 변화 및 약간의 크기 변화를 주는 효과 */
+.mypage-form-group .gender-btn:hover {
+  background: #19335A;
+  color: white;
+}
+
+/* 선택된 버튼에 active 클래스 추가 시 스타일 */
+.mypage-form-group .gender-btn.active {
   background: #19335A;
   color: white;
 }
