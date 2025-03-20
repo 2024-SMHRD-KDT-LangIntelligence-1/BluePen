@@ -14,7 +14,7 @@
     <div class="login-container">
         <h2>🖋️BLUE PEN</h2>
         <form action="login.do" method = "post" id="login-form">
-            <div id="error-message" style="color: red; display: none;"></div> <!-- 에러 메시지 영역 -->
+            <div id="error-message" th:if="${error}" th:text="${error}" style="color: red;"></div>
             <div class="input-group">
                 <label for="username">아이디</label>
                 <div class="input-group">

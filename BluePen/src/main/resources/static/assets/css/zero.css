@@ -1,33 +1,31 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 105vw;
-    height: 100vh;
-    background-color: white;
-    flex-direction: column;
-    overflow: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 .container {
-    width: 100vw;
+    width: 1100px;
     height: 100vh;
-    padding: 5vh 5vw; /* 좌우 여유 공간 추가 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 .logo {
-font-size: 24px;
-color: #3b6fd9;
-font-weight: bold;
-margin-bottom: 15px;
-text-align: center; /* 중앙 정렬 */
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .logo-container {
     display: flex;
