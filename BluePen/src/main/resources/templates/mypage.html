@@ -22,7 +22,9 @@
         <form id="mypage-form">
         <div class="mypage-form-group">
             <label for="mypage-username">아이디 확인</label>
-            <input type="text" id="mypage-username" disabled placeholder="아이디">
+            <input type ="text" disabled th:placeholder ="${user_id}"/>
+            <!-- <input type="text" id="user_id" th:text="${session.user.user_id}" /> -->
+
         </div>
         
         <div class="mypage-form-group">
