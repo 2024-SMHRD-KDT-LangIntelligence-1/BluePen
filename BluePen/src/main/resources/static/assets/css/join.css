@@ -14,11 +14,13 @@ body {
 }
 
 .container {
-  position: absolute;
+  position: fixed; /* 화면 중앙 고정 */
   width: 380px;
   height: auto;
-  top: 170px;
-  margin-bottom: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정중앙 정렬 */
+  margin-bottom: 0; /* 불필요한 마진 제거 */
   padding: 10px 30px;
   background: #f9f9f9;
   border-radius: 15px;
@@ -46,7 +48,7 @@ input[type="date"] {
   border: 1px solid #ccc;
   border-radius: 15px;
   font-size: 16px;
-  margin-bottom: 12px;
+  margin-top: 12px;
   transition: border 0.3s ease;
 }
 
@@ -60,7 +62,10 @@ input[type="date"]:focus {
 .error-message {
   font-size: 12px;
   color: red;
-  margin-top: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  
 }
 
 .id-pw-input {
@@ -80,8 +85,8 @@ input[type="date"]:focus {
 
 .small-btn {
   position: absolute;
-  right: 6px; /* 입력 필드의 오른쪽 끝에 배치 */
-  top: 39%;
+  right: 12px; /* 입력 필드의 오른쪽 끝에 배치 */
+  top: 62%;
   transform: translateY(-50%);
   font-size: 14px;
   border: none;
@@ -122,8 +127,8 @@ label {
   width: 100%;
 }
 
-.gender-btn.active {
-  background-color: #19335a;
+.gender-btn.selected {
+  background-color: #19335a; /* 선택 시 파란색 */
   color: white;
 }
 
@@ -141,7 +146,8 @@ label {
   background-color: #19335a;
   color: white;
   cursor: pointer;
-  margin-top: 80px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .join-btn:hover {
