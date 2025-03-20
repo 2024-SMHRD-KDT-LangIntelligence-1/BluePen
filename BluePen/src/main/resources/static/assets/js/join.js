@@ -88,17 +88,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const genderButtons = document.querySelectorAll(".gender-btn");
+  const form = document.querySelector("form");
+  
+  // Hidden input 추가
+  let genderInput = document.createElement("input");
+  genderInput.type = "hidden";
+  genderInput.name = "user_gender";
+  form.appendChild(genderInput);
 
-  // 성별 버튼 클릭 이벤트 추가
   genderButtons.forEach((button) => {
-    button.addEventListener("click", function (event) {
-      event.preventDefault(); // 기본 버튼 동작 방지
-
-      // 모든 버튼의 활성화 클래스 제거
+    button.addEventListener("click", function () {
+      // 모든 버튼에서 활성화 클래스 제거
       genderButtons.forEach((btn) => btn.classList.remove("selected"));
 
       // 클릭한 버튼만 활성화
       button.classList.add("selected");
+
+      // 선택한 성별 값을 hidden input에 저장
+      genderInput.value = button.dataset.gender;
     });
   });
+
+  // 폼 제출 시 성별 선택 확인
+  form.addEventListener("submit", function (event) {
+    if (!genderInput.value) {
+      event.preventDefault(); // 제출 막기
+      alert("성별을 선택하세요.");
+    }
+  });
 });
+

@@ -10,11 +10,10 @@ import com.cothink.bluepen.repository.UserRepo;
 
 @Controller
 public class JoinController {
-	
+
 	@Autowired
 	private UserRepo userRepo;
-	
-	
+
 	@PostMapping("/join.do")
 	public String joinDo(UserVO userVo) {
 		TblUser userinfo = new TblUser(userVo);
@@ -24,7 +23,7 @@ public class JoinController {
 		System.out.println(userinfo.getUserBirthdate());
 		System.out.println(userinfo.getUserGender());
 		System.out.println(userinfo.getJoinedAt());
-		return "redirect:/login";
+		return "redirect:/zero";
 	}
-	
+
 }
