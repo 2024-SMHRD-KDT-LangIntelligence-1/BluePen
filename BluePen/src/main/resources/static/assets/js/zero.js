@@ -1,73 +1,106 @@
-function populateOptions(categoryId, items) {
-    const container = document.getElementById(categoryId);
-    items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "option";
-        div.textContent = item;
-        div.onclick = () => toggleSelection(div);
-        container.appendChild(div);
-    });
-}
+// 각 슬라이드 이동 버튼 클릭 이벤트 핸들러
+document.getElementById('next-slide-jobs').addEventListener('click', function() {
+  moveSlide('jobs');
+});
 
-const jobTitles = [
-    "개발자", "디자이너", "마케팅", "영업", "기획자", "HR", "데이터 분석가", "AI 연구원", "PM", "컨설턴트",
-    "영상 편집자", "회계사", "교수", "법률가", "공무원", "작가", "의사", "연구원", "운동 트레이너", "요리사"
-];
-const certificateTitles = [
-    "정보처리기사", "SQLD", "컴퓨터활용능력", "토익", "MOS", "GTQ", "JLPT", "CFA", "FP", "변리사",
-    "TEPS", "HSK", "사회복지사", "네트워크 관리사", "전기기사", "공인중개사", "세무사", "9급 공무원", "소방시설관리사", "CS관리사"
-];
-const locationTitles = [
-    "서울", "부산", "대구", "광주", "인천", "대전", "울산", "세종", "경기", "강원",
-    "충북", "충남", "전북", "전남", "경북", "경남", "제주", "해외", "전국", "기타"
-];
+document.getElementById('next-slide-education').addEventListener('click', function() {
+  moveSlide('education');
+});
 
-populateOptions("jobs", jobTitles);
-populateOptions("certificates", certificateTitles);
-populateOptions("locations", locationTitles);
+document.getElementById('next-slide-locations').addEventListener('click', function() {
+  moveSlide('locations');
+});
 
-function toggleSelection(element) {
-    element.classList.toggle("selected");
-}
+// 슬라이드를 5개씩 부드럽게 이동하는 함수
+function moveSlide(sectionId) {
+  const slider = document.querySelector(`#${sectionId} .slider`);
+  const slides = slider.querySelectorAll('.option-btn');
+  
+  // 슬라이드의 너비를 가져옵니다
+  const slideWidth = slides[0].offsetWidth;
 
-function nextSlide(categoryId) {
-    const container = document.getElementById(categoryId);
-    const firstItem = container.firstElementChild;
+  // 슬라이드가 이동할 때 transition을 적용하여 부드럽게 이동하도록 설정
+  slider.style.transition = 'transform 0.6s ease-in-out'; // 이동 속도와 애니메이션 타이밍을 더 부드럽게 설정
 
-    container.style.transition = "transform 0.5s ease-in-out";
-    container.style.transform = "translateX(-25%)"; // 4개만 보이도록 이동 거리 조정
+  // 현재 transform 값 가져오기 (이동 전 현재 위치)
+  const currentTransform = getComputedStyle(slider).transform;
+  const currentTranslateX = currentTransform === 'none' ? 0 : parseInt(currentTransform.split(',')[4]);
 
-    setTimeout(() => {
-        container.appendChild(firstItem);
-        container.style.transition = "none";
-        container.style.transform = "translateX(0)";
-    }, 500);
-}
+  // 슬라이드를 오른쪽으로 5칸 이동시킴
+  slider.style.transform = `translateX(${currentTranslateX - (slideWidth * 5)}px)`;
 
-function submitSelection() {
-    const selectedJobs = Array.from(document.querySelectorAll("#jobs .selected")).map(el => el.innerText);
-    const selectedCertificates = Array.from(document.querySelectorAll("#certificates .selected")).map(el => el.innerText);
-    const selectedLocations = Array.from(document.querySelectorAll("#locations .selected")).map(el => el.innerText);
+  // 600ms 후에 첫 번째 5개의 슬라이드를 맨 뒤로 이동시킴
+  setTimeout(() => {
+    slider.style.transition = 'none'; // transition을 없애서 위치 변경 후 자연스럽게 초기화
 
-    if (selectedJobs.length === 0 || selectedCertificates.length === 0 || selectedLocations.length === 0) {
-        alert("각 카테고리에서 최소 한 개 이상 선택해주세요.");
-        return;
+    // 첫 번째 5개의 슬라이드를 맨 뒤로 보냄
+    for (let i = 0; i < 5; i++) {
+      const firstSlide = slides[0];
+      slider.appendChild(firstSlide);
     }
 
-    const userData = {
-        jobs: selectedJobs,
-        certificates: selectedCertificates,
-        locations: selectedLocations
+    // 슬라이드가 원위치로 가도록 수정 (이동된 거리 초기화)
+    slider.style.transform = 'translateX(0)';
+  }, 600); // 슬라이드가 0.6초 후 첫 번째 슬라이드 맨 뒤로 이동
+}
+//-----------------------------------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+    // 버튼 그룹별 선택 상태 저장 객체
+    let selected = {
+        job: localStorage.getItem("selectedJob") || "",
+        qualification: localStorage.getItem("selectedQualification") || "",
+        experience: localStorage.getItem("selectedExperience") || "",
+        region: localStorage.getItem("selectedRegion") || ""
     };
 
-    fetch("/save-preferences", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("선택한 정보가 저장되었습니다.");
-    })
-    .catch(error => console.error("저장 오류:", error));
-}
+    // 버튼 클릭 시 선택 상태 저장 및 스타일 변경 함수
+    function handleButtonClick(category, button) {
+        // 해당 카테고리의 기존 선택된 버튼 초기화
+        document.querySelectorAll(`.${category}`).forEach(btn => {
+            btn.style.backgroundColor = "";  // 원래 스타일로 초기화
+            btn.style.color = "";  // 원래 스타일로 초기화
+        });
+
+        // 선택한 버튼 스타일 변경
+        button.style.backgroundColor = "#19335A";
+        button.style.color = "white";
+
+        // 선택 상태 저장
+        selected[category] = button.innerText;
+        localStorage.setItem(`selected${capitalizeFirstLetter(category)}`, button.innerText);
+    }
+
+    // 첫 글자를 대문자로 변환하는 함수 (localStorage key 생성용)
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    // 기존 선택 상태 불러와서 스타일 적용
+    function applySavedSelection() {
+        Object.keys(selected).forEach(category => {
+            if (selected[category]) {
+                let savedButton = Array.from(document.querySelectorAll(`.${category}`))
+                    .find(btn => btn.innerText === selected[category]);
+                if (savedButton) {
+                    savedButton.style.backgroundColor = "#19335A";
+                    savedButton.style.color = "white";
+                }
+            }
+        });
+    }
+
+    // 모든 버튼에 클릭 이벤트 추가
+    document.querySelectorAll(".job-btn, .aca-btn, .career-btn, .region-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            if (this.classList.contains("job-btn")) handleButtonClick("job-btn", this);
+            if (this.classList.contains("aca-btn")) handleButtonClick("aca-btn", this);
+            if (this.classList.contains("career-btn")) handleButtonClick("career-btn", this);
+            if (this.classList.contains("region-btn")) handleButtonClick("region-btn", this);
+        });
+    });
+
+    // 저장된 선택 적용
+    applySavedSelection();
+});
+
+
