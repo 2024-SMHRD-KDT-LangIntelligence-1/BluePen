@@ -1,16 +1,16 @@
 /* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
+  padding: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height:  auto;
 }
 
 /* 헤더 스타일 */
@@ -19,149 +19,150 @@ body {
   z-index: 1002; /* chat-container보다 위로 오도록 z-index 값 설정 */
 }
 
-/* 사이드바 스타일 */
-.sidebar {
-  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
-  z-index: 1001; /* chat-container보다 위로 오도록 z-index 값 설정 */
-}
 /*----------------------------------------------------------------------------------------------------*/
 .container {
+  position:absolute;
+  top: 90px;
   width: 1200px;
-  margin-top: 500px;
+  height: auto;
+  margin: 10px 0px 50px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
   background: white;
-  padding: 20px;
+  padding: 20px 20px 20px 20px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-        .buttons {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .buttons button, .buttons select {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: white;
-            color: rgb(2, 2, 2);
-            cursor: pointer;
-        }
-        .buttons input[type='search'] {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-        }
-        .job-list {
-            border-top: 2px solid #ddd;
-        }
-        .job-item {
-            border-bottom: 1px solid #ddd;
-            padding: 15px 10px;
-            display: flex;
-            align-items: center;
-        }
-        .job-category {
-            width: 80px;
-            font-weight: bold;
-            color: #444;
-        }
-        .company-name {
-            width: 180px;
-            font-weight: bold;
-            color: #555;
-        }
-        .job-info {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .job-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .job-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-        }
-        .job-meta, .job-extra {
-            font-size: 14px;
-            color: #777;
-            margin-top: 3px;
-        }
-        .job-deadline {
-            font-size: 14px;
-            color: black;
-            font-weight: bold;
-            margin-left: 100px;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #ff0000;
-        }
-        .apply-btn {
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            margin-left: 40px;
-        }
-        .homepage {
-            background: none;
-            color: #007bff;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-        }
-        .apply {
-            background: none;
-            color: #007bff;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-        }
-        .interview {
-            background: none;
-            color: #737679;
-            border: 1px solid #737679;
-            border-radius: 5px;
-        }
-        .resum {
-            background: none;
-            color: #f80c04;
-            border: 1px solid #f80c04;
-            border-radius: 5px;
-        }
-        
-        .delete-btn {
-            background: none;
-            border: none;
-            color: rgb(112, 109, 109);
-            cursor: pointer;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        /* 페이지네이션 버튼 스타일 */
-        .pagination button {
-            padding: 6px 12px;
-            margin: 0 4px;
-            border: 1px solid #ccc;
-            background-color: white;
-            cursor: pointer;
-            border-radius: 4px;
-        }
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.buttons button,
+.buttons select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  color: rgb(2, 2, 2);
+  cursor: pointer;
+}
+.buttons input[type="search"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+.job-list {
+  border-top: 2px solid #ddd;
 
-        /* 현재 활성화된 페이지 버튼 스타일 */
-        .pagination button.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
+}
+.job-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+}
+.job-category {
+  width: 80px;
+  font-weight: bold;
+  color: #444;
+}
+.company-name {
+  width: 180px;
+  font-weight: bold;
+  color: #555;
+}
+.job-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.job-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.job-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.job-meta,
+.job-extra {
+  font-size: 14px;
+  color: #777;
+  margin-top: 3px;
+}
+.job-deadline {
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  margin-left: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.highlight {
+  font-weight: bold;
+  color: #ff0000;
+}
+.apply-btn {
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 40px;
+}
+.homepage {
+  background: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+}
+.apply {
+  background: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+}
+.interview {
+  background: none;
+  color: #737679;
+  border: 1px solid #737679;
+  border-radius: 5px;
+}
+.resum {
+  background: none;
+  color: #f80c04;
+  border: 1px solid #f80c04;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: rgb(112, 109, 109);
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+/* 페이지네이션 버튼 스타일 */
+.pagination button {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* 현재 활성화된 페이지 버튼 스타일 */
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
