@@ -1,17 +1,10 @@
 package com.cothink.bluepen.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import com.cothink.bluepen.entity.TblUser;
-import com.cothink.bluepen.model.UserVO;
-import com.cothink.bluepen.repository.UserRepo;
 
 @Controller
 public class MainController {
-	
 
 	@GetMapping("/")
 	public String index() {

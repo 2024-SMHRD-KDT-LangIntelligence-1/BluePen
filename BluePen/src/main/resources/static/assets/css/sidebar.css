@@ -301,3 +301,97 @@ body {
     background-color: #c0c0c0; /* 호버 시 배경색 변경 */
     transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
 }
+
+/*----------------------------------------------------------------------------------------*/
+/*반응형 디자인 추가*/
+/* 사이드바가 작은 화면에서 숨겨지도록 */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* 작은 화면에서 사이드바 크기 조정 */
+  }
+  
+  /* 사이드바가 닫히면 토글 버튼 왼쪽 위치 */
+  .sidebar.closed .side-toggle-btn {
+    left: 8px;
+  }
+
+  /* 사이드바를 닫을 때, 사이드바 토글 버튼은 왼쪽에 위치 */
+  .side-toggle-btn {
+    left: 0;
+    top: 50%;
+  }
+
+  /* 작은 화면에서는 사이드바 리스트 항목을 세로로 나열 */
+  .sidebar-list {
+    margin-top: 0;
+    padding-top: 20px;
+    font-size: 14px;
+  }
+
+  /* 사이드바 하단 내용 위치 */
+  .sidebar-footer {
+    position: relative;
+    bottom: 20px;
+  }
+
+  /* 전체선택 체크박스를 오른쪽 정렬 */
+  #side-select-all-container {
+    margin-left: 20px; /* 오른쪽 정렬 없애기 */
+  }
+}
+
+/* 모바일 화면에서 사이드바 숨김 및 상단바 크기 조정 */
+@media (max-width: 480px) {
+  /* 사이드바를 기본적으로 숨김 */
+  .sidebar.closed {
+    display: none;
+  }
+
+  /* 사이드바 토글 버튼을 오른쪽 상단으로 이동 */
+  .side-toggle-btn {
+    top: 10px;
+    left: 10px;
+  }
+
+  /* 사이드바 아이템들 줄바꿈 */
+  .sidebar-list {
+    display: block;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .sidebar-logo h2 {
+    font-size: 18px; /* 로고 크기 줄이기 */
+  }
+
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    bottom: 50px;
+    left: 20px;
+  }
+
+  /* 버튼의 크기 및 패딩 조정 */
+  .side-modal-buttons button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* 데스크탑 화면에서 사이드바 기본 상태 */
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  /* 사이드바의 항목은 여전히 가로로 나열 */
+  .sidebar-list {
+    font-size: 13px;
+  }
+
+  .sidebar-footer {
+    position: absolute;
+    bottom: 35px;
+    left: 20px;
+  }
+}

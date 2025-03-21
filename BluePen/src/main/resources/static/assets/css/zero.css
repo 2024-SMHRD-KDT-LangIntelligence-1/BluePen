@@ -1,113 +1,390 @@
-/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
-* {
+/* 기본 스타일 */
+body {
+  background-color: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: white;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-    width: 1100px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.logo {
+/* 제목 스타일 */
+h1, h3 {
   text-align: center;
-  font-size: 24px;
+  color: #19335A;
+}
+
+/* header 스타일 */
+header {
+  text-align: center; /* 중앙 정렬 */
+  padding: 30px 20px 40px 20px; /* 위 오른쪽 아래 왼쪽*/
+}
+
+header h1 {
+  font-size: 32px; /* 큰 제목 크기 */
+  color: #19335A; /* 글자 색상 */
+  font-weight: bold; /* 제목 굵게 */
+  margin-bottom: 16px; /* 제목과 하위 내용 사이 여백 */
+}
+
+header h3 {
+  font-size: 21px; /* 부제목 크기 */
+  color: #3A6A92; /* 부제목 색상 */
+  line-height: 1.5; /* 줄 간격 */
+  margin-bottom: 24px; /* 부제목과 버튼 사이 여백 */
+}
+
+header .next-btn {
+  background-color: #19335A; /* 버튼 글자 색상 */
+  color: white;
+  width: 10%;
+  border: none; /* 테두리 제거 */
+  padding: 12px 24px; /* 버튼 여백 */
+  cursor: pointer; /* 커서 모양 변경 */
+  border-radius: 12px; /* 둥근 모서리 */
+  font-size: 18px; /* 부제목 크기 */
+}
+
+form {
+  padding: 5px 5px 5px 5px; /* 위 오른쪽 아래 왼쪽*/
+  margin: 20px 20px 20px 5px; /* 위 오른쪽 아래 왼쪽*/
+}
+
+/* 섹션 제목 */
+.section-title {
+  font-size: 18px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  color: #19335A;
+  padding: 0px 5px 0px 5px; /* 위 오른쪽 아래 왼쪽*/
+  margin: 5px 10px 5px 10px; /* 위 오른쪽 아래 왼쪽*/
 }
-.logo-container {
-    display: flex;
+
+.container1 {
+  background-color: #C6E7FF;
+  border-radius: 12px;
+  width: 1200px; /* 화면 크기에 맞춰 최대 너비를 설정 */
+  height: 870px;
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 10px; /* 내부 여백 */
+  box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
+  margin-bottom: 100px; /* 아래에 50px 여백 추가 */
+  position: relative; /* 부모 요소를 명확히 설정 */ 
+}
+
+/* active 상태 버튼 스타일 */
+.job-btn.active,
+.education-btn.active,
+.career-btn.active,
+.region-btn.active {
+  color: white;
+  font-weight: bold;
+  background-color: #19335A;
+}
+
+.inactive {
+  color: black;
+  background-color: #F3F8FF;
+}
+
+/* 버튼 스타일 */
+.job-btn,
+.education-btn,
+.career-btn,
+.region-btn {
+  width: 202px; /* 각 버튼의 너비 */
+  height: 120px;
+  color: black;
+  margin: 5px 10px 5px 2px; /* 위 오른쪽 아래 왼쪽*/
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  pointer-events: auto;
+  flex-shrink: 0; /* 버튼들이 넘치지 않도록 방지 */
+  background-color: #F3F8FF;
+}
+
+#just1, #just2 {
+  position: relative;
+  top: 12px; /* 원하는 만큼 조절 */
+}
+
+
+
+/* 세션*/
+.job-selection-section,
+.education-selection-section,
+.career-selection-section,
+.region-selection-section{
+  padding: 0px 5px 0px 5px; /* 위 오른쪽 아래 왼쪽*/
+  margin: 0px 5px 0px 5px; /* 위 오른쪽 아래 왼쪽*/
+}
+
+.job-options-wrapper,
+.education-options-wrapper,
+.career-options-wrapper,
+.region-options-wrapper{
+  height: 150px;
+  padding: 5px;
+  margin: 5px;
+}
+
+/* 슬라이더 */
+.job-selection-container,
+.education--container,
+.career-selection-container,
+.region-selection-container{
+  display: flex; /* flexbox 사용 */
+  justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
+  overflow-x: hidden; /* 가로로 스크롤이 가능하게 설정 */
+  white-space: nowrap; /* 한 줄로 배치 */
+  scroll-behavior: smooth; /* 부드러운 스크롤 */
+  padding: 0;
+  margin: 0;
+}
+
+/* 슬라이더 박스 */
+.job-slider,
+.education-slider,
+.career-slider,
+.region-slider{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: black;
+  font-size: 32px;
+  padding: 0px 5px 5px 0px; /* 위 오른쪽 아래 왼쪽*/
+  margin: 0px 5px 5px 0px; /* 위 오른쪽 아래 왼쪽*/
+  cursor: pointer;
+}
+
+/* 슬라이드 이동 버튼 컨테이너 */
+.slide-buttons {
+  position: relative; /* 부모 요소가 위치 기준점이 됨 */
+  width: 100%; /* 부모 요소 크기 */
+  display: flex;
+  justify-content: space-between; /* 버튼을 양쪽 끝으로 배치 */
+  align-items: center;
+  margin-top: 10px; /* 위쪽 여백 추가 */
+}
+
+/* 슬라이드 이동 버튼 */
+#next-slide-education-level{
+  position: absolute;
+  top: 80%; /* 부모 요소의 중앙 정렬 */
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-job-list{
+  position: absolute;
+  top: 16%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-40%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-education-level{
+  position: absolute;
+  top: 41%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-region {
+  position: absolute;
+  top: 88%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/*---------------------------------------------------------------------------------------------------*/
+.container2 {
+  display: none;
+  background-color: #C6E7FF;
+  border-radius: 12px;
+  width: 1200px; /* 화면 크기에 맞춰 최대 너비를 설정 */
+  height: 800px;
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 10px; /* 내부 여백 */
+  box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
+  padding-top: 20px;
+  margin-bottom: 50px; /* 아래에 50px 여백 추가 */
+  position: relative; /* 부모 요소를 명확히 설정 */
+}
+
+/* 자격증 세션*/
+.license-section, .hoped-licenses-section {
+  padding: 0px 5px 0px 5px; /* 위 오른쪽 아래 왼쪽*/
+  margin: 0px 5px 0px 5px; /* 위 오른쪽 아래 왼쪽*/
+}
+
+/* 자격증 슬라이더 */
+.license-container,
+.licenses-container {
+  display: flex; /* flexbox 사용 */
+  justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
+  overflow-x: auto; /* 내부 요소만 스크롤 가능 */
+  white-space: nowrap;
+  scroll-behavior: smooth; /* 부드러운 스크롤 */
+  overflow: hidden; /* 스크롤 숨기기 */
+  padding: 0;
+  margin: 0;
+}
+
+/* 슬라이더의 버튼 */
+.license-btn,
+.license-btn.hoped {
+  width: 202px; /* 각 버튼의 너비 */
+  height: 120px;
+  color: black;
+  margin: 5px 10px 15px 2px; /* 위 오른쪽 아래 왼쪽*/
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  pointer-events: auto;
+  flex-shrink: 0; /* 버튼들이 넘치지 않도록 방지 */
+  background-color: #F3F8FF;
+}
+
+/* 포커스 버튼 스타일 */
+.license-btn:focus,
+.license-btn.hoped:focus {
+  color: white;
+  font-weight: bold;
+  background-color: #19335A;
+}
+
+/* 슬라이더 박스 */
+.license-slider,
+.licenses-slider {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: black;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* 슬라이드 이동 버튼 */
+#next-slide-button1 {
+  position: absolute;
+  bottom: 73%; /*부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-button2 {
+  position: absolute;
+  bottom: 53%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-hoped-button1 {
+  position: absolute;
+  bottom: 29%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#next-slide-hoped-button2 {
+  position: absolute;
+  bottom: 9%; /* 부모 요소의 중앙 정렬 */
+  right: 22px;
+  transform: translateY(-50%); /* 세로 정렬 보정 */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #19335A;
+  font-size: 32px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/* 반응형 처리 (기기 크기에 따른 스타일 조정) */
+@media (max-width: 1200px) {
+  .container1, .container2 {
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container1, .container2 {
+    max-width: 90%;
+  }
+
+  .job-selection-container, 
+  .education--container, 
+  .career-selection-container, 
+  .region-selection-container, 
+  .license-container, 
+  .licenses-container {
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-}
-.logo-container img {
-    height: 50px;
-}
-.title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
-.next-btn {
-    background-color: #4675C0;
-    color: white;
-    border: none;
-    padding: 18px;
-    width: 93%;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.next-btn:hover {
-    background-color: #335bb5;
-}
-.category {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-.selection-container {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    width: 110%;
-}
-.options-wrapper {
-    display: flex;
-    align-items: center;
-    width: 85%; /* 여유 공간을 위해 조정 */
-    overflow: hidden;
-}
-.options {
-    display: flex;
-    gap: 15px; /* 박스 간격 조정 */
-    transition: transform 0.5s ease-in-out;
-    flex-wrap: nowrap;
+  }
+
+  button {
     width: 100%;
+    padding: 12px;
+  }
 }
-.option {
-    background-color: #ddd;
-    width: 19.2%; /* 4개만 보이도록 조정 */
-    height: 120px;
-    border-radius: 12px;
-    text-align: center;
-    line-height: 120px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.option.selected {
-    background-color: #4675C0;
-    color: white;
-}
-.arrow {
-    font-size: 26px;
-    font-weight: bold;
-    color: rgb(10, 10, 10);
-    padding: 14px;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px; /* 여유 공간 유지 */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container1, .container2 {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
 }

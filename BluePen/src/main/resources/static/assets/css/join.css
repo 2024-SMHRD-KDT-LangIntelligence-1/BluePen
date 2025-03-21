@@ -153,3 +153,66 @@ label {
 .join-btn:hover {
   background-color: #1e4a8d;
 }
+
+/*------------------------------------------------------------------------------*/
+/* 반응형 디자인 추가 */
+
+/* 768px 이하에서 */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%; /* 화면 크기에 맞춰 너비 조정 */
+    padding: 20px; /* 여백 조정 */
+  }
+
+  .logo {
+    font-size: 25px; /* 로고 크기 줄이기 */
+    margin-bottom: 40px; /* 로고 아래 여백 줄이기 */
+  }
+
+  /* 입력 필드 폰트 크기 조정 */
+  input[type="text"],
+  input[type="password"],
+  input[type="date"] {
+    font-size: 14px; /* 작은 화면에서 글자 크기 줄이기 */
+  }
+
+  .small-btn {
+    font-size: 12px; /* 버튼 글자 크기 줄이기 */
+    width: 70px; /* 버튼 크기 줄이기 */
+    height: 30px;
+  }
+
+  .join-btn {
+    width: 80%; /* 버튼 너비 줄이기 */
+  }
+}
+
+/* 480px 이하에서 */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 95%; /* 더 작은 화면에서 너비 최대화 */
+    padding: 15px; /* 여백 줄이기 */
+  }
+
+  .logo {
+    font-size: 20px; /* 로고 크기 더 줄이기 */
+    margin-bottom: 30px; /* 로고 아래 여백 더 줄이기 */
+  }
+
+  /* 입력 필드 폰트 크기 더 줄이기 */
+  input[type="text"],
+  input[type="password"],
+  input[type="date"] {
+    font-size: 12px; /* 글자 크기 최대로 줄이기 */
+  }
+
+  .small-btn {
+    font-size: 10px; /* 버튼 글자 크기 더 줄이기 */
+    width: 60px; /* 버튼 크기 더 줄이기 */
+    height: 28px;
+  }
+
+  .join-btn {
+    width: 90%; /* 버튼 너비 거의 꽉 차게 */
+  }
+}

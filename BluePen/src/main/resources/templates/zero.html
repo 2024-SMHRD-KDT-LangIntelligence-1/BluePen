@@ -1,52 +1,290 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관심사 선택 - BLUE PEN</title>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLUEPEN</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/zero.css">
+    <!-- Font Awesome 아이콘 라이브러리 (CDN 방식) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/zero.css" />
+  </head>
+  <body>
+    <header>
+      <h1>님, 관심사를 선택해주세요.</h1>
+      <h3>
+        회원님의 맞춤 자격증과 취업 공고를 찾아드리고, 맞춤 일정 관리도
+        제공해드리기 위해 관심사를 선택해주세요.
+      </h3>
+      <button type="submit" form="interest-form" class="next-btn">다음</button>
+    </header>
+    <div class="container1">
+      <form id="">
+            <!-- 관심 직무 섹션 -->
+          <section class="job-selection-section">
+            <div class="section-title">관심 직무</div>
+            <div class="job-selection-container">
+              <div class="job-options-wrapper">
+                <div class="job-options" id="job-list">
+                  <div class="job-slider" id="job-slider">
+                    <button type="button" class="job-btn" name="job">
+                      기획·전략
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      마케팅·홍보·조사
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      회계·사무
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      IT·개발·데이터
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      디자인
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      영업·판매·무역
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      고객상담·TM
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      구매·자재·물류
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      상품기획·MD
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      운전·운송·배송
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      서비스
+                    </button>
+                    <button type="button" class="job-btn" name="job">생산</button>
+                    <button type="button" class="job-btn" name="job">
+                      건설·건축
+                    </button>
+                    <button type="button" class="job-btn" name="job">의료</button>
+                  </div>
+                  <!-- 슬라이드 이동 버튼 -->
+                  <button type="button" class="job-slide-btn" id="next-slide-job-list">
+                    <i class="fa-solid fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+            
+          <!-- 학력 섹션 -->
+          <section class="education-selection-section">
+            <div class="section-title">학력</div>
+            <div class="education--container">
+            <div class="education-options-wrapper">
+              <div class="education-options" id="education-level">
+                <div class="education-slider" id="education-slider">
+                  <button type="button" class="education-btn" name="zero_aca">
+                    고등학교 졸업 이하
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    고등학교 졸업
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학교 재학
+                  </button>
+                  <button type="button" class="education-btn" id="just1" name="zero_aca">
+                    대학교 졸업<br />(2,3년제)
+                  </button>
+                  <button type="button" class="education-btn" id="just2" name="zero_aca">
+                    대학교 졸업<br />(4년제)
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학원 석사 졸업
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학원 박사 졸업
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학원 박사 졸업 이상
+                  </button>
+                </div>
+                <!-- 슬라이드 이동 버튼 -->
+                <button type="button" class="education-slide-btn" id="next-slide-education-level">
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+            </div>
+          </section>
     
-</head>
-<body>
-
-    <div class="container">
-        <div class="logo-container">
-            <div class="logo">🖋️BLUE PEN</div>
-        </div>
-
-        <p class="title">BluePen 님, 관심가는 항목을 선택하세요.</p>
-
-        <button class="next-btn" onclick="submitSelection()">다음</button>
-
-        <div class="category">관심 직종</div>
-        <div class="selection-container">
-            <div class="options-wrapper">
-                <div class="options" id="jobs"></div>
+          <!-- 경력 섹션 -->
+          <section class="career-selection-section">
+            <div class="section-title" >경력</div>
+              <div class="career-selection-container">
+              <div class="career-options-wrapper" id="career-experience">
+                <div class="career-slider" id="career-slider">
+                  <button type="button" class="career-btn" name="zero_career">
+                    신입
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    1년 이하
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    1 - 3년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    3 - 7년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    7년 이상
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="arrow" onclick="nextSlide('jobs')">></div>
-        </div>
-
-        <div class="category">관심 자격증</div>
-        <div class="selection-container">
-            <div class="options-wrapper">
-                <div class="options" id="certificates"></div>
+          </section>
+    
+          <!-- 관심 지역 섹션 -->
+          <section class="region-selection-section">
+            <div class="section-title">관심 지역</div>
+            <div class="region-selection-container">
+              <div class="region-options-wrapper">
+                <div class="region-options" id="region-list">
+                  <div class="region-slider" id="region-slider">
+                    <button type="button" class="region-btn" name="region">
+                      서울
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경기
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      부산
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      대구
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      인천
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      대전
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      광주
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      울산
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      강원
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      제주
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="region-slide-btn"
+                    id="next-slide-region"
+                  >
+                    <i class="fa-solid fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="arrow" onclick="nextSlide('certificates')">></div>
-        </div>
+          </section>
+         </form>
+     </div>
 
-        <div class="category">희망 지역</div>
-        <div class="selection-container">
-            <div class="options-wrapper">
-                <div class="options" id="locations"></div>
+    <div class="container2">
+      <form id="">
+        <!-- 보유 자격증 섹션 -->
+        <section class="license-section">
+          <div class="section-title">보유 자격증</div>
+          <div class="license-container">
+            <div class="license-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="license-slider" id="license-slider1">
+			  <button
+			    type="button"
+			    class="license-btn"
+			    name="license"
+			    th:each="license : ${licenses}"
+			  >
+			  </button>
+              </div>
+              <!-- 첫 번째 슬라이드 이동 버튼 -->
+              <button type="button" class="slide-btn" id="next-slide-button1">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+              <!-- 두 번째 슬라이더 -->
+              <div class="license-slider" id="license-slider2">
+			  <button
+			    type="button"
+			    class="license-btn"
+			    name="license"
+			    th:each="license : ${licenses}"
+			  >
+			  </button>
+              </div>
+              <!-- 두 번째 슬라이드 이동 버튼 -->
+              <button type="button" class="slide-btn" id="next-slide-button2">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
             </div>
-            <div class="arrow" onclick="nextSlide('locations')">></div>
-        </div>
-
+          </div>
+        </section>
+        <!-- 관심 자격증 섹션 -->
+        <section class="hoped-licenses-section">
+          <div class="section-title">관심 자격증</div>
+          <div class="licenses-container">
+            <div class="licenses-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="licenses-slider" id="hoped-licenses-slider1">
+			  <button
+			    type="button"
+			    class="license-btn hoped"
+			    name="hoped_license"
+			    th:each="license : ${licenses}"
+			  >
+			  </button>
+              </div>
+              <!-- 슬라이드 이동 버튼 -->
+              <button
+                type="button"
+                class="slide-btn"
+                id="next-slide-hoped-button1"
+              >
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+              <!-- 두 번째 슬라이더 -->
+              <div class="licenses-slider" id="hoped-licenses-slider2">
+			  <button
+			    type="button"
+			    class="license-btn hoped"
+			    name="hoped_license"
+			    th:each="license : ${licenses}"
+			  >
+			  </button>
+              </div>
+              <!-- 슬라이드 이동 버튼 -->
+              <button
+                type="button"
+                class="slide-btn"
+                id="next-slide-hoped-button2"
+              >
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </form>
     </div>
+
     <script src="assets/js/zero.js"></script>
-</body>
+  </body>
 </html>

@@ -27,6 +27,7 @@ public class JoinController {
 		System.out.println(userinfo.getJoinedAt());
 		
 		session.setAttribute("user", userinfo);
+
 		return "redirect:/zero";
 	}
 
