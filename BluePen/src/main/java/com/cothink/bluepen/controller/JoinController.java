@@ -8,6 +8,8 @@ import com.cothink.bluepen.entity.TblUser;
 import com.cothink.bluepen.model.UserVO;
 import com.cothink.bluepen.repository.UserRepo;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class JoinController {
 
@@ -15,7 +17,7 @@ public class JoinController {
 	private UserRepo userRepo;
 
 	@PostMapping("/join.do")
-	public String joinDo(UserVO userVo) {
+	public String joinDo(UserVO userVo, HttpSession session) {
 		TblUser userinfo = new TblUser(userVo);
 		userRepo.save(userinfo);
 		System.out.println(userinfo.getUserId());
@@ -23,7 +25,8 @@ public class JoinController {
 		System.out.println(userinfo.getUserBirthdate());
 		System.out.println(userinfo.getUserGender());
 		System.out.println(userinfo.getJoinedAt());
-
+		
+		session.setAttribute("user", userinfo);
 		return "redirect:/zero";
 	}
 

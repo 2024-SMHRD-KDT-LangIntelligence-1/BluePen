@@ -49,11 +49,11 @@ public class MainController {
 		return "login";
 	}
 
-	@GetMapping("/zero")
-	public String zero() {
-
-		return "zero";
-	}
+	/*
+	 * @GetMapping("/zero") public String zero() {
+	 * 
+	 * return "zero"; }
+	 */
 
 	@GetMapping("/calendar")
 	public String calendar() {
