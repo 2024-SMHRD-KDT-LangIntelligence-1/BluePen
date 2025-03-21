@@ -22,7 +22,7 @@
 
     <div class="cover">
       <!-- 대화 프롬프트, 추천 검색어 -->
-      <div class="chat-interface">
+      <div class="chat-container">
         <div th:if="${session.user} != null">
             <!-- th태그를 활용하여 해당 태그의 내용 수정 -->
             <h2 th:text="${session.user.userId} + '님 환영합니다.'"></h2>
@@ -35,19 +35,19 @@
         
           <div class="chat-message bot-message"></div>
         </div>
-        <div class="user-input-container">
-        <form>
+        <div class="input-container">
+        <form action="/flasktest.do" method="get" onsubmit="return handleEnterKey(event)">
           <input
             type="text"
             id="user-input"
-            name="user-message"
+            name="text"
             placeholder="무엇이든 물어보세요"
           />
-        <a class="bookmark">
-		  <i class="fa-regular fa-bookmark"></i>
+        <a class="bookmark" onclick="saveBookmark()">
+		  <i class="fa-regular fa-bookmark" style="color: #C6E7FF;"></i>
 		</a>
         </form>
-        <div class="suggestions" id="suggestions-list">
+        <div class="suggestions" id="suggestions">
           <span class="suggestion">스마트인재개발원</span>
           <span class="suggestion">면접일정</span>
           <span class="suggestion">자격증일정</span>

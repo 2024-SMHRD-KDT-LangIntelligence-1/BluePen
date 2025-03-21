@@ -1,86 +1,49 @@
-function handleEnterKey(event) {
-        if (event.key === "Enter") {
-            document.querySelector('form').submit();
-            return false; // Enter 키가 제출 외의 기본 동작을 수행하지 않도록 방지
-        }
-    }
-
-    document.getElementById('text').addEventListener("keypress", handleEnterKey);
-
 document.addEventListener("DOMContentLoaded", function () {
-  let userInput = document.getElementById("user-input");
+  const userInput = document.getElementById("user-input");
+  const chatBox = document.getElementById("chat-box");
+  const chatContainer = document.querySelector(".chat-container");
+  const suggestions = document.querySelectorAll(".suggestion");
 
+  // 메시지 추가 함수
+  function addMessage(text, isUser = true) {
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("chat-message", isUser ? "user-message" : "bot-message");
+    messageDiv.innerText = text;
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 아래로 이동
+
+    // 대화 시작 시 하단으로 이동
+    if (!chatContainer.classList.contains("active")) {
+      chatContainer.classList.add("active");
+    }
+  }
+
+  // 사용자 입력 처리
+  function handleUserInput() {
+    const text = userInput.value.trim();
+    if (text === "") return;
+
+    addMessage(text, true); // 사용자 메시지 추가
+    userInput.value = ""; // 입력 필드 초기화
+
+    setTimeout(() => {
+      addMessage("AI 응답 예시: 질문을 이해했습니다!", false);
+    }, 1000);
+  }
+
+  // 엔터 키 입력 감지
   userInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      let userInputValue = this.value.trim();
-      if (userInputValue === "") {
-        return;
-      }
-
-      // h2 숨기기
-      document.querySelector(".chat-container h2").style.display = "none";
-
-      // 사용자 메시지 추가
-      addMessage(userInputValue, "user");
-
-      // 챗봇 응답 추가
-      let botResponse = getBotResponse(userInputValue);
-      addMessage(botResponse, "bot");
-
-      // 입력창 초기화
-      this.value = "";
+      event.preventDefault();
+      handleUserInput();
     }
   });
+
+  // 추천 검색어 클릭 시 입력창에 자동 입력
+  suggestions.forEach((suggestion) => {
+    suggestion.addEventListener("click", function () {
+      userInput.value = this.innerText;
+      userInput.focus();
+    });
+  });
 });
-
-// 메시지 추가 함수
-function addMessage(message, sender) {
-  const chatBox = document.getElementById("chat-box");
-
-  // 대화 시작 시 chat-box 표시
-  chatBox.style.display = "block";
-
-  const messageDiv = document.createElement("div");
-  messageDiv.classList.add("chat-message", sender + "-message");
-
-  // 사용자와 봇을 구분하여 p 태그 스타일 다르게 적용
-  const pTag = document.createElement("p");
-  pTag.textContent = message;
-
-  // 사용자 메시지와 봇 메시지 구분
-  if (sender === "user") {
-    pTag.classList.add("user-message-p");
-  } else {
-    pTag.classList.add("bot-message-p");
-  }
-
-  messageDiv.appendChild(pTag);
-  chatBox.appendChild(messageDiv);
-
-  // 스크롤을 자동으로 맨 아래로 이동
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-document.getElementById('user-input').addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
-    // 메시지 입력 후 위로 이동
-    document.querySelector('.input-container').style.bottom = '60px';
-    
-    // 입력된 메시지 처리 부분 (필요시 여기에 메시지 추가하는 코드 작성)
-    const userInput = event.target.value;
-    // 예: 메시지를 chat-box에 추가하는 코드
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('chat-message', 'user-message');
-    messageElement.textContent = userInput;
-    document.getElementById('chat-box').appendChild(messageElement);
-    
-    // 메시지 입력 후 input 필드 비우기
-    event.target.value = '';
-    
-    // 입력 후 채팅창 스크롤을 맨 아래로 이동 (기본적으로 새 메시지가 아래로 추가되게)
-    const chatBox = document.getElementById('chat-box');
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-}); 
-
-
