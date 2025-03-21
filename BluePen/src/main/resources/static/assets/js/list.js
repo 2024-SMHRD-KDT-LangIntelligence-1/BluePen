@@ -303,3 +303,6 @@ renderJobs();
         renderPagination(); // 페이지네이션 생성
         showPage(currentPage); // 첫 페이지 보여줌
     });
+	
+
+	const sidebar = document.querySelector(".sidebar");
