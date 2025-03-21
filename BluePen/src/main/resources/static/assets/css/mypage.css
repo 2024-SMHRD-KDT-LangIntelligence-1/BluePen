@@ -268,3 +268,87 @@ body {
     background-color: #c0c0c0; /* 호버 시 배경색 변경 */
     transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
 }
+
+/*------------------------------------------------------------------------------------*/
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .mypage-cover {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .mypage-container {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .mypage-title {
+    font-size: 20px;
+  }
+
+  .mypage-submit {
+    margin-top: 30px;
+  }
+
+  #mypage-submit-btn {
+    width: 50%;
+    padding: 12px;
+  }
+
+  #mypage-reset-btn {
+    padding: 12px;
+  }
+
+  .mypage-form-group input {
+    font-size: 12px;
+  }
+
+  .mypage-form-group .gender-btn {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .mypage-modal-content {
+    width: 250px;
+    height: auto;
+    padding: 15px;
+  }
+
+  #modal-yes-btn, #modal-no-btn {
+    width: 80px;
+    height: 35px;
+  }
+}
+
+/* 더 작은 화면을 위한 추가 반응형 */
+@media screen and (max-width: 480px) {
+  .mypage-cover {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .mypage-container {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .mypage-title {
+    font-size: 18px;
+  }
+
+  .mypage-form-group input {
+    font-size: 10px;
+  }
+
+  .mypage-form-group .gender-btn {
+    padding: 6px;
+    font-size: 10px;
+  }
+
+  #mypage-submit-btn {
+    width: 70%;
+    padding: 12px;
+  }
+}

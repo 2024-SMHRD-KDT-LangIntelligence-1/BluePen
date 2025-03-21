@@ -134,3 +134,46 @@ a:visited {
   margin-bottom: 15px;
   text-align: center;
 }
+
+/*------------------------------------------------------------------------------------*/
+/* 반응형 디자인 추가 */
+
+/* 화면이 768px 이하일 때 */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%; /* 화면 너비에 맞게 폼의 크기 조정 */
+    top: 100px; /* 로그인 박스 위치 조정 */
+    padding: 20px; /* 여백 조정 */
+  }
+
+  .login-container h2 {
+    font-size: 26px; /* 제목 폰트 크기 줄이기 */
+    margin-bottom: 40px; /* 제목과 폼 사이 여백 조정 */
+  }
+
+  .btn {
+    width: 70%; /* 버튼 크기 줄이기 */
+  }
+}
+
+/* 화면이 480px 이하일 때 */
+@media (max-width: 480px) {
+  .login-container {
+    width: 95%; /* 폼의 크기 더 줄이기 */
+    padding: 15px; /* 여백 줄이기 */
+  }
+
+  .login-container h2 {
+    font-size: 22px; /* 제목 폰트 크기 더 줄이기 */
+    margin-bottom: 30px; /* 제목과 폼 사이 여백 조정 */
+  }
+
+  .btn {
+    width: 80%; /* 버튼 크기 더 줄이기 */
+  }
+
+  .input-group input {
+    padding: 10px; /* 입력칸 크기 조정 */
+    font-size: 14px; /* 입력칸 폰트 크기 줄이기 */
+  }
+}

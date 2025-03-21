@@ -1,58 +1,99 @@
-// 각 슬라이드 이동 버튼 클릭 이벤트 핸들러
-document.getElementById('next-slide-jobs').addEventListener('click', function() {
-  moveSlide('jobs');
-});
+// 슬라이드 이동 하게 하는 코드
+document.addEventListener("DOMContentLoaded", function () {
+  // 슬라이드 이동 함수
+  function moveSlide(slider, direction) {
+    const items = slider.querySelectorAll("button");
+    const itemWidth = items[0].offsetWidth;
+    const visibleItems = Math.floor(slider.offsetWidth / itemWidth);
+    
+    if (direction === "next") {
+      slider.scrollBy(itemWidth * visibleItems, 0);
+    } else if (direction === "prev") {
+      slider.scrollBy(-itemWidth * visibleItems, 0);
+    }
+  }
 
-document.getElementById('next-slide-education').addEventListener('click', function() {
-  moveSlide('education');
-});
+  // 각 슬라이드와 버튼에 대한 설정
+  const sliders = [
+    { sliderId: "job-slider", buttonId: "next-slide-job-list" },
+    { sliderId: "education-slider", buttonId: "next-slide-education-level" },
+    { sliderId: "region-slider", buttonId: "next-slide-region" },
+    { sliderId: "license-slider1", buttonId: "next-slide-button1" },
+    { sliderId: "license-slider2", buttonId: "next-slide-button2" },
+    { sliderId: "hoped-licenses-slider1", buttonId: "next-slide-hoped-button1" },
+    { sliderId: "hoped-licenses-slider2", buttonId: "next-slide-hoped-button2" },
+  ];
 
-document.getElementById('next-slide-locations').addEventListener('click', function() {
-  moveSlide('locations');
-});
+  // 슬라이드 버튼에 클릭 이벤트 리스너 추가
+  sliders.forEach(({ sliderId, buttonId }) => {
+    const slider = document.getElementById(sliderId);
+    const button = document.getElementById(buttonId);
+    
+    if (slider && button) {
+      button.addEventListener("click", function () {
+        moveSlide(slider, "next");  // "next" 방향으로 이동
+      });
+    }
+  });
 
-// 슬라이드를 5개씩 부드럽게 이동하는 함수
-function moveSlide(sectionId) {
-  const slider = document.querySelector(`#${sectionId} .slider`);
-  const slides = slider.querySelectorAll('.option-btn');
-  
-  // 슬라이드의 너비를 가져옵니다
-  const slideWidth = slides[0].offsetWidth;
-
-  // 슬라이드가 이동할 때 transition을 적용하여 부드럽게 이동하도록 설정
-  slider.style.transition = 'transform 0.6s ease-in-out'; // 이동 속도와 애니메이션 타이밍을 더 부드럽게 설정
-
-  // 현재 transform 값 가져오기 (이동 전 현재 위치)
-  const currentTransform = getComputedStyle(slider).transform;
-  const currentTranslateX = currentTransform === 'none' ? 0 : parseInt(currentTransform.split(',')[4]);
-
-  // 슬라이드를 오른쪽으로 5칸 이동시킴
-  slider.style.transform = `translateX(${currentTranslateX - (slideWidth * 5)}px)`;
-
-  // 600ms 후에 첫 번째 5개의 슬라이드를 맨 뒤로 이동시킴
-  setTimeout(() => {
-    slider.style.transition = 'none'; // transition을 없애서 위치 변경 후 자연스럽게 초기화
-
-    // 첫 번째 5개의 슬라이드를 맨 뒤로 보냄
-    for (let i = 0; i < 5; i++) {
-      const firstSlide = slides[0];
-      slider.appendChild(firstSlide);
+  // 슬라이드를 한 번에 이동하는 함수
+  function moveSlide(slider, direction) {
+    if (!slider) {
+      console.error(`Slider not found!`);
+      return;
     }
 
-    // 슬라이드가 원위치로 가도록 수정 (이동된 거리 초기화)
-    slider.style.transform = 'translateX(0)';
-  }, 600); // 슬라이드가 0.6초 후 첫 번째 슬라이드 맨 뒤로 이동
-}
-//-----------------------------------------------------------------------------------------------------
+    const slides = slider.querySelectorAll('button');
+    if (slides.length === 0) {
+      console.error('No slides found!');
+      return;
+    }
+
+    const slideWidth = slides[0].offsetWidth; // 슬라이드 너비
+
+    slider.style.transition = "transform 0.6s ease-in-out"; // 부드럽게 이동하도록 설정
+
+    // 현재 transform 값 가져오기
+    const currentTransform = getComputedStyle(slider).transform;
+    const currentTranslateX = currentTransform === "none" ? 0 : parseInt(currentTransform.split(",")[4]);
+
+    // 슬라이드를 이동시킴 (5개씩 이동)
+    slider.style.transform = `translateX(${currentTranslateX - slideWidth * 5}px)`;
+
+    setTimeout(() => {
+      slider.style.transition = "none"; // transition을 없앰
+      const firstSlides = Array.from(slides).slice(0, 5); // 5개 슬라이드 선택
+      firstSlides.forEach(slide => {
+        slider.appendChild(slide); // 첫 5개 슬라이드를 맨 뒤로 추가
+      });
+
+      slider.style.transform = "translateX(0)"; // 이동된 거리 초기화
+
+      setTimeout(() => {
+        slider.style.transition = "transform 0.6s ease-in-out"; // transition 다시 활성화
+      }, 50); // 작은 시간 지연 후 transition 활성화
+    }, 600); // 0.6초 후 첫 5개 슬라이드를 맨 뒤로 보냄
+  }
+});
+
+//---------------------------------------------------------------------------------------------------------
+// 버튼 선택시 이전에 선택한 버튼 유지되게하는 코드
 document.addEventListener("DOMContentLoaded", function () {
     // 버튼 그룹별 선택 상태 저장 객체
     let selected = {
         job: localStorage.getItem("selectedJob") || "",
         qualification: localStorage.getItem("selectedQualification") || "",
         experience: localStorage.getItem("selectedExperience") || "",
-        region: localStorage.getItem("selectedRegion") || ""
+        region: localStorage.getItem("selectedRegion") || "",
+        license: localStorage.getItem("selectedLicense") || "",
+        hopedLicense: localStorage.getItem("selectedHopedLicense") || ""
     };
 
+	// 첫 글자를 대문자로 바꾸는 함수 정의
+	function capitalizeFirstLetter(string) {
+	    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	
     // 버튼 클릭 시 선택 상태 저장 및 스타일 변경 함수
     function handleButtonClick(category, button) {
         // 해당 카테고리의 기존 선택된 버튼 초기화
@@ -70,11 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem(`selected${capitalizeFirstLetter(category)}`, button.innerText);
     }
 
-    // 첫 글자를 대문자로 변환하는 함수 (localStorage key 생성용)
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
     // 기존 선택 상태 불러와서 스타일 적용
     function applySavedSelection() {
         Object.keys(selected).forEach(category => {
@@ -90,17 +126,46 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 모든 버튼에 클릭 이벤트 추가
-    document.querySelectorAll(".job-btn, .aca-btn, .career-btn, .region-btn").forEach(button => {
+    document.querySelectorAll(".job-btn, .education-btn, .career-btn, .region-btn, .license-btn, .license-btn.hoped").forEach(button => {
         button.addEventListener("click", function () {
-            if (this.classList.contains("job-btn")) handleButtonClick("job-btn", this);
-            if (this.classList.contains("aca-btn")) handleButtonClick("aca-btn", this);
-            if (this.classList.contains("career-btn")) handleButtonClick("career-btn", this);
-            if (this.classList.contains("region-btn")) handleButtonClick("region-btn", this);
+            if (this.classList.contains("job-btn")) handleButtonClick("job", this);
+            if (this.classList.contains("education-btn")) handleButtonClick("qualification", this);
+            if (this.classList.contains("career-btn")) handleButtonClick("experience", this);
+            if (this.classList.contains("region-btn")) handleButtonClick("region", this);
+            if (this.classList.contains("license-btn")) handleButtonClick("license", this);
+            if (this.classList.contains("license-btn") && this.classList.contains("hoped")) handleButtonClick("hopedLicense", this);
         });
     });
 
     // 저장된 선택 적용
     applySavedSelection();
 });
+//------------------------------------------------------------------------------------------------------
+// 모든 버튼을 가져오기
+// 버튼 클릭 시 활성화/비활성화 토글
+function toggleActive(button) {
+  // 클릭된 버튼에 active 클래스가 있는지 확인
+  if (button.classList.contains('active')) {
+    button.classList.remove('active'); // active가 있으면 제거
+  } else {
+    button.classList.add('active'); // 없으면 추가
+  }
+}
+//----------------------------------------------------------------------------------------------
+// 직무 선택시 자격증 선택칸 밑에 생성하게 하는 코드
+document.addEventListener("DOMContentLoaded", function () {
+  // 모든 직무 버튼 선택
+  const jobButtons = document.querySelectorAll(".job-btn");
+  // container2 요소 선택
+  const container2 = document.querySelector(".container2");
 
+  // 버튼 클릭 시 container2를 보이게 설정
+  jobButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      container2.style.display = "block";
+    });
+  });
+});
+//---------------------------------------------------------------------------------------
 
+ 
