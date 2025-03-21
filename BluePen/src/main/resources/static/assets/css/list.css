@@ -18,14 +18,13 @@ body {
   position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
   z-index: 1002; /* chat-container보다 위로 오도록 z-index 값 설정 */
 }
+
 /*----------------------------------------------------------------------------------------------------*/
 .container {
   position:absolute;
   top: 90px;
   width: 1200px;
   height: auto;
-  max-height: 750px; /* 최대 높이 제한 */
-  overflow: hidden; /* 내부 내용이 넘칠 경우 감춤 */
   margin: 10px 0px 50px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
   background: white;
   padding: 20px 20px 20px 20px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
@@ -59,9 +58,7 @@ h2 {
 }
 .job-list {
   border-top: 2px solid #ddd;
-  max-height: 500px; /* 리스트 높이 제한 */
-  overflow-y: auto;  /* 세로 스크롤 표시 */
-  padding-right: 10px; /* 스크롤 안겹치게 */
+
 }
 .job-item {
   border-bottom: 1px solid #ddd;

@@ -19,7 +19,6 @@ body {
   height: 100vh; /* 화면 높이 꽉 채우기 */
   margin: 20px auto;
   padding: 20px;
-  background-color: blue;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* 수직 중앙 정렬을 하단으로 변경 */
@@ -28,19 +27,18 @@ body {
 }
 
 .chat-box {
-  display: flex;
+  display: none;
   flex-direction: column; /* 세로로 정렬 */
   width: 800px;
-  height: 700px; /* 화면 높이 꽉 채우기 */
+  height: 655px; /* 화면 높이 꽉 채우기 */
   overflow-y: auto;
   padding: 10px;
-  background-color: #f9f9f9;
   margin-top: 100px;
   margin-bottom: 10px;
   justify-content: flex-start; /* 대화창은 상단에서 시작 */
   align-items: center; /* 수평 중앙 정렬 */
   position: absolute; /* 화면 중앙에 고정 */
-  top: 40%; /* 화면 세로 중앙 */
+  top: 35%; /* 화면 세로 중앙 */
   left: 50%; /* 화면 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확히 중앙에 위치 */
 }
@@ -98,21 +96,20 @@ body {
 .user-input-container {
   position: relative; /* 이게 기준이 됨!!! */
   left: 180px;
+  bottom: -40px;
   width: 800px;
   height: 190px;
   padding: 20px;
   border: none;
-  background-color: black;
 }
 
 form {
   position: absolute; /* 부모(.user-input-container)를 기준으로 배치 */
-  top: 0;
+  top: 10px;;
   left: 0;
   width: 100%;
   height: 80%;
   border-radius: 25px;
-  background-color: gray;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +124,7 @@ form {
   padding: 20px;
   border: 1px solid #AACBFD;
   font-size: 15px;
-  border-radius: 25px;
+  border-radius: 30px;
   box-shadow: 0 1px 3px rgba(170, 203, 253, 0.3),
               0 -1px 3px rgba(170, 203, 253, 0.3),
               1px 0 3px rgba(170, 203, 253, 0.3),
@@ -152,6 +149,7 @@ form {
 
 .suggestions {
   position: relative; /* 부모 요소를 기준으로 움직이도록 설정 */
+  top: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* 요소들을 중앙 정렬 */
@@ -159,8 +157,7 @@ form {
   width: 100%; /* 부모 크기에 맞추기 */
   margin-top: 10px;
   padding: 10px;
-  background-color: lightgray; /* 확인용 */
-  border-radius: 10px; /* 둥근 모서리 */
+  border-radius: 20px; /* 둥근 모서리 */
 }
 
 .suggestion-item {
