@@ -141,16 +141,15 @@ document.addEventListener("DOMContentLoaded", function () {
     applySavedSelection();
 });
 //------------------------------------------------------------------------------------------------------
-// 모든 버튼을 가져오기
-// 버튼 클릭 시 활성화/비활성화 토글
-function toggleActive(button) {
-  // 클릭된 버튼에 active 클래스가 있는지 확인
-  if (button.classList.contains('active')) {
-    button.classList.remove('active'); // active가 있으면 제거
-  } else {
-    button.classList.add('active'); // 없으면 추가
-  }
-}
+// 버튼 요소들을 선택
+const buttons = document.querySelectorAll('.job-btn, .education-btn, .career-btn, .region-btn');
+
+buttons.forEach(button => {
+  button.addEventListener("click", function () {
+    // active 클래스를 토글
+    button.classList.toggle("active");
+  });
+});
 //----------------------------------------------------------------------------------------------
 // 직무 선택시 자격증 선택칸 밑에 생성하게 하는 코드
 document.addEventListener("DOMContentLoaded", function () {
@@ -167,5 +166,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 //---------------------------------------------------------------------------------------
-
  

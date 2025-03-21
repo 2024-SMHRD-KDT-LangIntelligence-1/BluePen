@@ -71,13 +71,18 @@ form {
 }
 
 /* active 상태 버튼 스타일 */
-.job-btn .active,
-.education-btn .active,
-.career-btn .active,
-.region-btn .active {
+.job-btn.active,
+.education-btn.active,
+.career-btn.active,
+.region-btn.active {
   color: white;
   font-weight: bold;
   background-color: #19335A;
+}
+
+.inactive {
+  color: black;
+  background-color: #F3F8FF;
 }
 
 /* 버튼 스타일 */

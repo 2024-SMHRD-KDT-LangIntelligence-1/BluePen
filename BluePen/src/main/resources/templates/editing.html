@@ -11,138 +11,23 @@
     <link rel="stylesheet" href="assets/css/calendar.css" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <link rel="stylesheet" href="assets/css/editing.css">
-
 </head>
 <body>
-      <!-- 상단바, 사이드바 -->
+    <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
     <div class="container">
         <!-- PDF 파일 업로드 -->
-        <div class="file-upload">
-            <label for="resumeFile">📎 이력서 PDF 파일 첨부</label>
-            <input type="file" id="resumeFile" accept=".pdf">
-            <span id="file-name">파일을 선택해주세요 (최대 50MB)</span>
-        </div>
-        <div class="header">
-            <div id="step1" class="active" onclick="showSection(1)">① 인적사항 입력</div>
-            <div id="step2" class="inactive" onclick="showSection(2)">② 이력사항 입력</div>
-        </div>
-
-        <!-- 인적사항 입력 -->
-        <div id="section1" class="section visible">
-            <div class="form-section">
-                <div class="photo-upload">
-                    <label for="photo">사진 추가 </label>
-                    <span>(10MB 이하)</span>
-                    <input type="file" id="photo" accept="image/*">
-                </div>
-                <div class="input-group-container">
-                    <div class="input-group">
-                        <label for="name">이름</label>
-                        <input type="text" id="name" placeholder="이름을 입력하세요">
-                    </div>
-                    <div class="input-group">
-                        <label for="dob">생년월일</label>
-                        <input type="text" id="dob" placeholder="YYYY/MM/DD">
-                    </div>
-                    <div class="input-group">
-                        <label for="phone">연락처</label>
-                        <input type="text" id="phone" placeholder="010-0000-0000">
-                    </div>
-                </div>
+        <form action="/upload_resume" method="post" enctype="multipart/form-data">
+            <div class="file-upload">
+                <label for="resumeFile">이력서 PDF 파일 첨부</label>
+                <input type="file" id="resumeFile" name="resumeFile" accept=".pdf">
+                <span id="file-name">파일을 선택해주세요 (최대 50MB)</span>
             </div>
-            <div class="input-group">
-                <label for="email">이메일</label>
-                <input type="email" id="email" placeholder="이메일을 입력하세요">
-            </div>
-            <div class="input-group">
-                <label for="address">주소</label>
-                <input type="text" id="address" placeholder="주소를 입력하세요">
-            </div>
-            <div class="input-group">
-                <label for="portfolio">포트폴리오 링크</label>
-                <input type="url" id="portfolio" placeholder="포트폴리오 링크를 입력하세요">
-            </div>
-            <!-- 학력 사항 입력 -->
-           <div class="input-group">
-            <label class="education-title">학력 사항</label>
-        <div id="education-container">
-            <div class="education-box">
-                <div class="education-header">
-                    <span>학력 1</span>
-                    <button class="remove-btn" onclick="removeEducation(this)">삭제</button>
-                </div>
-                <div class="education-group">
-                    <div style="width: 50%;">
-                        <label>학교 (선택)</label>
-                        <input type="text" name="school[]" placeholder="학교명을 입력하세요">
-                    </div>
-                    <div style="width: 50%;">
-                        <label>전공 (선택)</label>
-                        <input type="text" name="major[]" placeholder="전공을 입력하세요">
-                    </div>
-                </div>
-                <div class="education-group">
-                    <div style="width: 50%;">
-                        <label>재학기간 (선택)</label>
-                        <input type="text" name="study_period[]" placeholder="YYYY/MM - YYYY/MM">
-                    </div>
-                    <div style="width: 50%;">
-                        <label>구분 (선택)</label>
-                        <select name="status[]">
-                            <option value="">현 상태를 선택해 주세요</option>
-                            <option value="재학 중">재학 중</option>
-                            <option value="졸업">졸업</option>
-                            <option value="중퇴">중퇴</option>
-                            <option value="중퇴">수료</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="education-group">
-                    <div class="gpa-group">
-                        <label>학점 (선택)</label>
-                        <input type="text" name="gpa[]" placeholder="학점을 입력하세요 (예: 4.0)">
-                    </div>
-                </div>
-            </div>
-            </div>
-                <button class="add-btn" onclick="addEducation()">+ 학력추가</button>
-            </div>
-                <div class="button-group">
-                <button class="submit-next2-btn" onclick="showSection(2)">다음</button>
-            </div>
-            </div>
-
-        <!-- 이력사항 입력 -->
-        <div id="section2" class="section">
-            <div class="input-group">
-                <label for="profile_highlight">프로필에서 강조할 점</label>
-                <textarea id="profile_highlight" placeholder="강점이 될 사항, 성격 등을 입력해 주세요"></textarea>
-            </div>
-            <div class="input-group">
-                <label for="experience">주요 경력 / 프로젝트</label>
-                <textarea id="experience" placeholder="기간, 회사명, 직책, 업무 등을 상세히 작성해 주세요"></textarea>
-            </div>
-            <div class="input-group">
-                <label for="skills">기술 및 역량</label>
-                <textarea id="skills" placeholder="가능한 기술과 수준을 작성해 주세요"></textarea>
-            </div>
-            <div class="input-group">
-                <label for="certifications">교육 / 자격증</label>
-                <textarea id="certifications" placeholder="자격증 및 교육 이력을 입력하세요"></textarea>
-            </div>
-            <div class="input-group">
-                <label for="activities">기타 활동 / 수상내역</label>
-                <textarea id="activities" placeholder="기타 활동이나 수상 내역을 작성해 주세요"></textarea>
-            </div>
-            <div class="button-group">
-                <button class="submit-next1-btn" onclick="showSection(1)">이전</button>
-                <button class="submit-next2-btn" onclick="submitForm()">이력서 완성하기</button>
-            </div>
-        </div> 
- </div>
- <div class="prompt" th:replace="~{/prompt}"></div>
+            <button class="up-btn" type="submit" id="upload-btn" disabled>업로드</button>
+        </form>
+    </div>
+    <div class="prompt" th:replace="~{/prompt}">
     <script src="assets/js/editing.js"></script>
 </body>
 </html>
