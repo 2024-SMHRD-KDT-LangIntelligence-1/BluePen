@@ -1,9 +1,9 @@
 /* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
 * {
-  margin: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  padding: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  box-sizing: border-box;
-}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
 body {
   font-family: "Noto Sans KR", sans-serif;
@@ -30,10 +30,6 @@ body {
   padding: 20px 20px 20px 20px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
 }
 .buttons {
   display: flex;
