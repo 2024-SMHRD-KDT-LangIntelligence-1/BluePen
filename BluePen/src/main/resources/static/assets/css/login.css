@@ -78,8 +78,9 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 30px;
+  margin: 10px;
   text-align: center;
+  
 }
 
 .btn:hover {
