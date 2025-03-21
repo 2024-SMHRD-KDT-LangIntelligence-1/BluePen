@@ -21,7 +21,8 @@ public class FastAPIController {
     // 자바에서 처리하려면 이를 객체나 데이터 구조로 변환해야 함
     // 따라 Map<string, object>사용하면 간단히 JSON데이터를 표현 가능함.
     @GetMapping("/fast.do")
-    public String fastDo(@RequestParam("text") String text, Model model) {
+    public String fastDo(@RequestParam("text") String text,
+    		Model model) {
         Map<String, Object> response = webClient.get()
         		.uri(uriBuilder -> uriBuilder
         			.queryParam("sentence", text)
