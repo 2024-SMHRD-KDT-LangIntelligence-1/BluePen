@@ -81,6 +81,89 @@ html {
   display: inline-block;
   text-align: center;
 }
+/*-----------------------------------------------------------------------------------*/
+/* 팝업창 */
+.overlay {
+  display: none; /* 처음에는 보이지 않게 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* 팝업 박스 스타일 */
+.popup {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* 닫기 버튼 스타일 (오른쪽 상단 위치) */
+.close-btn {
+  position: absolute;
+  top: 16px;  /* 상단에서 16px 떨어짐 */
+  right: 16px; /* 오른쪽에서 16px 떨어짐 */
+  cursor: pointer;
+  font-size: 20px;
+  color: #666;
+  z-index: 1001;
+}
+
+/* 테이블 스타일 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background: #f0f0f0;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+.table th, .table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  word-break: break-word;
+  vertical-align: middle;
+}
+
+.row-icon {
+  cursor: pointer;
+  margin-left: 8px;
+  color: #888;
+}
+
+.row-icon:hover {
+  color: #333;
+}
+
+.title-link {
+  color: #4f46e5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.title-link:hover {
+  text-decoration: underline;
+}
+
+/* 스크롤 가능한 영역 */
+.scrollable-body {
+  max-height: 350px; /* 대략 7줄에 맞는 높이 */
+  overflow-y: auto;
+}
 
 /*-----------------------------------------------------------------------------*/
 /* 반응형 디자인 */

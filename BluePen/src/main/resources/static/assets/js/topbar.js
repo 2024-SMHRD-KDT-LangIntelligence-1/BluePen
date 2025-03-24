@@ -62,8 +62,7 @@ const sortedData = [...data].sort((a, b) => {
 
 
   function deleteItem(index) {
-    if (confirm("정말 삭제하시겠습니까?")) {
-      data.splice(index, 1);
-      renderBookmarkList();
-    }
+    // 얼럿 없이 바로 아이템 삭제
+    data.splice(index, 1);
+    renderBookmarkList();
   }

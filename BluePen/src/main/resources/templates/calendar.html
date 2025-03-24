@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset='utf-8' />
     <title>BLUEPEN CALENDAR</title>
@@ -16,5 +16,9 @@
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
     <div id='calendar'></div>
+    
+    <!-- 일정 리스트 -->
+    <h2>일정 목록</h2>
+    <ul id="eventList"></ul>
   </body>
 </html>

@@ -1,35 +1,74 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BLUEPEN EDITING</title>
-	<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/editing.css">
-</head>
-<body>
+    <!-- Font Awesome CDN 추가 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/editing.css" />
+  </head>
+  <body>
     <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
     <div class="resume-container">
-        <!-- PDF 파일 업로드 -->
-        <form class="resume-form" action="/upload_resume" method="post" enctype="multipart/form-data">
-            <div class="file-upload">
-                <div class="drag-drop-zone" id="drag-drop-zone">
-                    <p>여기에 이력서 파일을 드래그하거나 클릭하여 선택하세요</p>
-                </div>
-                <input type="file" id="resumeFile" name="resumeFile" accept=".pdf" style="display: none;">
-                <span id="file-name"> PDF 파일을 선택해주세요 (최대 50MB)</span>
-            </div>
-            <button class="up-btn" type="submit" id="upload-btn" disabled>업로드</button>
-        </form>
-
-        <!-- 이력서 첨삭 중 메시지 -->
-        <h2>이력서 첨삭 중이니, 잠시만 기다려 주세요</h2>
+      <!-- PDF 파일 업로드 -->
+      <form
+        class="resume-form"
+        action="/upload_resume"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="file-upload">
+          <div class="drag-drop-zone" id="drag-drop-zone">
+            <p>여기에 이력서 파일을 드래그하거나 클릭하여 선택하세요</p>
+          </div>
+          <input
+            type="file"
+            id="resumeFile"
+            name="resumeFile"
+            accept=".pdf"
+            style="display: none"
+          />
+          <span id="file-name"> PDF 파일을 선택해주세요 (최대 50MB)</span>
+        </div>
+        <button class="up-btn" type="submit" id="upload-btn" disabled>
+          업로드
+        </button>
+      </form>
     </div>
-    <div class="prompt" th:replace="~{/prompt}"></div>
+
+    <!-- 대화 프롬프트 -->
+    <div class="chat-interface">
+      <div th:if="${session.user} != null">
+        <h2 th:text="${session.user.userId} + '님 환영합니다.'"></h2>
+      </div>
+      <div class="chat-box" id="chat-box">
+        <div class="chat-message bot-message"></div>
+      </div>
+      <div class="user-input-container">
+        <form>
+          <input
+            type="text"
+            id="user-input"
+            name="user-message"
+            placeholder="무엇이든 물어보세요"
+          />
+          <a class="bookmark">
+            <i class="fa-regular fa-bookmark"></i>
+          </a>
+        </form>
+      </div>
+    </div>
+
     <script src="assets/js/editing.js"></script>
-</body>
+  </body>
 </html>
