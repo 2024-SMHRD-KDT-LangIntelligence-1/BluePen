@@ -2,7 +2,7 @@
 <html lang='ko'>
   <head>
     <meta charset='utf-8' />
-    <title>LIST</title>
+    <title>BLUEPEN LIST</title>
 	<link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
@@ -24,9 +24,6 @@
             </select>
             <input type="search" id="searchInput" placeholder="키워드 입력" onkeyup="highlightText()">
         </div>
-        
-         <!-- 프롬프트가 job-list보다 앞으로 오도록 수정 -->
-        <div class="prompt" th:replace="~{/prompt}"></div>
         
         <div class="job-list"></div>
         <!-- 페이지네이션 버튼이 출력될 위치 -->

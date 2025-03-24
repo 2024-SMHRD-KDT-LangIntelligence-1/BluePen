@@ -25,6 +25,7 @@
     justify-content: flex-end; /* 수직 중앙 정렬을 하단으로 변경 */
     position: absolute; /* 화면 하단에 고정 */
     bottom: 10px; /* 하단에 고정 */
+    z-index: 1;  /* 기본적으로 이력서 페이지보다 낮은 우선순위 */
   }
   
   .chat-box {
@@ -99,16 +100,15 @@
   bottom: 0px; /* 하단 여백 */
   left: 50%;
   transform: translateX(-50%); /* 가로 중앙 정렬 */
-  width: 90%; /* 너비 90% */
-  max-width: 1800px; /* 최대 너비 설정 */
-  height: 190px;
+  width: 100%; /* 너비 90% */
+  height: 185px;
   background-color: white;
   z-index: 1000; /* 다른 요소보다 위로 */
 }
 
 form {
   position: absolute; /* 부모(.user-input-container)를 기준으로 절대 위치 */
-  top: 35%; /* 부모의 세로 중앙 */
+  top: 39%; /* 부모의 세로 중앙 */
   left: 50%; /* 부모의 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확히 중앙으로 맞추기 */
   width: 40%; /* form의 너비는 100% */

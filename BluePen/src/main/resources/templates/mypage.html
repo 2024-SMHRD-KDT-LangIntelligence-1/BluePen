@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MYPAGE</title>
+    <title>BLUEPEN MYPAGE</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
@@ -14,7 +14,6 @@
 
     <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
-    <div class="sidebar" th:replace="~{/sidebar}"></div>
     <div class="mypage-cover">
     <main class="mypage-container">
         <h2 class="mypage-title">MYPAGE</h2>
@@ -69,7 +68,8 @@
             <button type="submit" id="mypage-submit-btn">수정완료</button>
         </div>
         </form>
-        <!-- 모달 -->
+        
+        <!-- 저장확인 팝업 -->
 		<div id="mypage-modal" class="modal">
 		    <div class="mypage-modal-content">
 		        <p>저장하시겠습니까?</p>

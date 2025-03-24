@@ -97,9 +97,6 @@ input[type="date"]:focus {
   width: 85px;
   height: 36px;
 }
-.small-btn:hover {
-  background-color: #1e4a8d;
-}
 
 label {
   display: block;
@@ -149,11 +146,6 @@ label {
   margin-top: 50px;
   margin-bottom: 20px;
 }
-
-.join-btn:hover {
-  background-color: #1e4a8d;
-}
-
 /*------------------------------------------------------------------------------*/
 /* 반응형 디자인 추가 */
 

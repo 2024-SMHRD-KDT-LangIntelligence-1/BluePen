@@ -3,6 +3,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: auto; /* 페이지 전체 스크롤 숨기기 */
+}
+
+/* 스크롤바 숨기기 */
+*::-webkit-scrollbar {
+  width: 0; /* 세로 스크롤바 숨기기 */
+  height: 0; /* 가로 스크롤바 숨기기 */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* 스크롤 트랙을 투명하게 설정 */
+}
+
+*::-webkit-scrollbar-thumb {
+	background: transparent; /* 스크롤 바를 투명하게 설정 */
 }
 
 body {
@@ -10,7 +25,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 50px); /* 50px 하단 여백을 고려한 높이 설정 */
+  padding-bottom: 50px; /* 여백 추가 */
+  overflow: hidden; /* 스크롤 숨기기 */
 }
 
 /* 헤더 스타일 */
@@ -18,18 +35,7 @@ body {
   position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
   z-index: 1002; /* chat-container보다 위로 오도록 z-index 값 설정 */
 }
-
-/* 사이드바 스타일 */
-.sidebar {
-  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
-  z-index: 1001; /* chat-container보다 위로 오도록 z-index 값 설정 */
-}
-
 /*----------------------------------------------------------------------------------------------------*/
-.sidebar.closed {
-    display: none; /* 또는 width: 0; overflow: hidden; 등 */
-}
-
 /* 마이페이지 컨테이너 전체 감싸는 영역 */
 .mypage-cover {
   width: 500px;
@@ -111,12 +117,6 @@ body {
   background: #e0e0e0;
 }
 
-/* 호버 시 배경색 변화 및 약간의 크기 변화를 주는 효과 */
-.mypage-form-group .gender-btn:hover {
-  background: #19335A;
-  color: white;
-}
-
 /* 선택된 버튼에 active 클래스 추가 시 스타일 */
 .mypage-form-group .gender-btn.active {
   background: #19335A;
@@ -151,10 +151,6 @@ body {
   transition: background 0.3s;
 }
 
-#mypage-reset-btn:hover {
-  background: #3364AF;
-}
-
 /* 제출 버튼 */
 .mypage-submit {
   text-align: center;
@@ -173,10 +169,6 @@ body {
   color: white;
   font-weight: bold;
   transition: background 0.3s;
-}
-
-#mypage-submit-btn:hover {
-  background: #3364AF;
 }
 
 #error-message, #confirm-error-message{

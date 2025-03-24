@@ -202,7 +202,3 @@ input[type="text"]:focus {
 .login-link i {
   margin-right: 5px;
 }
-
-.login-link:hover {
-  background-color: #3364AF;
-}

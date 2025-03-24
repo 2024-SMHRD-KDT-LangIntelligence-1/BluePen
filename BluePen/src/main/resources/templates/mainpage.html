@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAINPAGE</title>
+    <title>BLUEPEN MAINPAGE</title>
     <!-- Font Awesome CDN 추가 -->
     <link
       rel="stylesheet"
@@ -23,11 +23,7 @@
       <!-- 대화 프롬프트, 추천 검색어 -->
       <div class="chat-interface">
         <div th:if="${session.user} != null">
-            <!-- th태그를 활용하여 해당 태그의 내용 수정 -->
             <h2 th:text="${session.user.userId} + '님 환영합니다.'"></h2>
-         </div>
-         <div th:unless="${session.user} != null">
-            <h2>로그인 한 세션아이디를 확인해주세요!</h2>
          </div>
 
         <div class="chat-box" id="chat-box">
