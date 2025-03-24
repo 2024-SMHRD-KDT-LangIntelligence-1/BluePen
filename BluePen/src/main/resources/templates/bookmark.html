@@ -13,7 +13,32 @@
       <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
-    <div class="prompt" th:replace="~{/prompt}"></div>
+    <!--  <div class="prompt" th:replace="~{/prompt}"></div> -->
+    <button class="open-popup-btn" onclick="openPopup()">북마크 열기</button>
+
+  <div class="overlay" id="popupOverlay">
+    <div class="popup">
+      <div class="close-btn" onclick="closePopup()">×</div>
+      <h2>BookMark</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 50%; text-align: left; padding-left: 12px;">이름</th>
+            <th style="width: 30%; text-align: left; padding-left: 12px;">생성 일자</th>
+            <th style="width: 20%; text-align: center;">동작</th>
+          </tr>
+        </thead>
+      </table>
+      <!-- 스크롤 가능한 부분 -->
+      <div class="scrollable-body">
+        <table class="table">
+          <tbody id="bookmarkList">
+            <!-- 자바스크립트로 채워짐 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
     <script src="assets/js/bookmark.js"></script>
   </body>
 </html>
