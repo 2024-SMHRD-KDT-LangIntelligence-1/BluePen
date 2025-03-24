@@ -28,14 +28,16 @@
 			</div>
 			<div class="user-input-container">
 				<form action="fast.do" method="get">
-					<input type="text" id="user-input" name="user-message"
+					<input type="text" id="user-input" name="text"
 						placeholder="무엇이든 물어보세요" />
 				</form>
 			</div>
+			<a th:text = "${answer}"/>
 		</div>
 		<a class="bookmark"> <i class="fa-regular fa-bookmark"></i>
 		</a>
 	</div>
+
 	<script src="assets/js/mainpage.js"></script>
 </body>
 </html>
