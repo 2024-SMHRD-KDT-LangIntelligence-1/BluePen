@@ -31,14 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
 
-  // 엔터 키 입력 감지
-  userInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      handleUserInput();
-    }
-  });
-
   // 추천 검색어 클릭 시 입력창에 자동 입력
   suggestions.forEach((suggestion) => {
     suggestion.addEventListener("click", function () {
