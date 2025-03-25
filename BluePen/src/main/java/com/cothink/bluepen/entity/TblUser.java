@@ -13,12 +13,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//model의 객체는 db의 이름과 같게
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class TblUser {
-	
+
 	// 회원가입시 DB에 저장하기 위해
 	public TblUser(UserVO vo) {
 		userId = vo.getUser_id();
@@ -28,7 +29,7 @@ public class TblUser {
 		joinedAt = vo.getJoined_at();
 
 	}
-	
+
 	// 회원 아이디
 	@Id
 	private String userId;
