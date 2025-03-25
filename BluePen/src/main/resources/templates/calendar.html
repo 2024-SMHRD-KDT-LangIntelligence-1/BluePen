@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset='utf-8' />
-    <title>BLUEPEN CALENDAR</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/calendar.css" />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script src="assets/js/calendar.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <title>BLUEPEN CALENDAR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/calendar.css">
+  <!-- FullCalendar 스타일시트 -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <!-- FullCalendar 자바스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <!-- 한국어 로케일 파일 -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales/ko.js"></script>
+</head>
+<body>
       <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
@@ -20,5 +21,19 @@
     <!-- 일정 리스트 -->
     <h2>일정 목록</h2>
     <ul id="eventList"></ul>
-  </body>
+    
+	<!-- 일정 추가 모달 -->
+	<div id="eventModal" class="modal">
+	  <div class="modal-content">
+	    <span id="closeModal" class="close">
+	      <i class="fa-solid fa-xmark" style="color: #19335a; font-size: 24px;"></i>
+	    </span>
+	    <h2>일정 추가</h2>
+	    <input type="text" id="eventTitle" placeholder="일정 제목을 입력하세요" />
+	    <button id="addEventBtn">일정 추가</button>
+	  </div>
+	</div>
+
+    <script src="assets/js/calendar.js"></script>
+</body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,74 +22,100 @@
           <h2>🖋️BLUE PEN</h2>
         </a>
       </div>
+      <!-- 새채팅 버튼 -->
       <nav class="top-navigation">
-      	<a href="/mainpage" class="top-nav-link">
-          <i class="fa-regular fa-comment-dots"
-            style="--fa-primary-color: #19335a"></i>
+        <a href="/mainpage" class="top-nav-link">
+          <i
+            class="fa-regular fa-comment-dots"
+            style="color: #19335a;"
+          ></i>
           <span class="top-icon-text">새채팅</span>
         </a>
-        <a href="/calendar" class="top-nav-link">
-          <i class="fa-solid fa-bell top-nav-icon"
-            style="--fa-primary-color: #19335a"></i>
-          <span class="top-icon-text">알림</span>
-        </a>
-        <a href="/editing" class="top-nav-link">
-          <i
-            class="fa-regular fa-file-pdf top-nav-icon"
-            style="--fa-primary-color: #19335a"
-          ></i>
-          <span class="top-icon-text">이력서첨삭</span>
-        </a>
-        <a href="/calendar" class="top-nav-link">
-         <i
-            class="fa-solid fa-calendar-minus nav-icon calendar-icon"
-            style="--fa-primary-color: #19335a"
-          ></i>
-          <span class="top-icon-text">캘린더</span>
-        </a>
-        <a href="/list" class="top-nav-link">
-          <i
-            class="fa-solid fa-list-ul nav-icon list-icon"
-            style="--fa-primary-color: #19335a"
-          ></i>
-          <span class="top-icon-text">리스트</span>
-        </a>
-		<!-- 북마크 버튼 -->
-		<button class="top-nav-link" onclick="openPopup(event)" style="background: none; border: none; cursor: pointer;">
-		  <i
-		    class="fa-solid fa-book-bookmark nav-icon favorites-icon"
-		    style="--fa-primary-color: #19335a"
-		  ></i>
-		  <span class="top-icon-text">북마크</span>
+
+		<!-- 알람 토글 버튼 -->
+		<button
+		  class="alram-icon"
+		  onclick="toggleAlram()"
+		  style="background: none; border: none; cursor: pointer"
+		>
+		  <i class="fa-solid fa-bell" style="color: #19335a;"></i>
+		  <span class="top-icon-text">알람</span>
 		</button>
-	  </nav>
-	  
-	     <!-- 북마크 팝업창 -->
-		<div class="overlay" id="popupOverlay">
-		  <div class="popup">
-		    <div class="close-btn" onclick="closePopup()">
-			  <i class="fa-solid fa-xmark"></i>
-			</div>
-		    <table class="table">
-		      <thead>
-		        <tr>
-		          <th style="width: 50%; text-align: left; padding-left: 12px;">이름</th>
-		          <th style="width: 30%; text-align: left; padding-left: 12px;">생성 일자</th>
-		          <th style="width: 20%; text-align: center;">동작</th>
-		        </tr>
-		      </thead>
-		    </table>
-		    <!-- 스크롤 가능한 부분 -->
-		    <div class="scrollable-body">
-		      <table class="table">
-		        <tbody id="bookmarkList">
-		          <!-- 자바스크립트로 채워짐 -->
-		        </tbody>
-		      </table>
-		    </div>
+		
+		<!-- 알람 목록 (초기 상태에서 숨김) -->
+		<div class="alram-container" id="alramContainer">
+		  <div class="alram-popup" id="alramPopup">
+		    <!-- 알림 항목은 자바스크립트로 동적으로 생성됨 -->
 		  </div>
 		</div>
 
+        <!-- 이력서 첨삭 버튼 -->
+        <a href="/editing" class="top-nav-link">
+          <i
+            class="fa-regular fa-file-pdf top-nav-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">이력서첨삭</span>
+        </a>
+
+        <!-- 캘린더 버튼 -->
+        <a href="/calendar" class="top-nav-link">
+          <i
+            class="fa-solid fa-calendar-minus nav-icon calendar-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">캘린더</span>
+        </a>
+
+        <!-- 리스트 버튼튼 -->
+        <a href="/list" class="top-nav-link">
+          <i
+            class="fa-solid fa-list-ul nav-icon list-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">리스트</span>
+        </a>
+
+        <!-- 북마크 버튼 -->
+        <button
+          class="bookmark-icon"
+          onclick="openPopup(event)"
+          style="background: none; border: none; cursor: pointer"
+        >
+          <i
+            class="fa-solid fa-book-bookmark nav-icon favorites-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">북마크</span>
+        </button>
+      </nav>
+
+      <!-- 북마크 팝업창 -->
+      <div class="bookmarkpopup" id="bookmarkpopup">
+        <div class="popup">
+          <button class="bookmark-close-btn" onclick="closeModal()">
+          <i class="fa-solid fa-xmark" style="color: #19335a;"></i>
+          </button>
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 50%; text-align: left; padding-left: 12px">
+                  이름
+                </th>
+                <th style="width: 30%; text-align: left; padding-left: 12px">
+                  생성 일자
+                </th>
+                <th style="width: 20%; text-align: center"> </th>
+              </tr>
+            </thead>
+          </table>
+          <div class="scrollable-body">
+            <table class="table">
+              <tbody id="bookmarkList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </header>
     <script src="assets/js/topbar.js"></script>
   </body>

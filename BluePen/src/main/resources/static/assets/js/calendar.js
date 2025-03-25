@@ -1,117 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2025-02-07',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2025-02-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2025-02-07',
-        end: '2025-02-10'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2025-02-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2025-02-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2025-02-11',
-        end: '2025-02-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T10:30:00',
-        end: '2025-02-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2025-02-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T14:30:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2025-02-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'https://google.com/',
-        start: '2025-02-28'
-      }
-    ]
-  });
-
-  calendar.render();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2025-04-01',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    editable: true, // 일정 드래그 가능
-    selectable: true, // 날짜 선택 가능
-    events: [
-      {
-        title: '회의',
-        start: '2025-04-01T10:00:00',
-        end: '2025-04-01T12:00:00'
-      },
-      {
-        title: '점심 약속',
-        start: '2025-04-05T12:30:00'
-      }
-    ],
-    // 날짜 클릭 시 일정 추가
-    dateClick: function(info) {
-      var eventTitle = prompt('이벤트 제목을 입력하세요:');
-      if (eventTitle) {
-        calendar.addEvent({
-          title: eventTitle,
-          start: info.dateStr
-        });
-      }
-    },
-    // 일정 이동 가능
-    eventDrop: function(info) {
-      alert(info.event.title + ' 날짜가 ' + info.event.start.toISOString() + '로 변경되었습니다.');
-    }
-  });
-
-  calendar.render();
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
-  var eventListEl = document.getElementById("eventList");
+  var modal = document.getElementById("eventModal");
+  var closeModal = document.getElementById("closeModal");
+  var addEventBtn = document.getElementById("addEventBtn");
+  var eventTitleInput = document.getElementById("eventTitle");
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: "ko", // 한국어로 설정
     initialView: "dayGridMonth",
-    initialDate: "2025-04-01",
+    initialDate: new Date(), // 오늘 날짜로 설정
     headerToolbar: {
       left: "prev,next today",
       center: "title",
@@ -122,52 +19,144 @@ document.addEventListener("DOMContentLoaded", function () {
     events: [
       {
         id: "1",
-        title: "회의",
+        title: "자격증 공부",
         start: "2025-04-01T10:00:00",
         end: "2025-04-01T12:00:00",
+        backgroundColor: "yellow",
+        borderColor: "yellow",
       },
       {
         id: "2",
-        title: "출장",
-        start: "2025-04-05",
-        end: "2025-04-08",
+        title: "취업 면접",
+        start: "2025-04-01T14:00:00",
+        end: "2025-04-01T16:00:00",
+        backgroundColor: "lightgreen",
+        borderColor: "lightgreen",
       },
       {
         id: "3",
-        title: "휴가",
-        start: "2025-04-10",
-        end: "2025-04-15",
+        title: "자격증 복습",
+        start: "2025-04-01T16:00:00",
+        end: "2025-04-01T18:00:00",
+        backgroundColor: "yellow",
+        borderColor: "yellow",
       },
+      {
+        id: "4",
+        title: "취업 준비",
+        start: "2025-04-01T09:00:00",
+        end: "2025-04-01T11:00:00",
+        backgroundColor: "lightgreen",
+        borderColor: "lightgreen",
+      },
+      {
+        id: "5",
+        title: "자격증 시험",
+        start: "2025-04-01T13:00:00",
+        end: "2025-04-01T15:00:00",
+        backgroundColor: "yellow",
+        borderColor: "yellow",
+      }
     ],
-    // 일정 클릭 시 아래 리스트에 표시
-    eventClick: function (info) {
-      var event = info.event;
-      var eventId = event.id;
-      var eventTitle = event.title;
-      var eventStart = event.start.toISOString().split("T")[0]; // YYYY-MM-DD 형식
-      var eventEnd = event.end ? event.end.toISOString().split("T")[0] : null;
+    eventRender: function(info) {
+      // 하루 이상 일정은 라인으로 표시하기
+      if (info.event.end) {
+        info.el.style.borderLeft = "5px solid #19335a"; // 왼쪽에 라인 추가
+        info.el.style.backgroundColor = "#f1f1f1"; // 배경색 변경
+      }
 
-      // 이미 존재하는지 확인
-      if (document.getElementById("event-" + eventId)) return;
-
-      var li = document.createElement("li");
-      li.id = "event-" + eventId;
-      li.innerHTML = `<strong>${eventTitle}</strong> - ${eventStart} ${
-        eventEnd ? `~ ${eventEnd}` : ""
-      } 
-                      <button onclick="removeEvent('${eventId}')">삭제</button>`;
-      eventListEl.appendChild(li);
+      // 자격증 관련 일정 색상 변경
+      if (info.event.title.includes("자격증")) {
+        info.el.style.backgroundColor = "yellow";
+        info.el.style.borderColor = "yellow";
+      }
+      // 취업 관련 일정 색상 변경
+      if (info.event.title.includes("취업")) {
+        info.el.style.backgroundColor = "lightgreen";
+        info.el.style.borderColor = "lightgreen";
+      }
     },
+    dayRender: function(info) {
+      var day = info.el;
+      var dayNumber = info.date.getDate();  // 날짜만 추출
+
+      // 해당 날짜의 일정을 가져옵니다
+      var events = info.view.calendar.getEvents();
+      var dayEvents = events.filter(function(event) {
+        return event.startStr.startsWith(info.dateStr); // 해당 날짜의 일정만 필터링
+      });
+
+      // 일정이 3개 이상인 경우 "더 보기" 버튼 추가
+      if (dayEvents.length > 3) {
+        var moreLink = document.createElement("div");
+        moreLink.classList.add("more-events");
+        moreLink.textContent = "..."; // '더 보기' 텍스트
+        day.appendChild(moreLink);
+
+        // 첫 3개의 일정만 보여주기
+        dayEvents.slice(0, 3).forEach(function(event) {
+          var li = document.createElement("li");
+          li.textContent = event.title; // 일정 제목만 표시
+          day.appendChild(li);
+        });
+
+        // 더 보기 클릭 시 나머지 일정 보여주기
+        moreLink.addEventListener("click", function () {
+          var eventList = document.createElement("ul");
+          dayEvents.forEach(function (event) {
+            var li = document.createElement("li");
+            li.textContent = event.title;
+            eventList.appendChild(li);
+          });
+          day.appendChild(eventList);
+          moreLink.style.display = "none"; // '더 보기' 링크 숨기기
+        });
+
+        // 진한 색으로 표시하여 구분하기
+        day.style.backgroundColor = "#c8d6e5";  // 진한 색으로 변경
+      } else {
+        // 3개 이하일 경우 모든 일정을 나열합니다
+        var eventList = document.createElement("ul");
+        dayEvents.forEach(function (event) {
+          var li = document.createElement("li");
+          li.textContent = event.title; // 일정 제목만 표시
+          eventList.appendChild(li);
+        });
+        day.appendChild(eventList);
+      }
+    },
+
+    dayClick: function(info) {
+      // 날짜 클릭 시 모달 띄우기
+      modal.style.display = "block";
+      var selectedDate = info.dateStr;
+
+      addEventBtn.onclick = function() {
+        var eventTitle = eventTitleInput.value;
+        if (eventTitle) {
+          calendar.addEvent({
+            title: eventTitle,
+            start: selectedDate,
+            allDay: true
+          });
+          modal.style.display = "none"; // 모달 닫기
+          eventTitleInput.value = ""; // 입력 필드 초기화
+        }
+      };
+    }
   });
 
   calendar.render();
 
-  // 리스트에서 일정 삭제
-  window.removeEvent = function (eventId) {
-    var event = calendar.getEventById(eventId);
-    if (event) event.remove();
+  // 모달 닫기 버튼 클릭 시
+  closeModal.onclick = function() {
+    modal.style.display = "none";
+  };
 
-    var li = document.getElementById("event-" + eventId);
-    if (li) li.remove();
+  // 모달 외부 클릭 시 모달 닫기
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
   };
 });

@@ -51,6 +51,7 @@ body {
     max-width: 1000px;
     width: 100%;
     padding-top: 70px; /* 상단바 여백 */
+    z-index: 1002;
 }
 
 .resume-form {
@@ -176,6 +177,7 @@ h2 {
   justify-content: flex-start; /* 상단 정렬로 변경 */
   position: absolute; /* 화면 하단에 고정 */
   bottom: 10px; /* 하단에 고정 */
+  z-index: 0;
 }
 
 .chat-container h2 {

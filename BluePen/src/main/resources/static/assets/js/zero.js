@@ -77,93 +77,102 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //---------------------------------------------------------------------------------------------------------
-// 버튼 선택시 이전에 선택한 버튼 유지되게하는 코드
-document.addEventListener("DOMContentLoaded", function () {
-    // 버튼 그룹별 선택 상태 저장 객체
-    let selected = {
-        job: localStorage.getItem("selectedJob") || "",
-        qualification: localStorage.getItem("selectedQualification") || "",
-        experience: localStorage.getItem("selectedExperience") || "",
-        region: localStorage.getItem("selectedRegion") || "",
-        license: localStorage.getItem("selectedLicense") || "",
-        hopedLicense: localStorage.getItem("selectedHopedLicense") || ""
-    };
-
-	// 첫 글자를 대문자로 바꾸는 함수 정의
-	function capitalizeFirstLetter(string) {
-	    return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-	
-    // 버튼 클릭 시 선택 상태 저장 및 스타일 변경 함수
-    function handleButtonClick(category, button) {
-        // 해당 카테고리의 기존 선택된 버튼 초기화
-        document.querySelectorAll(`.${category}`).forEach(btn => {
-            btn.style.backgroundColor = "";  // 원래 스타일로 초기화
-            btn.style.color = "";  // 원래 스타일로 초기화
-        });
-
-        // 선택한 버튼 스타일 변경
-        button.style.backgroundColor = "#19335A";
-        button.style.color = "white";
-
-        // 선택 상태 저장
-        selected[category] = button.innerText;
-        localStorage.setItem(`selected${capitalizeFirstLetter(category)}`, button.innerText);
-    }
-
-    // 기존 선택 상태 불러와서 스타일 적용
-    function applySavedSelection() {
-        Object.keys(selected).forEach(category => {
-            if (selected[category]) {
-                let savedButton = Array.from(document.querySelectorAll(`.${category}`))
-                    .find(btn => btn.innerText === selected[category]);
-                if (savedButton) {
-                    savedButton.style.backgroundColor = "#19335A";
-                    savedButton.style.color = "white";
-                }
-            }
-        });
-    }
-
-    // 모든 버튼에 클릭 이벤트 추가
-    document.querySelectorAll(".job-btn, .education-btn, .career-btn, .region-btn, .license-btn, .license-btn.hoped").forEach(button => {
-        button.addEventListener("click", function () {
-            if (this.classList.contains("job-btn")) handleButtonClick("job", this);
-            if (this.classList.contains("education-btn")) handleButtonClick("qualification", this);
-            if (this.classList.contains("career-btn")) handleButtonClick("experience", this);
-            if (this.classList.contains("region-btn")) handleButtonClick("region", this);
-            if (this.classList.contains("license-btn")) handleButtonClick("license", this);
-            if (this.classList.contains("license-btn") && this.classList.contains("hoped")) handleButtonClick("hopedLicense", this);
-        });
-    });
-
-    // 저장된 선택 적용
-    applySavedSelection();
-});
-//------------------------------------------------------------------------------------------------------
-// 버튼 요소들을 선택
+// 버튼 요소 선택
 const buttons = document.querySelectorAll('.job-btn, .education-btn, .career-btn, .region-btn');
+const nextButton = document.querySelector('.next-btn'); // 다음 버튼
 
+// 로컬 스토리지에서 선택 상태 불러오기
+function loadSelectedState() {
+  const categories = ['job', 'education', 'career', 'region'];
+  
+  categories.forEach(category => {
+    const savedSelection = localStorage.getItem(`selected${capitalizeFirstLetter(category)}`);
+    
+    if (savedSelection) {
+      // 저장된 선택값을 찾아서 active 클래스 추가
+      const button = Array.from(document.querySelectorAll(`.${category}-btn`))
+                           .find(btn => btn.innerText === savedSelection);
+      if (button) {
+        button.classList.add("active");
+      }
+    }
+  });
+
+  checkNextButton(); // 모든 그룹에서 버튼이 선택되었는지 확인
+}
+
+// 첫 글자를 대문자로 변환하는 함수
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// 버튼 클릭 시 선택 상태 저장 및 스타일 변경 함수
+function handleButtonClick(category, button) {
+  // 같은 그룹의 기존 선택된 버튼 초기화
+  document.querySelectorAll(`.${category}-btn`).forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  // 선택한 버튼 스타일 변경
+  button.classList.add("active");
+
+  // 선택 상태 저장
+  localStorage.setItem(`selected${capitalizeFirstLetter(category)}`, button.innerText);
+
+  checkNextButton(); // 모든 그룹에서 버튼이 선택되었는지 확인
+}
+
+// 모든 세션의 버튼이 클릭되었는지 확인하는 함수
+function checkNextButton() {
+  const categories = ['job', 'education', 'career', 'region'];
+  let allSelected = true; // 모든 그룹이 선택되었는지 확인하는 변수
+
+  // 모든 카테고리가 선택되었는지 확인
+  categories.forEach(category => {
+    const selected = localStorage.getItem(`selected${capitalizeFirstLetter(category)}`);
+    if (!selected) {
+      allSelected = false; // 하나라도 선택되지 않으면 false
+    }
+  });
+
+  // 모든 세션에서 버튼이 선택되었을 때만 next 버튼 활성화
+  if (allSelected) {
+    nextButton.disabled = false;
+  } else {
+    nextButton.disabled = true;
+  }
+}
+
+// 각 버튼에 클릭 이벤트 추가
 buttons.forEach(button => {
   button.addEventListener("click", function () {
-    // active 클래스를 토글
-    button.classList.toggle("active");
+    if (this.classList.contains("job-btn")) handleButtonClick("job", this);
+    if (this.classList.contains("education-btn")) handleButtonClick("education", this);
+    if (this.classList.contains("career-btn")) handleButtonClick("career", this);
+    if (this.classList.contains("region-btn")) handleButtonClick("region", this);
   });
 });
-//----------------------------------------------------------------------------------------------
-// 직무 선택시 자격증 선택칸 밑에 생성하게 하는 코드
+
+// 페이지 로드 시 선택된 상태 적용
 document.addEventListener("DOMContentLoaded", function () {
-  // 모든 직무 버튼 선택
+  loadSelectedState();
+});
+
+// 직무 선택 시 자격증 선택칸 보이게 하는 코드
+document.addEventListener("DOMContentLoaded", function () {
   const jobButtons = document.querySelectorAll(".job-btn");
-  // container2 요소 선택
   const container2 = document.querySelector(".container2");
 
-  // 버튼 클릭 시 container2를 보이게 설정
   jobButtons.forEach((button) => {
     button.addEventListener("click", function () {
       container2.style.display = "block";
     });
   });
 });
-//---------------------------------------------------------------------------------------
- 
+
+// next 버튼 클릭 시 mainpage로 이동
+nextButton.addEventListener('click', function() {
+  if (!this.disabled) {
+    window.location.href = '/mainpage';
+  }
+});

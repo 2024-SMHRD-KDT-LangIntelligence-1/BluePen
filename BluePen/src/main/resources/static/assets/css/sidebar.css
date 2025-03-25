@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .side-container {
@@ -14,21 +14,25 @@ body {
   left: 0; /* 기본값: 열려 있음 */
   width: 240px;
   height: 100vh;
-  background-color: #DEECFF;
+  background-color: #deecff;
   color: black;
   transition: left 0.3s ease-in-out;
   padding-top: 20px; /* px 단위 추가 */
-  overflow-y: auto; /* 세로 스크롤 추가 */
+  overflow-y: auto; /* 세로
+  스크롤 추가 */
   overflow-x: hidden; /* 가로 스크롤 방지 */
-  white-space: nowrap; /* 줄바꿈 방지 */
+  white-space: nowrap;
+  /* 줄바꿈 방지 */
   box-sizing: border-box; /* 패딩 포함한 크기 조정 */
-}
+} 
 
-/* 토글 버튼 스타일 */
+/* 토글
+  버튼 스타일 */
 .side-toggle-btn {
   position: fixed;
   top: 50%;
-  left: 8px; /* 기본적으로 사이드바 옆에 위치 */
+  left: 8px; /*
+  기본적으로 사이드바 옆에 위치 */
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -36,19 +40,22 @@ body {
   transition: left 0.3s ease-in-out;
   font-size: 24px;
   background-color: rgba(0, 0, 0, 0); /* 배경 투명*/
-  color: #19335A;
-}
+  color: #19335a;
+} 
 
-/* 호버 상태에서의 스타일 제거 */
+/* 호버
+  상태에서의 스타일 제거 */
 .side-toggle-btn:hover {
   background-color: rgba(0, 0, 0, 0); /* 호버시 배경이 바뀌지 않게 설정 */
-  color: #19335A; /* 호버 시 색상 변경이 없게 설정 */
-}
+  color: #19335a; /* 호버 시 색상
+  변경이 없게 설정 */
+} 
 
 /* 사이드바가 열린 상태일 때 토글 버튼의 위치 이동 */
 .sidebar.opened .side-toggle-btn {
-  left: 240px; /* 사이드바가 열린 상태에서 240px 만큼 이동 */
-}
+  left: 240px; /* 사이드바가 열린 상태에서
+  240px 만큼 이동 */
+} 
 
 /* 사이드바가 닫힐 때 */
 .sidebar.closed {
@@ -57,51 +64,42 @@ body {
 
 .side-toggle-btn.closed {
   left: 8px;
-}
-
-/* 로고 스타일 */
-.sidebar-logo h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #19335A;
-  margin-left: 20px; /* 오른쪽에 여백을 추가하여 이동 */
-  text-decoration: none;
-}
-
-.sidebar-logo a {
-  text-decoration: none;
-  color: inherit;
-}
+} 
 
 /* 리스트 스타일 */
 .sidebar-list {
-  margin-top: 10px;
+  margin-top: 0px;
   margin-left: 20px;
   font-size: 13px;
-  max-height: 480px; /* 원하는 높이 설정 */
+  max-height: 480px; /*
+  원하는 높이 설정 */
   overflow-y: auto; /* 세로 스크롤을 활성화 */
   overflow-x: hidden; /* 리스트에서 가로 스크롤 제거 */
-  white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
-  padding-top: 30px;
+  white-space: nowrap; /* 텍스트 줄 바꿈
+  방지 */
+  padding-top: 10px;
   position: relative; /* 상대적 위치 지정 */
-  top: 40px; /* 아래로 이동 */
-}
+  top: 80px;
+  /* 아래로 이동 */
+} 
 
 /* 스크롤바 전체 */
 .sidebar-list::-webkit-scrollbar {
   width: 8px; /* 스크롤바 너비 */
   margin-right: 0;
-}
+} 
 
 /* 스크롤바 배경 */
 .sidebar-list::-webkit-scrollbar-track {
-  background-color: #F3F8FF; /* 배경 색상 */
+  background-color: #f3f8ff; /* 배경 색상
+  */
   border-radius: 10px; /* 둥근 모서리 */
-}
+} 
 
 /* 스크롤바 썸 (슬라이드 바) */
 .sidebar-list::-webkit-scrollbar-thumb {
-  background-color: #19335A; /* 썸 색상 */
+  background-color: #19335a; /* 썸 색상
+  */
   border-radius: 10px; /* 둥근 모서리 */
 }
 
@@ -111,43 +109,45 @@ body {
   padding: 0;
 }
 
-#side-today strong {
-  margin: 0;
-}
-
-.sidebar-list li strong {
-  display: block; /* 블록 요소로 만들어 줄 간격 확보 */
-  margin-top: 18px; /* 아래쪽 여백 추가 */
-}
-
 .sidebar-list li {
   padding: 5px;
-  cursor: pointer; /* 클릭 가능하게 변경 */
-  border-radius: 5px; /* 부드러운 디자인 */
-  transition: background-color 0.2s ease-in-out; /* 부드러운 효과 */
-  white-space: nowrap; /* 텍스트가 한 줄로 유지되고 넘치면 스크롤로 표시 */
-  overflow: hidden; /* 넘치는 부분 숨기기 */
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: auto;
   width: 90%;
-  position: relative; /* 상대적 위치 지정 */
-  top: -35px; /* 아래로 이동 */
+  position: relative;
+  top: -35px;
+}
+
+/* span.title의 스타일 */
+.sidebar-list li .title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #19335a;
+  display: block;
+  margin-bottom: 12px;
+  padding-left: 10px;
 }
 
 .side-task-checkbox {
-  margin-right: 8px; /* 체크박스와 텍스트 사이 간격 */
+  margin-right: 8px; /* 체크박스와 텍스트 사이
+  간격 */
+} 
+
+/* span.title 태그에 호버 효과 제거 */
+.sidebar-list li span.title {
+  pointer-events: none; /* 마우스 이벤트 차단 */
 }
 
-/* 마우스 올렸을 때 효과 (단, strong 제외) */
-.sidebar-list li:not(:has(strong)):hover {
-  background-color: #C6E7FF;
-  width: 90%;
+.sidebar-list li span.title:hover {
+  background-color: transparent; /* 호버 시 배경색 없애기 */
+  color: inherit; /* 호버 시 색상 변경 없애기 */
 }
 
-/* strong 태그에는 호버 & 선택 효과 적용 안 되게 */
-.sidebar-list li strong {
-  cursor: default; /* 마우스 포인터 기본값으로 변경 */
-}
-
-/* 사이드바 하단 (마이페이지 & 로그아웃) */
+/* 사이드바 하단 (마이페이지 &
+  로그아웃) */
 .sidebar-footer {
   position: absolute;
   bottom: 35px;
@@ -156,18 +156,19 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-}
+} 
 
-/* 마이페이지 & 로그아웃 공통 스타일 */
+/*
+  마이페이지 & 로그아웃 공통 스타일 */
 .sidebar-footer a {
   width: 80px;
-  color: #19335A;
+  color: #19335a;
   font-size: 12px;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
   padding: 7px 0;
-}
+} 
 
 /* 아이콘 버튼 기본 스타일 */
 .side-icon-btn {
@@ -176,28 +177,30 @@ body {
   color: #205781;
   font-size: 24px;
   cursor: pointer;
-}
+} 
 
 /* 휴지통 아이콘 */
 .side-trash {
   position: absolute;
-  color: #19335A;
+  color: #19335a;
   bottom: 35px; /*아래에서 떨어지게 */
   left: 195px; /* 왼쪽에서 떨어지게 */
-}
+} 
 
-/* 전체선택 체크박스를 오른쪽 정렬 */
+/*
+  전체선택 체크박스를 오른쪽 정렬 */
 #side-select-all-container {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   margin-left: 120px;
   position: relative; /* 상대적 위치 지정 */
-}
+} 
 
 /* 전체선택 체크박스 스타일 */
 #side-select-all-container li {
   display: flex;
-  align-items: center; /* 수직 가운데 정렬 */
+  align-items: center; /* 수직
+  가운데 정렬 */
   font-size: 14px; /* 글자 크기 */
 }
 
@@ -209,189 +212,4 @@ body {
 #side-select-all-container input[type="checkbox"] {
   margin-bottom: 0; /* 체크박스와 텍스트 간 간격 */
   margin-left: 8px;
-}
-
-/* 모달 스타일 */
-#side-modal {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 모달 내용 */
-.side-modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* 화면 중앙에 위치 */
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    height: 200px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column; /* 세로 정렬 */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* 다른 요소들보다 우선적으로 나타나게 */
-}
-
-/* 버튼 스타일 */
-.side-modal-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 20px;
-}
-
-.side-modal-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#modal-yes-btn {
-    background-color: #3B74CB;
-    color: white;
-    width: 88px;
-    height: 42px;
-}
-
-#modal-no-btn {
-    background-color: #e0e0e0;
-    width: 88px;
-    height: 42px;
-    margin-left: 20px;
-}
-
-#modal-yes-btn {
-    background-color: #3B74CB;
-    color: white;
-    width: 88px;
-    height: 42px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 변화 */
-}
-
-#modal-yes-btn:hover {
-    background-color: #2a5e99; /* 호버 시 배경색 변경 */
-    transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
-}
-
-#modal-no-btn {
-    background-color: #e0e0e0;
-    width: 88px;
-    height: 42px;
-    margin-left: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* 부드러운 변화 */
-}
-
-#modal-no-btn:hover {
-    background-color: #c0c0c0; /* 호버 시 배경색 변경 */
-    transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
-}
-
-/*----------------------------------------------------------------------------------------*/
-/*반응형 디자인 추가*/
-/* 사이드바가 작은 화면에서 숨겨지도록 */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px; /* 작은 화면에서 사이드바 크기 조정 */
-  }
-  
-  /* 사이드바가 닫히면 토글 버튼 왼쪽 위치 */
-  .sidebar.closed .side-toggle-btn {
-    left: 8px;
-  }
-
-  /* 사이드바를 닫을 때, 사이드바 토글 버튼은 왼쪽에 위치 */
-  .side-toggle-btn {
-    left: 0;
-    top: 50%;
-  }
-
-  /* 작은 화면에서는 사이드바 리스트 항목을 세로로 나열 */
-  .sidebar-list {
-    margin-top: 0;
-    padding-top: 20px;
-    font-size: 14px;
-  }
-
-  /* 사이드바 하단 내용 위치 */
-  .sidebar-footer {
-    position: relative;
-    bottom: 20px;
-  }
-
-  /* 전체선택 체크박스를 오른쪽 정렬 */
-  #side-select-all-container {
-    margin-left: 20px; /* 오른쪽 정렬 없애기 */
-  }
-}
-
-/* 모바일 화면에서 사이드바 숨김 및 상단바 크기 조정 */
-@media (max-width: 480px) {
-  /* 사이드바를 기본적으로 숨김 */
-  .sidebar.closed {
-    display: none;
-  }
-
-  /* 사이드바 토글 버튼을 오른쪽 상단으로 이동 */
-  .side-toggle-btn {
-    top: 10px;
-    left: 10px;
-  }
-
-  /* 사이드바 아이템들 줄바꿈 */
-  .sidebar-list {
-    display: block;
-    padding-top: 10px;
-    font-size: 14px;
-  }
-
-  .sidebar-logo h2 {
-    font-size: 18px; /* 로고 크기 줄이기 */
-  }
-
-  .sidebar-footer {
-    display: flex;
-    flex-direction: column;
-    bottom: 50px;
-    left: 20px;
-  }
-
-  /* 버튼의 크기 및 패딩 조정 */
-  .side-modal-buttons button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-}
-
-/* 데스크탑 화면에서 사이드바 기본 상태 */
-@media (min-width: 1024px) {
-  .sidebar {
-    width: 240px;
-  }
-
-  /* 사이드바의 항목은 여전히 가로로 나열 */
-  .sidebar-list {
-    font-size: 13px;
-  }
-
-  .sidebar-footer {
-    position: absolute;
-    bottom: 35px;
-    left: 20px;
-  }
 }

@@ -156,4 +156,45 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "none"; // 모달 바깥 클릭 시 모달 숨기기
     }
   });
+
+  // 예시로 사용할 동적 데이터
+  const taskData1 = [
+    { task: "언제 끝나....", id: 1 },
+    { task: "프로젝트 관리", id: 2 },
+    { task: "코드 리팩토링", id: 3 },
+  ];
+
+  const taskData2 = [
+    { task: "초봉 3000 이상 주는 회사", id: 4 },
+    { task: "면접 일정 조정", id: 5 },
+    { task: "공채 일정 확인", id: 6 },
+    { task: "이력서 업데이트", id: 7 },
+    { task: "자기소개서 작성", id: 8 },
+    { task: "포트폴리오 점검", id: 9 },
+  ];
+
+  // task list1 동적으로 생성
+  function createTaskList(listContainer, taskData) {
+    listContainer.innerHTML = ""; // 기존 내용을 지운 후 새로운 항목을 추가
+    taskData.forEach((task) => {
+      const listItem = document.createElement("li");
+      listItem.dataset.id = task.id; // 각 항목에 고유한 id를 data-속성으로 추가
+
+      const taskText = document.createElement("span");
+      taskText.textContent = task.task;
+      listItem.appendChild(taskText);
+
+      // 체크박스 추가
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.classList.add("side-task-checkbox");
+      listItem.prepend(checkbox);
+
+      listContainer.appendChild(listItem);
+    });
+  }
+
+  // 두 리스트에 데이터 추가
+  createTaskList(taskLists[0], taskData1);
+  createTaskList(taskLists[1], taskData2);
 });

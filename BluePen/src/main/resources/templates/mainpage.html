@@ -20,8 +20,8 @@
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
 
-    <div class="cover">
-        <!-- 대화 프롬프트, 추천 검색어 -->
+     <div class="cover">
+        <!--대화 프롬프트  -->
         <div class="chat-interface">
           <div th:if="${session.user} != null">
             <h2 th:text="${session.user.userId} + '님 환영합니다.'"></h2>
@@ -37,12 +37,12 @@
                 name="user-message"
                 placeholder="무엇이든 물어보세요"
               />
-              <a class="bookmark">
-                <i class="fa-regular fa-bookmark"></i>
-              </a>
             </form>
           </div>
         </div>
+		<button class="bookmark" id="bookmark-btn">
+		  <i class="fa-regular fa-bookmark"></i>
+		</button>
     </div>
     <script src="assets/js/mainpage.js"></script>
 </body>
