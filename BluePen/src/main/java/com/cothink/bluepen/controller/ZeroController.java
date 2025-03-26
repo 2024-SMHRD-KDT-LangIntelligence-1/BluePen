@@ -38,6 +38,12 @@ public class ZeroController {
 	                       @RequestParam("zero_aca") String education,
 	                       @RequestParam("zero_career") String career,
 	                       @RequestParam("region") String region,
+	                       @RequestParam(value = "license", required = false) String license,
+	                       @RequestParam(value = "hoped_license", required = false) String hopedLicense,
+	                       @RequestParam(value = "salary_top", required = false) Integer salaryTop,
+	                       @RequestParam(value = "salary_bottom", required = false) Integer salaryBottom,
+	                       @RequestParam(value = "welfare", required = false) String welfare,
+	                       @RequestParam(value = "working_condition", required = false) String workingCondition,
 	                       HttpSession session) { // 세션 통해 로그인 사용자 가져옴
 		
 		// 🔽 로그인 사용자 정보 꺼내기
@@ -50,6 +56,13 @@ public class ZeroController {
 	    zp.setCareer(career);
 	    zp.setRegion(region);
 	    zp.setUserId(userId); // 🔽 사용자 ID 저장
+	 // 🔽 추가 항목들 저장
+	    zp.setLicense(license);
+	    zp.setHopedLicense(hopedLicense);
+	    zp.setSalaryTop(salaryTop);
+	    zp.setSalaryBottom(salaryBottom);
+	    zp.setWelfare(welfare);
+	    zp.setWorkingCondition(workingCondition);
 
 	    zeroPartyRepository.save(zp); // ✅ 올바르게 저장
 
