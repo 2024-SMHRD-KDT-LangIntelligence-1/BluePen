@@ -33,9 +33,12 @@
 	      <i class="fa-solid fa-xmark" style="color: #19335a; font-size: 24px;"></i>
 	    </span>
 	    <h2>일정 추가</h2>
-	    <input type="text" id="eventTitle" placeholder="일정 제목 입력" />
-	    <input type="color" id="eventColor" value="#ffd700" />
-	    <input type="time" id="eventTime" />
+	    <input type="text" id="eventTitle" name="scheTitle"placeholder="일정 제목 입력" />
+	    <select id="eventType" name="scheType">
+	      <option value="자격증">자격증 일정</option>
+	      <option value="취업">취업 일정</option>
+	    </select>
+	    <input type="time" id="eventTime" name="scheTm"/>
 	    <button id="addEventBtn">추가하기</button>
 	  </div>
 	</div>

@@ -1,22 +1,36 @@
-package com.cothink.bluepen.model;
+package com.cothink.bluepen.entity;
 
 import java.sql.Date;
 import java.sql.Time;
 
-public class ScheduleVO {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tbl_schedule")
+public class Tblschedule {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int scheIdx;
+
 	private String userId;
 	private String scheTitle;
-	private String scheContent;
-	private String scheFile;
 	private Date scheDt;
 	private Time scheTm;
 	private String scheType;
 	private String scheColor;
-	private String alertSetting;
-	private String scheStatus;
 
-	// ✅ Getter & Setter
+	// 선택적으로 비워둘 수 있는 필드들
+	private String scheContent = "";
+	private String scheFile = "";
+	private String alertSetting = "off";
+	private String scheStatus = "active";
+
+	// === Getter & Setter ===
 
 	public int getScheIdx() {
 		return scheIdx;
@@ -40,22 +54,6 @@ public class ScheduleVO {
 
 	public void setScheTitle(String scheTitle) {
 		this.scheTitle = scheTitle;
-	}
-
-	public String getScheContent() {
-		return scheContent;
-	}
-
-	public void setScheContent(String scheContent) {
-		this.scheContent = scheContent;
-	}
-
-	public String getScheFile() {
-		return scheFile;
-	}
-
-	public void setScheFile(String scheFile) {
-		this.scheFile = scheFile;
 	}
 
 	public Date getScheDt() {
@@ -88,6 +86,22 @@ public class ScheduleVO {
 
 	public void setScheColor(String scheColor) {
 		this.scheColor = scheColor;
+	}
+
+	public String getScheContent() {
+		return scheContent;
+	}
+
+	public void setScheContent(String scheContent) {
+		this.scheContent = scheContent;
+	}
+
+	public String getScheFile() {
+		return scheFile;
+	}
+
+	public void setScheFile(String scheFile) {
+		this.scheFile = scheFile;
 	}
 
 	public String getAlertSetting() {

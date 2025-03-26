@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModal = document.getElementById("closeModal");
   const addEventBtn = document.getElementById("addEventBtn");
   const eventTitleInput = document.getElementById("eventTitle");
-  const eventColorInput = document.getElementById("eventColor");
+  const eventTypeInput = document.getElementById("eventType"); // ✅ 일정 유형 셀렉트
   const eventTimeInput = document.getElementById("eventTime");
   const deleteModal = document.getElementById("deleteModal");
   const closeDeleteModal = document.getElementById("closeDeleteModal");
@@ -14,11 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedDate = null;
   let eventToDelete = null;
 
+  // 모달 닫기
   closeModal.onclick = function () {
     modal.style.display = "none";
     eventTitleInput.value = "";
     eventTimeInput.value = "";
-    eventColorInput.value = "#ffd700";
+    eventTypeInput.value = "자격증";
   };
 
   window.onclick = function (event) {
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "none";
       eventTitleInput.value = "";
       eventTimeInput.value = "";
-      eventColorInput.value = "#ffd700";
+      eventTypeInput.value = "자격증";
     }
   };
 
@@ -51,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
     dayMaxEvents: false,
     moreLinkClick: "none",
 
-    dateClick: function (info, jsEvent) {
-      if (jsEvent.target.closest(".custom-more")) return;
+    dateClick: function (info) {
+      if (info.jsEvent.target.closest(".custom-more")) return;
       selectedDate = info.dateStr;
       modal.style.display = "block";
     },
@@ -60,23 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
     eventClick: function (info) {
       eventToDelete = info.event;
       deleteModal.style.display = "block";
-
-      const clickedDate = info.event.startStr.substring(0, 10);
-      const allEvents = calendar.getEvents();
-      const filtered = allEvents.filter(e => e.startStr.startsWith(clickedDate));
-
-      const listEl = document.getElementById("eventList");
-      listEl.innerHTML = "";
-
-      if (filtered.length === 0) {
-        listEl.innerHTML = "<li>해당 날짜에 일정이 없습니다.</li>";
-      } else {
-        filtered.forEach(e => {
-          const li = document.createElement("li");
-          li.textContent = `${e.title} (${e.startStr.substring(11, 16) || "종일"})`;
-          listEl.appendChild(li);
-        });
-      }
     },
 
     eventDidMount: function (info) {
@@ -108,9 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
     dayCellDidMount: function (arg) {
       const dateStr = arg.date.toISOString().substring(0, 10);
       const cell = arg.el;
-	  cell.innerHTML = ""; // ✅ 기존 내용 삭제!!!!
-	  
-      const events = calendar.getEvents().filter(e => e.startStr.startsWith(dateStr));
+      cell.innerHTML = "";
+
+      const events = calendar.getEvents().filter(e =>
+        e.startStr.startsWith(dateStr)
+      );
 
       const container = document.createElement("div");
       container.classList.add("custom-cell-events");
@@ -134,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         moreBtn.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
         moreBtn.onclick = function () {
           const hiddenItems = container.querySelectorAll(".more-hidden");
-          hiddenItems.forEach(el => el.style.display = "block");
+          hiddenItems.forEach(el => (el.style.display = "block"));
           moreBtn.style.display = "none";
         };
         container.appendChild(moreBtn);
@@ -142,75 +128,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
       cell.appendChild(container);
     },
-
   });
 
+  // ✅ 일정 추가 버튼 클릭 시
   addEventBtn.onclick = function () {
     const title = eventTitleInput.value;
-    const color = eventColorInput.value;
+    const type = eventTypeInput.value;
     const time = eventTimeInput.value;
+    const color = type === "자격증" ? "yellow" : "lightgreen";
 
     if (title && selectedDate) {
-      const startDateTime = time ? `${selectedDate}T${time}:00` : selectedDate;
+      const timeFormatted = time ? `${time}:00` : "00:00:00";
 
-      calendar.addEvent({
-        title: title,
-        start: startDateTime,
-        allDay: !time,
-        backgroundColor: color,
-        borderColor: color
-      });
+      // fetch로 서버에 저장 요청
+      const formData = new URLSearchParams();
+      formData.append("scheTitle", title);
+      formData.append("scheDt", selectedDate);
+      formData.append("scheTm", timeFormatted);
+      formData.append("scheType", type);
+      formData.append("scheColor", color);
 
-      eventTitleInput.value = "";
-      eventTimeInput.value = "";
-      modal.style.display = "none";
+      fetch("/insert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      })
+        .then((res) => {
+          if (res.ok) {
+            calendar.addEvent({
+              title: title,
+              start: time ? `${selectedDate}T${time}` : selectedDate,
+              allDay: !time,
+              backgroundColor: color,
+              borderColor: color,
+            });
+            modal.style.display = "none";
+            eventTitleInput.value = "";
+            eventTimeInput.value = "";
+            eventTypeInput.value = "자격증";
+          } else {
+            alert("서버 오류로 저장에 실패했습니다.");
+          }
+        })
+        .catch((err) => console.error("에러 발생:", err));
     }
   };
 
   calendar.render();
 });
-
-addEventBtn.onclick = function () {
-  const title = eventTitleInput.value;
-  const color = eventColorInput.value;
-  const time = eventTimeInput.value;
-
-  if (title && selectedDate) {
-    const startDateTime = time ? `${selectedDate}T${time}:00` : selectedDate;
-
-    // ✅ 서버로 전송 (fetch)
-    fetch("/schedule/insert", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: "user01", // 로그인 세션으로 받아야 함
-        title: title,
-        content: "내용 예시", // 필요시 입력폼 추가
-        file: "",
-        date: selectedDate,
-        time: time || "00:00:00",
-        type: "기타",
-        color: color,
-        alert: "off",
-        status: "active"
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        calendar.addEvent({
-          title: title,
-          start: startDateTime,
-          allDay: !time,
-          backgroundColor: color,
-          borderColor: color
-        });
-        modal.style.display = "none";
-        eventTitleInput.value = "";
-        eventTimeInput.value = "";
-      }
-    });
-  }
-};

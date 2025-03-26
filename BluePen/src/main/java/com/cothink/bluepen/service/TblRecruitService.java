@@ -39,143 +39,183 @@ public class TblRecruitService {
 		this.dataSource = dataSource;
 	}
 
-	public void fetchAndStoreRecruitData() {
+	public void fetchFixedPages() {
 		try {
-			// 먼저 컬럼이 존재하는지 확인하고 없으면 추가하는 메서드 호출
 			addMissingColumnsIfNeeded();
 
-			String apiUrl = "https://apis.data.go.kr/1051000/recruitment/list"
-					+ "?serviceKey=xpiTjg%2FjQSwlHvprRxo8ARUahlPYJPptVfcvMMg8GDl9zp%2Bn3vcDKrRVpSH9lflZVOk2eegHCc4MwAw8URQ01A%3D%3D"
-					+ "&pbancBgngYmd=2025-01-01" + "&pbancEndYmd=2025-12-31" + "&resultType=xml";
+			int totalPages = 26;
+			int numOfRows = 20;
 
-			URL url = new URL(apiUrl);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Content-type", "application/json");
+			for (int page = 1; page <= totalPages; page++) {
+				String apiUrl = "https://apis.data.go.kr/1051000/recruitment/list"
+						+ "?serviceKey=xpiTjg%2FjQSwlHvprRxo8ARUahlPYJPptVfcvMMg8GDl9zp%2Bn3vcDKrRVpSH9lflZVOk2eegHCc4MwAw8URQ01A%3D%3D"
+						+ "&numOfRows=" + numOfRows + "&ongoingYn=Y" + "&pageNo=" + page + "&pbancBgngYmd=2025-01-01"
+						+ "&pbancEndYmd=2025-12-31" + "&resultType=xml";
 
-			BufferedReader rd;
-			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			} else {
-				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+				System.out.println("📡 요청 URL: " + apiUrl);
+
+				URL url = new URL(apiUrl);
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Content-type", "application/json");
+
+				BufferedReader rd;
+				if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+					rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				} else {
+					rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+				}
+
+				StringBuilder response = new StringBuilder();
+				String line;
+				while ((line = rd.readLine()) != null) {
+					response.append(line);
+				}
+				rd.close();
+				conn.disconnect();
+
+				int savedCount = parseAndSaveData(response.toString());
+				System.out.println("📦 응답 내용:\n" + response.substring(0, Math.min(3000, response.length())));
+				System.out.println("✅ page " + page + " → 저장된 공고 수: " + savedCount);
 			}
 
-			StringBuilder response = new StringBuilder();
-			String line;
-			while ((line = rd.readLine()) != null) {
-				response.append(line);
-			}
-			rd.close();
-			conn.disconnect();
+			System.out.println("🎉 총 26페이지, 진행 중인 공고 수집 완료!!!!!!");
 
-			parseAndSaveData(response.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void parseAndSaveData(String xmlData) {
+	private int parseAndSaveData(String xmlData) {
+
+		List<TblRecruit> recruitList = new ArrayList<>();
+		int savedCount = 0;
+
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setNamespaceAware(false); // 네임스페이스 무시
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(new java.io.ByteArrayInputStream(xmlData.getBytes()));
 			doc.getDocumentElement().normalize();
 
-			NodeList itemList = doc.getElementsByTagName("item");
-			List<TblRecruit> recruitList = new ArrayList<>();
+			// ✅ 여기서 선언! 밖에서 쓸 수 있도록!
+			NodeList itemList = null;
+
+			// result → item 직접 진입
+			NodeList resultList = doc.getElementsByTagName("result");
+			if (resultList.getLength() > 0) {
+				Element result = (Element) resultList.item(0);
+				itemList = result.getElementsByTagName("item");
+				System.out.println("📦 result 안에 있는 item 개수: " + itemList.getLength());
+			} else {
+				System.out.println("❌ result 태그 없음! 수집 불가!");
+				return 0;
+			}
 
 			for (int i = 0; i < itemList.getLength(); i++) {
 				Node item = itemList.item(i);
+				if (item.getNodeType() != Node.ELEMENT_NODE)
+					continue;
+
+				Element element = (Element) item;
 				TblRecruit recruit = new TblRecruit();
 
-				recruit.setRecruitTitle(getTagValue(item, "recrutPbancTtl"));
-				recruit.setInstNm(getTagValue(item, "instNm"));
-				recruit.setDuty(getTagValue(item, "recrutSeNm"));
-				recruit.setHireTypeLst(getTagValue(item, "hireTypeNmLst"));
-				recruit.setWorkingArea(getTagValue(item, "workRgnNmLst"));
-				recruit.setWorkingDay(getTagValue(item, "workdayWeek"));
-				recruit.setPosition(getTagValue(item, "jobsNm"));
-				recruit.setCompany(getTagValue(item, "repr"));
-				recruit.setOngoingYn(getTagValue(item, "recrutPsblYn"));
-				recruit.setSrcUrl(getTagValue(item, "srcUrl"));
-				recruit.setRecrutPbancTtl(getTagValue(item, "recrutPbancTtl"));
-				recruit.setWorkRgnLst(getTagValue(item, "workRgnNmLst"));
-				recruit.setAcademic(getTagValue(item, "acbgCondNmLst"));
+				// 값 세팅
+				recruit.setCompany(getTagValue(element, "instNm"));
+				recruit.setRecruitTitle(getTagValue(element, "recrutPbancTtl"));
+				recruit.setAcademic(getTagValue(element, "acbgCondNmLst"));
+				recruit.setDuty(getTagValue(element, "hireTypeNmLst"));
+				recruit.setPosition(getTagValue(element, "recrutSeNm"));
+				recruit.setWorkingArea(getTagValue(element, "workRgnNmLst"));
+				recruit.setSrcUrl(getTagValue(element, "srcUrl"));
+				recruit.setOngoingYn(getTagValue(element, "recrutPsblYn"));
 
-				String pblntSnStr = getTagValue(item, "recrutPblntSn");
+				// 공고 번호 파싱
+				String pblntSnStr = getTagValue(element, "recrutPblntSn");
 				if (pblntSnStr != null && !pblntSnStr.isBlank()) {
 					try {
 						recruit.setRecrutPblntSn(Integer.parseInt(pblntSnStr));
 					} catch (NumberFormatException e) {
-						System.out.println(" recrutPblntSn 변환 실패: " + pblntSnStr);
+						System.out.println("❌ recrutPblntSn 변환 실패: " + pblntSnStr);
 					}
 				}
 
-				String pbancBgngYmdStr = getTagValue(item, "pbancBgngYmd");
-				if (pbancBgngYmdStr != null && pbancBgngYmdStr.matches("\\d{8}")) {
-					String formattedStart = pbancBgngYmdStr.substring(0, 4) + "-" + pbancBgngYmdStr.substring(4, 6)
-							+ "-" + pbancBgngYmdStr.substring(6, 8);
-					recruit.setPbancBgngYmd(Timestamp.valueOf(formattedStart + " 00:00:00"));
-					System.out.println(" 시작일 설정: " + recruit.getPbancBgngYmd());
+				// 날짜 파싱
+				String endDateStr = getTagValue(element, "pbancEndYmd");
+				if (endDateStr != null && endDateStr.matches("\\d{8}")) {
+					String formatted = endDateStr.substring(0, 4) + "-" + endDateStr.substring(4, 6) + "-"
+							+ endDateStr.substring(6, 8);
+					recruit.setClosedAt(Timestamp.valueOf(formatted + " 00:00:00"));
 				}
 
-				String pbancEndYmdStr = getTagValue(item, "pbancEndYmd");
-				if (pbancEndYmdStr != null && pbancEndYmdStr.matches("\\d{8}")) {
-					String formattedEnd = pbancEndYmdStr.substring(0, 4) + "-" + pbancEndYmdStr.substring(4, 6) + "-"
-							+ pbancEndYmdStr.substring(6, 8);
-					recruit.setClosedAt(Timestamp.valueOf(formattedEnd + " 00:00:00"));
-					System.out.println(" 마감일 설정 (closed_at): " + recruit.getClosedAt());
+				// 필수값 확인
+				if (recruit.getCompany() == null) {
+					System.out.println("❌ company NULL, 저장 안 함");
+					continue;
 				}
 
-				recruitList.add(recruit);
+				// 중복 체크 후 저장
+				if (recruit.getRecrutPblntSn() != null
+						&& !recruitRepo.existsByRecrutPblntSn(recruit.getRecrutPblntSn())) {
+					recruitList.add(recruit);
+					savedCount++;
+				} else {
+					System.out.println("⚠️ 중복된 공고, 저장 생략: " + recruit.getRecrutPblntSn());
+				}
 			}
 
 			recruitRepo.saveAll(recruitList);
-			System.out.println("✅ 총 " + recruitList.size() + "개의 채용 공고 저장 완료!!!!");
+			System.out.println("✅ 이번 페이지 저장 완료! 총 " + savedCount + "건 저장됨!!!!!!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return savedCount;
 	}
 
 	private String getTagValue(Node item, String tagName) {
 		try {
 			NodeList children = ((Element) item).getElementsByTagName(tagName);
 			if (children.getLength() > 0) {
-				return children.item(0).getTextContent();
+				String value = children.item(0).getTextContent();
+				System.out.println("✅ 태그 [" + tagName + "] 값: " + value); // ← 여기!!!
+				return value;
+			} else {
+				System.out.println("⚠️ 태그 없음: " + tagName); // ← 태그가 없을 경우
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("❌ 태그 추출 실패: " + tagName); // ← 예외 발생
+			e.printStackTrace(); // ← 정확한 원인 로그
 		}
 		return null;
 	}
 
-	// 컬럼이 없으면 추가하는 메서드
 	private void addMissingColumnsIfNeeded() {
 		try (Connection conn = dataSource.getConnection()) {
 			String tableName = "tbl_recruit";
 
-			// 컬럼 'pbancBgngYmd'가 존재하는지 확인
-			if (!columnExists(conn, tableName, "pbancBgngYmd")) {
-				addColumn(conn, tableName, "pbancBgngYmd", "DATETIME");
-			}
+			String[][] columnsToCheck = { { "recruit_title", "VARCHAR(255)" }, { "company", "VARCHAR(255)" },
+					{ "academic", "VARCHAR(100)" }, { "duty", "VARCHAR(100)" }, { "position", "VARCHAR(100)" },
+					{ "working_area", "VARCHAR(100)" }, { "closed_at", "DATETIME" }, { "pbancBgngYmd", "DATETIME" },
+					{ "srcUrl", "VARCHAR(255)" } };
 
-			// 컬럼 'srcUrl'가 존재하는지 확인
-			if (!columnExists(conn, tableName, "srcUrl")) {
-				addColumn(conn, tableName, "srcUrl", "VARCHAR(255)");
+			for (String[] col : columnsToCheck) {
+				if (!columnExists(conn, tableName, col[0])) {
+					addColumn(conn, tableName, col[0], col[1]);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// 컬럼이 존재하는지 확인하는 메서드
 	private boolean columnExists(Connection conn, String tableName, String columnName) throws SQLException {
 		DatabaseMetaData metaData = conn.getMetaData();
 		ResultSet columns = metaData.getColumns(null, null, tableName, columnName);
-		return columns.next(); // 컬럼이 존재하면 true 반환
+		return columns.next();
 	}
 
-	// 컬럼을 추가하는 메서드
 	private void addColumn(Connection conn, String tableName, String columnName, String columnType)
 			throws SQLException {
 		String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnType;

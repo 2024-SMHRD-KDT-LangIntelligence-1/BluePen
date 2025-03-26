@@ -52,9 +52,6 @@ public class TblRecruit {
 	@Column(name = "recrut_pblnt_sn")
 	private Integer recrutPblntSn; // 채용 공고 식별 번호
 
-	@Column(name = "instNm")
-	private String instNm; // 기관명
-
 	@Column(name = "hireTypeLst")
 	private String hireTypeLst; // 채용 유형 목록
 

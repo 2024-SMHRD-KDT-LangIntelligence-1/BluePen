@@ -29,4 +29,6 @@ public interface RecruitRepo extends JpaRepository<TblRecruit, Integer> {
 	// 특정 날짜 이후 마감되는 공고만 보기
 	List<TblRecruit> findByClosedAtAfter(Timestamp date);
 
+	boolean existsByRecrutPblntSn(Integer recrutPblntSn);
+
 }

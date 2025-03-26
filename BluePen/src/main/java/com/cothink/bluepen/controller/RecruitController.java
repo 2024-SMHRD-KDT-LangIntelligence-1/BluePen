@@ -3,6 +3,7 @@
 package com.cothink.bluepen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,15 +21,11 @@ public class RecruitController {
 
 	// ✅ 테스트용 API: 공공데이터 API 호출 → DB 저장
 	@GetMapping("/api/test/fetch")
-	public String fetchRecruitDataTest() {
-		try {
-			recruitService.fetchAndStoreRecruitData();
-			return "채용공고 API 호출 및 저장 완료!!!!!";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "채용공고 저장 중 오류 발생!!!!!!";
-		}
+	public ResponseEntity<String> fetch() {
+		recruitService.fetchFixedPages(); // ✅ 형님이 새로 만든 메서드로 교체!
+		return ResponseEntity.ok("데이터 수집 완료!");
 	}
+
 }
 
 //채용 공고 추가 (사람인 API 호출 후 데이터 저장)
