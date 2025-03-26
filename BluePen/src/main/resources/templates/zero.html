@@ -25,7 +25,12 @@
       <button type="submit" form="interest-form" class="next-btn">다음</button>
     </header>
     <div class="container1">
-      <form id="">
+    <!-- 승혁 zero db 연결중@@@@@@@@@@@@@@@ -->
+      <form id="interest-form" action="/save" method="post">
+      <input type="hidden" name="job" id="hidden-job" />
+	  <input type="hidden" name="zero_aca" id="hidden-aca" />
+	  <input type="hidden" name="zero_career" id="hidden-career" />
+	  <input type="hidden" name="region" id="hidden-region" />
             <!-- 관심 직무 섹션 -->
           <section class="job-selection-section">
             <div class="section-title">관심 직무</div>
