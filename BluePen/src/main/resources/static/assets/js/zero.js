@@ -170,9 +170,32 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// next 버튼 클릭 시 mainpage로 이동
+// next 버튼 클릭 시 mainpage로 이동 승혁 수정 @@@@
 nextButton.addEventListener('click', function() {
   if (!this.disabled) {
-    window.location.href = '/mainpage';
-  }
-});
+	document.getElementById('interest-form').submit(); // form 전송
+	  }
+	});
+
+
+// 버튼 클릭 시 hidden input에 값 넣기 승혁@@@@@
+function setupSelection(category, btnClass, hiddenInputId) {
+  const buttons = document.querySelectorAll(`.${btnClass}`);
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // 스타일 처리
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // hidden input에 값 저장
+      document.getElementById(hiddenInputId).value = btn.innerText.trim();
+    });
+  });
+}
+
+// 카테고리별 설정
+setupSelection("job", "job-btn", "hidden-job");
+setupSelection("zero_aca", "education-btn", "hidden-aca");
+setupSelection("zero_career", "career-btn", "hidden-career");
+setupSelection("region", "region-btn", "hidden-region");
+

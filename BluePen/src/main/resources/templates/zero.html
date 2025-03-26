@@ -25,7 +25,12 @@
       <button type="submit" form="interest-form" class="next-btn">다음</button>
     </header>
     <div class="container1">
-      <form id="">
+    <!-- 승혁 zero db 연결중@@@@@@@@@@@@@@@ -->
+      <form id="interest-form" action="/save" method="post">
+      <input type="hidden" name="job" id="hidden-job" />
+	  <input type="hidden" name="zero_aca" id="hidden-aca" />
+	  <input type="hidden" name="zero_career" id="hidden-career" />
+	  <input type="hidden" name="region" id="hidden-region" />
             <!-- 관심 직무 섹션 -->
           <section class="job-selection-section">
             <div class="section-title">관심 직무</div>
@@ -184,6 +189,27 @@
                     </button>
                     <button type="button" class="region-btn" name="region">
                       제주
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      충북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      충남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      전북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      전남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      세종
                     </button>
                   </div>
                   <button
