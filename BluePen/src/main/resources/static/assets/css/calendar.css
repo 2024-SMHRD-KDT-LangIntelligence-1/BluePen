@@ -61,24 +61,54 @@ body {
   color: white;
 }
 
-/* 캘린더 날짜 칸 스타일 */
+/* 날짜 셀 내부 일정이 확장될 수 있도록 셀 높이 자동 + 오버플로우 허용 */
+.fc-daygrid-day-frame {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* 캘린더 셀 내부 일정 리스트 커스터마이징용 */
+.custom-event-list {
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* 더보기 버튼 (기본 스타일) */
+.custom-more {
+  color: #888;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 더보기 눌렀을 때 이벤트 표시 공간 확보 */
+.fc-daygrid-event-harness {
+  display: block;
+}
+
+/* 캘린더 셀 스타일 */
 .fc .fc-daygrid-day {
   background: white;
   border-radius: 5px;
   transition: background 0.3s;
 }
 
+/* 셀 호버 효과 */
 .fc .fc-daygrid-day:hover {
   background: #eaf2ff;
 }
 
-/* 오늘 날짜 강조 */
+/* 오늘 날짜 강조 스타일 */
 .fc .fc-day-today {
   background: #fffae6 !important;
   border: 2px solid #ffcc00 !important;
 }
 
-/* 이벤트(일정) 스타일 */
+/* 이벤트(일정) 기본 스타일 */
 .fc-event {
   color: black;
   border-radius: 5px;
@@ -86,6 +116,7 @@ body {
   text-align: center;
 }
 
+/* 이벤트(일정) 호버 효과 */
 .fc .fc-event:hover {
   background: #205181;
   color: white;
@@ -110,7 +141,7 @@ body {
   background: #ffebee !important;
 }
 
-/* "더 보기" 버튼 스타일 */
+/* 이전 더보기용 (사용하지 않음) */
 .more-events {
   font-weight: bold;
   color: #007BFF;
@@ -118,7 +149,7 @@ body {
   margin-top: 10px;
 }
 
-/* 일정 리스트의 스타일 */
+/* 일정 리스트 공통 스타일 */
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -128,9 +159,9 @@ li {
   padding: 5px;
   font-size: 14px;
 }
+
 /*------------------------------------------------------------------------------*/
-/*일정추가 팝업*/
-/* 모달 스타일 */
+/* 일정 추가 및 삭제 팝업 모달 관련 스타일 */
 .modal {
   display: none;
   position: fixed;
@@ -162,4 +193,39 @@ li {
 .close:focus {
   color: #000;
   text-decoration: none;
+}
+
+/* 셀 내부 일정 표시용 */
+.custom-cell-events {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.event-item {
+  padding: 2px 4px;
+  margin-bottom: 2px;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.more-hidden {
+  display: none;
+}
+
+/* 삭제 팝업용 X버튼 */
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal .close:hover {
+  color: #000;
 }

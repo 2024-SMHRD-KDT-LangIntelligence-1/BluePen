@@ -49,7 +49,7 @@ public class TblRecruit {
 	@Column(name = "closed_at")
 	private Timestamp closedAt; // 마감일자
 
-	@Column(name = "recrutPblntSn")
+	@Column(name = "recrut_pblnt_sn")
 	private Integer recrutPblntSn; // 채용 공고 식별 번호
 
 	@Column(name = "instNm")
@@ -61,11 +61,8 @@ public class TblRecruit {
 	@Column(name = "workRgnLst")
 	private String workRgnLst; // 근무 지역 목록
 
-	@Column(name = "pbancBgngYmd")
-	private Timestamp pbancBgngYmd; // 채용 공고 시작일
-
-	@Column(name = "pbancEndYmd")
-	private Timestamp pbancEndYmd; // 채용 공고 종료일
+	@Column(name = "pbanc_bgng_ymd")
+	private Timestamp pbancBgngYmd;// 채용 공고 시작일
 
 	@Column(name = "recrutPbancTtl")
 	private String recrutPbancTtl; // 채용 공고 제목
