@@ -37,13 +37,19 @@ public class ZeroController {
 	public String saveToDb(@RequestParam("job") String job,
 	                       @RequestParam("zero_aca") String education,
 	                       @RequestParam("zero_career") String career,
-	                       @RequestParam("region") String region) {
+	                       @RequestParam("region") String region,
+	                       HttpSession session) { // 세션 통해 로그인 사용자 가져옴
+		
+		// 🔽 로그인 사용자 정보 꺼내기
+	    TblUser uid = (TblUser) session.getAttribute("user");
+	    String userId = uid.getUserId();
 
 	    ZeroParty zp = new ZeroParty();
 	    zp.setJob(job);
 	    zp.setEducation(education);
 	    zp.setCareer(career);
 	    zp.setRegion(region);
+	    zp.setUserId(userId); // 🔽 사용자 ID 저장
 
 	    zeroPartyRepository.save(zp); // ✅ 올바르게 저장
 

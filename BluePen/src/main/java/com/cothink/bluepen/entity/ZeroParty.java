@@ -21,6 +21,9 @@ public class ZeroParty {
 
 	    @Column(name = "region")
 	    private String region; // 관심 지역
+	    
+	    @Column(name = "user_id") // DB 컬럼명과 일치
+	    private String userId;
 
 	    // Getters and Setters 생략 가능 (Lombok 사용 시 @Data 추가 가능)
 	    public Long getId() {
@@ -57,6 +60,15 @@ public class ZeroParty {
 
 	    public void setRegion(String region) {
 	        this.region = region;
+	    }
+	    
+	    // 🔽 userId Getter & Setter
+	    public String getUserId() {
+	        return userId;
+	    }
+
+	    public void setUserId(String userId) {
+	        this.userId = userId;
 	    }
 	}
 
