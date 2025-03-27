@@ -1,4 +1,10 @@
-/* 기본 스타일 */
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 body {
   background-color: white;
   font-family: 'Noto Sans KR', sans-serif;
@@ -87,7 +93,6 @@ form {
 
 /* 버튼 스타일 */
 .job-btn,
-.education-btn,
 .career-btn,
 .region-btn {
   width: 202px; /* 각 버튼의 너비 */
@@ -103,14 +108,38 @@ form {
   pointer-events: auto;
   flex-shrink: 0; /* 버튼들이 넘치지 않도록 방지 */
   background-color: #F3F8FF;
-}
-
-#just1, #just2 {
-  position: relative;
-  top: 12px; /* 원하는 만큼 조절 */
+  box-sizing: border-box;  /* 패딩과 테두리가 크기에 포함되게 */
 }
 
 
+.education-btn {
+  min-height: 120px; /* 원하는 높이로 조정 */
+  display: flex;
+  align-items: center; /* 텍스트 중앙 정렬 */
+  justify-content: center;
+  text-align: center;
+  padding: 10px; /* 버튼 내부 여백 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  width: 202px; /* 각 버튼의 너비 */
+  color: black;
+  margin: 5px 10px 5px 2px; /* 위 오른쪽 아래 왼쪽*/
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  pointer-events: auto;
+  flex-shrink: 0; /* 버튼들이 넘치지 않도록 방지 */
+  background-color: #F3F8FF;
+  box-sizing: border-box;  /* 패딩과 테두리가 크기에 포함되게 */
+}
+
+#education-slider {
+  display: flex; /* 가로 정렬 */
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+  gap: 10px; /* 버튼 사이 간격 */
+}
 
 /* 세션*/
 .job-selection-section,
@@ -196,7 +225,7 @@ form {
 
 #next-slide-education-level{
   position: absolute;
-  top: 41%; /* 부모 요소의 중앙 정렬 */
+  top: 39%; /* 부모 요소의 중앙 정렬 */
   right: 22px;
   transform: translateY(-50%); /* 세로 정렬 보정 */
   background-color: rgba(0, 0, 0, 0);
@@ -209,7 +238,7 @@ form {
 
 #next-slide-region {
   position: absolute;
-  top: 88%; /* 부모 요소의 중앙 정렬 */
+  top: 84%; /* 부모 요소의 중앙 정렬 */
   right: 22px;
   transform: translateY(-50%); /* 세로 정렬 보정 */
   background-color: rgba(0, 0, 0, 0);

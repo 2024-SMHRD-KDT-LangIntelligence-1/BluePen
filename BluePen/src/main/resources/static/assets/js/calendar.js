@@ -1,173 +1,180 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2025-02-07',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2025-02-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2025-02-07',
-        end: '2025-02-10'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2025-02-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2025-02-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2025-02-11',
-        end: '2025-02-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T10:30:00',
-        end: '2025-02-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2025-02-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T14:30:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2025-02-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'https://google.com/',
-        start: '2025-02-28'
-      }
-    ]
-  });
-
-  calendar.render();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2025-04-01',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    editable: true, // 일정 드래그 가능
-    selectable: true, // 날짜 선택 가능
-    events: [
-      {
-        title: '회의',
-        start: '2025-04-01T10:00:00',
-        end: '2025-04-01T12:00:00'
-      },
-      {
-        title: '점심 약속',
-        start: '2025-04-05T12:30:00'
-      }
-    ],
-    // 날짜 클릭 시 일정 추가
-    dateClick: function(info) {
-      var eventTitle = prompt('이벤트 제목을 입력하세요:');
-      if (eventTitle) {
-        calendar.addEvent({
-          title: eventTitle,
-          start: info.dateStr
-        });
-      }
-    },
-    // 일정 이동 가능
-    eventDrop: function(info) {
-      alert(info.event.title + ' 날짜가 ' + info.event.start.toISOString() + '로 변경되었습니다.');
-    }
-  });
-
-  calendar.render();
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-  var calendarEl = document.getElementById("calendar");
-  var eventListEl = document.getElementById("eventList");
+  const calendarEl = document.getElementById("calendar");
+  const modal = document.getElementById("eventModal");
+  const closeModal = document.getElementById("closeModal");
+  const addEventBtn = document.getElementById("addEventBtn");
+  const eventTitleInput = document.getElementById("eventTitle");
+  const eventTypeInput = document.getElementById("eventType"); // ✅ 일정 유형 셀렉트
+  const eventTimeInput = document.getElementById("eventTime");
+  const deleteModal = document.getElementById("deleteModal");
+  const closeDeleteModal = document.getElementById("closeDeleteModal");
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+  const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+  let selectedDate = null;
+  let eventToDelete = null;
+
+  // 모달 닫기
+  closeModal.onclick = function () {
+    modal.style.display = "none";
+    eventTitleInput.value = "";
+    eventTimeInput.value = "";
+    eventTypeInput.value = "자격증";
+  };
+
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      eventTitleInput.value = "";
+      eventTimeInput.value = "";
+      eventTypeInput.value = "자격증";
+    }
+  };
+
+  closeDeleteModal.onclick = cancelDeleteBtn.onclick = function () {
+    deleteModal.style.display = "none";
+    eventToDelete = null;
+  };
+
+  confirmDeleteBtn.onclick = function () {
+    if (eventToDelete) {
+      eventToDelete.remove();
+      eventToDelete = null;
+      deleteModal.style.display = "none";
+    }
+  };
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: "ko",
     initialView: "dayGridMonth",
-    initialDate: "2025-04-01",
-    headerToolbar: {
-      left: "prev,next today",
-      center: "title",
-      right: "dayGridMonth,timeGridWeek,timeGridDay",
-    },
-    editable: true,
     selectable: true,
-    events: [
-      {
-        id: "1",
-        title: "회의",
-        start: "2025-04-01T10:00:00",
-        end: "2025-04-01T12:00:00",
-      },
-      {
-        id: "2",
-        title: "출장",
-        start: "2025-04-05",
-        end: "2025-04-08",
-      },
-      {
-        id: "3",
-        title: "휴가",
-        start: "2025-04-10",
-        end: "2025-04-15",
-      },
-    ],
-    // 일정 클릭 시 아래 리스트에 표시
+    editable: true,
+    dayMaxEvents: false,
+    moreLinkClick: "none",
+
+    dateClick: function (info) {
+      if (info.jsEvent.target.closest(".custom-more")) return;
+      selectedDate = info.dateStr;
+      modal.style.display = "block";
+    },
+
     eventClick: function (info) {
-      var event = info.event;
-      var eventId = event.id;
-      var eventTitle = event.title;
-      var eventStart = event.start.toISOString().split("T")[0]; // YYYY-MM-DD 형식
-      var eventEnd = event.end ? event.end.toISOString().split("T")[0] : null;
+      eventToDelete = info.event;
+      deleteModal.style.display = "block";
+    },
 
-      // 이미 존재하는지 확인
-      if (document.getElementById("event-" + eventId)) return;
+    eventDidMount: function (info) {
+      const event = info.event;
+      const el = info.el;
 
-      var li = document.createElement("li");
-      li.id = "event-" + eventId;
-      li.innerHTML = `<strong>${eventTitle}</strong> - ${eventStart} ${
-        eventEnd ? `~ ${eventEnd}` : ""
-      } 
-                      <button onclick="removeEvent('${eventId}')">삭제</button>`;
-      eventListEl.appendChild(li);
+      const title = event.title;
+      if (title.includes("자격증")) {
+        el.style.backgroundColor = "yellow";
+        el.style.borderColor = "yellow";
+      }
+      if (title.includes("취업")) {
+        el.style.backgroundColor = "lightgreen";
+        el.style.borderColor = "lightgreen";
+      }
+
+      if (event.start && event.end) {
+        const startDate = new Date(event.start);
+        const endDate = new Date(event.end);
+        const dayDiff = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        if (dayDiff >= 1) {
+          el.style.borderLeft = "5px solid #19335a";
+          el.style.backgroundColor = "#f1f1f1";
+          el.style.fontWeight = "bold";
+        }
+      }
+    },
+
+    dayCellDidMount: function (arg) {
+      const dateStr = arg.date.toISOString().substring(0, 10);
+      const cell = arg.el;
+      cell.innerHTML = "";
+
+      const events = calendar.getEvents().filter(e =>
+        e.startStr.startsWith(dateStr)
+      );
+
+      const container = document.createElement("div");
+      container.classList.add("custom-cell-events");
+
+      events.forEach((event, idx) => {
+        const item = document.createElement("div");
+        item.classList.add("event-item");
+        item.textContent = event.title;
+
+        if (idx >= 3) {
+          item.style.display = "none";
+          item.classList.add("more-hidden");
+        }
+
+        container.appendChild(item);
+      });
+
+      if (events.length > 3) {
+        const moreBtn = document.createElement("div");
+        moreBtn.classList.add("custom-more");
+        moreBtn.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
+        moreBtn.onclick = function () {
+          const hiddenItems = container.querySelectorAll(".more-hidden");
+          hiddenItems.forEach(el => (el.style.display = "block"));
+          moreBtn.style.display = "none";
+        };
+        container.appendChild(moreBtn);
+      }
+
+      cell.appendChild(container);
     },
   });
 
-  calendar.render();
+  // ✅ 일정 추가 버튼 클릭 시
+  addEventBtn.onclick = function () {
+    const title = eventTitleInput.value;
+    const type = eventTypeInput.value;
+    const time = eventTimeInput.value;
+    const color = type === "자격증" ? "yellow" : "lightgreen";
 
-  // 리스트에서 일정 삭제
-  window.removeEvent = function (eventId) {
-    var event = calendar.getEventById(eventId);
-    if (event) event.remove();
+    if (title && selectedDate) {
+      const timeFormatted = time ? `${time}:00` : "00:00:00";
 
-    var li = document.getElementById("event-" + eventId);
-    if (li) li.remove();
+      // fetch로 서버에 저장 요청
+      const formData = new URLSearchParams();
+      formData.append("scheTitle", title);
+      formData.append("scheDt", selectedDate);
+      formData.append("scheTm", timeFormatted);
+      formData.append("scheType", type);
+      formData.append("scheColor", color);
+
+      fetch("/insert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      })
+        .then((res) => {
+          if (res.ok) {
+            calendar.addEvent({
+              title: title,
+              start: time ? `${selectedDate}T${time}` : selectedDate,
+              allDay: !time,
+              backgroundColor: color,
+              borderColor: color,
+            });
+            modal.style.display = "none";
+            eventTitleInput.value = "";
+            eventTimeInput.value = "";
+            eventTypeInput.value = "자격증";
+          } else {
+            alert("서버 오류로 저장에 실패했습니다.");
+          }
+        })
+        .catch((err) => console.error("에러 발생:", err));
+    }
   };
+
+  calendar.render();
 });

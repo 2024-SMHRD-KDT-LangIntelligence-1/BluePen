@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='ko'>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset='utf-8' />
     <title>BLUEPEN LIST</title>
@@ -13,7 +13,6 @@
       <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="container">
-        <h2>Schedule List</h2>
         <div class="buttons"> 
             <button onclick="confirmDeleteAll()">전체삭제</button>
             <select id="itemsPerPage" onchange="updateItemsPerPage()">
@@ -22,7 +21,6 @@
                 <option value="15">15개씩</option>
                 <option value="20">20개씩</option>
             </select>
-            <input type="search" id="searchInput" placeholder="키워드 입력" onkeyup="highlightText()">
         </div>
         
         <div class="job-list"></div>

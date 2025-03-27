@@ -1,24 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset='utf-8' />
-    <title>BLUEPEN CALENDAR</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/calendar.css" />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script src="assets/js/calendar.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <title>BLUEPEN CALENDAR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/calendar.css">
+  <!-- Font Awesome CDN 추가 -->
+  <link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+  <!-- FullCalendar 스타일시트 -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <!-- FullCalendar 자바스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <!-- 한국어 로케일 파일 -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales/ko.js"></script>
+</head>
+<body>
       <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
+    <div class="calendar-wrapper">
     <div id='calendar'></div>
-    
     <!-- 일정 리스트 -->
     <h2>일정 목록</h2>
     <ul id="eventList"></ul>
-  </body>
+    </div>
+    
+	<!-- 일정 추가 모달 -->
+	<div id="eventModal" class="modal">
+	  <div class="modal-content schedule-modal">
+	    <span id="closeModal" class="close">
+	      <i class="fa-solid fa-xmark"></i>
+	    </span>
+	    <h2 class="modal-title">일정 추가</h2>
+	
+	    <input type="text" id="eventTitle" name="scheTitle" placeholder="일정 제목 입력" class="input-box" />
+	
+	    <select id="eventType" name="scheType" class="input-box">
+	      <option value="자격증">자격증 일정</option>
+	      <option value="취업">취업 일정</option>
+	    </select>
+	
+	    <input type="time" id="eventTime" name="scheTm" class="input-box" />
+	
+	    <button id="addEventBtn" class="primary-btn">추가하기</button>
+	  </div>
+	</div>
+
+	<!-- 삭제 확인 모달 -->
+	<div id="deleteModal" class="modal">
+	  <div class="modal-content confirm-modal">
+	    <span id="closeDeleteModal" class="close">
+	      <i class="fa-solid fa-xmark"></i>
+	    </span>
+	    <p class="confirm-text">정말 이 일정을 삭제하시겠습니까?</p>
+	    <div class="confirm-buttons">
+	      <button id="confirmDeleteBtn" class="btn btn-danger">삭제</button>
+	      <button id="cancelDeleteBtn" class="btn btn-cancel">취소</button>
+	    </div>
+	  </div>
+	</div>
+
+    <script src="assets/js/calendar.js"></script>
+</body>
 </html>
