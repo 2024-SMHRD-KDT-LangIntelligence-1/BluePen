@@ -2,230 +2,147 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: auto; /* 페이지 전체 스크롤 숨기기 */
 }
 
-/* 스크롤바 숨기기 */
-*::-webkit-scrollbar {
-  width: 0; /* 세로 스크롤바 숨기기 */
-  height: 0; /* 가로 스크롤바 숨기기 */
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent; /* 스크롤 트랙을 투명하게 설정 */
-}
-
-*::-webkit-scrollbar-thumb {
-  background: transparent; /* 스크롤 바를 투명하게 설정 */
-}
-
+/* 전체 배경 설정 */
 body {
   font-family: "Noto Sans KR", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vx;
-  margin-top: 90px;
-  z-index: 1;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
 }
 
-/* 헤더 스타일 */
-.topbar {
-  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
-  z-index: 1002; /* chat-container보다 위로 오도록 z-index 값 설정 */
-}
-
-/* 폼 영역의 위치가 상단바와 겹치지 않도록 설정 */
-.user-input-container {
-  position: relative; /* 부모 요소에 상대적으로 위치 설정 */
-  z-index: 1000; /* 프롬프트보다 위에 오도록 설정 */
-}
-
-/* 사이드바 스타일 */
+/* 상단바와 사이드바 다시 표시 */
+.topbar,
 .sidebar {
-  position: relative; /* 부모 요소에서 위치를 기준으로 자식 요소가 움직이도록 설정 */
-  z-index: 1000; /* chat-container보다 위로 오도록 설정 */
+  display: block;
+  width: 100%;
+  z-index: 1000;
 }
 
-/*----------------------------------------------------------------------------------------------------*/
-.cover {
-  position: absolute;
-  top: 20%;
-  left: 0;
-  width: 80%; /* 화면 너비 전체 */
-  height: 70%; /* 화면 높이 전체 */
-  display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-}
-
+/* 전체 채팅 인터페이스 */
 .chat-interface {
   width: 1200px;
-  max-height: calc(100vh - 80px); /* 상단바 높이만큼 빼고 최대 높이 설정 */
-  height: auto; /* 내용에 맞게 높이 자동 조정 */
-  margin: 20px auto;
-  padding: 20px;
+  height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 상단 정렬로 변경 */
-  position: relative; /* 부모 기준으로 자식이 움직이도록 설정 */
-  bottom: 10px; /* 하단에 고정 */
-  z-index: 999; /* 프롬프트가 상단바보다 아래에 있도록 설정 */
-  overflow-y: auto; /* 세로 스크롤바 표시 */
-  right: -380px;
-  top: 180px;
-}
-
-.chat-container h2 {
-  text-align: center;
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 0px; /* 상단 여백 */
-}
-
-.chat-box {
-  display: none;
-  flex-direction: column; /* 세로로 정렬 */
-  width: 100%; /* 부모 크기에 맞춰 너비 설정 */
-  height: auto; /* 내용에 맞게 높이 자동 조정 */
-  overflow-y: auto;
-  padding: 10px;
-  margin-top: 100px;
-  margin-bottom: 10px;
-  justify-content: flex-start; /* 대화창은 상단에서 시작 */
-  align-items: center; /* 수평 중앙 정렬 */
-  position: relative; /* 부모를 기준으로 위치 */
-  top: 35%; /* 화면 세로 중앙 */
-  left: 50%; /* 화면 가로 중앙 */
-  transform: translateX(-50%); /* 정확히 중앙에 위치 */
-  background-color: gray;
-  max-height: 60vh; /* 최대 높이 60%로 설정 */
-}
-
-/* 스크롤바 숨기기 */
-.chat-box::-webkit-scrollbar {
-  width: 0; /* 세로 스크롤바 숨기기 */
-  height: 0; /* 가로 스크롤바 숨기기 */
-}
-
-.chat-box::-webkit-scrollbar-track {
-  background: transparent; /* 스크롤 트랙을 투명하게 설정 */
-}
-
-.chat-box::-webkit-scrollbar-thumb {
-  background: transparent; /* 스크롤 바를 투명하게 설정 */
-}
-
-.chat-message {
-  display: inline-block;
-  text-align: left;
-  color: black;
-  padding: 10px;
-  border-radius: 5px;
-  word-wrap: break-word;
-}
-
-.bot-message {
-  display: inline-block;
-  text-align: left;
-  color: black;
-  background-color: #c7e8ff;
-  padding: 10px;
-  border-radius: 8px;
-  margin-left: 0;
-  word-wrap: break-word;
-  padding: 15px 5px 5px 15px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  margin: 20px 10px 0px 10px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  align-self: flex-start; /* 왼쪽 정렬 */
-}
-
-.user-message {
-  text-align: right;
-  color: black;
-  background-color: #f2f8ff;
-  padding: 10px;
-  border-radius: 8px;
-  max-width: 70%;
-  margin-left: auto;
-  padding: 15px 5px 5px 15px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  margin: 20px 10px 0px 10px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  align-self: flex-end; /* 오른쪽 정렬 */
+  justify-content: flex-end;
+  position: relative;
+  padding: 20px;
 }
 
 .user-input-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 650px;
-  height: 185px;
-  z-index: 1002; /* 최상위로 띄우기 */
+  width: 100%; /* chat-interface 기준으로 맞춰짐 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
 }
 
 form {
-  position: absolute; /* 부모(.user-input-container)를 기준으로 절대 위치 */
-  top: 39%; /* 부모의 세로 중앙 */
-  left: 50%; /* 부모의 가로 중앙 */
-  transform: translate(-50%, -50%); /* 정확히 중앙으로 맞추기 */
-  width: 100%; /* form의 너비는 100% */
-  height: 100px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #user-input {
-  width: 100%;
-  height: 100px;
-  padding: 20px 20px 70px 40px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
-  padding-right: 50px; /* 오른쪽에 북마크 공간 확보 */
-  font-size: 15px;
-  border-radius: 30px;
-  border: 1px solid #aacbfd;
+  width: 760px; /* 💥 고정 너비 설정 */
+  min-height: 60px;
+  padding: 16px 20px;
+  font-size: 16px;
+  border-radius: 16px;
+  border: 1px solid #d0d7e2;
   background-color: white;
-  box-shadow: 0 1px 3px rgba(170, 203, 253, 0.3);
-  position: relative; /* 부모 요소에서 영향을 받지 않도록 설정 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 #user-input:focus {
-  outline: none; /* 포커스 시 테두리 제거 */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(129, 177, 235, 0.4);
 }
 
-/* 버튼 기본 스타일 */
+/* 대화창 */
+.chat-box {
+  width: 100%;
+  max-width: 760px; /* ✅ 메시지 박스 너비 고정! */
+  margin: 0 auto;   /* ✅ 중앙 정렬 핵심! */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-message {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: #e1ecf9;
+  color: #1a1a1a;
+  border-bottom-left-radius: 0;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #dff2db;
+  color: #1a1a1a;
+  border-bottom-right-radius: 0;
+}
+
+/* 스크롤바 숨기기 */
+.chat-box::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* 북마크 버튼 위치 재정렬 */
 .bookmark {
-  background-color: transparent;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: 28px;
+  background: white;
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: none;
+  color: #81b1eb;
   cursor: pointer;
-  font-size: 24px;
-  color: #aacbfd;
-  transition: color 0.3s ease, transform 0.3s ease;
-  position: absolute; /* relative인 user-input-container 기준으로 위치함 */
-  top: 530px;          /* 입력창 바로 위로 이동 (조정 가능) */
-  right: 30px;         /* 오른쪽 끝에 배치 */
-  z-index: 1003;       /* 입력창보다 위에 있도록 설정 */
+  z-index: 2000;
 }
 
-/* 아이콘에 마우스 오버 시 효과 추가 */
 .bookmark i {
   transition: transform 0.3s ease;
 }
 
-/* 북마크가 활성화되었을 때 (클릭 후 아이콘 색상 변경) */
 .bookmark.active i {
-  color: #81B1EB;
+  color: #4e91db;
 }
 
-
-/*-----------------------------------------------------------------------------------*/
-/*반응형 스타일*/
-/* 작은 화면에서 입력 필드 및 버튼 크기 조정 */
+/* 반응형 대응 */
 @media (max-width: 600px) {
   .chat-interface {
-    margin: 10px;
     padding: 10px;
   }
 
   #user-input {
     font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .bookmark {
+    bottom: 20px;
+    right: 20px;
   }
 }
