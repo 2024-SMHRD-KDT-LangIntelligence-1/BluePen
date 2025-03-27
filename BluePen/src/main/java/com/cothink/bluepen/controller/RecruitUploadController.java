@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RecruitUploadController {
 	
 	
-	 private static final String FASTAPI_URL = "http://0.0.0.0:8000/upload"; // FastAPI 서버 URL
+	 private static final String FASTAPI_URL = "http://localhost:8000/upload"; // FastAPI 서버 URL
 	
 	 @PostMapping
 	    public ResponseEntity<String> uploadResume(@RequestParam("resumeFile") MultipartFile file) throws IOException {

@@ -1,4 +1,3 @@
-
 package com.cothink.bluepen.controller;
 
 import java.util.Map;
@@ -10,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.cothink.bluepen.entity.TblUser;
+
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class FastAPIController {
 	private final WebClient webClient;
 
-	public FastAPIController() {
+	public FastAPIController() {					// fastapi의 서버
 		this.webClient = WebClient.builder().baseUrl("http://localhost:8000").build();
 	}
 
@@ -23,9 +26,16 @@ public class FastAPIController {
 	// 따라 Map<string, object>사용하면 간단히 JSON데이터를 표현 가능함.
 
 	@GetMapping("/fast.do")
-	public String fastDo(@RequestParam("text") String text, Model model) {
+	public String fastDo(@RequestParam("text") String text, HttpSession session ,Model model) {
+		
+		// 현재 로그인한 userid 가져오기
+		TblUser uid = (TblUser) session.getAttribute("user");
+		String userid = uid.getUserId();
+		
 		Map<String, Object> response = webClient.get()
-				.uri(uriBuilder -> uriBuilder.queryParam("sentence", text)
+				.uri(uriBuilder -> uriBuilder
+						.queryParam("sentence", text)
+						.queryParam("userid", userid)
 						.build())
 				.retrieve()
 				.bodyToMono(Map.class)
@@ -33,11 +43,12 @@ public class FastAPIController {
 
 		// 응답에서 "response" 키의 값을 가져오기
 		String chatGptResponse = (String) response.get("response");
-
+		
+		// client의 질문과 llm의 답변을 model에 담아
 		model.addAttribute("question", text);
 		model.addAttribute("answer", chatGptResponse);
 
-		// 변수에 저장한 후 반환 
+		// mainpage로 반환
 		return "mainpage";
 	}
 }
