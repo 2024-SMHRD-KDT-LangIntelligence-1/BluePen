@@ -86,82 +86,82 @@ function toggleMenu(button) {
   menuPopup.classList.toggle('show');
 }
 
-// 외부 클릭 시 메뉴 닫기
-document.addEventListener('click', function(event) {
-  const menuButton = document.querySelector('.menu-button');
-  const openMenu = document.querySelector('.menu-popup.show');
+document.addEventListener("click", function (event) {
+  const alramContainer = document.getElementById("alramContainer");
+  const alramButton = document.querySelector(".alram-icon");
 
-  // 메뉴 버튼을 클릭한 경우는 예외로 두고, 다른 곳을 클릭하면 메뉴 닫기
-  if (menuButton && !menuButton.contains(event.target) && openMenu) {
-    openMenu.classList.remove('show'); // 메뉴 닫기
+  // 클릭한 대상이 알람 버튼이나 알람창 내부가 아니면 닫기
+  if (
+    alramContainer.style.display === "block" &&
+    !alramContainer.contains(event.target) &&
+    !alramButton.contains(event.target)
+  ) {
+    alramContainer.style.display = "none";
   }
 });
 
 //------------------------------------------------------------------------------------
-// 모달 요소 가져오기
-const modal = document.getElementById("bookmarkpopup");
-const closeButton = document.querySelector(".bookmark-close-btn");
+// 북마크 팝업 요소
+const bookmarkPopup = document.getElementById("bookmarkpopup");
 
-// 모달 열기 함수
-function openPopup(event) {
-  event.stopPropagation(); // 클릭 이벤트 전파 방지
-  modal.style.display = "flex"; // flex로 설정해서 화면 중앙 정렬
-}
-
-// 모달 닫기 함수
-function closeModal() {
-  modal.style.display = "none";
-}
-
-// 닫기 버튼 클릭 시 모달 닫기
-closeButton.addEventListener("click", closeModal);
-
-// 모달 바깥 영역 클릭 시 닫기
-window.addEventListener("click", function (event) {
-  if (event.target === modal) {
-    closeModal();
-  }
-});
-
-// 북마크 데이터를 담을 배열
+// 북마크 데이터 배열
 const bookmarks = [
   { name: "로그인 페이지 제작 도움", date: "2025년 3월 19일" },
   { name: "최겨울 등장!", date: "2025년 3월 11일" }
 ];
 
-// 북마크 리스트를 생성하는 함수
+// 북마크 토글 함수 (열기/닫기)
+function toggleBookmark(event) {
+  event.stopPropagation();
+
+  // 알람창이 열려있으면 닫기
+  const alramContainer = document.getElementById('alramContainer');
+  if (alramContainer?.style.display === 'block') {
+    alramContainer.style.display = 'none';
+  }
+
+  // 북마크 팝업 토글
+  if (bookmarkPopup.style.display === "flex") {
+    bookmarkPopup.style.display = "none";
+  } else {
+    bookmarkPopup.style.display = "flex";
+    renderBookmarks();
+  }
+}
+
+// 북마크 리스트 렌더링 함수
 function renderBookmarks() {
   const bookmarkList = document.getElementById("bookmarkList");
-  bookmarkList.innerHTML = ""; // 기존 목록 초기화
+  bookmarkList.innerHTML = "";
 
   bookmarks.forEach((bookmark, index) => {
-    const row = document.createElement("tr"); // 새로운 행 생성
+    const row = document.createElement("tr");
 
-    // 이름 열 (클릭하면 해당 북마크 열도록 설정 가능)
+    // 이름 셀
     const nameCell = document.createElement("td");
     nameCell.textContent = bookmark.name;
     nameCell.style.cursor = "pointer";
-    nameCell.addEventListener("click", () => {
+    nameCell.onclick = () => {
       alert(`"${bookmark.name}"을(를) 클릭했습니다!`);
-    });
+    };
 
-    // 생성 일자 열
+    // 날짜 셀
     const dateCell = document.createElement("td");
     dateCell.textContent = bookmark.date;
 
-    // 삭제 버튼 열
+    // 삭제 버튼 셀
     const deleteCell = document.createElement("td");
     deleteCell.style.textAlign = "center";
     const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = '<i class="fas fa-trash"></i>'; // Font Awesome 아이콘으로 변경
-    deleteButton.style.border = "none";
-    deleteButton.style.background = "none";
-    deleteButton.style.cursor = "pointer";
-    deleteButton.addEventListener("click", () => removeBookmark(index)); // 삭제 기능 연결
-
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+    Object.assign(deleteButton.style, {
+      border: "none",
+      background: "none",
+      cursor: "pointer"
+    });
+    deleteButton.onclick = () => removeBookmark(index);
     deleteCell.appendChild(deleteButton);
 
-    // 행에 추가
     row.appendChild(nameCell);
     row.appendChild(dateCell);
     row.appendChild(deleteCell);
@@ -171,23 +171,23 @@ function renderBookmarks() {
 
 // 북마크 삭제 함수
 function removeBookmark(index) {
-  bookmarks.splice(index, 1); // 배열에서 해당 북마크 삭제
-  renderBookmarks(); // 다시 그리기
+  bookmarks.splice(index, 1);
+  renderBookmarks();
 }
 
-// 모달을 열 때 북마크 리스트도 렌더링
-function openPopup(event) {
-  event.stopPropagation(); // 클릭 이벤트 전파 방지
-  modal.style.display = "flex";
-  renderBookmarks(); // 최신 북마크 리스트 표시
-}
+// 외부 클릭 시 북마크 팝업 닫기
+document.addEventListener("click", function (event) {
+  const bookmarkBtn = document.querySelector(".bookmark-icon");
 
-// 모달 닫기 함수
-function closeModal() {
-  modal.style.display = "none";
-}
+  if (
+    bookmarkPopup.style.display === "flex" &&
+    !bookmarkPopup.contains(event.target) &&
+    !bookmarkBtn.contains(event.target)
+  ) {
+    bookmarkPopup.style.display = "none";
+  }
+});
 
-// 페이지 로드 시 북마크 목록 렌더링 (초기 데이터 표시)
+// 페이지 로드 시 초기 렌더링
 document.addEventListener("DOMContentLoaded", renderBookmarks);
-
 
