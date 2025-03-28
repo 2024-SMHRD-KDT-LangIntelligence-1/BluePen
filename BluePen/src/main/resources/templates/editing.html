@@ -19,6 +19,7 @@
     <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{/topbar}"></header>
     <div class="sidebar" th:replace="~{/sidebar}"></div>
+    <div class="cover">
     <div class="resume-container">
       <!-- PDF 파일 업로드 -->
       <form
@@ -70,6 +71,24 @@
 			  <i class="fa-regular fa-bookmark"></i>
 			</button>
 	    </div>
+
+<!--      <div class="wrapper hidden">
+        대화 프롬프트 
+        <div class="chat-interface">
+          <div th:if="${session.user} != null">
+            <h2 class="welcome-message" th:text="${session.user.userId} + '님 첨삭중으로 잠시만 기다려주세요:)'"></h2>
+          </div>
+          <div class="chat-box" id="chat-box">
+            <div class="chat-message bot-message"></div>
+          </div>
+          <div class="user-input-container">
+            <form>
+				<textarea id="user-input" name="user-message" placeholder="무엇이든 물어보세요" rows="1"></textarea>
+            </form>
+          </div>
+        </div>
+    </div> -->
+    </div>
 
     <script src="assets/js/editing.js"></script>
   </body>

@@ -129,43 +129,48 @@ function toggleBookmark(event) {
   }
 }
 
-// 북마크 리스트 렌더링 함수
+// 북마크 리스트 렌더링 함수 (수정된 부분 포함!)
 function renderBookmarks() {
   const bookmarkList = document.getElementById("bookmarkList");
   bookmarkList.innerHTML = "";
 
-  bookmarks.forEach((bookmark, index) => {
-    const row = document.createElement("tr");
+  if (bookmarks.length === 0) {
+    const emptyMessage = document.createElement("div");
+    emptyMessage.classList.add("bookmark-empty");
+    emptyMessage.textContent = "북마크를 추가해주세요!";
+    bookmarkList.appendChild(emptyMessage);
+    return;
+  }
 
-    // 이름 셀
-    const nameCell = document.createElement("td");
-    nameCell.textContent = bookmark.name;
-    nameCell.style.cursor = "pointer";
-    nameCell.onclick = () => {
-      alert(`"${bookmark.name}"을(를) 클릭했습니다!`);
+  bookmarks.forEach((bookmark, index) => {
+    const item = document.createElement("div");
+    item.classList.add("bookmark-item");
+
+    const content = document.createElement("div");
+    content.classList.add("bookmark-content");
+
+    const title = document.createElement("div");
+    title.classList.add("bookmark-title");
+    title.innerHTML = `<i class="fa-solid fa-comment"></i> ${bookmark.name}`;
+
+    const date = document.createElement("div");
+    date.classList.add("bookmark-date");
+    date.textContent = bookmark.date;
+
+    content.appendChild(title);
+    content.appendChild(date);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("bookmark-delete-btn");
+    deleteBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+    deleteBtn.onclick = (event) => {
+      event.stopPropagation(); // 🔥 팝업 닫힘 방지!!!
+      removeBookmark(index);
     };
 
-    // 날짜 셀
-    const dateCell = document.createElement("td");
-    dateCell.textContent = bookmark.date;
-
-    // 삭제 버튼 셀
-    const deleteCell = document.createElement("td");
-    deleteCell.style.textAlign = "center";
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-    Object.assign(deleteButton.style, {
-      border: "none",
-      background: "none",
-      cursor: "pointer"
-    });
-    deleteButton.onclick = () => removeBookmark(index);
-    deleteCell.appendChild(deleteButton);
-
-    row.appendChild(nameCell);
-    row.appendChild(dateCell);
-    row.appendChild(deleteCell);
-    bookmarkList.appendChild(row);
+    item.appendChild(content);
+    item.appendChild(deleteBtn);
+    bookmarkList.appendChild(item);
   });
 }
 
@@ -190,4 +195,3 @@ document.addEventListener("click", function (event) {
 
 // 페이지 로드 시 초기 렌더링
 document.addEventListener("DOMContentLoaded", renderBookmarks);
-

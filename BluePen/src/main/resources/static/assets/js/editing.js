@@ -122,3 +122,66 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
 			});
 	}
 });
+
+
+// ---------------------- 충돌 (처리 필요)
+  /*document.addEventListener("DOMContentLoaded", function () {
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+    const welcomeMessage = document.querySelector(".welcome-message");
+    const uploadBtn = document.getElementById("upload-btn");
+    const resumeContainer = document.querySelector(".resume-container");
+	const wrapper = document.querySelector(".wrapper"); // ← 추가
+
+    // ✅ 업로드 버튼 누르면 이력서 업로드 영역 숨김
+    uploadBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // 폼 전송 방지
+      resumeContainer.classList.add("hidden");
+	  wrapper.classList.remove("hidden"); // ← 이 줄 추가!
+    });
+
+    // ✅ 대화 처리
+    function handleUserInput() {
+      const text = userInput.value.trim();
+      if (text === "") return;
+
+      // 대화 시작 시 welcomeMessage 숨김
+      if (welcomeMessage && !welcomeMessage.classList.contains("hidden")) {
+        welcomeMessage.classList.add("hidden");
+      }
+
+      const messageSet = document.createElement("div");
+      messageSet.classList.add("message-set");
+
+      const userMsg = document.createElement("div");
+      userMsg.classList.add("chat-message", "user-message");
+      userMsg.innerText = text;
+      messageSet.appendChild(userMsg);
+
+      chatBox.appendChild(messageSet);
+      userInput.value = "";
+
+      messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.classList.add("chat-message", "bot-message");
+        botMsg.innerText = "AI 응답 예시: 질문을 이해했습니다!";
+        messageSet.appendChild(botMsg);
+        messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 1000);
+    }
+
+    userInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleUserInput();
+      }
+    });
+
+    userInput.addEventListener("input", function () {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+    });
+  });*/
+

@@ -31,13 +31,11 @@ body {
   text-align: center;
 }
 
-.logo {
-  font-size: 30px;
-  margin-top: 20px;
-  margin-right: 15px;
-  margin-bottom: 70px;
-  color: #19335a;
-  font-weight: bold;
+.logo img {
+  height: 80px;            
+  object-fit: contain;
+  margin-top: 20px;    
+  margin-bottom: 20px;       /* 로고 아래 여백 추가 */
 }
 
 input[type="text"],

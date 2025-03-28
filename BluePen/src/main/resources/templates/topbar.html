@@ -18,9 +18,8 @@
   <body>
     <header class="top-header" id="top-bar">
       <div class="top-logo">
-        <a href="/mainpage">
-          <h2>🖋️BLUE PEN</h2>
-        </a>
+         <a href="/mainpage"><img src="./assets/img/logo.png">
+         </a>
       </div>
       <!-- 새채팅 버튼 -->
       <nav class="top-navigation">
@@ -91,31 +90,13 @@
       </nav>
 
       <!-- 북마크 팝업창 -->
-      <div class="bookmarkpopup" id="bookmarkpopup">
-        <div class="popup">
-          <button class="bookmark-close-btn" onclick="closeModal()">
-          <i class="fa-solid fa-xmark" style="color: #19335a;"></i>
-          </button>
-          <table class="table">
-            <thead>
-              <tr>
-                <th style="width: 50%; text-align: left; padding-left: 12px">
-                  이름
-                </th>
-                <th style="width: 30%; text-align: left; padding-left: 12px">
-                  생성 일자
-                </th>
-                <th style="width: 20%; text-align: center"> </th>
-              </tr>
-            </thead>
-          </table>
-          <div class="scrollable-body">
-            <table class="table">
-              <tbody id="bookmarkList"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+		<div class="bookmarkpopup" id="bookmarkpopup">
+		  <div class="scrollable-body">
+		    <div class="bookmark-popup-body" id="bookmarkList">
+		      <!-- JS에서 bookmark-item이 여기에 렌더링됨 -->
+		    </div>
+		  </div>
+		</div>
     </header>
     <script src="assets/js/topbar.js"></script>
   </body>

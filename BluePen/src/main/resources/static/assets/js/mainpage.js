@@ -44,43 +44,63 @@
 document.addEventListener("DOMContentLoaded", function () {
   const userInput = document.getElementById("user-input");
   const chatBox = document.getElementById("chat-box");
-  const chatContainer = document.querySelector(".chat-container");
-  const suggestions = document.querySelectorAll(".suggestion");
-
-  // 메시지 추가 함수
-  function addMessage(text, isUser = true) {
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("chat-message", isUser ? "user-message" : "bot-message");
-    messageDiv.innerText = text;
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 아래로 이동
-
-    // chatContainer가 있을 경우에만 active 추가
-    if (chatContainer && !chatContainer.classList.contains("active")) {
-      chatContainer.classList.add("active");
-    }
-  }
+  const chatContainer = document.querySelector(".chat-interface");
+  const welcomeMessage = document.querySelector(".welcome-message");
 
   // 사용자 입력 처리
   function handleUserInput() {
     const text = userInput.value.trim();
     if (text === "") return;
 
-    addMessage(text, true); // 사용자 메시지 추가
+    // 💥 대화 시작되면 환영 메시지 숨기기 + active 클래스 추가
+    if (welcomeMessage && !chatContainer.classList.contains("active")) {
+      welcomeMessage.classList.add("hidden");
+      chatContainer.classList.add("active");
+    }
+
+    // 💥 message-set 생성
+    const messageSet = document.createElement("div");
+    messageSet.classList.add("message-set");
+
+    // 사용자 메시지
+    const userMsg = document.createElement("div");
+    userMsg.classList.add("chat-message", "user-message");
+    userMsg.innerText = text;
+    messageSet.appendChild(userMsg);
+
+    // chat-box에 붙이기
+    chatBox.appendChild(messageSet);
     userInput.value = ""; // 입력 필드 초기화
 
+    // 💥 자동 스크롤 (1차 위치)
+    messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+
+    // AI 응답 추가
     setTimeout(() => {
-      addMessage("AI 응답 예시: 질문을 이해했습니다!", false);
+      const botMsg = document.createElement("div");
+      botMsg.classList.add("chat-message", "bot-message");
+      botMsg.innerText = "AI 응답 예시: 질문을 이해했습니다!";
+      messageSet.appendChild(botMsg);
+
+      // 💥 쌍 단위로 스크롤 이동
+      messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
     }, 1000);
   }
 
   // 엔터 키 입력 감지
   userInput.addEventListener("submit", function (event) {
+  // 💥 엔터 키 입력 감지
+//  userInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       handleUserInput();
     }
   });
 
+  // 💥 자동 리사이즈 (textarea 늘어나게)
+  userInput.addEventListener("input", function () {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -93,40 +113,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 //--------------------------------------------------------------------------------------
-const bookmarkBtn = document.getElementById('bookmark-btn');
-const bookmarkIcon = bookmarkBtn.querySelector('i');  // 버튼 내 아이콘 선택
+const bookmarkBtn = document.getElementById("bookmark-btn");
+const bookmarkIcon = document.getElementById("bookmark-icon");
 
-bookmarkBtn.addEventListener('click', function() {
-  saveBookmark();
+bookmarkBtn.addEventListener("click", function () {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  savedBookmarks.push({
+    text: text,
+    timestamp: new Date().toISOString()
+  });
+  localStorage.setItem("bookmarks", JSON.stringify(savedBookmarks));
+
+  // 스타일만 토글
+  bookmarkIcon.classList.add("active");
 });
 
-function saveBookmark() {
-  const bookmark = {
-    url: window.location.href,
-    title: document.title
-  };
-
-  fetch('/save-bookmark', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(bookmark)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // 북마크 저장 성공 시 아이콘 변경
-      bookmarkIcon.classList.remove('fa-regular', 'fa-bookmark');  // 기존 아이콘 클래스 제거
-      bookmarkIcon.classList.add('fa-solid', 'fa-bookmark');  // 새로운 아이콘 클래스 추가
-      alert('북마크가 DB에 저장되었습니다!');
-    } else {
-      alert('북마크 저장에 실패했습니다.');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('에러가 발생했습니다.');
-  });
-}
-
+// 입력창이 바뀌면 다시 원래 상태로
+userInput.addEventListener("input", function () {
+  bookmarkIcon.classList.remove("active");
+});

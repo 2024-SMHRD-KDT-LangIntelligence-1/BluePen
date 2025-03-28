@@ -21,7 +21,7 @@
         <!--대화 프롬프트  -->
         <div class="chat-interface">
           <div th:if="${session.user} != null">
-            <h2 th:text="${session.user.userId} + '님 환영합니다.'"></h2>
+            <h2 class="welcome-message" th:text="${session.user.userId} + '님 환영합니다.'"></h2>
           </div>
           <div class="chat-box" id="chat-box">
           <div th:if="${answer} != null">
@@ -36,11 +36,11 @@
                 placeholder="무엇이든 물어보세요"
               />
             </form> 
+            <!-- <form>
+				<textarea id="user-input" name="user-message" placeholder="무엇이든 물어보세요" rows="1"></textarea>
+            </form> -->
           </div>
         </div>
-		<button class="bookmark" id="bookmark-btn">
-		  <i class="fa-regular fa-bookmark"></i>
-		</button>
     </div>
     <script src="assets/js/mainpage.js"></script>
 </div>
