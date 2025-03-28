@@ -16,39 +16,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let checkboxesVisible = false;
 
-  // 🔁 사이드바 토글 기능
+  // ✅ 사이드바 토글 기능
   toggleBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("opened");
-    sidebar.classList.toggle("closed");
-    icon.classList.toggle("fa-angle-left");
-    icon.classList.toggle("fa-angle-right");
+    const isOpened = sidebar.classList.contains("opened");
+
+    if (isOpened) {
+      sidebar.classList.remove("opened");
+      sidebar.classList.add("closed");
+      icon.classList.remove("fa-angle-left");
+      icon.classList.add("fa-angle-right");
+    } else {
+      sidebar.classList.remove("closed");
+      sidebar.classList.add("opened");
+      icon.classList.remove("fa-angle-right");
+      icon.classList.add("fa-angle-left");
+    }
+
+    console.log("사이드바 상태:", sidebar.classList);
   });
 
+  // ✅ 휴지통 버튼 클릭 → 체크박스 or 모달
   trashBtn.addEventListener("click", () => {
     const listItems = document.querySelectorAll("#side-task-list1 li, #side-task-list2 li");
 
-	if (!checkboxesVisible) {
-	  listItems.forEach(li => {
-	    // 🔥 제목에는 체크박스 안 만들도록 조건 추가!!!!
-	    if (!li.classList.contains("title-li") && !li.querySelector("input[type='checkbox']")) {
-	      const checkbox = document.createElement("input");
-	      checkbox.type = "checkbox";
-	      checkbox.classList.add("side-task-checkbox");
-	      li.prepend(checkbox);
-	    }
-	  });
+    if (!checkboxesVisible) {
+      listItems.forEach(li => {
+        if (!li.classList.contains("title-li") && !li.querySelector("input[type='checkbox']")) {
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.classList.add("side-task-checkbox");
+          li.prepend(checkbox);
+        }
+      });
 
       checkboxesVisible = true;
       selectAllContainer.style.display = "flex";
 
     } else {
-      // ✅ 두 번째 클릭: 체크박스 있는 상태
       const checked = document.querySelectorAll(".side-task-checkbox:checked");
 
       if (checked.length > 0) {
-        modal.style.display = "flex"; // 삭제 모달 띄움
+        modal.style.display = "flex"; // ✅ 삭제 모달 띄우기
       } else {
-        // ❌ 아무것도 선택 안 된 경우 → 체크박스 제거!
         document.querySelectorAll(".side-task-checkbox").forEach(cb => cb.remove());
         checkboxesVisible = false;
         selectAllContainer.style.display = "none";
@@ -58,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSelectAllCheckboxState();
   });
 
-  // ✅ li 클릭 시 체크 토글
+  // ✅ 리스트 클릭 시 체크박스 토글
   taskLists.forEach(list => {
     list.addEventListener("click", (e) => {
       const li = e.target.closest("li");
@@ -70,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 🔁 전체 선택 체크박스
+  // ✅ 전체선택 체크박스 동기화
   selectAllCheckbox.addEventListener("change", () => {
     const isChecked = selectAllCheckbox.checked;
     document.querySelectorAll(".side-task-checkbox").forEach(cb => {
@@ -78,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ✅ 전체선택 체크박스 상태 업데이트
+  // ✅ 전체선택 체크박스 상태 업데이트 함수
   function updateSelectAllCheckboxState() {
     const checkboxes = document.querySelectorAll(".side-task-checkbox");
     const checked = [...checkboxes].filter(cb => cb.checked).length;
@@ -87,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     selectAllCheckbox.checked = checked === checkboxes.length;
   }
 
-  // ✅ 예 클릭: 체크된 항목 삭제 + 체크박스 제거
+  // ✅ "예" 클릭 시 체크된 항목 삭제
   modalYesBtn.addEventListener("click", () => {
     document.querySelectorAll(".side-task-checkbox:checked").forEach(cb => {
       cb.closest("li").remove();
@@ -99,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.style.display = "none";
   });
 
-  // ❌ 아니오 클릭: 체크 해제 + 모달 닫기
+  // ❌ "아니오" 클릭 시 모달 닫고 체크 해제
   modalNoBtn.addEventListener("click", () => {
     document.querySelectorAll(".side-task-checkbox").forEach(cb => {
       cb.checked = false;
@@ -116,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 🔄 예시 데이터
+  // ✅ 예시 데이터
   const taskData1 = [
     { task: "프로젝트 관리", id: 1 },
     { task: "코드 리팩토링", id: 2 },

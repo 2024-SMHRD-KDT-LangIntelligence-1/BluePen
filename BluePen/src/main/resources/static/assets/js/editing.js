@@ -115,53 +115,64 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
   }*/
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  const userInput = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
-  const chatContainer = document.querySelector(".chat-container");
-  const suggestions = document.querySelectorAll(".suggestion");
+  document.addEventListener("DOMContentLoaded", function () {
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+    const welcomeMessage = document.querySelector(".welcome-message");
+    const uploadBtn = document.getElementById("upload-btn");
+    const resumeContainer = document.querySelector(".resume-container");
+	const wrapper = document.querySelector(".wrapper"); // ← 추가
 
-  // 메시지 추가 함수
-  function addMessage(text, isUser = true) {
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("chat-message", isUser ? "user-message" : "bot-message");
-    messageDiv.innerText = text;
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 아래로 이동
+    // ✅ 업로드 버튼 누르면 이력서 업로드 영역 숨김
+    uploadBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // 폼 전송 방지
+      resumeContainer.classList.add("hidden");
+	  wrapper.classList.remove("hidden"); // ← 이 줄 추가!
+    });
 
-    // 대화 시작 시 하단으로 이동
-    if (!chatContainer.classList.contains("active")) {
-      chatContainer.classList.add("active");
+    // ✅ 대화 처리
+    function handleUserInput() {
+      const text = userInput.value.trim();
+      if (text === "") return;
+
+      // 대화 시작 시 welcomeMessage 숨김
+      if (welcomeMessage && !welcomeMessage.classList.contains("hidden")) {
+        welcomeMessage.classList.add("hidden");
+      }
+
+      const messageSet = document.createElement("div");
+      messageSet.classList.add("message-set");
+
+      const userMsg = document.createElement("div");
+      userMsg.classList.add("chat-message", "user-message");
+      userMsg.innerText = text;
+      messageSet.appendChild(userMsg);
+
+      chatBox.appendChild(messageSet);
+      userInput.value = "";
+
+      messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.classList.add("chat-message", "bot-message");
+        botMsg.innerText = "AI 응답 예시: 질문을 이해했습니다!";
+        messageSet.appendChild(botMsg);
+        messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 1000);
     }
-  }
 
-  // 사용자 입력 처리
-  function handleUserInput() {
-    const text = userInput.value.trim();
-    if (text === "") return;
+    userInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleUserInput();
+      }
+    });
 
-    addMessage(text, true); // 사용자 메시지 추가
-    userInput.value = ""; // 입력 필드 초기화
-
-    setTimeout(() => {
-      addMessage("AI 응답 예시: 질문을 이해했습니다!", false);
-    }, 1000);
-  }
-
-  // 엔터 키 입력 감지
-  userInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      handleUserInput();
-    }
-  });
-
-  // 추천 검색어 클릭 시 입력창에 자동 입력
-  suggestions.forEach((suggestion) => {
-    suggestion.addEventListener("click", function () {
-      userInput.value = this.innerText;
-      userInput.focus();
+    userInput.addEventListener("input", function () {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
     });
   });
-});
+
 
