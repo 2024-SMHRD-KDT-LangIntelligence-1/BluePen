@@ -40,9 +40,28 @@ public class FastAPIController {
 				.retrieve()
 				.bodyToMono(Map.class)
 				.block(); // 동기적으로 결과 가져오기
-
-		// 응답에서 "response" 키의 값을 가져오기
-		String chatGptResponse = (String) response.get("response");
+		
+		System.out.println(response);
+		
+		Object responseObject = response.get("response");
+		
+		String chatGptResponse = "";
+		if (responseObject instanceof String) {
+		    chatGptResponse = (String) responseObject;
+		    // chatGptResponse를 사용
+		} else if (responseObject instanceof Map) {
+		    // 만약 response.get("response")가 Map이라면, 그 내부에서 필요한 값 추출
+		    Map<String, Object> responseMap = (Map<String, Object>) responseObject;
+		    // 예시: responseMap에서 "text"라는 필드 추출
+		    chatGptResponse = (String) responseMap.get("content");
+		    // chatGptResponse를 사용
+		} else {
+		    // 예상치 못한 타입일 경우 처리
+		    throw new IllegalStateException("Unexpected response format: " + responseObject);
+		}
+		
+//		// 응답에서 "response" 키의 값을 가져오기
+//		String chatGptResponse = (String) response.get("response");
 		
 		// client의 질문과 llm의 답변을 model에 담아
 		model.addAttribute("question", text);

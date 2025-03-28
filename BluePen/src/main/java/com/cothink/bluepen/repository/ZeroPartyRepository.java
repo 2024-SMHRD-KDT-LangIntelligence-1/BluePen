@@ -10,5 +10,3 @@ import com.cothink.bluepen.entity.ZeroParty;
 public interface ZeroPartyRepository extends JpaRepository<ZeroParty, Long> {
  // 기본적인 save(), findAll() 등 자동 제공
 }
-
-
