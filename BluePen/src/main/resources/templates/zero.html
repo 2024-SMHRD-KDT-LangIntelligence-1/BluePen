@@ -30,16 +30,11 @@
     <!-- 승혁 zero db 연결중@@@@@@@@@@@@@@@ -->
       <form id="interest-form" action="save" method="post">
       <input type="hidden" name="job" id="hidden-job" />
-	  <input type="hidden" name="zero_aca" id="hidden-aca" />
-	  <input type="hidden" name="zero_career" id="hidden-career" />
-	  <input type="hidden" name="region" id="hidden-region" />
-	  
-	  <input type="text" name="salary_top" placeholder="희망 연봉 상한">
-	  <input type="text" name="salary_bottom" placeholder="희망 연봉 하한">
-  	  <textarea name="welfare" placeholder="복지 사항"></textarea>
-	  <textarea name="working_condition" placeholder="근무 조건"></textarea>
-	  <input type="hidden" name="license" id="license-hidden" />
-	  <input type="hidden" name="hoped_license" id="hoped-license-hidden" />
+     <input type="hidden" name="zero_aca" id="hidden-aca" />
+     <input type="hidden" name="zero_career" id="hidden-career" />
+     <input type="hidden" name="region" id="hidden-region" />
+     <input type="hidden" name="license" id="license-hidden" />
+     <input type="hidden" name="hoped_license" id="hoped-license-hidden" />
             <!-- 관심 직무 섹션 -->
           <section class="job-selection-section">
             <div class="section-title">관심 직무</div>
@@ -94,6 +89,98 @@
               </div>
             </div>
           </section>
+
+          <!-- 보유 자격증 섹션 -->
+        <section class="license-section">
+          <div class="section-title">보유 자격증</div>
+          <div class="license-container">
+            <div class="license-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="license-slider" id="license-slider">
+           <button type="button" class="license-btn" name="license">
+            정보처리기사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            사회복지사 1급
+           </button>
+           <button type="button" class="license-btn" name="license">
+            공인중개사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            주택관리사보
+           </button>
+           <button type="button" class="license-btn" name="license">
+            전기기사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            조주기능사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            웹디자인개발기능사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            손해평가사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            가스기술사
+           </button>
+              </div>
+              <!-- 첫 번째 슬라이드 이동 버튼 -->
+              <button type="button" class="license-slide-btn" id="next-slide-license-list">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+              
+            </div>
+          </div>
+        </section>
+        <!-- 관심 자격증 섹션 -->
+        <section class="hoped-licenses-section">
+          <div class="section-title">관심 자격증</div>
+          <div class="licenses-container">
+            <div class="licenses-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="licenses-slider" id="hoped_license-slider">
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            가스기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            건축기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            금속재료기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            도시계획기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            산림기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            식물보호기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            용접기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            유기농업기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            일반기계기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            임산가공기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            조경기사
+           </button>
+              </div>
+              <!-- 슬라이드 이동 버튼 -->
+              <button type="button" class="hoped_license-slide-btn" id="next-slide-hoped_license-list">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
             
           <!-- 학력 섹션 -->
           <section class="education-selection-section">
@@ -155,9 +242,19 @@
                     3 - 7년
                   </button>
                   <button type="button" class="career-btn" name="zero_career">
-                    7년 이상
+                    7 - 10년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    10 - 15년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    15년 이상
                   </button>
                 </div>
+                <!-- 슬라이드 이동 버튼 -->
+                <button type="button" class="career-slide-btn" id="next-slide-career-level">
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
               </div>
             </div>
           </section>
@@ -232,93 +329,6 @@
               </div>
             </div>
           </section>
-         </form>
-     </div>
-
-    <div class="container2">
-      <form id="">
-        <!-- 보유 자격증 섹션 -->
-        <section class="license-section">
-          <div class="section-title">보유 자격증</div>
-          <div class="license-container">
-            <div class="license-wrapper">
-              <!-- 첫 번째 슬라이더 -->
-              <div class="license-slider" id="license-slider1">
-			  <button
-			    type="button"
-			    class="license-btn"
-			    name="license"
-			    th:each="license : ${licenses}"
-			  >
-			  </button>
-              </div>
-              <!-- 첫 번째 슬라이드 이동 버튼 -->
-              <button type="button" class="slide-btn" id="next-slide-button1">
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-              <!-- 두 번째 슬라이더 -->
-              <div class="license-slider" id="license-slider2">
-			  <button
-			    type="button"
-			    class="license-btn"
-			    name="license"
-			    th:each="license : ${licenses}"
-			  >
-			  </button>
-              </div>
-              <!-- 두 번째 슬라이드 이동 버튼 -->
-              <button type="button" class="slide-btn" id="next-slide-button2">
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- 관심 자격증 섹션 -->
-        <section class="hoped-licenses-section">
-          <div class="section-title">관심 자격증</div>
-          <div class="licenses-container">
-            <div class="licenses-wrapper">
-              <!-- 첫 번째 슬라이더 -->
-              <div class="licenses-slider" id="hoped-licenses-slider1">
-			  <button
-			    type="button"
-			    class="license-btn hoped"
-			    name="hoped_license"
-			    th:each="license : ${licenses}"
-			  >
-			  </button>
-              </div>
-              <!-- 슬라이드 이동 버튼 -->
-              <button
-                type="button"
-                class="slide-btn"
-                id="next-slide-hoped-button1"
-              >
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-              <!-- 두 번째 슬라이더 -->
-              <div class="licenses-slider" id="hoped-licenses-slider2">
-			  <button
-			    type="button"
-			    class="license-btn hoped"
-			    name="hoped_license"
-			    th:each="license : ${licenses}"
-			  >
-			  </button>
-              </div>
-              <!-- 슬라이드 이동 버튼 -->
-              <button
-                type="button"
-                class="slide-btn"
-                id="next-slide-hoped-button2"
-              >
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-            </div>
-          </div>
-        </section>
-      </form>
-    </div>
 
     <script src="assets/js/zero.js"></script>
   </body>

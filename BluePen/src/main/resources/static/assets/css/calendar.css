@@ -162,8 +162,16 @@ body {
 
 /*------------------------------------------------------------------------------*/
 /* 일정 추가 모달 전체 */
+/* 일정 추가 모달 전체 */
+.modal {
+  display: none; /* ✅ 요기 넣기 */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
 .schedule-modal {
-  display:none;
   width: 400px;
   margin: 10% auto;
   background: #fff;
