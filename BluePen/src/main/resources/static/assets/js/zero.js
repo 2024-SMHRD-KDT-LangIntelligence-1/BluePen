@@ -1,4 +1,4 @@
-// 슬라이드 이동 하게 하는 코드
+         // 슬라이드 이동 하게 하는 코드
 document.addEventListener("DOMContentLoaded", function () {
   // 슬라이드 이동 함수
   function moveSlide(slider, direction) {
@@ -16,12 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // 각 슬라이드와 버튼에 대한 설정
   const sliders = [
     { sliderId: "job-slider", buttonId: "next-slide-job-list" },
+    { sliderId: "license-slider", buttonId: "next-slide-license-list" },
+    { sliderId: "hoped_license-slider", buttonId: "next-slide-hoped_license-list" },
     { sliderId: "education-slider", buttonId: "next-slide-education-level" },
+    { sliderId: "career-slider", buttonId: "next-slide-career-level" },
     { sliderId: "region-slider", buttonId: "next-slide-region" },
-    { sliderId: "license-slider1", buttonId: "next-slide-button1" },
-    { sliderId: "license-slider2", buttonId: "next-slide-button2" },
-    { sliderId: "hoped-licenses-slider1", buttonId: "next-slide-hoped-button1" },
-    { sliderId: "hoped-licenses-slider2", buttonId: "next-slide-hoped-button2" },
   ];
 
   // 슬라이드 버튼에 클릭 이벤트 리스너 추가
@@ -173,9 +172,9 @@ document.addEventListener("DOMContentLoaded", function () {
 // next 버튼 클릭 시 mainpage로 이동 승혁 수정 @@@@
 nextButton.addEventListener('click', function() {
   if (!this.disabled) {
-	document.getElementById('interest-form').submit(); // form 전송
-	  }
-	});
+   document.getElementById('interest-form').submit(); // form 전송
+     }
+   });
 
 
 // 버튼 클릭 시 hidden input에 값 넣기 승혁@@@@@
@@ -199,3 +198,40 @@ setupSelection("zero_aca", "education-btn", "hidden-aca");
 setupSelection("zero_career", "career-btn", "hidden-career");
 setupSelection("region", "region-btn", "hidden-region");
 
+document.addEventListener("DOMContentLoaded", function () {
+  // 보유 자격증 자동 선택
+  const licenseButtons = document.querySelectorAll(".license-btn:not(.hoped)");
+  const licenseHidden = document.getElementById("license-hidden");
+  if (licenseButtons.length > 0) {
+    const first = licenseButtons[0];
+    first.classList.add("license-active");
+    licenseHidden.value = first.innerText.trim();
+  }
+
+  // 관심 자격증 자동 선택
+  const hopedLicenseButtons = document.querySelectorAll(".license-btn.hoped");
+  const hopedLicenseHidden = document.getElementById("hoped-license-hidden");
+  if (hopedLicenseButtons.length > 0) {
+    const first = hopedLicenseButtons[0];
+    first.classList.add("hoped-license-active");
+    hopedLicenseHidden.value = first.innerText.trim();
+  }
+
+  // 보유 자격증 클릭 시
+  licenseButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      licenseButtons.forEach((b) => b.classList.remove("license-active"));
+      btn.classList.add("license-active");
+      licenseHidden.value = btn.innerText.trim();
+    });
+  });
+
+  // 관심 자격증 클릭 시
+  hopedLicenseButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      hopedLicenseButtons.forEach((b) => b.classList.remove("hoped-license-active"));
+      btn.classList.add("hoped-license-active");
+      hopedLicenseHidden.value = btn.innerText.trim();
+    });
+  });
+});
