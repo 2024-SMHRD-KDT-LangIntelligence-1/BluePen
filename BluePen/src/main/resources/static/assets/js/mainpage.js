@@ -88,9 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 엔터 키 입력 감지
-  userInput.addEventListener("submit", function (event) {
+//  userInput.addEventListener("submit", function (event) {
   // 💥 엔터 키 입력 감지
-//  userInput.addEventListener("keydown", function (event) {
+    userInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       handleUserInput();
     }
@@ -103,14 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
       const botMessage = document.getElementById("bot-response");
       const gptResponse = botMessage.getAttribute("data-answer"); // 서버에서 받은 답변
 
       if (gptResponse && gptResponse.trim() !== "") {
           addMessage(gptResponse, false); // GPT 응답을 대화창에 추가
       }
-  });
+  });*/
 
 //--------------------------------------------------------------------------------------
 const bookmarkBtn = document.getElementById("bookmark-btn");
