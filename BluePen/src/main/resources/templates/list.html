@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
     />
+   
     <link rel="stylesheet" href="assets/css/list.css" />
   </head>
   <body>
@@ -23,9 +24,39 @@
             </select>
         </div>
         
-        <div class="job-list"></div>
-        <!-- 페이지네이션 버튼이 출력될 위치 -->
+        <div class="job-list" id="schedule-list">
+  <div class="job-item" th:each="item : ${schedules}">
+    <div class="job-category" th:text="${item.scheType}">카테고리</div>
+    <div class="company-name">내 일정</div>
+    <div class="job-info">
+      <div class="job-details">
+        <div class="job-title" th:text="${item.scheTitle}">제목</div>
+        <div class="job-meta" th:text="'날짜: ' + ${item.scheDt} + ' 시간: ' + ${item.scheTm}">메타</div>
+        <div class="job-extra">캘린더에서 입력한 일정</div>
+      </div>
+      <div class="job-deadline" th:text="${item.scheDt}">마감일</div>
+    </div>
+    <button class="apply-btn delete-btn homepage" th:attr="onclick='confirmDelete(' + ${item.scheIdx} + ')'">
+  <i class="fa-solid fa-trash-can"></i> 
+</button>
+  </div>
+</div>
+<!-- 페이지네이션 버튼이 출력될 위치 -->
 <div class="pagination" style="text-align: center; margin-top: 20px;"></div>
+
+
+<!-- 삭제 확인 모달 -->
+<div id="deleteModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <p class="modal-text">정말 이 일정을 삭제하시겠습니까?</p>
+    <div class="modal-buttons">
+      <button class="modal-confirm" onclick="deleteConfirmed()">삭제</button>
+      <button class="modal-cancel" onclick="closeModal()">취소</button>
+    </div>
+  </div>
+</div>
+        </div>
+        
     </div>
     <script src="assets/js/list.js"></script>
   </body>
