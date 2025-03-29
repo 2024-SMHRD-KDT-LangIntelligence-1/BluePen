@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BLUEPEN MAINPAGE</title>
+<!-- Font Awesome CDN 추가 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/mainpage.css" />
+</head>
+<body>
+	<!-- 상단바, 사이드바 -->
+	<header class="topbar" th:replace="~{/topbar}"></header>
+	<div class="sidebar" th:replace="~{/sidebar}"></div>
+
+	<div class="cover">
+		<!--대화 프롬프트  -->
+		<div class="chat-interface">
+			<div th:if="${session.user} != null">
+				<h2 class="welcome-message"
+					th:text="${session.user.userId} + '님 환영합니다.'"></h2>
+			</div>
+			<div class="chat-box" id="chat-box">
+				<div th:if="${answer} != null">
+					<div class="chat-message bot-message" th:text="${answer}"
+						 id="bot-response" th:data-answer="${answer}"></div>
+				</div>
+			</div>
+			<div class="user-input-container">
+				<form action="fast.do" method="get">
+					<input type="text" id="user-input" name="text"
+						placeholder="무엇이든 물어보세요" />
+				</form>
+				<!-- <form action="fast.do" method="get">
+					<textarea id="user-input" name="text" placeholder="무엇이든 물어보세요"
+						rows="1"></textarea> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="assets/js/mainpage.js"></script>
+</body>
+</html>

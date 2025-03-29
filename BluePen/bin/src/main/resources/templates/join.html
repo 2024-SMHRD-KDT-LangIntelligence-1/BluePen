@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLUEPEN JOIN</title>
+	<link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/join.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo"><img src="./assets/img/logo.png"></div>
+      <form action="join.do" method="post">
+        <div class="id-pw-input">
+          <div class="id-input">
+          <input type="text" id="user_id" name="user_id" placeholder="아이디" />
+          <div class="error-message" style="color: red;"></div>
+          <button type="button" class="small-btn" onclick="checkDuplicate()">중복확인</button>
+          </div>
+        <input
+          type="password"
+          id="user_pw"
+          name="user_pw"
+          placeholder="비밀번호"
+        />
+        <div class="error-message" style="color: red;"></div>
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="비밀번호 확인"
+        />
+        <div class="error-message" style="color: red;"></div>
+        </div>
+        <div class="mypage-form-group">
+          <label for="user_gender">성별</label>
+
+          <div id="user_gender" class="gender-buttons">
+            <button type="button" class="gender-btn" name="user_gender" data-gender="m">
+              남성
+            </button>
+
+            <button type="button" class="gender-btn" name="user_gender" data-gender="f">
+              여성
+            </button>
+          </div>
+        </div>
+        <div class="mypage-form-group">
+          <label for="mypage-birthday">생년월일</label>
+          <input type="date" id="user_birthdate" name="user_birthdate"/>
+        </div>
+        <button class="join-btn" onclick="register()">회원가입</button>
+      </form>
+    </div>
+    <script src="assets/js/join.js"></script>
+  </body>
+</html>

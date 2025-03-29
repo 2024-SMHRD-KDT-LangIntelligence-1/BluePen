@@ -1,6 +1,6 @@
 package com.cothink.bluepen.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,68 +8,59 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tbl_recruit")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TblRecruit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "recruit_idx")
-	private Integer recruitIdx; // 채용 식별자
+	private Long recruitIdx;
 
-	@Column(name = "company")
-	private String company; // 기업명
+	@Column(nullable = false, length = 255)
+	private String company;
 
-	@Column(name = "recruit_title")
-	private String recruitTitle; // 공고명
+	@Column(name = "recruit_title", nullable = false, length = 255)
+	private String recruitTitle;
 
-	@Column(name = "academic")
-	private String academic; // 학력
+	@Column(nullable = false, columnDefinition = "TEXT")
+	private String career;
 
-	@Column(name = "duty")
-	private String duty; // 근무형태
+	@Column(nullable = false, columnDefinition = "TEXT")
+	private String academic;
 
-	@Column(name = "salary")
-	private Integer salary; // 급여
+	@Column(nullable = false, length = 255)
+	private String duty;
 
-	@Column(name = "position")
-	private String position; // 직급
+	@Column(nullable = false, length = 255)
+	private String salary;
 
-	@Column(name = "working_day")
-	private String workingDay; // 근무일시
+	@Column(nullable = false, length = 255)
+	private String position;
 
-	@Column(name = "working_area")
-	private String workingArea; // 근무지
+	@Column(name = "working_day", nullable = false, length = 255)
+	private String workingDay;
 
-	@Column(name = "closed_at")
-	private Timestamp closedAt; // 마감일자
+	@Column(name = "working_area", nullable = false, length = 255)
+	private String workingArea;
 
-	@Column(name = "recrut_pblnt_sn")
-	private Integer recrutPblntSn; // 채용 공고 식별 번호
+	@Column(name = "started_at", nullable = false)
+	private LocalDateTime startedAt;
 
-	@Column(name = "hireTypeLst")
-	private String hireTypeLst; // 채용 유형 목록
+	@Column(name = "closed_at", nullable = false)
+	private LocalDateTime closedAt;
 
-	@Column(name = "workRgnLst")
-	private String workRgnLst; // 근무 지역 목록
-
-	@Column(name = "pbanc_bgng_ymd")
-	private Timestamp pbancBgngYmd;// 채용 공고 시작일
-
-	@Column(name = "recrutPbancTtl")
-	private String recrutPbancTtl; // 채용 공고 제목
-
-	@Column(name = "srcUrl")
-	private String srcUrl; // 공고의 출처 URL
-
-	@Column(name = "ongoingYn")
-	private String ongoingYn; // 진행 중 여부
-
-	public static void fetchAndStoreRecruitData() {
-	}
+	@Column(name = "src_url", length = 255, nullable = true)
+	private String srcUrl;
 }

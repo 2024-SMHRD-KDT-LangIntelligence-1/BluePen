@@ -124,8 +124,7 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
 });
 
 
-// ---------------------- 충돌 (처리 필요)
-  /*document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const userInput = document.getElementById("user-input");
     const chatBox = document.getElementById("chat-box");
     const welcomeMessage = document.querySelector(".welcome-message");
@@ -183,5 +182,5 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
     });
-  });*/
+  });
 

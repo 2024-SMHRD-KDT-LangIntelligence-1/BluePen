@@ -90,7 +90,7 @@ input[type="date"]:focus {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  background-color: #19335a;
+  background-color: #3067B3;
   color: white;
   width: 85px;
   height: 36px;
@@ -123,12 +123,12 @@ label {
 }
 
 .gender-btn.selected {
-  background-color: #19335a; /* 선택 시 파란색 */
+  background-color: #3067B3; /* 선택 시 파란색 */
   color: white;
 }
 
 .gender-btn:hover {
-  background-color: #19335a;
+  background-color: #3067B3;
   color: white;
 }
 

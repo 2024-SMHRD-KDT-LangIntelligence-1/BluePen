@@ -1,0 +1,318 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 헤더 스타일 */
+.topbar {
+  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
+  z-index: 1003; /* chat-container보다 위로 오도록 z-index 값 설정 */
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+  position: relative; /* z-index가 제대로 작동하려면 position이 필요 */
+  z-index: 1000; /* chat-container보다 위로 오도록 z-index 값 설정 */
+}
+
+/*----------------------------------------------------------------------------------------------------*/
+/* 캘린더와 일정 리스트를 감싸는 부모 */
+.calendar-wrapper {
+  width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 -1px 3px rgba(0, 0, 0, 0.1),
+    1px 0 3px rgba(0, 0, 0, 0.1), -1px 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* calendar는 기본 스타일 유지 */
+#calendar {
+  width: 100%;
+  height: auto;
+}
+
+/* 일정 리스트는 아래로 내려가서 margin만 주기 */
+#eventList {
+  margin-top: 30px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  list-style-type: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+#eventList li {
+  padding: 6px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 헤더 스타일 (이전/다음 버튼, 월 제목) */
+.fc .fc-toolbar {
+  color: #19335a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* 헤더 안의 버튼 (prev, next, today) */
+.fc .fc-button {
+  background: #19335a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+
+.fc .fc-button:hover {
+  background: #0056b3;
+  color: white;
+}
+
+/* 날짜 셀 내부 일정이 확장될 수 있도록 셀 높이 자동 + 오버플로우 허용 */
+.fc-daygrid-day-frame {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* 캘린더 셀 내부 일정 리스트 커스터마이징용 */
+.custom-event-list {
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* 더보기 버튼 (기본 스타일) */
+.custom-more {
+  color: #888;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 더보기 눌렀을 때 이벤트 표시 공간 확보 */
+.fc-daygrid-event-harness {
+  display: block;
+}
+
+/* 캘린더 셀 스타일 */
+.fc .fc-daygrid-day {
+  background: white;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+/* 셀 호버 효과 */
+.fc .fc-daygrid-day:hover {
+  background: #eaf2ff;
+}
+
+/* 오늘 날짜 강조 스타일 */
+.fc .fc-day-today {
+  background: #fffae6 !important;
+  border: 2px solid #ffcc00 !important;
+}
+
+/* 이벤트(일정) 기본 스타일 */
+.fc-event {
+  color: black;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+/* 이벤트(일정) 호버 효과 */
+.fc .fc-event:hover {
+  background: #205181;
+  color: white;
+  border: none;
+}
+
+/* 요일 헤더 (월, 화, 수...) */
+.fc .fc-col-header-cell {
+  background: #19335a !important;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* 주말 색상 다르게 표시 */
+.fc-day-sat {
+  background: #e3f2fd !important;
+}
+
+.fc-day-sun {
+  background: #ffebee !important;
+}
+
+/*------------------------------------------------------------------------------*/
+/* 일정 추가 모달 전체 */
+.modal {
+  display: none; /* ✅ 요기 넣기 */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+.schedule-modal {
+  width: 400px;
+  margin: 10% auto;
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 15px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 모달 제목 */
+.modal-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #111;
+  font-weight: bold;
+}
+
+/* 공통 인풋박스 */
+.input-box {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* 드롭다운도 인풋박스처럼 */
+.input-box select {
+  appearance: none;
+}
+
+/* 추가 버튼 */
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background-color: #155ab6;
+}
+
+/* 닫기 아이콘 */
+.schedule-modal .close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #999;
+}
+
+.schedule-modal .close:hover {
+  color: #000;
+}
+/*----------------------------------------------------------------------------------*/
+/* 삭제 모달 스타일 (공통 모달 스타일은 유지) */
+.confirm-modal {
+  display: none;
+  width: 300px;
+  margin: 10% auto;
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 15px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #111;
+  font-weight: bold;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c62828;
+}
+
+.btn-cancel {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background-color: #d5d5d5;
+}
+
+.confirm-modal .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #888;
+}
+
+.confirm-modal .close:hover {
+  color: #000;
+}
+
+/*----------------------------------------------------------------------------------*/
+@media (max-width: 768px) {
+  #calendar {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+
+  .fc .fc-col-header-cell {
+    font-size: 14px;
+  }
+}

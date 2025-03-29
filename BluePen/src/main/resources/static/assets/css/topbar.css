@@ -26,7 +26,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px 0px 35px; /* 위 오른쪽 아래 왼쪽*/
+  padding: 0px 20px 0px 30px; /* 위 오른쪽 아래 왼쪽*/
   margin: 0px 5px 10px 5px; /* 위 오른쪽 아래 왼쪽*/
   position: fixed;
   width: 100%;
@@ -44,11 +44,11 @@ html {
   display: flex;              /* 자식 요소 정렬하려면 flex가 최고다 */
   align-items: center;        /* 세로 정렬을 중앙으로 맞춘다 */
   height: 100%;              /* 필요 시 상단 바 높이에 맞게 조정 */
-  padding-left: -20px;         /* 좌측 여백도 약간 주는 센스 */
+  padding-left: 0px;         /* 좌측 여백도 약간 주는 센스 */
 }
 
 .top-logo img {
-  width: 170px; 
+  width: 17%; 
   margin: 30px 0px 0px 0px; /* 위 오른쪽 아래 왼쪽*/
 }
 
@@ -106,20 +106,15 @@ html {
   position: absolute;
   top: 73px;
   right: 30px;
-  width: 404px;
-  background-color: #F3F8FF;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
-              0 -1px 3px rgba(0, 0, 0, 0.1),
-              1px 0 3px rgba(0, 0, 0, 0.1),
-              -1px 0 3px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  border: none;
+  background-color: #F3F8FF; /* 배경색 */
+  border-radius: 10px; /* 모서리 둥글게 */
   z-index: 1005;
   padding: 20px;
-}
-
-/* 내부 popup 박스 제거 (더 이상 안 씀) */
-.popup {
-  all: unset;
+    /* ✅ 오른쪽 아래 그림자만! */
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+  
 }
 
 /* 닫기 버튼 제거 */
@@ -151,13 +146,12 @@ html {
 /* 개별 북마크 항목 */
 .bookmark-item {
   display: flex;
-  width: 360px;
+  width: 260px;
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
   background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* 북마크 텍스트 정보 묶음 */
@@ -202,7 +196,7 @@ html {
   color: #888;
   font-size: 14px;
   text-align: center;
-  width: 360px;
+  width: 300px;
 }
 
 /*------------------------------------------------------------------------------*/

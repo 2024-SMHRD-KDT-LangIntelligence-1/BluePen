@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome CDN 추가 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <title>Topbar</title>
+    <link rel="stylesheet" href="assets/css/topbar.css" />
+  </head>
+  <body>
+    <header class="top-header" id="top-bar">
+      <div class="top-logo">
+         <a href="/mainpage"><img src="./assets/img/logo.png">
+         </a>
+      </div>
+      <!-- 새채팅 버튼 -->
+      <nav class="top-navigation">
+        <a href="/mainpage" class="top-nav-link">
+          <i
+            class="fa-regular fa-comment-dots"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">새채팅</span>
+        </a>
+
+		<!-- 알람 토글 버튼 -->
+		<button
+		  class="alram-icon"
+		  onclick="toggleAlram()"
+		  style="background: none; border: none; cursor: pointer"
+		>
+		  <i class="fa-solid fa-bell" style="color: #19335a;"></i>
+		  <span class="top-icon-text">알람</span>
+		</button>
+		
+		<!-- 알람 목록 (초기 상태에서 숨김) -->
+		<div class="alram-container" id="alramContainer">
+		  <div class="alram-popup" id="alramPopup">
+		    <!-- 알림 항목은 자바스크립트로 동적으로 생성됨 -->
+		  </div>
+		</div>
+
+        <!-- 이력서 첨삭 버튼 -->
+        <a href="/editing" class="top-nav-link">
+          <i
+            class="fa-regular fa-file-pdf top-nav-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">이력서첨삭</span>
+        </a>
+
+        <!-- 캘린더 버튼 -->
+        <a href="/calendar" class="top-nav-link">
+          <i
+            class="fa-solid fa-calendar-minus nav-icon calendar-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">캘린더</span>
+        </a>
+
+        <!-- 리스트 버튼튼 -->
+        <a href="/schedule-list" class="top-nav-link">
+          <i
+            class="fa-solid fa-list-ul nav-icon list-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">리스트</span>
+        </a>
+
+        <!-- 북마크 버튼 -->
+		<button
+		  class="bookmark-icon"
+		  onclick="toggleBookmark(event)"
+		  style="background: none; border: none; cursor: pointer"
+		>
+          <i
+            class="fa-solid fa-book-bookmark nav-icon favorites-icon"
+            style="color: #19335a;"
+          ></i>
+          <span class="top-icon-text">북마크</span>
+        </button>
+      </nav>
+
+      <!-- 북마크 팝업창 -->
+		<div class="bookmarkpopup" id="bookmarkpopup">
+		  <div class="scrollable-body">
+		    <div class="bookmark-popup-body" id="bookmarkList">
+		      <!-- JS에서 bookmark-item이 여기에 렌더링됨 -->
+		    </div>
+		  </div>
+		</div>
+    </header>
+    <script src="assets/js/topbar.js"></script>
+  </body>
+</html>

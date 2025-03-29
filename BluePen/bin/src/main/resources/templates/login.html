@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BLUEPEN LOGIN</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+	<div class="login-container">
+		<h2><img src="./assets/img/logo.png"></h2>
+		<form action="login.do" method="post" id="login-form">
+			<div id="error-message" th:if="${error}" th:text="${error}"
+				style="color: red;"></div>
+			<div class="input-group">
+				<label for="username">아이디</label>
+				<div class="input-group">
+					<input type="text" id="username" name="user_id"
+						placeholder="아이디를 입력하세요" required>
+				</div>
+				<label for="password">비밀번호</label> <input type="password"
+					id="password" name="user_pw" placeholder="비밀번호를 입력하세요" required>
+			</div>
+			<button type="submit" class="login-btn">로그인</button>
+			<button class="join-btn" onclick="location.href='/join'">회원가입</button>			
+			
+			<div class="footer">
+				<a href="/join">아이디/비밀번호 찾기</a>
+			</div>
+			<!-- 카카오톡 로그인 -->
+			<a
+				href="https://kauth.kakao.com/oauth/authorize?client_id=a4633bd7354256cd2c888420cc9d1b9c&redirect_uri=http://localhost:8085/login/kakao&response_type=code"
+				class="kakao_login"> <img src="./assets/img/kakao_login.png">
+			</a>
+		</form>
+	</div>
+	<script src="assets/js/login.js"></script>
+</body>
+</html>

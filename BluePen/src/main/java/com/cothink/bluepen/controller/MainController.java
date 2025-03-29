@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String index() {
 
 		return "index";
@@ -90,7 +90,7 @@ public class MainController {
 		return "prompt";
 	}
 
-	@GetMapping("/startpage")
+	@GetMapping("/")
 	public String startpage() {
 
 		return "startpage";

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLUEPEN</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome 아이콘 라이브러리 (CDN 방식) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/zero.css" />
+  </head>
+  <body>
+    <header>
+    <div th:if="${session.userid}!=null" >
+      <h1 th:text="${session.userid}+ '님 관심사를 선택해주세요.'"></h1>
+      </div>
+      <h3>
+        회원님의 맞춤 자격증과 취업 공고를 찾아드리고, 맞춤 일정 관리도
+        제공해드리기 위해 관심사를 선택해주세요.
+      </h3>
+      <button type="submit" form="interest-form" class="next-btn">다음</button>
+    </header>
+    <div class="container1">
+    <!-- 승혁 zero db 연결중@@@@@@@@@@@@@@@ -->
+      <form id="interest-form" action="save" method="post">
+      <input type="hidden" name="job" id="hidden-job" />
+     <input type="hidden" name="zero_aca" id="hidden-aca" />
+     <input type="hidden" name="zero_career" id="hidden-career" />
+     <input type="hidden" name="region" id="hidden-region" />
+     <input type="hidden" name="license" id="license-hidden" />
+     <input type="hidden" name="hoped_license" id="hoped-license-hidden" />
+            <!-- 관심 직무 섹션 -->
+          <section class="job-selection-section">
+            <div class="section-title">관심 직무</div>
+            <div class="job-selection-container">
+              <div class="job-options-wrapper">
+                <div class="job-options" id="job-list">
+                  <div class="job-slider" id="job-slider">
+                    <button type="button" class="job-btn" name="job">
+                      기획·전략
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      마케팅·홍보·조사
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      회계·사무
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      IT·개발·데이터
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      디자인
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      영업·판매·무역
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      고객상담·TM
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      구매·자재·물류
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      상품기획·MD
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      운전·운송·배송
+                    </button>
+                    <button type="button" class="job-btn" name="job">
+                      서비스
+                    </button>
+                    <button type="button" class="job-btn" name="job">생산</button>
+                    <button type="button" class="job-btn" name="job">
+                      건설·건축
+                    </button>
+                    <button type="button" class="job-btn" name="job">의료</button>
+                  </div>
+                  <!-- 슬라이드 이동 버튼 -->
+                  <button type="button" class="job-slide-btn" id="next-slide-job-list">
+                    <i class="fa-solid fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 보유 자격증 섹션 -->
+        <section class="license-section">
+          <div class="section-title">보유 자격증</div>
+          <div class="license-container">
+            <div class="license-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="license-slider" id="license-slider">
+           <button type="button" class="license-btn" name="license">
+            정보처리기사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            사회복지사 1급
+           </button>
+           <button type="button" class="license-btn" name="license">
+            공인중개사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            주택관리사보
+           </button>
+           <button type="button" class="license-btn" name="license">
+            전기기사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            조주기능사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            웹디자인개발기능사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            손해평가사
+           </button>
+           <button type="button" class="license-btn" name="license">
+            가스기술사
+           </button>
+              </div>
+              <!-- 첫 번째 슬라이드 이동 버튼 -->
+              <button type="button" class="license-slide-btn" id="next-slide-license-list">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+              
+            </div>
+          </div>
+        </section>
+        <!-- 관심 자격증 섹션 -->
+        <section class="hoped-licenses-section">
+          <div class="section-title">관심 자격증</div>
+          <div class="licenses-container">
+            <div class="licenses-wrapper">
+              <!-- 첫 번째 슬라이더 -->
+              <div class="licenses-slider" id="hoped_license-slider">
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            가스기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            건축기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            금속재료기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            도시계획기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            산림기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            식물보호기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            용접기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            유기농업기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            일반기계기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            임산가공기사
+           </button>
+           <button type="button" class="license-btn hoped" name="hoped_license">
+            조경기사
+           </button>
+              </div>
+              <!-- 슬라이드 이동 버튼 -->
+              <button type="button" class="hoped_license-slide-btn" id="next-slide-hoped_license-list">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+            
+          <!-- 학력 섹션 -->
+          <section class="education-selection-section">
+            <div class="section-title">학력</div>
+            <div class="education--container">
+            <div class="education-options-wrapper">
+              <div class="education-options" id="education-level">
+                <div class="education-slider" id="education-slider">
+                  <button type="button" class="education-btn" name="zero_aca">
+                    고등학교 졸업 이하
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    고등학교 졸업
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학교 재학
+                  </button>
+                  <button type="button" class="education-btn" id="just1" name="zero_aca">
+                    대학교 졸업<br />(2,3년제)
+                  </button>
+                  <button type="button" class="education-btn" id="just2" name="zero_aca">
+                    대학교 졸업<br />(4년제)
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학원 석사 졸업
+                  </button>
+                  <button type="button" class="education-btn" name="zero_aca">
+                    대학원 박사 졸업
+                  </button>
+                  <button type="button" class="education-btn" id="just3" name="zero_aca">
+                    대학원 박사<br /> 졸업 이상
+                  </button>
+                </div>
+                <!-- 슬라이드 이동 버튼 -->
+                <button type="button" class="education-slide-btn" id="next-slide-education-level">
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+            </div>
+          </section>
+    
+          <!-- 경력 섹션 -->
+          <section class="career-selection-section">
+            <div class="section-title" >경력</div>
+              <div class="career-selection-container">
+              <div class="career-options-wrapper" id="career-experience">
+                <div class="career-slider" id="career-slider">
+                  <button type="button" class="career-btn" name="zero_career">
+                    신입
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    1년 이하
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    1 - 3년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    3 - 7년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    7 - 10년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    10 - 15년
+                  </button>
+                  <button type="button" class="career-btn" name="zero_career">
+                    15년 이상
+                  </button>
+                </div>
+                <!-- 슬라이드 이동 버튼 -->
+                <button type="button" class="career-slide-btn" id="next-slide-career-level">
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+    
+          <!-- 관심 지역 섹션 -->
+          <section class="region-selection-section">
+            <div class="section-title">관심 지역</div>
+            <div class="region-selection-container">
+              <div class="region-options-wrapper">
+                <div class="region-options" id="region-list">
+                  <div class="region-slider" id="region-slider">
+                    <button type="button" class="region-btn" name="region">
+                      서울
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경기
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      부산
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      대구
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      인천
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      대전
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      광주
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      울산
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      강원
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      제주
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      충북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      충남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      경남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      전북
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      전남
+                    </button>
+                    <button type="button" class="region-btn" name="region">
+                      세종
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="region-slide-btn"
+                    id="next-slide-region"
+                  >
+                    <i class="fa-solid fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+    <script src="assets/js/zero.js"></script>
+  </body>
+</html>

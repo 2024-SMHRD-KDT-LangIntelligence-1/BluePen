@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLUEPEN MYPAGE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/mypage.css">
+</head>
+<body class="mypage">
+
+    <!-- 상단바, 사이드바 -->
+    <header class="topbar" th:replace="~{/topbar}"></header>
+    <div class="mypage-cover">
+    <main class="mypage-container">
+        <h2 class="mypage-title">MYPAGE</h2>
+         <!-- form 태그 추가 -->
+        <form id="mypage-form">
+        <div class="mypage-form-group">
+            <label for="mypage-username">아이디 확인</label>
+            <input type ="text" disabled th:placeholder ="${user_id}"/>
+            <!-- <input type="text" id="user_id" th:text="${session.user.user_id}" /> -->
+
+        </div>
+        
+        <div class="mypage-form-group">
+            <label for="mypage-password">비밀번호 변경</label>
+            <input type="password" id="mypage-password" placeholder="새 비밀번호 입력">
+            <div id="error-message" style="color: red;"></div>
+        </div>
+        
+        <div class="mypage-form-group">
+            <label for="mypage-confirm-password">비밀번호 확인</label>
+            <input type="password" id="mypage-confirm-password" placeholder="비밀번호 확인">
+            <div id="confirm-error-message" style="color: red;"></div>
+        </div>
+        
+        <div class="mypage-form-group">
+          <label for="user_gender">성별</label>
+          <div id="user_gender" class="gender-buttons">
+            <button type="button" class="gender-btn" data-gender="m">
+              남성
+            </button>
+            <button type="button" class="gender-btn" data-gender="f">
+              여성
+            </button>
+          </div>
+        </div>
+        
+        <div class="mypage-form-group">
+          <label for="mypage-birthday">생년월일</label>
+          <input type="date" id="user_birthdate" name="user_birthdate" style="font-family:'Pretendard', sans-serif"/>
+        </div>
+        
+        <div class="mypage-form-group">
+            <label>제로 파티 데이터</label>
+            <div class="mypage-zero-btn">
+                <a href="/zero">
+                    <button type="button" id="mypage-reset-btn">다시 고르기</button>
+                </a>
+            </div>
+        </div>
+        
+        <div class="mypage-submit">
+            <button type="submit" id="mypage-submit-btn">수정완료</button>
+        </div>
+        </form>
+        
+        <!-- 저장확인 팝업 -->
+		<div id="mypage-modal" class="modal">
+		    <div class="mypage-modal-content">
+		        <p>저장하시겠습니까?</p>
+		        <div class="mypage-modal-buttons">
+		            <button id="modal-yes-btn">예</button>
+					<button id="modal-no-btn">아니오</button>
+		        </div>
+		    </div>
+		</div>
+    </main>
+    </div>
+    <script src="assets/js/mypage.js"></script>
+</body>
+</html>
+

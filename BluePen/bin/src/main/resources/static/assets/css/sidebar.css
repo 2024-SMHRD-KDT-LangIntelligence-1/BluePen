@@ -1,0 +1,244 @@
+/* 기본 설정 */
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #f4f7fa;
+}
+
+.side-container {
+  position: relative;
+}
+
+/* 🔷 사이드바 기본 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar.opened {
+  transform: translateX(0);
+}
+
+/* 🔘 토글 버튼 - 항상 중앙 고정 */
+.side-toggle-btn {
+  position: fixed;
+  top: 50%;
+  left: 260px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: transparent; /* ✅ 배경 투명으로 */
+  color: #3B74CB;
+  border: none;
+  border-radius: 50%; /* 이건 둥글게 남겨도 됨, 아님 지워도 됨 */
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.side-toggle-btn:hover {
+  color: #1f4c8f; /* ✅ hover 시 색만 바뀌게 */
+}
+
+/* 🧱 리스트 박스 */
+.sidebar-list {
+  padding: 0 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 중앙 정렬 */
+  gap: 10px;
+  font-size: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 리스트 내부 구조 */
+.sidebar-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-list li {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-list li:hover {
+  background-color: #f0f4f9;
+}
+
+/* 📌 리스트 제목 */
+.title-li .title {
+  font-weight: bold;
+  font-size: 15px;
+  color: #3B74CB;
+  pointer-events: none;
+}
+
+/* 🔥 예외 처리 추가!!! */
+.sidebar-list li.title-li:hover {
+  background-color: transparent; /* ✅ 아무 변화도 없게 설정 */
+  cursor: default; /* 포인터도 없애버림 */
+}
+
+/* ✅ 체크박스 스타일 */
+.side-task-checkbox {
+  margin-right: 6px;
+}
+
+/* 🔧 전체선택 체크박스 */
+#side-select-all-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  margin: 10px 0;
+}
+
+#side-select-all-container li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  list-style: none;
+}
+
+#side-select-all-container strong {
+  font-weight: bold;
+  color: #3B74CB;
+}
+
+#side-select-all-container input[type="checkbox"] {
+  transform: scale(1.1);
+}
+
+/* 📥 하단 푸터 */
+.sidebar-footer {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* MYPAGE / LOGOUT */
+.sidebar-footer .left-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-footer a {
+  text-decoration: none;
+  color: #19345B;
+  font-weight: bold;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+/* 🗑️ 휴지통 */
+.side-trash {
+  position: relative;
+}
+
+.side-icon-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #19345B;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.side-icon-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ⚠️ 삭제 모달 */
+.common-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.common-modal-content {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 20px;
+}
+
+.common-modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 88px;
+  height: 42px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#modal-yes-btn {
+  background-color: #3B74CB;
+  color: white;
+}
+#modal-yes-btn:hover {
+  background-color: #2a5e99;
+  transform: scale(1.05);
+}
+
+#modal-no-btn {
+  background-color: #e0e0e0;
+  margin-left: 20px;
+}
+#modal-no-btn:hover {
+  background-color: #c0c0c0;
+  transform: scale(1.05);
+}

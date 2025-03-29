@@ -14,7 +14,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 260px;
+  width: 220px;
   height: 100vh;
   background-color: #ffffff;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -38,12 +38,12 @@ body {
 .side-toggle-btn {
   position: fixed;
   top: 50%;
-  left: 260px;
+  left: 220px;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   background-color: transparent; /* ✅ 배경 투명으로 */
-  color: #3B74CB;
+  color: #3b74cb;
   border: none;
   border-radius: 50%; /* 이건 둥글게 남겨도 됨, 아님 지워도 됨 */
   font-size: 24px;
@@ -61,11 +61,11 @@ body {
 
 /* 🧱 리스트 박스 */
 .sidebar-list {
-  padding: 0 20px;
+  padding: 100px 20px 0 20px; /* ✅ 위로 10px 정도 padding 추가 */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: flex-start; /* ✅ 상단부터 정렬 */
   gap: 10px;
   font-size: 14px;
   overflow-y: auto;
@@ -87,7 +87,7 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
 }
 
 .sidebar-list li:hover {
@@ -98,7 +98,7 @@ body {
 .title-li .title {
   font-weight: bold;
   font-size: 15px;
-  color: #3B74CB;
+  color: #3b74cb;
   pointer-events: none;
 }
 
@@ -115,27 +115,30 @@ body {
 
 /* 🔧 전체선택 체크박스 */
 #side-select-all-container {
-  display: flex;
+  display: flex; /* ✅ 유지! 공간은 항상 차지해야 하니까! */
   justify-content: flex-end;
-  padding: 0 20px;
-  margin: 10px 0;
+  padding: 0;
+  margin: 0;
+  visibility: hidden; /* ✅ 기본 상태는 숨김 (공간은 유지) */
+  opacity: 0; /* ✅ 부드러운 시각적 숨김 */
+  pointer-events: none; /* ✅ 클릭 불가 처리 */
+  height: 28px; /* ✅ 고정 높이 (리스트 밀림 방지용) */
+  transition: opacity 0.3s ease;
 }
 
-#side-select-all-container li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  list-style: none;
-}
-
-#side-select-all-container strong {
-  font-weight: bold;
-  color: #3B74CB;
+/* 🔥 보이게 만들기 */
+#side-select-all-container.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #side-select-all-container input[type="checkbox"] {
   transform: scale(1.1);
+}
+
+#side-select-all-container li:hover {
+  background-color: transparent;
 }
 
 /* 📥 하단 푸터 */
@@ -155,7 +158,7 @@ body {
 
 .sidebar-footer a {
   text-decoration: none;
-  color: #19345B;
+  color: #19345b;
   font-weight: bold;
   font-size: 13px;
   transition: color 0.2s ease;
@@ -170,7 +173,7 @@ body {
   background: none;
   border: none;
   font-size: 20px;
-  color: #19345B;
+  color: #19345b;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -179,6 +182,29 @@ body {
   transform: scale(1.1);
 }
 
+.bookmark-btn {
+  display: none; /* 기본 상태: 안 보이게! */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  margin-left: auto; /* ✅ 북마크만 오른쪽으로 밀어냄 */
+}
+
+/* 체크박스가 있는 li 안에 북마크는 안 보이게! */
+li:has(.side-task-checkbox) .bookmark-icon {
+  display: none;
+}
+
+li:hover .bookmark-btn {
+  display: inline-block; /* 리스트 항목 hover 시 등장! */
+}
+
+.bookmark-btn:hover {
+  color: #3b74cb;
+}
+
+/*-------------------------------------------------------------------------------------*/
 /* ⚠️ 삭제 모달 */
 .common-modal {
   display: none;
@@ -226,7 +252,7 @@ body {
 }
 
 #modal-yes-btn {
-  background-color: #3B74CB;
+  background-color: #3b74cb;
   color: white;
 }
 #modal-yes-btn:hover {
@@ -241,4 +267,55 @@ body {
 #modal-no-btn:hover {
   background-color: #c0c0c0;
   transform: scale(1.05);
+}
+/*------------------------------------------------------------------------*/
+/* 북마크 저장 팝업 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#bookmark-yes-btn {
+  background-color: #3b74cb;
+  color: white;
+}
+
+#bookmark-no-btn {
+  background-color: #ddd;
+}
+
+.hidden {
+  display: none;
 }

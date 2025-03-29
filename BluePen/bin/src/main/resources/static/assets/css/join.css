@@ -1,0 +1,208 @@
+/* 기본적인 스타일 (모든 페이지 그대로 적용 필수)*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  position: fixed; /* 화면 중앙 고정 */
+  width: 380px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정중앙 정렬 */
+  margin-bottom: 0; /* 불필요한 마진 제거 */
+  padding: 10px 30px;
+  background: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 
+              0 -1px 3px rgba(0, 0, 0, 0.1), 
+              1px 0 3px rgba(0, 0, 0, 0.1), 
+              -1px 0 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo img {
+  height: 80px;            
+  object-fit: contain;
+  margin-top: 20px;    
+  margin-bottom: 20px;       /* 로고 아래 여백 추가 */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-top: 12px;
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+  border: 1px solid #3364af;
+  outline: none;
+}
+
+.error-message {
+  font-size: 12px;
+  color: red;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  
+}
+
+.id-pw-input {
+  width: 100%;
+}
+
+.id-input {
+  position: relative; /* 부모 요소 기준 */
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.id-input input {
+  padding-right: 110px; /* 버튼이 겹치지 않도록 여유 공간 확보 */
+}
+
+.small-btn {
+  position: absolute;
+  right: 12px; /* 입력 필드의 오른쪽 끝에 배치 */
+  top: 62%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #19335a;
+  color: white;
+  width: 85px;
+  height: 36px;
+}
+
+label {
+  display: block;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.gender-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.gender-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.gender-btn.selected {
+  background-color: #19335a; /* 선택 시 파란색 */
+  color: white;
+}
+
+.gender-btn:hover {
+  background-color: #19335a;
+  color: white;
+}
+
+.join-btn {
+  width: 60%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #19335a;
+  color: white;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+/*------------------------------------------------------------------------------*/
+/* 반응형 디자인 추가 */
+
+/* 768px 이하에서 */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%; /* 화면 크기에 맞춰 너비 조정 */
+    padding: 20px; /* 여백 조정 */
+  }
+
+  .logo {
+    font-size: 25px; /* 로고 크기 줄이기 */
+    margin-bottom: 40px; /* 로고 아래 여백 줄이기 */
+  }
+
+  /* 입력 필드 폰트 크기 조정 */
+  input[type="text"],
+  input[type="password"],
+  input[type="date"] {
+    font-size: 14px; /* 작은 화면에서 글자 크기 줄이기 */
+  }
+
+  .small-btn {
+    font-size: 12px; /* 버튼 글자 크기 줄이기 */
+    width: 70px; /* 버튼 크기 줄이기 */
+    height: 30px;
+  }
+
+  .join-btn {
+    width: 80%; /* 버튼 너비 줄이기 */
+  }
+}
+
+/* 480px 이하에서 */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 95%; /* 더 작은 화면에서 너비 최대화 */
+    padding: 15px; /* 여백 줄이기 */
+  }
+
+  .logo {
+    font-size: 20px; /* 로고 크기 더 줄이기 */
+    margin-bottom: 30px; /* 로고 아래 여백 더 줄이기 */
+  }
+
+  /* 입력 필드 폰트 크기 더 줄이기 */
+  input[type="text"],
+  input[type="password"],
+  input[type="date"] {
+    font-size: 12px; /* 글자 크기 최대로 줄이기 */
+  }
+
+  .small-btn {
+    font-size: 10px; /* 버튼 글자 크기 더 줄이기 */
+    width: 60px; /* 버튼 크기 더 줄이기 */
+    height: 28px;
+  }
+
+  .join-btn {
+    width: 90%; /* 버튼 너비 거의 꽉 차게 */
+  }
+}

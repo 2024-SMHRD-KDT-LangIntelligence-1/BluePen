@@ -1,0 +1,264 @@
+/* ✅ 기본 초기화 */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* ✅ 상단바와 사이드바 */
+.topbar,
+.sidebar {
+  display: block;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* ✅ 전체 레이아웃 감싸는 cover */
+.cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding-top: 120px; /* ✅ 상단바 높이만큼 공간 확보 */
+}
+
+.resume-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* 각 요소 간 간격 */
+}
+
+.resume-container {
+  width: 1200px;
+  height: 100vh; /* 또는 원하는 고정 높이 */
+  position: relative;
+  display: flex;
+  justify-content: center;  /* 가로 중앙 */
+  align-items: center;      /* 세로 중앙 */
+  z-index: 10;
+}
+
+/* ✅ 업로드 완료 시 사라짐 */
+.resume-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 파일 업로드 레이블 */
+.file-upload label {
+    font-size: 18px;
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* 파일 이름 표시 */
+#file-name {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 30px;
+    display: block;
+    text-align: center; /* ✅ 요거 하나면 정중앙 박제!!!!!! */
+}
+
+/* 드래그 앤 드롭 영역 */
+.drag-drop-zone {
+    border: 2px dashed #B2D8FF;
+    background-color: #ecf4ff;
+    color: #3066B3;
+    padding: 20px 40px 20px 40px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 100%;
+    height: 60%;
+    max-width: 100%; /* 최대 너비 */
+    box-sizing: border-box;
+}
+
+.drag-drop-zone:hover {
+    background-color: #c6e3ff;
+    border-color: #0056b3;
+}
+
+.drag-drop-zone p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 업로드 버튼 */
+.up-btn {
+    background-color: #19335a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px 10px 25px; /* 위, 오른쪽, 아래, 왼쪽 여백 */
+    font-size: 15px;
+    cursor: pointer;
+    width: 80%;
+    height: 8%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    bottom: 17%;
+}
+
+.up-btn:disabled {
+    background-color: #c6e3ff;
+    color: #3066B3;
+    cursor: not-allowed;
+}
+
+.wrapper {
+  width: 1200px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+}
+
+.wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+}
+/* ✅ 채팅 인터페이스 내부 구조 */
+.chat-interface {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 760px;
+  width: 100%;
+  z-index: 100;
+}
+
+/* ✅ 채팅창 */
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-y: auto;
+  width: 100%;
+  max-height: 640px;
+  padding: 10px;
+  gap: 10px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.chat-box::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari */
+}
+
+/* ✅ 입력창 - 항상 화면 하단에서 10px 위 고정 */
+.user-input-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ✅ 입력창 내부 스타일 */
+#user-input {
+  font-family: "Noto Sans KR", sans-serif;
+  width: 760px;
+  min-height: 120px;
+  max-height: 200px;
+  padding: 20px 48px 20px 24px;
+  font-size: 18px;
+  line-height: 1.6;
+  border-radius: 36px;
+  border: 1px solid #d0d7e2;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  resize: none;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+#user-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(129, 177, 235, 0.4);
+}
+
+/* ✅ 환영 메시지 - 입력창 바로 위 */
+.welcome-message {
+  text-align: center;
+  font-size: 24px;
+  color: #3066b3;
+  margin-bottom: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.welcome-message.hidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 기존 챗박스 말풍선 */
+.chat-message.bot-message:first-child {
+  display: none;  /* 처음 시작 시 보이지 않게 */
+  margin-top: 10px; /* 💥 대화 시작 시 위에 딱 붙는 걸 방지 */
+}
+
+.message-set {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;       /* 💥 부모(.chat-box)의 너비에 맞춰 쫙~ */
+  box-sizing: border-box; /* 💥 패딩/보더 포함해서 정확하게 */
+}
+
+.chat-message {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: none;
+  color: #1a1a1a;
+  border-bottom-left-radius: 0;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #e1ecf9;
+  color: #1a1a1a;
+  border-bottom-right-radius: 0;
+}
