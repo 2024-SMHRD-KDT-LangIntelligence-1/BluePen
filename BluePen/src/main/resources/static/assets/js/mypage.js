@@ -83,18 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.style.display = "flex"; // 모달 열기
   });
 
-  // "예" 버튼 클릭 시 저장 작업 후 모달 닫고 입력 폼 초기화
+  // "예" 버튼 클릭 시 저장 작업 후 모달 닫고 실제로 form 제출
   modalYesBtn.addEventListener("click", function () {
-      console.log("저장 완료!"); // 저장 작업을 여기에 추가하세요.
-
-      // 모달 닫기
       modal.style.display = "none";
-
-      // 입력 필드 초기화
-      document.getElementById("mypage-form").reset();
-
-      // 성별 버튼 초기화 (남성 기본 선택)
-      selectGender("m");
+      document.getElementById("mypage-form").submit(); // ✅ 이거 추가!
   });
 
   // "아니오" 버튼 클릭 시 모달 닫기
@@ -107,6 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target === modal) {
       modal.style.display = "none"; // 모달 닫기
     }
+  });
+});
+
+// 성별 버튼 클릭 처리
+const genderButtons = document.querySelectorAll(".gender-btn");
+const genderHiddenInput = document.getElementById("user_gender_hidden");
+
+genderButtons.forEach(btn => {
+  btn.addEventListener("click", function () {
+    genderButtons.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    const selectedGender = this.dataset.gender;
+    genderHiddenInput.value = selectedGender;
   });
 });
 

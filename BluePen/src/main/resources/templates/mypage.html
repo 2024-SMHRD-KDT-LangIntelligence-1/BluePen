@@ -18,7 +18,7 @@
     <main class="mypage-container">
         <h2 class="mypage-title">MYPAGE</h2>
          <!-- form 태그 추가 -->
-        <form id="mypage-form">
+        <form id="mypage-form" action="/mypage/updateUserFields" method="post">
         <div class="mypage-form-group">
             <label for="mypage-username">아이디 확인</label>
             <input type ="text" disabled th:placeholder ="${user_id}"/>
@@ -28,7 +28,7 @@
         
         <div class="mypage-form-group">
             <label for="mypage-password">비밀번호 변경</label>
-            <input type="password" id="mypage-password" placeholder="새 비밀번호 입력">
+            <input type="password" id="mypage-password" name="user_pw" placeholder="새 비밀번호 입력">
             <div id="error-message" style="color: red;"></div>
         </div>
         
@@ -40,6 +40,8 @@
         
         <div class="mypage-form-group">
           <label for="user_gender">성별</label>
+          <!-- 성별 선택 (JS에서 숨겨진 input에 값 넣도록 처리 필요) -->
+		  <input type="hidden" name="user_gender" id="user_gender_hidden">
           <div id="user_gender" class="gender-buttons">
             <button type="button" class="gender-btn" data-gender="m">
               남성
@@ -54,6 +56,26 @@
           <label for="mypage-birthday">생년월일</label>
           <input type="date" id="user_birthdate" name="user_birthdate" style="font-family:'Pretendard', sans-serif"/>
         </div>
+        
+        <div class="mypage-form-group">
+	    <label for="salary_top">연봉 상한</label>
+	    <input type="text" id="salary_top" name="salary_top" placeholder="예: 6000만원">
+	</div>
+	
+	<div class="mypage-form-group">
+	    <label for="salary_bottom">연봉 하한</label>
+	    <input type="text" id="salary_bottom" name="salary_bottom" placeholder="예: 3000만원">
+	</div>
+	
+	<div class="mypage-form-group">
+	    <label for="welfare">복지</label>
+	    <input type="text" id="welfare" name="welfare" placeholder="예: 식대, 교통비 지원 등">
+	</div>
+	
+	<div class="mypage-form-group">
+	    <label for="working_condition">근무 조건</label>
+	    <input type="text" id="working_condition" name="working_condition" placeholder="예: 주 5일, 유연 근무제 등">
+	</div>
         
         <div class="mypage-form-group">
             <label>제로 파티 데이터</label>
