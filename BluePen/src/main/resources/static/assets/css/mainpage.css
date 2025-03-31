@@ -124,6 +124,18 @@ form {
   max-width: 1200px;
 }
 
+/* 기본 상태: 사이드바 열림 */
+.chat-interface.sidebar-open {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+}
+
+/* 사이드바 닫힘 */
+.chat-interface.sidebar-closed {
+  margin-left: 0;
+  width: 100%;
+}
+
 .chat-interface.active {
   justify-content: space-between;
   align-items: stretch;
@@ -193,6 +205,8 @@ form {
 /* 반응형 대응 */
 @media (max-width: 600px) {
   .chat-interface {
+    margin-left: 0;
+    width: 100%;
     padding: 10px;
   }
 

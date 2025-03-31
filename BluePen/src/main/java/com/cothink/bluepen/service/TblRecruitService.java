@@ -1,11 +1,16 @@
 package com.cothink.bluepen.service;
 
+import java.io.ByteArrayInputStream;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.stereotype.Service;
@@ -144,62 +149,68 @@ public class TblRecruitService {
 		try {
 			System.out.println("✅ 공공데이터 API(XML) 수집 시작");
 
-			String serviceKey = "Tkhcf%2FIzpxOGAHtelWE2J0S8UOHaRjjD1tPbLeL0pXTQ5pWfI7kSVvynqNpbmIZGdwM9BsRl%2FWEQAmCPPMAiVA%3D%3D";
+			String rawServiceKey = "Tkhcf/IzpxOGAHtelWE2J0S8UOHaRjjD1tPbLeL0pXTQ5pWfI7kSVvynqNpbmIZGdwM9BsRl/WEQAmCPPMAiVA==";
 			int numOfRows = 20;
 			String startDate = "20250101";
 			String endDate = "20251231";
 
 			for (int pageNo = 1; pageNo <= 23; pageNo++) {
 				try {
-					String url = String.format("https://apis.data.go.kr/1051000/recruitment/list" + "?serviceKey=%s"
-							+ "&numOfRows=%d" + "&pageNo=%d" + "&ongoingYn=Y" + "&pbancBgngYmd=%s" + "&pbancEndYmd=%s"
-							+ "Type=XML", serviceKey, numOfRows, pageNo, startDate, endDate);
+					URI uri = new URI("https", "apis.data.go.kr", "/1051000/recruitment/list", String.format(
+							"serviceKey=%s&numOfRows=%d&ongoingYn=Y&pageNo=%d&pbancBgngYmd=%s&pbancEndYmd=%s&resultType=xml",
+							URLEncoder.encode(rawServiceKey, StandardCharsets.UTF_8), numOfRows, pageNo, startDate,
+							endDate), null);
 
-					System.out.println("📡 URL 요청 전: " + url);
+					System.out.println("📡 요청 URI: " + uri.toString());
 
-					String xml = restTemplate.getForObject(url, String.class);
-					System.out.println("📥 수신된 XML: " + xml);
+					String xmlResponse = new String(restTemplate.getForObject(uri, byte[].class),
+							StandardCharsets.UTF_8);
 
-					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-							.parse(new java.io.ByteArrayInputStream(xml.getBytes()));
+					System.out.println("📥 받은 XML: " + xmlResponse);
+
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder builder = factory.newDocumentBuilder();
+					Document doc = builder
+							.parse(new ByteArrayInputStream(xmlResponse.getBytes(StandardCharsets.UTF_8)));
+
 					doc.getDocumentElement().normalize();
 
 					NodeList itemList = doc.getElementsByTagName("item");
 					System.out.println("📊 데이터 크기: " + itemList.getLength());
 
 					for (int i = 0; i < itemList.getLength(); i++) {
-						Node item = itemList.item(i);
-						if (item.getNodeType() != Node.ELEMENT_NODE)
-							continue;
-						Element elem = (Element) item;
+						Node node = itemList.item(i);
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element elem = (Element) node;
 
-						String recruitTitle = getTagValue(elem, "recrutPbancTtl");
-						String company = getTagValue(elem, "instNm");
-						String academic = getTagValue(elem, "acbgCondNmLst");
-						String duty = getTagValue(elem, "hireTypeNmLst");
-						String position = getTagValue(elem, "recrutSeNm");
-						String workingArea = getTagValue(elem, "workRgnNmLst");
-						String startedAtStr = getTagValue(elem, "pbancBgngYmd");
-						String closedAtStr = getTagValue(elem, "pbancEndYmd");
-						String srcUrl = getTagValue(elem, "srcUrl");
+							String recruitTitle = getTagValue(elem, "recrutPbancTtl");
+							String company = getTagValue(elem, "instNm");
+							String academic = getTagValue(elem, "acbgCondNmLst");
+							String duty = getTagValue(elem, "hireTypeNmLst");
+							String position = getTagValue(elem, "recrutSeNm");
+							String workingArea = getTagValue(elem, "workRgnNmLst");
+							String startedAtStr = getTagValue(elem, "pbancBgngYmd");
+							String closedAtStr = getTagValue(elem, "pbancEndYmd");
+							String srcUrl = getTagValue(elem, "srcUrl");
 
-						LocalDateTime startedAt = LocalDate.parse(startedAtStr, publicDateFormat).atStartOfDay();
-						LocalDateTime closedAt = LocalDate.parse(closedAtStr, publicDateFormat).atStartOfDay();
+							LocalDateTime startedAt = LocalDate.parse(startedAtStr, publicDateFormat).atStartOfDay();
+							LocalDateTime closedAt = LocalDate.parse(closedAtStr, publicDateFormat).atStartOfDay();
 
-						List<TblRecruit> existing = recruitRepo.findByCompanyAndRecruitTitleAndStartedAt(company,
-								recruitTitle, startedAt);
-						if (!existing.isEmpty()) {
-							recruitRepo.deleteAll(existing);
-							System.out.println("🧹 기존 공고 삭제: " + recruitTitle);
+							List<TblRecruit> existing = recruitRepo.findByCompanyAndRecruitTitleAndStartedAt(company,
+									recruitTitle, startedAt);
+							if (!existing.isEmpty()) {
+								recruitRepo.deleteAll(existing);
+								System.out.println("🧹 기존 공고 삭제: " + recruitTitle);
+							}
+
+							TblRecruit recruit = TblRecruit.builder().company(company).recruitTitle(recruitTitle)
+									.academic(academic).duty(duty).position(position).career("제공 없음").salary("제공 없음")
+									.workingArea(workingArea).workingDay("제공 없음").startedAt(startedAt)
+									.closedAt(closedAt).srcUrl(srcUrl).build();
+
+							recruitRepo.save(recruit);
+							System.out.println("✅ 저장 완료: " + recruitTitle);
 						}
-
-						TblRecruit recruit = TblRecruit.builder().company(company).recruitTitle(recruitTitle)
-								.academic(academic).duty(duty).position(position).career("협의").salary("협의")
-								.workingArea(workingArea).workingDay("협의").startedAt(startedAt).closedAt(closedAt)
-								.srcUrl(srcUrl).build();
-
-						recruitRepo.save(recruit);
-						System.out.println("✅ 저장 완료: " + recruitTitle);
 					}
 				} catch (Exception pageErr) {
 					System.out.println("❌ 페이지 수집 실패 (pageNo=" + pageNo + ") !!!");
@@ -214,15 +225,13 @@ public class TblRecruitService {
 
 	private String getTagValue(Element elem, String tag) {
 		try {
-			NodeList nList = elem.getElementsByTagName(tag);
-			if (nList.getLength() == 0)
-				return "협의";
-			Node node = nList.item(0);
-			if (node == null || node.getTextContent() == null)
-				return "협의";
+			NodeList nodeList = elem.getElementsByTagName(tag);
+			Node node = nodeList.item(0);
+			if (node == null || node.getTextContent().isBlank())
+				return "제공 없음";
 			return node.getTextContent().trim();
 		} catch (Exception e) {
-			return "협의";
+			return "제공 없음";
 		}
 	}
 }

@@ -1,47 +1,4 @@
-/*document.addEventListener("DOMContentLoaded", function () {
-  const userInput = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
-  const chatContainer = document.querySelector(".chat-container");
-  const suggestions = document.querySelectorAll(".suggestion");
-
-  // 메시지 추가 함수
-  function addMessage(text, isUser = true) {
-	const messageDiv = document.createElement("div");
-	messageDiv.classList.add("chat-message", isUser ? "user-message" : "bot-message");
-	messageDiv.innerText = text;
-	chatBox.appendChild(messageDiv);
-	chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 아래로 이동
-
-	// 대화 시작 시 하단으로 이동
-	if (!chatContainer.classList.contains("active")) {
-	  chatContainer.classList.add("active");
-	}
-  }
-
-  // 사용자 입력 처리
-  function handleUserInput() {
-	const text = userInput.value.trim();
-	if (text === "") return;
-
-	addMessage(text, true); // 사용자 메시지 추가
-	userInput.value = ""; // 입력 필드 초기화
-
-	setTimeout(() => {
-	  addMessage("AI 응답 예시: 질문을 이해했습니다!", false);
-	}, 1000);
-  }
-
-  // 추천 검색어 클릭 시 입력창에 자동 입력
-  suggestions.forEach((suggestion) => {
-	suggestion.addEventListener("click", function () {
-	  userInput.value = this.innerText;
-	  userInput.focus();
-	});
-  });
-});
-*/
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 	const userInput = document.getElementById("user-input");
 	const chatBox = document.getElementById("chat-box");
 	const chatContainer = document.querySelector(".chat-interface");
@@ -82,11 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			const botMessage = document.getElementById("bot-response");
 			const gptResponse = botMessage.getAttribute("data-answer"); // 서버에서 받은 GPT 응답
 			console.log(botMessage);
-			
+
 			if (gptResponse && gptResponse.trim() !== "") {
-			    botMsg.innerText = gptResponse; // GPT 응답을 추가
+				botMsg.innerText = gptResponse; // GPT 응답을 추가
 			} else {
-			    botMsg.innerText = "AI 응답을 가져올 수 없습니다."; // 예외 처리
+				botMsg.innerText = "AI 응답을 가져올 수 없습니다."; // 예외 처리
 			}
 
 			// 💥 쌍 단위로 스크롤 이동
@@ -95,9 +52,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	// 엔터 키 입력 감지
-//	 userInput.addEventListener("submit", function (event) {
+	// userInput.addEventListener("submit", function (event) {
 	// 💥 엔터 키 입력 감지
-	userInput.addEventListener("keydown", function(event) {
+	userInput.addEventListener("keydown", function (event) {
 		if (event.key === "Enter") {
 			form.submit();
 			handleUserInput();
@@ -105,11 +62,34 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 	// 💥 자동 리사이즈 (textarea 늘어나게)
-	userInput.addEventListener("input", function() {
+	userInput.addEventListener("input", function () {
 		this.style.height = "auto";
 		this.style.height = this.scrollHeight + "px";
 	});
+
+	// 💥 사이드바 토글 시 chat-interface 위치 조정만 수행!!!
+	const sidebar = document.querySelector(".sidebar");
+	const chatInterface = document.querySelector(".chat-interface");
+	const sidebarToggleBtn = document.getElementById("side-toggle-btn"); // ← 형님이 쓰신 ID 그대로 유지!
+
+	if (sidebarToggleBtn) {
+		sidebarToggleBtn.addEventListener("click", function () {
+			// 💥 기존 sidebar.js에서 toggle 처리되므로 여기선 상태만 읽어서 위치만 조정!
+			setTimeout(() => {
+				const isClosed = sidebar.classList.contains("closed");
+
+				if (isClosed) {
+					chatInterface.classList.remove("sidebar-open");
+					chatInterface.classList.add("sidebar-closed");
+				} else {
+					chatInterface.classList.remove("sidebar-closed");
+					chatInterface.classList.add("sidebar-open");
+				}
+			}, 10); // 💥 살짝 늦게 확인해야 정확하게 상태 반영됨!
+		});
+	}
 });
+
 /*
 document.addEventListener("DOMContentLoaded", function () {
 	  const botMessage = document.getElementById("bot-response");
@@ -119,27 +99,3 @@ document.addEventListener("DOMContentLoaded", function () {
 		  addMessage(gptResponse, false); // GPT 응답을 대화창에 추가
 	  }
   });*/
-
-//--------------------------------------------------------------------------------------
-/*sconst bookmarkBtn = document.getElementById("bookmark-btn");
-const bookmarkIcon = document.getElementById("bookmark-icon");
-
-bookmarkBtn.addEventListener("click", function() {
-	const text = userInput.value.trim();
-	if (!text) return;
-
-	const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
-	savedBookmarks.push({
-		text: text,
-		timestamp: new Date().toISOString()
-	});
-	localStorage.setItem("bookmarks", JSON.stringify(savedBookmarks));
-
-	// 스타일만 토글
-	bookmarkIcon.classList.add("active");
-});
-
-// 입력창이 바뀌면 다시 원래 상태로
-userInput.addEventListener("input", function() {
-	bookmarkIcon.classList.remove("active");
-});*/

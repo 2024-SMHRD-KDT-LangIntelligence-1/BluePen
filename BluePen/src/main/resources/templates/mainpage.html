@@ -19,10 +19,10 @@
 
 	<div class="cover">
 		<!--대화 프롬프트  -->
-		<div class="chat-interface">
+		<div class="chat-interface sidebar-open">
 			<div th:if="${session.user} != null">
 				<h2 class="welcome-message"
-					th:text="${session.user.userId} + '님 환영합니다.'"></h2>
+					th:text="${session.user.userId} + '님, 정보처리기사 실기 시험 접수하셨나요?☺️'"></h2>
 			</div>
 			<div class="chat-box" id="chat-box">
 				<div th:if="${answer} != null">
@@ -32,12 +32,7 @@
 			</div>
 			<div class="user-input-container">
 				<form action="fast.do" method="get">
-					<input type="text" id="user-input" name="text"
-						placeholder="무엇이든 물어보세요" />
-				</form>
-				<!-- <form action="fast.do" method="get">
-					<textarea id="user-input" name="text" placeholder="무엇이든 물어보세요"
-						rows="1"></textarea> -->
+					<textarea id="user-input" name="text" placeholder="무엇이든 물어보세요" rows="1"></textarea>
 				</form>
 			</div>
 		</div>
