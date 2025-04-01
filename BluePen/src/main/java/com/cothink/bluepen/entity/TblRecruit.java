@@ -1,6 +1,6 @@
 package com.cothink.bluepen.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,10 +56,10 @@ public class TblRecruit {
 	private String workingArea;
 
 	@Column(name = "started_at", nullable = false)
-	private LocalDateTime startedAt;
+	private LocalDate startedAt;
 
 	@Column(name = "closed_at", nullable = false)
-	private LocalDateTime closedAt;
+	private LocalDate closedAt;
 
 	@Column(name = "src_url", length = 255, nullable = true)
 	private String srcUrl;

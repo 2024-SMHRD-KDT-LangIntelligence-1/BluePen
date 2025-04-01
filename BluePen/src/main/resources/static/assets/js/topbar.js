@@ -134,11 +134,8 @@ document.addEventListener("click", function (event) {
 // 북마크 팝업 요소
 const bookmarkPopup = document.getElementById("bookmarkpopup");
 
-// 북마크 데이터 배열
-const bookmarks = [
-  { name: "자기소개서 작성", date: "2025년 3월 19일" },
-  { name: "정보처리기사 일정 정리", date: "2025년 3월 11일" }
-];
+// ✅ 전역 공유 가능하게 빈 배열 선언
+window.bookmarks = [];
 
 // 북마크 토글 함수 (열기/닫기)
 function toggleBookmark(event) {
@@ -223,5 +220,8 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// 페이지 로드 시 초기 렌더링
-document.addEventListener("DOMContentLoaded", renderBookmarks);
+document.addEventListener("DOMContentLoaded", () => {
+  window.bookmarks = window.bookmarks || []; // 사이드바에서 쓸 수 있게 공유!
+  window.renderBookmarks = renderBookmarks;  // 렌더 함수도 공유!
+  renderBookmarks(); // 초기 렌더링
+});

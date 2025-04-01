@@ -1,25 +1,14 @@
 package com.cothink.bluepen.service;
 
-import java.io.ByteArrayInputStream;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.cothink.bluepen.entity.TblRecruit;
 import com.cothink.bluepen.repository.RecruitRepo;
@@ -39,9 +28,11 @@ public class TblRecruitService {
 
 	@Transactional
 	public void fetchAllRecruitData() {
-		fetchFromSaramin(); // 사람인 API 데이터 수집
-		fetchFromPublicApi(); // 공공데이터 API 데이터 수집
-	}
+		fetchFromSaramin();
+		// 사람인 API 데이터 수집
+		/*
+		 * fetchFromPublicApi(); // 공공데이터 API 데이터 수집
+		 */ }
 
 	public void fetchFromSaramin() {
 		try {
@@ -94,15 +85,15 @@ public class TblRecruitService {
 					String startedRaw = job.path("posting-date").asText();
 					String closedTimestampStr = job.path("expiration-timestamp").asText();
 
-					LocalDateTime startedAt = LocalDateTime.parse(startedRaw, saraminDateFormat);
-					LocalDateTime closedAt = LocalDateTime.ofEpochSecond(Long.parseLong(closedTimestampStr), 0,
-							ZoneOffset.of("+09:00"));
+					LocalDate startedAt = LocalDateTime.parse(startedRaw, saraminDateFormat).toLocalDate();
+					LocalDate closedAt = LocalDateTime
+							.ofEpochSecond(Long.parseLong(closedTimestampStr), 0, ZoneOffset.of("+09:00"))
+							.toLocalDate();
 
 					// 기존 공고 삭제 처리
-					List<TblRecruit> existing = recruitRepo.findByCompanyAndRecruitTitleAndStartedAt(company, title,
-							startedAt);
-					if (!existing.isEmpty()) {
-						recruitRepo.deleteAll(existing);
+					List<TblRecruit> duplicates = recruitRepo.findRecruit(company, title, startedAt); // ← 변수명 변경
+					if (!duplicates.isEmpty()) {
+						recruitRepo.deleteAll(duplicates);
 						System.out.println("🧹 기존 중복 공고 삭제 완료: " + title);
 					}
 
@@ -145,93 +136,74 @@ public class TblRecruitService {
 		return node == null || node.isMissingNode() ? "협의" : node.asText().trim();
 	}
 
-	public void fetchFromPublicApi() {
-		try {
-			System.out.println("✅ 공공데이터 API(XML) 수집 시작");
-
-			String rawServiceKey = "Tkhcf/IzpxOGAHtelWE2J0S8UOHaRjjD1tPbLeL0pXTQ5pWfI7kSVvynqNpbmIZGdwM9BsRl/WEQAmCPPMAiVA==";
-			int numOfRows = 20;
-			String startDate = "20250101";
-			String endDate = "20251231";
-
-			for (int pageNo = 1; pageNo <= 23; pageNo++) {
-				try {
-					URI uri = new URI("https", "apis.data.go.kr", "/1051000/recruitment/list", String.format(
-							"serviceKey=%s&numOfRows=%d&ongoingYn=Y&pageNo=%d&pbancBgngYmd=%s&pbancEndYmd=%s&resultType=xml",
-							URLEncoder.encode(rawServiceKey, StandardCharsets.UTF_8), numOfRows, pageNo, startDate,
-							endDate), null);
-
-					System.out.println("📡 요청 URI: " + uri.toString());
-
-					String xmlResponse = new String(restTemplate.getForObject(uri, byte[].class),
-							StandardCharsets.UTF_8);
-
-					System.out.println("📥 받은 XML: " + xmlResponse);
-
-					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-					DocumentBuilder builder = factory.newDocumentBuilder();
-					Document doc = builder
-							.parse(new ByteArrayInputStream(xmlResponse.getBytes(StandardCharsets.UTF_8)));
-
-					doc.getDocumentElement().normalize();
-
-					NodeList itemList = doc.getElementsByTagName("item");
-					System.out.println("📊 데이터 크기: " + itemList.getLength());
-
-					for (int i = 0; i < itemList.getLength(); i++) {
-						Node node = itemList.item(i);
-						if (node.getNodeType() == Node.ELEMENT_NODE) {
-							Element elem = (Element) node;
-
-							String recruitTitle = getTagValue(elem, "recrutPbancTtl");
-							String company = getTagValue(elem, "instNm");
-							String academic = getTagValue(elem, "acbgCondNmLst");
-							String duty = getTagValue(elem, "hireTypeNmLst");
-							String position = getTagValue(elem, "recrutSeNm");
-							String workingArea = getTagValue(elem, "workRgnNmLst");
-							String startedAtStr = getTagValue(elem, "pbancBgngYmd");
-							String closedAtStr = getTagValue(elem, "pbancEndYmd");
-							String srcUrl = getTagValue(elem, "srcUrl");
-
-							LocalDateTime startedAt = LocalDate.parse(startedAtStr, publicDateFormat).atStartOfDay();
-							LocalDateTime closedAt = LocalDate.parse(closedAtStr, publicDateFormat).atStartOfDay();
-
-							List<TblRecruit> existing = recruitRepo.findByCompanyAndRecruitTitleAndStartedAt(company,
-									recruitTitle, startedAt);
-							if (!existing.isEmpty()) {
-								recruitRepo.deleteAll(existing);
-								System.out.println("🧹 기존 공고 삭제: " + recruitTitle);
-							}
-
-							TblRecruit recruit = TblRecruit.builder().company(company).recruitTitle(recruitTitle)
-									.academic(academic).duty(duty).position(position).career("제공 없음").salary("제공 없음")
-									.workingArea(workingArea).workingDay("제공 없음").startedAt(startedAt)
-									.closedAt(closedAt).srcUrl(srcUrl).build();
-
-							recruitRepo.save(recruit);
-							System.out.println("✅ 저장 완료: " + recruitTitle);
-						}
-					}
-				} catch (Exception pageErr) {
-					System.out.println("❌ 페이지 수집 실패 (pageNo=" + pageNo + ") !!!");
-					pageErr.printStackTrace();
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("❌ 공공데이터 전체 수집 실패!!!!!");
-			e.printStackTrace();
-		}
-	}
-
-	private String getTagValue(Element elem, String tag) {
-		try {
-			NodeList nodeList = elem.getElementsByTagName(tag);
-			Node node = nodeList.item(0);
-			if (node == null || node.getTextContent().isBlank())
-				return "제공 없음";
-			return node.getTextContent().trim();
-		} catch (Exception e) {
-			return "제공 없음";
-		}
-	}
+	/*
+	 * public void fetchFromPublicApi() { try {
+	 * System.out.println("✅ 공공데이터 API(XML) 수집 시작");
+	 * 
+	 * String rawServiceKey =
+	 * "Tkhcf/IzpxOGAHtelWE2J0S8UOHaRjjD1tPbLeL0pXTQ5pWfI7kSVvynqNpbmIZGdwM9BsRl/WEQAmCPPMAiVA==";
+	 * int numOfRows = 20; String startDate = "20250101"; String endDate =
+	 * "20251231";
+	 * 
+	 * for (int pageNo = 1; pageNo <= 23; pageNo++) { try { URI uri = new
+	 * URI("https", "apis.data.go.kr", "/1051000/recruitment/list", String.format(
+	 * "serviceKey=%s&numOfRows=%d&ongoingYn=Y&pageNo=%d&pbancBgngYmd=%s&pbancEndYmd=%s&resultType=xml",
+	 * URLEncoder.encode(rawServiceKey, StandardCharsets.UTF_8), numOfRows, pageNo,
+	 * startDate, endDate), null);
+	 * 
+	 * System.out.println("📡 요청 URI: " + uri.toString());
+	 * 
+	 * String xmlResponse = new String(restTemplate.getForObject(uri, byte[].class),
+	 * StandardCharsets.UTF_8);
+	 * 
+	 * System.out.println("📥 받은 XML: " + xmlResponse);
+	 * 
+	 * DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	 * DocumentBuilder builder = factory.newDocumentBuilder(); Document doc =
+	 * builder .parse(new
+	 * ByteArrayInputStream(xmlResponse.getBytes(StandardCharsets.UTF_8)));
+	 * 
+	 * doc.getDocumentElement().normalize();
+	 * 
+	 * NodeList itemList = doc.getElementsByTagName("item");
+	 * System.out.println("📊 데이터 크기: " + itemList.getLength());
+	 * 
+	 * for (int i = 0; i < itemList.getLength(); i++) { Node node =
+	 * itemList.item(i); if (node.getNodeType() == Node.ELEMENT_NODE) { Element elem
+	 * = (Element) node;
+	 * 
+	 * String recruitTitle = getTagValue(elem, "recrutPbancTtl"); String company =
+	 * getTagValue(elem, "instNm"); String academic = getTagValue(elem,
+	 * "acbgCondNmLst"); String duty = getTagValue(elem, "hireTypeNmLst"); String
+	 * position = getTagValue(elem, "recrutSeNm"); String workingArea =
+	 * getTagValue(elem, "workRgnNmLst"); String startedAtStr = getTagValue(elem,
+	 * "pbancBgngYmd"); String closedAtStr = getTagValue(elem, "pbancEndYmd");
+	 * String srcUrl = getTagValue(elem, "srcUrl");
+	 * 
+	 * LocalDateTime startedAt = LocalDate.parse(startedAtStr,
+	 * publicDateFormat).atStartOfDay(); LocalDateTime closedAt =
+	 * LocalDate.parse(closedAtStr, publicDateFormat).atStartOfDay();
+	 * 
+	 * List<TblRecruit> existing =
+	 * recruitRepo.findByCompanyAndRecruitTitleAndStartedAt(company, recruitTitle,
+	 * startedAt); if (!existing.isEmpty()) { recruitRepo.deleteAll(existing);
+	 * System.out.println("🧹 기존 공고 삭제: " + recruitTitle); }
+	 * 
+	 * TblRecruit recruit =
+	 * TblRecruit.builder().company(company).recruitTitle(recruitTitle)
+	 * .academic(academic).duty(duty).position(position).career("제공 없음").
+	 * salary("제공 없음")
+	 * .workingArea(workingArea).workingDay("제공 없음").startedAt(startedAt)
+	 * .closedAt(closedAt).srcUrl(srcUrl).build();
+	 * 
+	 * recruitRepo.save(recruit); System.out.println("✅ 저장 완료: " + recruitTitle); }
+	 * } } catch (Exception pageErr) { System.out.println("❌ 페이지 수집 실패 (pageNo=" +
+	 * pageNo + ") !!!"); pageErr.printStackTrace(); } } } catch (Exception e) {
+	 * System.out.println("❌ 공공데이터 전체 수집 실패!!!!!"); e.printStackTrace(); } }
+	 * 
+	 * private String getTagValue(Element elem, String tag) { try { NodeList
+	 * nodeList = elem.getElementsByTagName(tag); Node node = nodeList.item(0); if
+	 * (node == null || node.getTextContent().isBlank()) return "제공 없음"; return
+	 * node.getTextContent().trim(); } catch (Exception e) { return "제공 없음"; } }
+	 */
 }
