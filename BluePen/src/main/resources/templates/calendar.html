@@ -27,40 +27,51 @@
     <ul id="eventList"></ul>
     </div>
     
-	<!-- 일정 추가 모달 -->
-	<div id="eventModal" class="modal" >
-	  <div class="modal-content schedule-modal">
-	    <span id="closeModal" class="close">
-	      <i class="fa-solid fa-xmark"></i>
-	    </span>
-	    <h2 class="modal-title">일정 추가</h2>
-	
-	    <input type="text" id="eventTitle" name="scheTitle" placeholder="일정 제목 입력" class="input-box" />
-	
-	    <select id="eventType" name="scheType" class="input-box">
-	      <option value="자격증">자격증 일정</option>
-	      <option value="취업">취업 일정</option>
-	    </select>
-	
-	    <input type="time" id="eventTime" name="scheTm" class="input-box" />
-	
-	    <button id="addEventBtn" class="primary-btn">추가하기</button>
-	  </div>
-	</div>
+   <!-- 일정 추가 모달 -->
+   <div id="eventModal" class="modal" >
+     <div class="modal-content schedule-modal">
+       <span id="closeModal" class="close">
+         <i class="fa-solid fa-xmark"></i>
+       </span>
+       <h2 class="modal-title">일정 추가</h2>
+   
+       <input type="text" id="eventTitle" name="scheTitle" placeholder="일정 제목 입력" class="input-box" />
+   
+       <select id="eventType" name="scheType" class="input-box">
+         <option value="자격증">자격증 일정</option>
+         <option value="취업">취업 일정</option>
+       </select>
+   
+       <input type="time" id="eventTime" name="scheTm" class="input-box" />
+   
+       <button id="addEventBtn" class="primary-btn">추가하기</button>
+     </div>
+   </div>
 
-	<!-- 삭제 확인 모달 -->
-	<div id="deleteModal" class="modal">
-	  <div class="modal-content confirm-modal">
-	    <span id="closeDeleteModal" class="close">
-	      <i class="fa-solid fa-xmark"></i>
-	    </span>
-	    <p class="confirm-text">정말 이 일정을 삭제하시겠습니까?</p>
-	    <div class="confirm-buttons">
-	      <button id="confirmDeleteBtn" class="btn btn-danger">삭제</button>
-	      <button id="cancelDeleteBtn" class="btn btn-cancel">취소</button>
-	    </div>
-	  </div>
-	</div>
+   <!-- 삭제 확인 모달 -->
+   <div id="deleteModal" class="modal">
+     <div class="modal-content confirm-modal">
+       <span id="closeDeleteModal" class="close">
+         <i class="fa-solid fa-xmark"></i>
+       </span>
+       <p class="confirm-text">정말 이 일정을 삭제하시겠습니까?</p>
+       <div class="confirm-buttons">
+         <button id="confirmDeleteBtn" class="btn btn-danger">삭제</button>
+         <button id="cancelDeleteBtn" class="btn btn-cancel">취소</button>
+       </div>
+     </div>
+   </div>
+   
+   <!-- 일정 상세 보기 모달 -->
+<div id="viewModal" class="modal">
+  <div class="modal-content schedule-modal">
+    <span id="closeViewModal" class="close">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+    <h2 class="modal-title">일정 상세 보기</h2>
+    <p id="viewModalContent">내용을 불러오는 중...</p>
+  </div>
+</div>
 
     <script src="assets/js/calendar.js"></script>
 </body>

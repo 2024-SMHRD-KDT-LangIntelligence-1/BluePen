@@ -3,8 +3,12 @@ package com.cothink.bluepen.controller;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,7 +54,7 @@ public class ScheduleController {
 		return "redirect:/calendar"; // 저장 후 이동
 	}
 	
-	// 승혁 리스트 캘린더 연결중@@@@@@@
+	// 승혁 리스트 캘린더 연결@@@@@@@
 	@GetMapping("/schedule-list") // ✅ 경로 이름 바꿈
 	public String getScheduleList(Model model) {
 	    List<Tblschedule> schedules = scheduleRepo.findAll();
@@ -63,6 +67,28 @@ public class ScheduleController {
 	public ResponseEntity<String> deleteSchedule(@PathVariable("id") int id) {
 	    scheduleRepo.deleteById(id);
 	    return ResponseEntity.ok("deleted");
+	}
+	@GetMapping("/calendar/events")
+	@ResponseBody
+	public ResponseEntity<?> getAllSchedules(HttpSession session) {
+	    TblUser user = (TblUser) session.getAttribute("user");
+
+	    if (user == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                             .body("세션이 만료되었습니다");
+	    }
+
+	    List<Tblschedule> schedules = scheduleRepo.findByUserId(user.getUserId());
+
+	    // 🔥 FullCalendar 형식으로 변환
+	    List<Map<String, Object>> eventList = schedules.stream().map(s -> {
+	        Map<String, Object> event = new HashMap<>();
+	        event.put("title", s.getScheTitle());
+	        event.put("start", s.getScheDt() + "T" + s.getScheTm());
+	        return event;
+	    }).collect(Collectors.toList()); // ✅ 빨간줄 해결 핵심!!!
+
+	    return ResponseEntity.ok(eventList);
 	}
 
 }
