@@ -8,7 +8,7 @@ function toggleAlram() {
 const alarmData = {
   title: "자격증접수일정",
   time: "어제 오후 09:12",
-  body: "내일은 정보처리기사 실지 접수일입니다!",
+  body: "내일은 정보처리기사 실기 접수일입니다!",
 };
 
 // 알림 항목을 동적으로 생성하는 함수
@@ -106,8 +106,8 @@ const bookmarkPopup = document.getElementById("bookmarkpopup");
 
 // 북마크 데이터 배열
 const bookmarks = [
-  { name: "로그인 페이지 제작 도움", date: "2025년 3월 19일" },
-  { name: "최겨울 등장!", date: "2025년 3월 11일" }
+  { name: "자기소개서 작성", date: "2025년 3월 19일" },
+  { name: "정보처리기사 일정 정리", date: "2025년 3월 11일" }
 ];
 
 // 북마크 토글 함수 (열기/닫기)

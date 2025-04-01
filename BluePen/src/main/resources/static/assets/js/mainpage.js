@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}, 500);
 	}
 
-	// 엔터 키 입력 감지
-	// userInput.addEventListener("submit", function (event) {
+
 	// 💥 엔터 키 입력 감지
 	userInput.addEventListener("keydown", function (event) {
 		if (event.key === "Enter") {
