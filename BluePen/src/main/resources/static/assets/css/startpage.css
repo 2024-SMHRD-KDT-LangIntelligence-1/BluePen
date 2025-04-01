@@ -9,13 +9,11 @@ html {
   font-family: "Noto Sans KR", "Pretendard", sans-serif;
   background-color: #f9fbfe;
   color: #19335a;
-  scrollbar-width: none;       /* Firefox */
-  -ms-overflow-style: none;    /* IE, Edge */
-  overflow-y: scroll;
+
 }
 
-body::-webkit-scrollbar {
-  display: none;               /* Chrome, Safari */
+body {
+  overflow-y: scroll;
 }
 
 .hero {
