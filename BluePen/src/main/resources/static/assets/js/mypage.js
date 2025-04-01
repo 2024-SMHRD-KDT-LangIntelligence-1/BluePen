@@ -83,18 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.style.display = "flex"; // 모달 열기
   });
 
-  // "예" 버튼 클릭 시 저장 작업 후 모달 닫고 입력 폼 초기화
+  // "예" 버튼 클릭 시 저장 작업 후 모달 닫고 실제로 form 제출
   modalYesBtn.addEventListener("click", function () {
-      console.log("저장 완료!"); // 저장 작업을 여기에 추가하세요.
-
-      // 모달 닫기
       modal.style.display = "none";
-
-      // 입력 필드 초기화
-      document.getElementById("mypage-form").reset();
-
-      // 성별 버튼 초기화 (남성 기본 선택)
-      selectGender("m");
+      saveZeroPartyData(); // ✅ 먼저 제로파티 비동기 전송
+      document.getElementById("mypage-form").submit(); // ✅ 사용자 정보 form 제출
   });
 
   // "아니오" 버튼 클릭 시 모달 닫기
@@ -109,4 +102,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// 성별 버튼 클릭 처리
+const genderButtons = document.querySelectorAll(".gender-btn");
+const genderHiddenInput = document.getElementById("user_gender_hidden");
+
+genderButtons.forEach(btn => {
+  btn.addEventListener("click", function () {
+    genderButtons.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    const selectedGender = this.dataset.gender;
+    genderHiddenInput.value = selectedGender;
+  });
+});
+//제로파티 따로 연동하기 위한 코드
+function saveZeroPartyData() {
+    const formData = new FormData();
+    formData.append("salary_top", document.getElementById("salary_top").value);
+    formData.append("salary_bottom", document.getElementById("salary_bottom").value);
+    formData.append("welfare", document.getElementById("welfare").value);
+    formData.append("working_condition", document.getElementById("working_condition").value);
+
+    fetch("/mypage/saveOnlySalary", {
+        method: "POST",
+        body: formData
+    }).then(res => {
+        if (res.redirected) {
+            window.location.href = res.url;
+        }
+    });
+}
+
+
+
 

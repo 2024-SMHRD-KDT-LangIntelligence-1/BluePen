@@ -8,9 +8,10 @@ import jakarta.persistence.*;
 @Table(name = "tbl_zeroparty") // MySQL 테이블과 매핑
 public class ZeroParty {
 	
-	 @Id
+	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가 ID
-	    private Long id;
+	 	@Column(name = "zero_idx") // ✅ 여기가 핵심
+	 	private Long id;
 
 	    @Column(name = "job")
 	    private String job; // 관심 직무
