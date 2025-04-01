@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const calendar = new FullCalendar.Calendar(calendarEl, {
     locale: "ko",
     initialView: "dayGridMonth",
+	events: "/calendar/events", // ✅ DB에서 일정 가져옴
     selectable: true,
     editable: true,
     dayMaxEvents: false,
@@ -58,10 +59,22 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "block";
     },
 
-    eventClick: function (info) {
-      eventToDelete = info.event;
-      deleteModal.style.display = "block";
-    },
+	eventClick: function (info) {
+	  eventToDelete = info.event;
+
+	  // 모달에 내용 설정
+	  const event = info.event;
+	  const title = event.title;
+	  const start = event.start;
+
+	  viewModalContent.innerHTML = `
+	    <strong>일정 제목:</strong> ${title}<br>
+	    <strong>시작 시간:</strong> ${start.toLocaleString()}
+	  `;
+
+	  // 상세보기 모달 오픈
+	  viewModal.style.display = "block";
+	},
 
     eventDidMount: function (info) {
       const event = info.event;
@@ -89,46 +102,17 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     },
 
-    dayCellDidMount: function (arg) {
-      const dateStr = arg.date.toISOString().substring(0, 10);
-      const cell = arg.el;
-      cell.innerHTML = "";
 
-      const events = calendar.getEvents().filter(e =>
-        e.startStr.startsWith(dateStr)
-      );
-
-      const container = document.createElement("div");
-      container.classList.add("custom-cell-events");
-
-      events.forEach((event, idx) => {
-        const item = document.createElement("div");
-        item.classList.add("event-item");
-        item.textContent = event.title;
-
-        if (idx >= 3) {
-          item.style.display = "none";
-          item.classList.add("more-hidden");
-        }
-
-        container.appendChild(item);
-      });
-
-      if (events.length > 3) {
-        const moreBtn = document.createElement("div");
-        moreBtn.classList.add("custom-more");
-        moreBtn.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
-        moreBtn.onclick = function () {
-          const hiddenItems = container.querySelectorAll(".more-hidden");
-          hiddenItems.forEach(el => (el.style.display = "block"));
-          moreBtn.style.display = "none";
-        };
-        container.appendChild(moreBtn);
-      }
-
-      cell.appendChild(container);
-    },
   });
+  //상단 변수 선언부 추가
+  const viewModal = document.getElementById("viewModal");
+  const closeViewModal = document.getElementById("closeViewModal");
+  const viewModalContent = document.getElementById("viewModalContent");
+  
+  //닫기 버튼 이벤트 추가
+  closeViewModal.onclick = function () {
+    viewModal.style.display = "none";
+  };
 
   // ✅ 일정 추가 버튼 클릭 시
   addEventBtn.onclick = function () {

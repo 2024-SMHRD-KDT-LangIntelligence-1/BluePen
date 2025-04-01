@@ -30,6 +30,17 @@ let deleteTargetId = null;
         let itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
         const jobItems = Array.from(document.querySelectorAll('.job-item'));
         const paginationDiv = document.querySelector('.pagination');
+		
+		// 🔥 일정 정렬: 날짜 + 시간 기준 오름차순
+		jobItems.sort((a, b) => {
+		  const dateA = new Date(a.querySelector('.job-meta').textContent.replace("날짜: ", "").replace(" 시간:", ""));
+		  const dateB = new Date(b.querySelector('.job-meta').textContent.replace("날짜: ", "").replace(" 시간:", ""));
+		  return dateA - dateB;
+		});
+		
+		// 🔁 정렬된 순서대로 다시 append
+		const listContainer = document.getElementById("schedule-list");
+		jobItems.forEach(item => listContainer.appendChild(item));
 
         function showPage(page) {
           jobItems.forEach((item, index) => {
