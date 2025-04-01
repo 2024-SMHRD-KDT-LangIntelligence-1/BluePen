@@ -1,3 +1,33 @@
+document.getElementById("new-chat-btn").addEventListener("click", async function () {
+  try {
+    const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+
+    if (chatHistory.length > 0) {
+      const response = await fetch("/api/chat/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(chatHistory),
+      });
+
+      if (!response.ok) {
+        throw new Error("서버에 대화 저장 실패했슴다!!!!");
+      }
+
+      console.log("대화 저장 성공했슴다!!!!");
+    }
+
+    localStorage.removeItem("chatHistory"); // 기존 대화 제거
+    window.location.href = "/mainpage"; // 페이지 새로고침
+
+  } catch (err) {
+    console.error("새채팅 처리 중 에러 발생!!!!", err);
+    alert("새 채팅 초기화 중 문제가 발생했습니다!!!!");
+  }
+});
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // 알람 토글 함수
 function toggleAlram() {
   const alramContainer = document.getElementById('alramContainer'); // 알람 목록 컨테이너 선택
