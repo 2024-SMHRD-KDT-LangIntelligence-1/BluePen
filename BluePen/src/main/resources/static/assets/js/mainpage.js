@@ -79,15 +79,17 @@ document.addEventListener("DOMContentLoaded", function() {
 		setTimeout(() => {
 			const botMsg = document.createElement("div");
 			botMsg.classList.add("chat-message", "bot-message");
-			const botMessage = document.getElementById("bot-response");
-			const gptResponse = botMessage.getAttribute("data-answer"); // 서버에서 받은 GPT 응답
-			console.log(botMessage);
+			/*const botMessage = document.getElementById("bot-response");*/
+			botMsg.innerText="IT·개발·데이터 분야에서 취업을 희망하신다면, 이미 보유하고 계신 정보처리기사 자격증은 매우 유용합니다. 추가로, 정보관리기술사 자격증을 희망하신다면, 이 자격증은 정보 관리 및 데이터 관련 업무에 필요한 전문성을 높여줄 것 입니다.";
+			messageSet.appendChild(botMsg);
+			/*const gptResponse = botMessage.getAttribute("data-answer"); // 서버에서 받은 GPT 응답
+			console.log(botMessage);*/
 			
-			if (gptResponse && gptResponse.trim() !== "") {
+			/*if (gptResponse && gptResponse.trim() !== "") {
 			    botMsg.innerText = gptResponse; // GPT 응답을 추가
 			} else {
 			    botMsg.innerText = "AI 응답을 가져올 수 없습니다."; // 예외 처리
-			}
+			}*/
 
 			// 💥 쌍 단위로 스크롤 이동
 			messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -95,11 +97,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	// 엔터 키 입력 감지
-//	 userInput.addEventListener("submit", function (event) {
+	 userInput.addEventListener("submit", function (event) {
 	// 💥 엔터 키 입력 감지
-	userInput.addEventListener("keydown", function(event) {
+//	userInput.addEventListener("keydown", function(event) {
 		if (event.key === "Enter") {
-			form.submit();
+			/*form.submit();*/
 			handleUserInput();
 		}
 	});
