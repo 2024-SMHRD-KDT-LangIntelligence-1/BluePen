@@ -41,31 +41,27 @@ public class FastAPIController {
 				.bodyToMono(Map.class)
 				.block(); // 동기적으로 결과 가져오기
 		
-		System.out.println(response);
-		
-		Object responseObject = response.get("response");
-		
-		String chatGptResponse = "";
-		if (responseObject instanceof String) {
-		    chatGptResponse = (String) responseObject;
-		    // chatGptResponse를 사용
-		} else if (responseObject instanceof Map) {
-		    // 만약 response.get("response")가 Map이라면, 그 내부에서 필요한 값 추출
-		    Map<String, Object> responseMap = (Map<String, Object>) responseObject;
-		    // 예시: responseMap에서 "text"라는 필드 추출
-		    chatGptResponse = (String) responseMap.get("content");
-		    // chatGptResponse를 사용
-		} else {
-		    // 예상치 못한 타입일 경우 처리
-		    throw new IllegalStateException("Unexpected response format: " + responseObject);
-		}
-		
-//		// 응답에서 "response" 키의 값을 가져오기
-//		String chatGptResponse = (String) response.get("response");
-		
-		// client의 질문과 llm의 답변을 model에 담아
-		model.addAttribute("question", text);
-		model.addAttribute("answer", chatGptResponse);
+		String chatGptResponse = (String) response.get("response");
+        Object plansObject = response.get("plans");
+        String plans = "";
+        
+        if (plansObject instanceof java.util.List) {
+            // 마감일 관련 정보는 리스트 형태로 반환되므로 이를 처리
+            java.util.List<?> plansList = (java.util.List<?>) plansObject;
+            plans = String.join(", ", (Iterable<? extends CharSequence>) plansList);
+        }
+        
+        System.out.println(chatGptResponse);
+        System.out.println(plans);
+        model.addAttribute("question", text);
+        model.addAttribute("answer", chatGptResponse);
+        model.addAttribute("plans", plans);
+        
+        
+//        if (!plans.isEmpty()) {
+//        	model.addAttribute("plans", plans);
+//            return "calendar";  // calendar 페이지로 리다이렉트
+//        }
 
 		// mainpage로 반환
 		return "mainpage";
