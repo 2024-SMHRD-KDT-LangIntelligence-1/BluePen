@@ -12,6 +12,7 @@ body {
   align-items: center;
   height:  auto;
   overflow: auto;
+    background-color: #f9fbfe;
   scrollbar-width: none;
 }
 
@@ -232,4 +233,82 @@ html {
 }
 .container {
   scrollbar-width: none;
+}
+
+/* 💣 폼 요소에도 폰트 강제 적용 */
+select,
+button,
+input,
+textarea {
+  font-family: "Noto Sans KR", sans-serif;
+}
+/* ------------------ 반응형 스타일 ------------------ */
+
+/* 모바일 (최대 600px) */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+    position: static;
+    margin-top: 100px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .buttons input[type="search"],
+  .buttons select,
+  .buttons button {
+    width: 100%;
+  }
+
+  .job-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .job-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-deadline {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .apply-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* 태블릿 (601px ~ 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+    position: static;
+    margin-top: 100px;
+  }
+
+  .company-name {
+    width: 120px;
+  }
+
+  .job-category {
+    width: 70px;
+  }
+
+  .job-deadline {
+    margin-left: 30px;
+  }
+
+  .apply-btn {
+    margin-left: 20px;
+  }
 }
