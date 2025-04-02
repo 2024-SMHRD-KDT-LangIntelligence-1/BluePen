@@ -55,13 +55,9 @@ public class FastAPIController {
         System.out.println(plans);
         model.addAttribute("question", text);
         model.addAttribute("answer", chatGptResponse);
-        model.addAttribute("plans", plans);
         
+        session.setAttribute("plans", plans);
         
-//        if (!plans.isEmpty()) {
-//        	model.addAttribute("plans", plans);
-//            return "calendar";  // calendar 페이지로 리다이렉트
-//        }
 
 		// mainpage로 반환
 		return "mainpage";

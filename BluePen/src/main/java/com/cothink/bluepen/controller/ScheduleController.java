@@ -56,8 +56,10 @@ public class ScheduleController {
 	
 	// 승혁 리스트 캘린더 연결@@@@@@@
 	@GetMapping("/schedule-list") // ✅ 경로 이름 바꿈
-	public String getScheduleList(Model model) {
-	    List<Tblschedule> schedules = scheduleRepo.findAll();
+	public String getScheduleList(Model model, HttpSession session) {
+		TblUser uid = (TblUser) session.getAttribute("user");
+		String userId = uid.getUserId();
+	    List<Tblschedule> schedules = scheduleRepo.findByUserId(userId);
 	    model.addAttribute("schedules", schedules);
 	    return "list";
 	}
