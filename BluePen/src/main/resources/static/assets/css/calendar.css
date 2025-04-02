@@ -301,18 +301,86 @@ body {
   color: #000;
 }
 
-/*----------------------------------------------------------------------------------*/
-@media (max-width: 768px) {
-  #calendar {
+/* ------------------ 📱 반응형 스타일 시작 ------------------ */
+@media (max-width: 1024px) {
+  .calendar-wrapper {
     width: 95%;
+    padding: 15px;
+  }
+
+  .schedule-modal,
+  .confirm-modal {
+    width: 90% !important;
+    margin-top: 20%;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+
+  .input-box {
+    font-size: 13px;
+  }
+
+  .primary-btn {
+    font-size: 14px;
+  }
+
+  #eventList li {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    height: auto;
+  }
+
+  .calendar-wrapper {
+    width: 100%;
+    margin: 10px 0;
     padding: 10px;
   }
 
-  .modal-content {
-    width: 90%;
+  .fc .fc-col-header-cell {
+    font-size: 12px;
+    padding: 8px;
   }
 
-  .fc .fc-col-header-cell {
-    font-size: 14px;
+  .fc .fc-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  #eventList {
+    padding: 8px;
+  }
+
+  #eventList li {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .modal-title {
+    font-size: 16px;
+  }
+
+  .input-box {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .primary-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 13px;
   }
 }
+/* ------------------ 반응형 끝 ------------------ */

@@ -82,12 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const title = event.title;
       if (title.includes("자격증")) {
-        el.style.backgroundColor = "yellow";
-        el.style.borderColor = "yellow";
+        el.style.backgroundColor = "#5F8B4C";
+        el.style.borderColor = "#5F8B4C";
       }
       if (title.includes("취업")) {
-        el.style.backgroundColor = "lightgreen";
-        el.style.borderColor = "lightgreen";
+        el.style.backgroundColor = "#FF9A9A";
+        el.style.borderColor = "#FF9A9A";
       }
 
       if (event.start && event.end) {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const title = eventTitleInput.value;
     const type = eventTypeInput.value;
     const time = eventTimeInput.value;
-    const color = type === "자격증" ? "yellow" : "lightgreen";
+    const color = type === "자격증" ? "#5F8B4C" : "#FF9A9A";
 
     if (title && selectedDate) {
       const timeFormatted = time ? `${time}:00` : "00:00:00";

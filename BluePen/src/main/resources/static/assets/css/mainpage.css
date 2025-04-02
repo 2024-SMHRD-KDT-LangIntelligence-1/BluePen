@@ -1,10 +1,10 @@
+/* 🔵 BLUEPEN 메인페이지 - 시작페이지 톤 통일 버전 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 전체 배경 설정 */
 body {
   font-family: "Noto Sans KR", sans-serif;
   display: flex;
@@ -13,9 +13,10 @@ body {
   height: 100vh;
   overflow: hidden;
   flex-direction: column;
+  background-color: #f9fbfe;
+  color: #19335a;
 }
 
-/* 상단바와 사이드바 다시 표시 */
 .topbar,
 .sidebar {
   display: block;
@@ -23,25 +24,28 @@ body {
   z-index: 1000;
 }
 
-/* 전체 채팅 인터페이스 */
 .chat-interface {
   width: 1200px;
   height: 97vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 💥 처음엔 중앙 정렬 */
+  justify-content: center;
   position: relative;
   padding-bottom: 10px;
-  transition: all 0.3s ease; /* 💥 부드럽게 전환 */
+  transition: all 0.3s ease;
 }
 
 .chat-interface.active {
-  justify-content: space-between; /* ✅ 위(대화) + 아래(입력창) 구조로 전환 */
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 100px;
 }
 
 .welcome-message {
   text-align: center;
   font-size: 32px;
+  font-weight: 700;
+  color: #19335a;
   margin-bottom: 5px;
   transition: opacity 0.3s ease;
 }
@@ -57,8 +61,8 @@ body {
 }
 
 .user-input-container {
-  position: relative; /* 북마크 위치 기준점!!! */
-  width: 100%; /* chat-interface 기준으로 맞춰짐 */
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +74,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* 🔥 이 줄 추가!!!! */
+  position: relative;
 }
 
 #user-input {
@@ -78,13 +82,14 @@ form {
   width: 760px;
   min-height: 120px;
   max-height: 200px;
-  padding: 20px 48px 20px 24px; /* ✅ 북마크 공간 확보 완료 */
+  padding: 20px 48px 20px 24px;
   font-size: 18px;
   line-height: 1.6;
   border-radius: 36px;
-  border: 1px solid #d0d7e2;
+  border: 1px solid #cbd5e1;
   background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+  box-shadow: 0 4px 10px rgba(0, 87, 184, 0.1);
   resize: none;
   overflow-y: auto;
   white-space: pre-wrap;
@@ -94,15 +99,19 @@ form {
 
 #user-input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(129, 177, 235, 0.4);
+  box-shadow: 0 0 0 3px rgba(0, 87, 184, 0.3);
+}
+
+#user-input::placeholder {
+  color: #64748b;
 }
 
 .chat-box {
-  display: none; /* ❌ 대화 시작 전엔 안 보임 + 자리도 차지 안 함 */
+  display: none;
 }
 
 .chat-interface.active .chat-box {
-  display: flex; /* ✅ 대화 시작되면 등장! */
+  display: flex;
   flex-grow: 1;
   flex-direction: column;
   justify-content: flex-start;
@@ -113,63 +122,21 @@ form {
   overflow-y: auto;
   scroll-behavior: smooth;
   gap: 10px;
-}
-
-.chat-interface {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 97vh;
-  width: 100%;
-  max-width: 1200px;
-}
-
-/* 기본 상태: 사이드바 열림 */
-.chat-interface.sidebar-open {
-  margin-left: 240px;
-  width: calc(100% - 240px);
-}
-
-/* 사이드바 닫힘 */
-.chat-interface.sidebar-closed {
-  margin-left: 0;
-  width: 100%;
-}
-
-.chat-interface.active {
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 100px;
-}
-
-.chat-interface.active .chat-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-grow: 1;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  max-width: 760px;
-  width: 100%;
-  margin: 0 auto;
   padding-bottom: 50px;
-  gap: 10px;
-  min-height: 100px; /* ✅ 요걸로 공간 확보!!!! */
+  min-height: 100px;
 }
 
-/* 기존 챗박스 말풍선 */
 .chat-message.bot-message:first-child {
-  display: none;  /* 처음 시작 시 보이지 않게 */
-  margin-top: 10px; /* 💥 대화 시작 시 위에 딱 붙는 걸 방지 */
+  display: none;
+  margin-top: 10px;
 }
 
 .message-set {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;       /* 💥 부모(.chat-box)의 너비에 맞춰 쫙~ */
-  box-sizing: border-box; /* 💥 패딩/보더 포함해서 정확하게 */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .chat-message {
@@ -184,25 +151,23 @@ form {
 
 .bot-message {
   align-self: flex-start;
-  background-color: none;
-  color: #1a1a1a;
+  background-color: #e6f0ff;
+  color: #19335a;
   border-bottom-left-radius: 0;
 }
 
 .user-message {
   align-self: flex-end;
-  background-color: #e1ecf9;
-  color: #1a1a1a;
+  background-color: #0057b8;
+  color: white;
   border-bottom-right-radius: 0;
 }
 
-/* 스크롤바 숨기기 */
 .chat-box::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-/* 반응형 대응 */
 @media (max-width: 600px) {
   .chat-interface {
     margin-left: 0;
@@ -213,6 +178,19 @@ form {
   #user-input {
     font-size: 14px;
     padding: 12px 16px;
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
   }
+}
 
+/* 사이드바 열림/닫힘 상태 대응 */
+.chat-interface.sidebar-open {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+}
+
+.chat-interface.sidebar-closed {
+  margin-left: 0;
+  width: 100%;
 }
