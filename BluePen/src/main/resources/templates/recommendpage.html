@@ -6,6 +6,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="assets/css/list.css" />
 </head>
 <body>
@@ -37,11 +39,11 @@
 					</div>
 					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
 				</div>
-				<button class="add-schedule">
-				<i class="fa-solid fa-plus"></i>
-			</button>
+				<button class="add-schedule" onclick="addToDatabase(this)">
+					<i class="fa-solid fa-plus"></i>
+				</button>
 			</div>
-			
+
 		</div>
 	</div>
 	<script>
@@ -53,9 +55,9 @@
       let enddt = jobItem.querySelector(".job-deadline").innerText;
 
       let postData = {
-          company: company,
-          title: title,
-          enddt: enddt
+          sche_title: company,
+          sche_content: title,
+          sche_dt: enddt
       };
 
       // 서버에 데이터 전송
@@ -81,6 +83,6 @@
   }
 </script>
 
-	
+
 </body>
 </html>
