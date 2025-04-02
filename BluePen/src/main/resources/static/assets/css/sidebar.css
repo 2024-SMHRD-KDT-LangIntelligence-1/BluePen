@@ -1,321 +1,241 @@
-/* 기본 설정 */
-body {
-  margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
-  background-color: #f4f7fa;
-}
+/* Modern Blue-toned Sidebar Design with #19335a Accent */
 
 .side-container {
-  position: relative;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  transition: all 0.3s ease;
 }
 
-/* 🔷 사이드바 기본 */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background-color: #ffffff;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  width: 240px;
+  height: 100%;
+  background-color: #1f2a44;
+  color: white;
+  padding: 0px 10px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  border-right: 2px solid #19335a;
+  position: relative;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(0);
-  border-right: 1px solid #e0e0e0;
+  cursor: pointer;
 }
 
 .sidebar.closed {
-  transform: translateX(-100%);
+  width: 60px;
+  padding: 20px 5px;
+  overflow: hidden;
 }
 
-.sidebar.opened {
-  transform: translateX(0);
+.sidebar.closed .sidebar-list,
+.sidebar.closed .side-trash {
+  display: none;
 }
 
-/* 🔘 토글 버튼 - 항상 중앙 고정 */
-.side-toggle-btn {
-  position: fixed;
-  top: 50%;
-  left: 220px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: transparent; /* ✅ 배경 투명으로 */
-  color: #3b74cb;
-  border: none;
-  border-radius: 50%; /* 이건 둥글게 남겨도 됨, 아님 지워도 됨 */
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1001;
-  display: flex;
-  align-items: center;
+.sidebar.closed li span,
+.sidebar.closed .title-li .title,
+.sidebar.closed .sidebar-text {
+  display: none;
+}
+
+.sidebar.closed li {
   justify-content: center;
-  transition: color 0.3s ease;
+  padding: 10px 0;
 }
 
-.side-toggle-btn:hover {
-  color: #1f4c8f; /* ✅ hover 시 색만 바뀌게 */
-}
-
-/* 🧱 리스트 박스 */
 .sidebar-list {
-  padding: 100px 20px 0 20px; /* ✅ 위로 10px 정도 padding 추가 */
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* ✅ 상단부터 정렬 */
-  gap: 10px;
-  font-size: 14px;
   overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
+  flex: 1;
+  margin-top: 50px;
+  position: relative;
 }
 
-/* 리스트 내부 구조 */
-.sidebar-list ul {
+.sidebar ul {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin-bottom: 20px;
 }
 
-.sidebar-list li {
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
+.sidebar li {
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: #2e3b59;
+  transition: background 0.3s;
   display: flex;
   align-items: center;
-  gap: 3px;
+  color: white;
+  font-size: 14px;
 }
 
-.sidebar-list li:hover {
-  background-color: #f0f4f9;
+.sidebar li:not(.title-li):not(#side-select-all-container li):hover {
+  background-color: #dddddd;
+  color: #000;
 }
 
-/* 📌 리스트 제목 */
-.title-li .title {
-  font-weight: bold;
-  font-size: 15px;
-  color: #3b74cb;
-  pointer-events: none;
+.sidebar li input[type="checkbox"] {
+  margin-right: 10px;
 }
 
-/* 🔥 예외 처리 추가!!! */
-.sidebar-list li.title-li:hover {
-  background-color: transparent; /* ✅ 아무 변화도 없게 설정 */
-  cursor: default; /* 포인터도 없애버림 */
-}
-
-/* ✅ 체크박스 스타일 */
-.side-task-checkbox {
-  margin-right: 6px;
-}
-
-/* 🔧 전체선택 체크박스 */
-#side-select-all-container {
-  display: flex; /* ✅ 유지! 공간은 항상 차지해야 하니까! */
-  justify-content: flex-end;
-  padding: 0;
-  margin: 0;
-  visibility: hidden; /* ✅ 기본 상태는 숨김 (공간은 유지) */
-  opacity: 0; /* ✅ 부드러운 시각적 숨김 */
-  pointer-events: none; /* ✅ 클릭 불가 처리 */
-  height: 28px; /* ✅ 고정 높이 (리스트 밀림 방지용) */
-  transition: opacity 0.3s ease;
-}
-
-/* 🔥 보이게 만들기 */
-#side-select-all-container.visible {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#side-select-all-container input[type="checkbox"] {
-  transform: scale(1.1);
-}
-
-#side-select-all-container li:hover {
+.sidebar .title-li {
   background-color: transparent;
+  font-weight: bold;
+  color: #ffffff;
+  padding-left: 10px;
+  position: relative;
+  z-index: 1;
 }
 
-/* 📥 하단 푸터 */
-.sidebar-footer {
-  padding: 20px;
+.sidebar .title-li .title {
+  font-size: 15px;
+  border-left: 4px solid #19335a;
+  padding-left: 8px;
+}
+
+#side-select-all-container {
+  display: none;
+  justify-content: flex-end;
+  padding-right: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+#side-select-all-container.visible {
+  display: flex !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+#side-select-all-container li label {
+  margin-right: 10px;
+}
+
+#side-select-all-container li {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.side-mypage-link i,
+.side-logout-link i {
+  margin-right: 15px;
+}
+
+.side-mypage-link,
+.side-logout-link {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  width:40%;
+  margin-bottom: 10px;
+  transition: color 0.3s;
 }
 
-/* MYPAGE / LOGOUT */
-.sidebar-footer .left-footer {
+.sidebar.closed .side-mypage-link,
+.sidebar.closed .side-logout-link {
+  font-size: 20px;
+}
+
+.sidebar.closed .side-mypage-link span,
+.sidebar.closed .side-logout-link span {
+  display: none;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-bottom: 70px;
+  padding-top: 0;
+  position: relative;
+}
+
+.left-footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-left: 10px;
 }
 
-.sidebar-footer a {
-  text-decoration: none;
-  color: #19345b;
-  font-weight: bold;
-  font-size: 13px;
-  transition: color 0.2s ease;
-}
-
-/* 🗑️ 휴지통 */
 .side-trash {
-  position: relative;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 10px;
+  position: absolute;
+  top: 0;
+  right: 10px;
 }
 
 .side-icon-btn {
   background: none;
   border: none;
-  font-size: 20px;
-  color: #19345b;
+  color: #ccc;
+  font-size: 18px;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
 .side-icon-btn:hover {
-  transform: scale(1.1);
+  color: #fff;
 }
 
-.bookmark-btn {
-  display: none; /* 기본 상태: 안 보이게! */
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #888;
-  margin-left: auto; /* ✅ 북마크만 오른쪽으로 밀어냄 */
-}
-
-/* 체크박스가 있는 li 안에 북마크는 안 보이게! */
-li:has(.side-task-checkbox) .bookmark-icon {
-  display: none;
-}
-
-li:hover .bookmark-btn {
-  display: inline-block; /* 리스트 항목 hover 시 등장! */
-}
-
-.bookmark-btn:hover {
-  color: #3b74cb;
-}
-
-/*-------------------------------------------------------------------------------------*/
-/* ⚠️ 삭제 모달 */
 .common-modal {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
+  z-index: 10000;
   align-items: center;
+  justify-content: center;
 }
 
 .common-modal-content {
   background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  text-align: center;
+  border-radius: 16px;
+  padding: 30px 20px;
   width: 300px;
-  height: 200px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 
 .common-modal-buttons {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
-  padding: 10px 20px;
 }
 
 .common-modal-buttons button {
   padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  width: 88px;
-  height: 42px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-#modal-yes-btn {
-  background-color: #3b74cb;
-  color: white;
-}
-#modal-yes-btn:hover {
-  background-color: #2a5e99;
-  transform: scale(1.05);
-}
-
-#modal-no-btn {
-  background-color: #e0e0e0;
-  margin-left: 20px;
-}
-#modal-no-btn:hover {
-  background-color: #c0c0c0;
-  transform: scale(1.05);
-}
-/*------------------------------------------------------------------------*/
-/* 북마크 저장 팝업 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 24px 32px;
+#bookmark-modal .modal-content {
+  display: none;
+  background: white;
   border-radius: 12px;
+  padding: 20px;
+  width: 280px;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  font-size: 16px;
-}
-
-.modal-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
 }
 
 .modal-buttons button {
-  padding: 8px 16px;
+  padding: 10px 20px;
+  margin: 10px;
+  font-weight: bold;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-}
-
-#bookmark-yes-btn {
-  background-color: #3b74cb;
-  color: white;
-}
-
-#bookmark-no-btn {
-  background-color: #ddd;
-}
-
-.hidden {
-  display: none;
 }

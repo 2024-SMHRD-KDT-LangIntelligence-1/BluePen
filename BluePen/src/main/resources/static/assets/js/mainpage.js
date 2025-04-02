@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
          const botMsg = document.createElement("div");
          botMsg.classList.add("chat-message", "bot-message");
-         botMsg.innerText = "응답을 가져오는 중...";
+         botMsg.innerHTML = botMessageText; // ✅ 여기를 수정!!!
 
          messageSet.appendChild(botMsg);
-         messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+         chatBox.scrollTop = chatBox.scrollHeight; // ✅ 여기도 스크롤 추가
       }, 500);
    }
 

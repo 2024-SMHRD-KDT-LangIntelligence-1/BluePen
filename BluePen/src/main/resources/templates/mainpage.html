@@ -24,12 +24,15 @@
             <h2 class="welcome-message"
                th:text="${session.user.userId} + '님 환영합니다.'"></h2>
          </div>
-         <div class="chat-box" id="chat-box">
-            <div th:if="${answer} != null">
-               <div class="chat-message bot-message" th:text="${answer}"
-                   id="bot-response" th:data-answer="${answer}"></div>
-            </div>
-         </div>
+		<div class="chat-box" id="chat-box">
+		   <div th:if="${question} != null">
+		      <div class="chat-message user-message" th:text="${question}"></div>
+		   </div>
+		   <div th:if="${answer} != null">
+		      <div class="chat-message bot-message" th:utext="${answer}"
+		           id="bot-response" th:data-answer="${answer}"></div>
+		   </div>
+		</div>
          <div class="user-input-container">
             <form action="fast.do" method="get">
                <input type="text" id="user-input" name="text"

@@ -126,10 +126,7 @@ form {
   min-height: 100px;
 }
 
-.chat-message.bot-message:first-child {
-  display: none;
-  margin-top: 10px;
-}
+
 
 .message-set {
   display: flex;

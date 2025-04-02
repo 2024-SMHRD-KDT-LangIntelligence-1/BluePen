@@ -8,7 +8,6 @@
       rel="stylesheet"
     />
     <title>Sidebar</title>
-    <!-- Font Awesome 아이콘 라이브러리 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,38 +16,33 @@
   </head>
   <body>
     <div class="side-container">
-      <!-- 사이드바 -->
       <div id="sidebar" class="sidebar opened">
-        <!-- 🔥 리스트 전체를 감싸는 부모 요소 -->
-        <div class="sidebar-list">
-          <!-- 전체선택 체크박스 -->
-          <ul id="side-select-all-container" class="hidden-select-all">
-            <li>
-              <strong>전체선택</strong>
+        <div class="sidebar-list" style="margin-top: 50px;">
+          <ul id="side-select-all-container" style="display: none; justify-content: flex-end;">
+            <li style="display: flex; justify-content: flex-end; align-items: center;">
+              <label><strong>전체선택</strong></label>
               <input type="checkbox" id="side-select-all" />
             </li>
           </ul>
 
-          <!-- 오늘 리스트 -->
           <ul id="side-today">
             <li class="title-li"><span class="title">오늘</span></li>
           </ul>
           <ul id="side-task-list1"></ul>
 
-          <!-- 지난 7일 리스트 -->
           <ul id="side-before">
             <li class="title-li"><span class="title">지난 7일</span></li>
           </ul>
           <ul id="side-task-list2"></ul>
         </div>
-        <!-- 하단: 마이페이지 / 로그아웃 -->
+
         <div class="sidebar-footer">
           <div class="left-footer">
             <a href="/mypage" class="side-mypage-link">
-              <i class="fa-solid fa-user"></i> MYPAGE
+              <i class="fa-solid fa-user"></i><span class="sidebar-text"> MYPAGE</span>
             </a>
             <a href="/" class="side-logout-link">
-              <i class="fa-solid fa-arrow-right-from-bracket"></i> LOGOUT
+              <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="sidebar-text"> LOGOUT</span>
             </a>
           </div>
 
@@ -59,7 +53,6 @@
           </div>
         </div>
 
-        <!-- 사이드바 삭제 확인 모달 -->
         <div id="side-modal" class="common-modal">
           <div class="common-modal-content">
             <p>채팅을 삭제하시겠습니까?</p>
@@ -69,11 +62,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 사이드바 토글 버튼 -->
-        <button id="side-toggle-btn" class="side-toggle-btn">
-          <i class="fa-solid fa-angle-left"></i>
-        </button>
       </div>
     </div>
 
@@ -87,7 +75,6 @@
       </div>
     </div>
 
-    <!-- 사이드바 스크립트 -->
     <script src="assets/js/sidebar.js"></script>
   </body>
 </html>

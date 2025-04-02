@@ -16,7 +16,6 @@ let deleteTargetId = null;
             method: "DELETE"
           }).then(res => {
             if (res.ok) {
-              alert("삭제되었습니다.");
               location.reload();
             } else {
               alert("삭제 실패!");
