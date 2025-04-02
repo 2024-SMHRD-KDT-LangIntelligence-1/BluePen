@@ -17,45 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales/ko.js"></script>
 </head>
 <body>
-<div id="calendar"></div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    
-    // Spring Boot에서 전달된 plans 데이터를 JavaScript 배열로 변환
-    var events = [];
-    
-    // 'plans' 데이터가 비어있지 않다면
-    var plans = /*[[${plans}]]*/ '';  // Spring Boot에서 전달한 plans 변수를 여기에 넣음
 
-    if (plans && plans.trim() !== "") {
-        // 쉼표로 구분된 마감일 데이터 분리
-        var deadlines = plans.split(',');
-
-        deadlines.forEach(function(deadline) {
-            var deadlineParts = deadline.trim().split(' ');  // 공고명, 회사명, 마감일 분리
-            var company = deadlineParts[0];
-            var jobTitle = deadlineParts[1];
-            var deadlineDate = deadlineParts[2];
-
-            events.push({
-                title: "회사명: " + company + " 공고명: " + jobTitle,  // 제목에 회사명과 공고명 추가
-                start: deadlineDate,  // 마감일을 시작일로 설정
-                allDay: true  // 마감일은 하루 종일 일정으로 표시
-            });
-        });
-    }
-
-    // FullCalendar 초기화
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: ['dayGrid', 'interaction'],
-        initialView: 'dayGridMonth',
-        events: events  // 위에서 설정한 이벤트 배열을 추가
-    });
-
-    calendar.render();
-});
-    </script>
 
       <!-- 상단바, 사이드바 -->
     <header class="topbar" th:replace="~{topbar}"></header>

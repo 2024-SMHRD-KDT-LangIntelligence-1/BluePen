@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>BLUEPEN LIST</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/list.css" />
+</head>
+<body>
+	<!-- 상단바, 사이드바 -->
+	<header class="topbar" th:replace="~{topbar}"></header>
+
+	<div class="container">
+		<div class="buttons">
+			<button onclick="confirmDeleteAll()">전체삭제</button>
+			<select id="itemsPerPage" onchange="updateItemsPerPage()">
+				<option value="5" selected>5개씩</option>
+				<option value="10">10개씩</option>
+				<option value="15">15개씩</option>
+				<option value="20">20개씩</option>
+			</select>
+		</div>
+
+		<!-- plans 데이터를 숨긴 input으로 저장 -->
+		<input type="hidden" id="plansData" th:value="${session.plans}" />
+
+		<div class="job-list" id="schedule-list">
+			<!-- Thymeleaf를 사용하여 직접 반복 출력 -->
+			<div class="job-item" th:each="plan : ${parsedPlans}">
+				<div class="company-name" th:text="${plan.company}">회사명</div>
+				<div class="job-info">
+					<div class="job-details">
+						<div class="job-title" th:text="${plan.title}">공고명</div>
+						<div class="job-extra">추천된 공고</div>
+					</div>
+					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
+				</div>
+				<button class="add-schedule">
+				<i class="fa-solid fa-plus"></i>
+			</button>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+  function addToDatabase(button) {
+      // 부모 요소(.job-item)에서 데이터 가져오기
+      let jobItem = button.closest(".job-item");
+      let company = jobItem.querySelector(".company-name").innerText;
+      let title = jobItem.querySelector(".job-title").innerText;
+      let enddt = jobItem.querySelector(".job-deadline").innerText;
+
+      let postData = {
+          company: company,
+          title: title,
+          enddt: enddt
+      };
+
+      // 서버에 데이터 전송
+      fetch('/addJob', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              alert("공고가 일정에 추가되었습니다!");
+          } else {
+              alert("추가 실패! 다시 시도해주세요.");
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert("서버 오류 발생!");
+      });
+  }
+</script>
+
+	
+</body>
+</html>
