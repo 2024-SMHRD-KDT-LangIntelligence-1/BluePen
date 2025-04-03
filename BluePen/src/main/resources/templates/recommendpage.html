@@ -61,7 +61,7 @@
       let enddt = jobDeadlines[0] ? jobDeadlines[0].innerText : ""; // 첫 번째 요소
       let endtm = jobDeadlines[1] ? jobDeadlines[1].innerText : ""; // 두 번째 요소
       
-      let urlR = jobItem.querySelectorAll(".job-file").innerText;
+      let urlR = jobItem.querySelector(".job-file").innerText;
       
       let postData = {
           sche_title: company,

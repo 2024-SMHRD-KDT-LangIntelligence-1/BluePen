@@ -134,8 +134,8 @@ public class recommendController {
 		        
 		        
 		        // 기본값 NULL 처리
-		        sc.setScheColor(null);
-		        sc.setScheType(null);
+		        sc.setScheColor("#5F8B4C");
+		        sc.setScheType("자격증");
 		        sc.setScheStatus(null);
 
 		        scheduleRepo.save(sc);
