@@ -1,5 +1,9 @@
 package com.cothink.bluepen.controller;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +13,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -16,7 +21,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cothink.bluepen.entity.TblUser;
+import com.cothink.bluepen.entity.Tblschedule;
 import com.cothink.bluepen.repository.ScheduleRepo;
 import com.cothink.bluepen.repository.UserRepo;
 
@@ -41,6 +49,7 @@ public class recommendController {
                 Matcher companyMatch = Pattern.compile("회사:(.*?) 공고명:").matcher(plan);
                 Matcher titleMatch = Pattern.compile("공고명:(.*?) 마감일:").matcher(plan);
                 Matcher enddtMatch = Pattern.compile("마감일:(.*)").matcher(plan);
+                Matcher urlRMatch = Pattern.compile("공고링크:(.*)").matcher(plan);
 
                 if (companyMatch.find()) {
                     planMap.put("company", companyMatch.group(1).trim());
@@ -66,6 +75,11 @@ public class recommendController {
                     planMap.put("enddt", "");
                     planMap.put("endtm", "");
                 }
+                if (urlRMatch.find()) {
+                    planMap.put("urlR", urlRMatch.group(1).trim());
+                } else {
+                    planMap.put("urlR", "");
+                }
 
                 parsedPlans.add(planMap);
             }
@@ -79,9 +93,65 @@ public class recommendController {
 	}
 	
 	@PostMapping("/addJob")
-    public String addRecommendsche(HttpSession session, Model model) {
+	@ResponseBody
+    public ResponseEntity<Map<String, Object>> addRecommendsche(@RequestBody Map<String, String> requestData, HttpSession session) {
 		
-		return "recommendpage";
-    }
+		Map<String, Object> response = new HashMap<>();
+		
+		 try {
+		        TblUser uid = (TblUser) session.getAttribute("user");
+		        if (uid == null) {
+		            response.put("success", false);
+		            response.put("message", "User session not found.");
+		            return ResponseEntity.badRequest().body(response);
+		        }
+
+		        String userId = uid.getUserId();
+		        Tblschedule sc = new Tblschedule();
+
+		        String scheTitle = requestData.get("sche_title");
+		        String scheContent = requestData.get("sche_content");
+		        String scheDtStr = requestData.get("sche_dt");
+		        String scheTmStr = requestData.get("sche_tm");
+
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+		        java.sql.Date sqlDate = (scheDtStr != null && !scheDtStr.isEmpty()) 
+		            ? new java.sql.Date(dateFormat.parse(scheDtStr).getTime()) : null;
+
+		        java.sql.Time sqlTime = (scheTmStr != null && !scheTmStr.isEmpty()) 
+		            ? new java.sql.Time(timeFormat.parse(scheTmStr).getTime()) : null;
+
+		        sc.setScheTitle(scheTitle);
+		        sc.setScheContent(scheContent);
+		        sc.setUserId(userId);
+		        sc.setScheDt(sqlDate);
+		        sc.setScheTm(sqlTime);
+		        
+		        // 기본값 NULL 처리
+		        sc.setScheColor(null);
+		        sc.setScheFile(null);
+		        sc.setScheType(null);
+		        sc.setScheStatus(null);
+
+		        scheduleRepo.save(sc);
+
+		        response.put("success", true);
+		        response.put("message", "일정이 성공적으로 추가되었습니다.");
+		        return ResponseEntity.ok(response);
+
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		        response.put("success", false);
+		        response.put("message", "날짜 변환 오류 발생.");
+		        return ResponseEntity.badRequest().body(response);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        response.put("success", false);
+		        response.put("message", "서버 내부 오류 발생.");
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		    }
+	}
 	
 }

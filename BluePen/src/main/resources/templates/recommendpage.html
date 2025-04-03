@@ -37,7 +37,11 @@
 						<div class="job-title" th:text="${plan.title}">공고명</div>
 						<div class="job-extra">추천된 공고</div>
 					</div>
+					<div class="job-content">
+						<div class="job-file" th:text="${plan.file}"></div>
+					</div>
 					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
+					<div class="job-deadline" th:text="${plan.endtm}"></div>
 				</div>
 				<button class="add-schedule" onclick="addToDatabase(this)">
 					<i class="fa-solid fa-plus"></i>
@@ -46,22 +50,25 @@
 
 		</div>
 	</div>
-	<script>
+<script>
   function addToDatabase(button) {
       // 부모 요소(.job-item)에서 데이터 가져오기
       let jobItem = button.closest(".job-item");
       let company = jobItem.querySelector(".company-name").innerText;
       let title = jobItem.querySelector(".job-title").innerText;
-      let enddt = jobItem.querySelector(".job-deadline").innerText;
+      let jobDeadlines = jobItem.querySelectorAll(".job-deadline"); // 모든 job-deadline 요소 가져오기
 
+      let enddt = jobDeadlines[0] ? jobDeadlines[0].innerText : ""; // 첫 번째 요소
+      let endtm = jobDeadlines[1] ? jobDeadlines[1].innerText : ""; // 두 번째 요소
       let postData = {
           sche_title: company,
           sche_content: title,
-          sche_dt: enddt
+          sche_dt: enddt,
+          sche_tm: endtm
       };
 
       // 서버에 데이터 전송
-      fetch('/addJob', {
+      fetch('addJob', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
