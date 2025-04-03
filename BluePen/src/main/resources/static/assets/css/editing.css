@@ -10,11 +10,15 @@ body {
 }
 
 /* ✅ 상단바와 사이드바 */
-.topbar,
+.topbar{
+  display: block;
+  width: 100%;
+  z-index: 1000; /* 상단바의 z-index를 낮게 설정 */
+}
 .sidebar {
   display: block;
   width: 100%;
-  z-index: 1000;
+  z-index: 1100; /* 사이드바의 z-index를 상단바보다 높게 설정 */
 }
 
 /* ✅ 전체 레이아웃 감싸는 cover */

@@ -92,7 +92,8 @@ public class TblPublicService {
 				String company = item.path("instNm").asText("제공 없음");
 				String academic = item.path("acbgCondNmLst").asText("제공 없음");
 				String duty = item.path("hireTypeNmLst").asText("제공 없음");
-				String position = item.path("recrutSeNm").asText("제공 없음");
+				String career = item.path("recrutSeNm").asText("제공 없음");
+				String position = item.path("ncsCdNmLst").asText("제공 없음");
 				String workingArea = item.path("workRgnNmLst").asText("제공 없음");
 				String startedAt = item.path("pbancBgngYmd").asText("20250101");
 				String closedAt = item.path("pbancEndYmd").asText("20251231");
@@ -107,7 +108,7 @@ public class TblPublicService {
 
 				// 저장
 				TblRecruit recruit = TblRecruit.builder().company(company).recruitTitle(recruitTitle).academic(academic)
-						.duty(duty).position(position).career("제공 없음").salary("제공 없음").workingDay("제공 없음")
+						.duty(duty).position(position).career(career).salary("제공 없음").workingDay("제공 없음")
 						.workingArea(workingArea).startedAt(startedDate).closedAt(closedDate).srcUrl(srcUrl).build();
 
 				recruitRepo.save(recruit);
