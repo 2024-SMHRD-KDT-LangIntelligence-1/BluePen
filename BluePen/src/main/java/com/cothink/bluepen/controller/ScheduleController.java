@@ -35,7 +35,8 @@ public class ScheduleController {
 
 	@PostMapping("/insert")
 	public String saveToDb(String scheTitle, Date scheDt, Time scheTm, String scheType, String scheColor,
-			HttpSession session) { // 세션 통해 로그인 사용자 가져옴
+            String scheContent, String scheFile,
+            HttpSession session) { // 세션 통해 로그인 사용자 가져옴
 
 		// 로그인 사용자 정보 꺼내기
 		TblUser uid = (TblUser) session.getAttribute("user");
@@ -48,6 +49,8 @@ public class ScheduleController {
 		sc.setScheTm(scheTm);
 		sc.setScheType(scheType);
 		sc.setUserId(userId); // 사용자 ID 저장
+		sc.setScheContent(scheContent); // 컨텐츠 파일 추가
+		sc.setScheFile(scheFile);
 
 		scheduleRepo.save(sc); // 올바르게 저장
 
@@ -92,6 +95,21 @@ public class ScheduleController {
 		}).collect(Collectors.toList()); // ✅ 빨간줄 해결 핵심!!!
 
 		return ResponseEntity.ok(eventList);
+	}
+	@DeleteMapping("/schedule-delete-all")
+	@ResponseBody
+	public ResponseEntity<String> deleteAllSchedules(HttpSession session) {
+	    TblUser user = (TblUser) session.getAttribute("user");
+
+	    if (user == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("세션 만료");
+	    }
+
+	    // 🔥 로그인한 유저의 일정만 삭제!!!
+	    List<Tblschedule> schedules = scheduleRepo.findByUserId(user.getUserId());
+	    scheduleRepo.deleteAll(schedules);
+
+	    return ResponseEntity.ok("전체 일정 삭제 완료!");
 	}
 
 }

@@ -208,3 +208,13 @@ body {
     align-self: flex-end;
   }
 }
+
+.job-extra {
+  margin-top: 5px;
+  font-size: 13px;
+  color: #444;
+}
+
+.job-content {
+  margin-bottom: 4px;
+}

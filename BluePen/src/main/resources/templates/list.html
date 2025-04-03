@@ -34,6 +34,17 @@
         <div class="job-meta" th:text="'날짜: ' + ${item.scheDt} + ' 시간: ' + ${item.scheTm}">메타</div>
         <div class="job-extra">캘린더에서 입력한 일정</div>
       </div>
+      <!-- ✅ 여기에 추가 시작 -->
+	<div class="job-extra">
+	  <div class="job-content" th:text="'내용: ' + ${item.scheContent}"></div>
+	
+	  <div th:if="${item.scheFile != null and item.scheFile != ''}">
+	    <a th:href="@{'/upload/' + ${item.scheFile}}" target="_blank"
+	       style="font-size: 13px; color: #007bff; text-decoration: underline;">
+	      첨부파일 열기
+	    </a>
+	  </div>
+	</div>
       <div class="job-deadline" th:text="'마감일자: ' + ${item.scheDt}"></div>
     </div>
     <button class="apply-btn delete-btn homepage" th:attr="onclick='confirmDelete(' + ${item.scheIdx} + ')'">

@@ -202,4 +202,23 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("사이드바 채팅 리스트 불러오기 실패!!!!", error);
     }
   });
+  
+  function handleResponsiveSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const width = window.innerWidth;
+
+    if (width < 1700) {
+      sidebar.classList.add("closed");
+      sidebar.classList.remove("opened");
+    } else {
+      sidebar.classList.remove("closed");
+      sidebar.classList.add("opened");
+    }
+  }
+
+  // ✅ 처음 로딩 시 실행
+  handleResponsiveSidebar();
+
+  // ✅ 창 크기 바뀔 때마다 감지해서 실행
+  window.addEventListener("resize", handleResponsiveSidebar);
 });
