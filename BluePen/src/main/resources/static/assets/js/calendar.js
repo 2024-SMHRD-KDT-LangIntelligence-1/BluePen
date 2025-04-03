@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
   // ✅ 여기에 추가!!
   const eventContentInput = document.getElementById("eventContent");
-  const eventFileInput = document.getElementById("eventFile");
+  const eventUrlInput = document.getElementById("eventUrl");
 
   let selectedDate = null;
   let eventToDelete = null;
@@ -149,10 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("scheColor", color);
 	  // ✅ 여기에 추가!!
 	  formData.append("scheContent", eventContentInput.value);
-
-	  if (eventFileInput.files.length > 0) {
-	    formData.append("scheFile", eventFileInput.files[0].name); // 파일명만 저장 (실제 파일 저장 X)
-	  }
+	  formData.append("scheFile", eventUrlInput.value);
+	  
 
       fetch("/insert", {
         method: "POST",

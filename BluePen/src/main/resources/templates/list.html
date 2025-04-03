@@ -39,11 +39,11 @@
 	  <div class="job-content" th:text="'내용: ' + ${item.scheContent}"></div>
 	
 	  <div th:if="${item.scheFile != null and item.scheFile != ''}">
-	    <a th:href="@{'/upload/' + ${item.scheFile}}" target="_blank"
-	       style="font-size: 13px; color: #007bff; text-decoration: underline;">
-	      첨부파일 열기
-	    </a>
-	  </div>
+	  <a th:href="${item.scheFile}" target="_blank"
+	     style="font-size: 13px; color: #007bff; text-decoration: underline;">
+	    관련 링크 열기
+	  </a>
+	</div>
 	</div>
       <div class="job-deadline" th:text="'마감일자: ' + ${item.scheDt}"></div>
     </div>

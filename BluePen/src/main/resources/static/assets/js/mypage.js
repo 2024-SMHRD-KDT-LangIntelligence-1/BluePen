@@ -86,8 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // "예" 버튼 클릭 시 저장 작업 후 모달 닫고 실제로 form 제출
   modalYesBtn.addEventListener("click", function () {
       modal.style.display = "none";
-      saveZeroPartyData(); // ✅ 먼저 제로파티 비동기 전송
-      document.getElementById("mypage-form").submit(); // ✅ 사용자 정보 form 제출
+	  // ✅ fetch 끝난 뒤 submit 실행되도록 비동기 처리
+	     saveZeroPartyData().then(() => {
+	         document.getElementById("mypage-form").submit(); // 🔥 fetch 완료 후 submit!
+	     });
   });
 
   // "아니오" 버튼 클릭 시 모달 닫기
@@ -117,22 +119,19 @@ genderButtons.forEach(btn => {
   });
 });
 //제로파티 따로 연동하기 위한 코드
-function saveZeroPartyData() {
+async function saveZeroPartyData() {
     const formData = new FormData();
     formData.append("salary_top", document.getElementById("salary_top").value);
     formData.append("salary_bottom", document.getElementById("salary_bottom").value);
     formData.append("welfare", document.getElementById("welfare").value);
     formData.append("working_condition", document.getElementById("working_condition").value);
 
-    fetch("/mypage/saveOnlySalary", {
-        method: "POST",
-        body: formData
-    }).then(res => {
-        if (res.redirected) {
-            window.location.href = res.url;
-        }
+    await fetch("/mypage/saveOnlySalary", {
+      method: "POST",
+      body: formData
     });
-}
+  }
+
 
 
 
