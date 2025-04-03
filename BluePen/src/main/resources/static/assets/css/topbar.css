@@ -15,10 +15,11 @@ html {
   left: 0;
   background-color: #ffffff;
   padding: 0 20px;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box; /* ✅ 이거 꼭 들어가야 padding 포함! */
+  box-sizing: border-box;
   z-index: 1000;
 }
 
@@ -26,40 +27,38 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px 0px 30px; /* 위 오른쪽 아래 왼쪽*/
-  margin: 0px 5px 10px 5px; /* 위 오른쪽 아래 왼쪽*/
+  padding: 0px 20px 0px 30px;
   position: fixed;
   width: 100%;
   height: 80px;
   top: 0;
   z-index: 1001;
-  background-color: transparent;
-}
-
-.top-header, .top-navigation {
-  overflow: visible;  /* 자식 요소가 잘리지 않도록 설정 */
+  background-color: #ffffff;
+  border-bottom: 2px solid #cccccc;
 }
 
 .top-logo {
-  display: flex;              /* 자식 요소 정렬하려면 flex가 최고다 */
-  align-items: center;        /* 세로 정렬을 중앙으로 맞춘다 */
-  height: 100%;              /* 필요 시 상단 바 높이에 맞게 조정 */
-  padding-left: 0px;         /* 좌측 여백도 약간 주는 센스 */
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 0px;
 }
 
 .top-logo img {
-  width: 17%; 
-  margin: 30px 0px 0px 0px; /* 위 오른쪽 아래 왼쪽*/
+  width: 17%;
+  margin: 15px 0px 0px 0px;
 }
 
 /* 네비게이션 스타일 */
 .top-navigation {
   display: flex;
+  gap: 8px; /* ✅ 아이콘 사이 간격 추가 */
 }
 
 /* 네비게이션 링크 스타일 */
 .top-nav-link,
-.bookmark-icon {
+.bookmark-icon,
+.alram-icon {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -67,18 +66,18 @@ html {
   width: 45px;
   height: 40px;
   color: #19335a;
-  position: relative; /* 아이콘 위치를 위한 relative 위치 설정 */
-  box-sizing: border-box; /* padding 포함하여 요소 크기 계산 */
+  position: relative;
+  box-sizing: border-box;
 }
 
-/* 아이콘 스타일 */
+/* 아이콘 크기 통일 */
 .top-nav-link i,
-.bookmark-icon i {
-  font-size: 24px;
-  margin: 0; /* margin 제거 */
+.bookmark-icon i,
+.alram-icon i {
+  font-size: 28px; /* ✅ 통일된 크기로 조정 */
+  margin: 0;
 }
 
-/* 기본적으로 텍스트 숨김 */
 .top-icon-text {
   display: none;
   margin-top: 5px;
@@ -86,16 +85,16 @@ html {
   font-size: 12px;
   color: #19335a;
   position: absolute;
-  top: 30px; /* 텍스트 위치 */
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
   width: 60px;
   text-align: center;
 }
 
-/* 네비게이션 아이템에 호버하면 텍스트가 보이도록 */
 .top-nav-link:hover .top-icon-text,
-.bookmark-icon:hover .top-icon-text {
+.bookmark-icon:hover .top-icon-text,
+.alram-icon:hover .top-icon-text {
   display: block;
 }
 
@@ -104,7 +103,7 @@ html {
 #bookmarkpopup {
   display: none;
   position: absolute;
-  top: 73px;
+  top: 83px;
   right: 30px;
   width: 300px;
   border: none;
@@ -204,7 +203,7 @@ html {
 #alramContainer {
   display: none; /* 초기에는 숨김 */
   position: absolute; /* 화면에서 위치를 고정 */
-  top: 30px; /* 버튼 아래쪽에 표시되도록 위치 조정 */
+  top: 50px; /* 버튼 아래쪽에 표시되도록 위치 조정 */
   right: 40px; /* 오른쪽 끝에 표시 */
   background-color: #F3F8FF; /* 배경색 */
   border-radius: 10px; /* 모서리 둥글게 */

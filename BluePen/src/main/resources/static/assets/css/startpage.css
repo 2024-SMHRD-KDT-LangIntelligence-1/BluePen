@@ -49,6 +49,13 @@ body {
   animation: fadeInUp 1.6s ease-out forwards;
 }
 
+.start-top-wrap {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  z-index: 20;
+}
+
 .start-bottom-wrap {
   width: 100%;
   display: flex;

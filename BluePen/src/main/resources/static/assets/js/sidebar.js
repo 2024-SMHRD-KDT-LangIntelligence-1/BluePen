@@ -1,7 +1,7 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("side-toggle-btn");
-  const icon = toggleBtn.querySelector("i");
   const modal = document.getElementById("side-modal");
   const modalYesBtn = document.getElementById("modal-yes-btn");
   const modalNoBtn = document.getElementById("modal-no-btn");
@@ -21,21 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentTargetId = null;
   let currentTargetLi = null;
 
-  // ✅ 사이드바 토글 기능
-  toggleBtn.addEventListener("click", () => {
-    const isOpened = sidebar.classList.contains("opened");
-
-    if (isOpened) {
-      sidebar.classList.remove("opened");
-      sidebar.classList.add("closed");
-      icon.classList.remove("fa-angle-left");
-      icon.classList.add("fa-angle-right");
-    } else {
-      sidebar.classList.remove("closed");
-      sidebar.classList.add("opened");
-      icon.classList.remove("fa-angle-right");
-      icon.classList.add("fa-angle-left");
+  // ✅ 사이드바 자체 클릭으로 토글
+  sidebar.addEventListener("click", (e) => {
+    if (e.target.closest(".side-trash") || e.target.closest(".bookmark-btn") || e.target.closest(".common-modal") || e.target.closest(".modal-buttons")) {
+      return; // 하단 요소나 모달 클릭 시 토글 무시
     }
+    sidebar.classList.toggle("closed");
+    sidebar.classList.toggle("opened");
   });
 
   trashBtn.addEventListener("click", () => {
@@ -139,14 +131,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const today = new Date();
       const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
 
-      // 🔥 topbar의 bookmarks 배열에 push
       if (window.bookmarks) {
         window.bookmarks.push({
           name: titleText,
           date: formattedDate,
         });
 
-        // 🔥 상단바 북마크 렌더링 호출
         if (typeof window.renderBookmarks === "function") {
           window.renderBookmarks();
         }
@@ -159,14 +149,12 @@ document.addEventListener("DOMContentLoaded", function () {
     currentTargetLi = null;
   });
 
-  // ❌ 북마크 "아니오" 클릭
   bookmarkNoBtn.addEventListener("click", () => {
     bookmarkModal.classList.add("hidden");
     currentTargetId = null;
     currentTargetLi = null;
   });
 
-  // ✅ 채팅 리스트 불러오기
   window.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await fetch("/api/chat/list");
@@ -193,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
           e.stopPropagation();
           bookmarkModal.classList.remove("hidden");
           currentTargetId = chat.promptIdx;
-          currentTargetLi = li; // ✅ 클릭된 li 기억!
+          currentTargetLi = li;
         });
 
         li.addEventListener("click", () => {
@@ -214,4 +202,23 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("사이드바 채팅 리스트 불러오기 실패!!!!", error);
     }
   });
+  
+  function handleResponsiveSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const width = window.innerWidth;
+
+    if (width < 1700) {
+      sidebar.classList.add("closed");
+      sidebar.classList.remove("opened");
+    } else {
+      sidebar.classList.remove("closed");
+      sidebar.classList.add("opened");
+    }
+  }
+
+  // ✅ 처음 로딩 시 실행
+  handleResponsiveSidebar();
+
+  // ✅ 창 크기 바뀔 때마다 감지해서 실행
+  window.addEventListener("resize", handleResponsiveSidebar);
 });

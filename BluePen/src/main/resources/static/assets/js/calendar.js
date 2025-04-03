@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.add("closed");
+  sidebar.classList.remove("opened");
+});
+
+document.addEventListener("DOMContentLoaded", function () {
   const calendarEl = document.getElementById("calendar");
   const modal = document.getElementById("eventModal");
   const closeModal = document.getElementById("closeModal");
@@ -10,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeDeleteModal = document.getElementById("closeDeleteModal");
   const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
   const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+  // ✅ 여기에 추가!!
+  const eventContentInput = document.getElementById("eventContent");
+  const eventFileInput = document.getElementById("eventFile");
 
   let selectedDate = null;
   let eventToDelete = null;
@@ -59,6 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "block";
     },
 
+	// ✅ 여기 넣으시면 됩니다 형님!!!
+	eventClassNames: function (arg) {
+	  if (arg.event.title.includes("자격증")) {
+	    return ["certificate-event"];
+	  } else if (arg.event.title.includes("취업")) {
+	    return ["recruit-event"];
+	  }
+	},
+	
 	eventClick: function (info) {
 	  eventToDelete = info.event;
 
@@ -76,30 +94,28 @@ document.addEventListener("DOMContentLoaded", function () {
 	  viewModal.style.display = "block";
 	},
 
-    eventDidMount: function (info) {
-      const event = info.event;
-      const el = info.el;
+	eventDidMount: function (info) {
+	  const event = info.event;
+	  const el = info.el;
 
-      const title = event.title;
-      if (title.includes("자격증")) {
-        el.style.backgroundColor = "#5F8B4C";
-        el.style.borderColor = "#5F8B4C";
-      }
-      if (title.includes("취업")) {
-        el.style.backgroundColor = "#FF9A9A";
-        el.style.borderColor = "#FF9A9A";
-      }
+	  const color = event.extendedProps.sche_color; // ✅ DB에서 받아온 색상
 
-      if (event.start && event.end) {
-        const startDate = new Date(event.start);
-        const endDate = new Date(event.end);
-        const dayDiff = (endDate - startDate) / (1000 * 60 * 60 * 24);
-        if (dayDiff >= 1) {
-          el.style.borderLeft = "5px solid #19335a";
-          el.style.backgroundColor = "#f1f1f1";
-          el.style.fontWeight = "bold";
-        }
-      }
+	  if (color) {
+	    el.style.backgroundColor = color;
+	    el.style.borderColor = color;
+	  }
+
+	  // ✅ 하루 이상 일정이면 border-left 추가
+	  if (event.start && event.end) {
+	    const startDate = new Date(event.start);
+	    const endDate = new Date(event.end);
+	    const dayDiff = (endDate - startDate) / (1000 * 60 * 60 * 24);
+	    if (dayDiff >= 1) {
+	      el.style.borderLeft = "5px solid #19335a";
+	      el.style.fontWeight = "bold";
+	      // ✅ 배경색은 유지해야 하므로 여기선 덮지 않음
+	    }
+	  }
     },
 
 
@@ -131,6 +147,12 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("scheTm", timeFormatted);
       formData.append("scheType", type);
       formData.append("scheColor", color);
+	  // ✅ 여기에 추가!!
+	  formData.append("scheContent", eventContentInput.value);
+
+	  if (eventFileInput.files.length > 0) {
+	    formData.append("scheFile", eventFileInput.files[0].name); // 파일명만 저장 (실제 파일 저장 X)
+	  }
 
       fetch("/insert", {
         method: "POST",

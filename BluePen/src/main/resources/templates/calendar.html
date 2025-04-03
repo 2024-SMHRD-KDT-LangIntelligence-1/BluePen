@@ -40,6 +40,13 @@
          <option value="자격증">자격증 일정</option>
          <option value="취업">취업 일정</option>
        </select>
+       
+       <!-- 일정 내용 입력 -->
+	  <textarea id="eventContent" name="scheContent" class="input-box" placeholder="일정 내용을 입력해주세요"></textarea>
+	
+	  <!-- 파일 첨부 -->
+	  <label for="eventFile">파일 첨부:</label>
+	  <input type="file" id="eventFile" name="scheFile" class="input-box" />
    
        <input type="time" id="eventTime" name="scheTm" class="input-box" />
    
@@ -61,16 +68,16 @@
      </div>
    </div>
    
-   <!-- 일정 상세 보기 모달 -->
-<div id="viewModal" class="modal">
-  <div class="modal-content schedule-modal">
-    <span id="closeViewModal" class="close">
-      <i class="fa-solid fa-xmark"></i>
-    </span>
-    <h2 class="modal-title">일정 상세 보기</h2>
-    <p id="viewModalContent">내용을 불러오는 중...</p>
-  </div>
-</div>
+	   <!-- 일정 상세 보기 모달 -->
+	<div id="viewModal" class="modal">
+	  <div class="modal-content schedule-modal">
+	    <span id="closeViewModal" class="close">
+	      <i class="fa-solid fa-xmark"></i>
+	    </span>
+	    <h2 class="modal-title">일정 상세 보기</h2>
+	    <p id="viewModalContent">내용을 불러오는 중...</p>
+	  </div>
+	</div>
 
     <script src="assets/js/calendar.js"></script>
 </body>

@@ -16,7 +16,6 @@ let deleteTargetId = null;
             method: "DELETE"
           }).then(res => {
             if (res.ok) {
-              alert("삭제되었습니다.");
               location.reload();
             } else {
               alert("삭제 실패!");
@@ -74,3 +73,25 @@ let deleteTargetId = null;
         showPage(currentPage);
         renderPagination();
       });
+	  
+	  // ✅ 전체삭제 모달 열기 함수
+	  function confirmDeleteAll() {
+	    document.querySelector(".modal-text").innerText = "정말 모든 일정을 삭제하시겠습니까?";
+	    const confirmBtn = document.querySelector(".modal-confirm");
+	    confirmBtn.onclick = deleteAllConfirmed;
+	    document.getElementById("deleteModal").style.display = "flex";
+	  }
+
+	  // ✅ 삭제 실행 함수
+	  function deleteAllConfirmed() {
+	    fetch("/schedule-delete-all", {
+	      method: "DELETE"
+	    }).then(res => {
+	      if (res.ok) {
+	        alert("전체 일정이 삭제되었습니다.");
+	        location.reload();
+	      } else {
+	        alert("삭제 실패!");
+	      }
+	    });
+	  }

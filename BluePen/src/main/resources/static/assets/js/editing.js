@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.add("closed");
+  sidebar.classList.remove("opened");
+});
+
 document.addEventListener("DOMContentLoaded", function() {
    const fileInput = document.getElementById("resumeFile");
    const fileNameSpan = document.getElementById("file-name");

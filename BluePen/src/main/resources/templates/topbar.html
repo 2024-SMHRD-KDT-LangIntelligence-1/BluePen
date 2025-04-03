@@ -23,9 +23,7 @@
       </div>
       <!-- 새채팅 버튼 -->
       <nav class="top-navigation">
-      <div id="recommendlist">
-			<a href="/recommendpage">추천받기</a>
-		</div>
+      
 		<a id="new-chat-btn" class="top-nav-link" style="cursor: pointer;">
 		  <i class="fa-regular fa-comment-dots" style="color: #19335a;"></i>
 		  <span class="top-icon-text">새채팅</span>
@@ -56,7 +54,13 @@
           ></i>
           <span class="top-icon-text">이력서첨삭</span>
         </a>
-
+        <!-- 추천 받기 버튼 -->
+		<div id="recommendlist" class="top-nav-link">
+		  <a href="/recommendpage" style="display: flex; align-items: center; gap: 5px;">
+		    <i class="fa-solid fa-hand-holding-heart" style="color: #19335a;"></i>
+		    <span class="top-icon-text">추천받기</span>
+		  </a>
+		</div>
         <!-- 캘린더 버튼 -->
         <a href="/calendar" class="top-nav-link">
           <i

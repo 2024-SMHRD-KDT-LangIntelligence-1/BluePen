@@ -47,6 +47,30 @@ document.addEventListener("DOMContentLoaded", function () {
          chatContainer.classList.add("active");
       }
 
-      chatBox.lastElementChild.scrollIntoView({ behavior: "smooth", block: "end" });
+//----------------------------------------------------------------------
+      // ✅ 사용자 메시지 생성
+      const messageSet = document.createElement("div");
+      messageSet.classList.add("message-set");
+
+      const userMsg = document.createElement("div");
+      userMsg.classList.add("chat-message", "user-message");
+      userMsg.innerText = text;
+      messageSet.appendChild(userMsg);
+
+      chatBox.appendChild(messageSet);
+      userInput.value = ""; // 입력 필드 초기화
+
+      // ✅ 자동 스크롤
+      messageSet.scrollIntoView({ behavior: "smooth", block: "end" });
+
+      // ✅ AI 응답 추가
+      setTimeout(() => {
+         const botMsg = document.createElement("div");
+         botMsg.classList.add("chat-message", "bot-message");
+         botMsg.innerHTML = botMessageText; // ✅ 여기를 수정!!!
+
+         messageSet.appendChild(botMsg);
+         chatBox.scrollTop = chatBox.scrollHeight; // ✅ 여기도 스크롤 추가
+      }, 500);
    }
 });
