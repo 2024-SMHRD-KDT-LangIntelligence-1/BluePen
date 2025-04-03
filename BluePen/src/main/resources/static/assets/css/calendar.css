@@ -34,7 +34,7 @@ body {
 .calendar-wrapper {
   width: calc(100% - 280px);
   max-width: 1000px;
-  margin: 120px auto 30px 280px;
+  margin: 120px auto 30px auto;
   padding: 30px;
   background: white;
   border-radius: 20px;

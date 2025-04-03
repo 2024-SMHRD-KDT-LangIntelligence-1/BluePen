@@ -1,7 +1,10 @@
 package com.cothink.bluepen.controller;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +16,7 @@ import com.cothink.bluepen.repository.UserRepo;
 import com.cothink.bluepen.repository.ZeroPartyRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class ZeroController {
@@ -34,67 +38,80 @@ public class ZeroController {
 	
 	//zero data 연결 - 승혁 @@@@@
 	@PostMapping("/save")
+	@Transactional
 	public String saveToDb(@RequestParam("job") String job,
 	                       @RequestParam("zero_aca") String education,
 	                       @RequestParam("zero_career") String career,
 	                       @RequestParam("region") String region,
 	                       @RequestParam(value = "license", required = false) String license,
 	                       @RequestParam(value = "hoped_license", required = false) String hopedLicense,
-	                       
-	                       HttpSession session) { // 세션 통해 로그인 사용자 가져옴
-		
-		// 🔽 로그인 사용자 정보 꺼내기
+	                       HttpSession session) {
+
 	    TblUser uid = (TblUser) session.getAttribute("user");
 	    String userId = uid.getUserId();
 
-	    ZeroParty zp = new ZeroParty();
-	    zp.setJob(job);
-	    zp.setEducation(education);
-	    zp.setCareer(career);
-	    zp.setRegion(region);
-	    zp.setUserId(userId); // 🔽 사용자 ID 저장
-	 // 🔽 추가 항목들 저장
-	    zp.setLicense(license);
-	    zp.setHopedLicense(hopedLicense);
-	    
-	    zeroPartyRepository.save(zp); // ✅ 올바르게 저장
+	    Optional<ZeroParty> optional = zeroPartyRepository.findByUserId(userId);
 
-	    return "redirect:/mainpage"; // 저장 후 mainpage로 이동
+	    if (optional.isPresent()) {
+	        // 🔥 이미 존재하는 데이터 → 업데이트
+	        ZeroParty zp = optional.get();
+	        zp.setJob(job);
+	        zp.setEducation(education);
+	        zp.setCareer(career);
+	        zp.setRegion(region);
+	        zp.setLicense(license);
+	        zp.setHopedLicense(hopedLicense);
+	        // ✅ save 호출 안 해도 됨 (변경감지)
+	    } else {
+	        // 🔥 처음 저장하는 사용자 → 새로 insert
+	        ZeroParty zp = new ZeroParty();
+	        zp.setUserId(userId);
+	        zp.setJob(job);
+	        zp.setEducation(education);
+	        zp.setCareer(career);
+	        zp.setRegion(region);
+	        zp.setLicense(license);
+	        zp.setHopedLicense(hopedLicense);
+	        zeroPartyRepository.save(zp); // ✅ insert 발생
+	    }
+
+	    return "redirect:/mainpage";
 	}
 	
 	@PostMapping("/mypage/saveOnlySalary")
-	public String saveOnlySalary(
-	        @RequestParam(value = "salary_top", required = false) Integer salaryTop,
-	        @RequestParam(value = "salary_bottom", required = false) Integer salaryBottom,
-	        @RequestParam(value = "welfare", required = false) String welfare,
-	        @RequestParam(value = "working_condition", required = false) String workingCondition,
-	        HttpSession session) {
-
-	    TblUser uid = (TblUser) session.getAttribute("user");
-	    if (uid == null) {
-	        return "redirect:/login";
+	@Transactional
+	public ResponseEntity<String> saveOnlySalary(
+	        @RequestParam("salary_top") Integer salaryTop,
+	        @RequestParam("salary_bottom") Integer salaryBottom,
+	        @RequestParam("welfare") String welfare,
+	        @RequestParam("working_condition") String workingCondition,
+	        HttpSession session
+	) {
+	    TblUser user = (TblUser) session.getAttribute("user");
+	    if (user == null) {
+	        return ResponseEntity.status(401).body("로그인 정보 없음");
 	    }
 
-	    String userId = uid.getUserId();
+	    String userId = user.getUserId();
+	    Optional<ZeroParty> optional = zeroPartyRepository.findByUserId(userId);
 
-	    // ✅ 기존 데이터 있는지 확인
-	    ZeroParty zp = zeroPartyRepository.findByUserId(userId).orElse(null);
-
-	    if (zp == null) {
-	        // ➕ 처음 쓰는 사용자만 새로 생성
-	        zp = new ZeroParty();
+	    if (optional.isPresent()) {
+	        ZeroParty zp = optional.get();
+	        zp.setSalaryTop(salaryTop);
+	        zp.setSalaryBottom(salaryBottom);
+	        zp.setWelfare(welfare);
+	        zp.setWorkingCondition(workingCondition);
+	    } else {
+	        ZeroParty zp = new ZeroParty();
 	        zp.setUserId(userId);
+	        zp.setSalaryTop(salaryTop);
+	        zp.setSalaryBottom(salaryBottom);
+	        zp.setWelfare(welfare);
+	        zp.setWorkingCondition(workingCondition);
+	        zeroPartyRepository.save(zp);
 	    }
 
-	    // ✅ 기존 데이터 유지하며 필요한 필드만 수정
-	    zp.setSalaryTop(salaryTop);
-	    zp.setSalaryBottom(salaryBottom);
-	    zp.setWelfare(welfare);
-	    zp.setWorkingCondition(workingCondition);
-
-	    zeroPartyRepository.save(zp); // ⏎ update or insert 자동 처리
-
-	    return "redirect:/mypage";
+	    return ResponseEntity.ok("성공!");
 	}
 
 	

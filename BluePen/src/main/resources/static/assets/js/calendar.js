@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeDeleteModal = document.getElementById("closeDeleteModal");
   const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
   const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+  // ✅ 여기에 추가!!
+  const eventContentInput = document.getElementById("eventContent");
+  const eventUrlInput = document.getElementById("eventUrl");
 
   let selectedDate = null;
   let eventToDelete = null;
@@ -144,6 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("scheTm", timeFormatted);
       formData.append("scheType", type);
       formData.append("scheColor", color);
+	  // ✅ 여기에 추가!!
+	  formData.append("scheContent", eventContentInput.value);
+	  formData.append("scheFile", eventUrlInput.value);
+	  
 
       fetch("/insert", {
         method: "POST",

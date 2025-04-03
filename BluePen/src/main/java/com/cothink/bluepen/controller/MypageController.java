@@ -63,12 +63,3 @@ public class MypageController {
     
 }
 
-    
-
-    // String userid = uid.getUserId();
-    // session.setAttribute("userid", userid);
-    // System.out.println("저장된 유저아이디 가져오기" + userid);
-
-    // List<TbCreditcard> cardlist = creditcard_repo.findAllByUserId(userid);
-    // model.addAttribute("cardlist", cardlist);
-

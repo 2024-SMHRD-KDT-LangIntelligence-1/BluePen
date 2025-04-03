@@ -39,7 +39,7 @@ public class FastAPIController {
 						.build())
 				.retrieve()
 				.bodyToMono(Map.class)
-				.block(); // 동기적으로 결과 가져오기
+				.block(); 
 		
 		String chatGptResponse = (String) response.get("response");
         Object plansObject = response.get("plans");
