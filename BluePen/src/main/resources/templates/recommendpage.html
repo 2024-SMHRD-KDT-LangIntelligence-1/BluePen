@@ -38,7 +38,7 @@
 						<div class="job-extra">추천된 공고</div>
 					</div>
 					<div class="job-content">
-						<div class="job-file" th:text="${plan.file}"></div>
+						<div class="job-file" th:text="${plan.urlR}"></div>				
 					</div>
 					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
 					<div class="job-deadline" th:text="${plan.endtm}"></div>
@@ -60,11 +60,15 @@
 
       let enddt = jobDeadlines[0] ? jobDeadlines[0].innerText : ""; // 첫 번째 요소
       let endtm = jobDeadlines[1] ? jobDeadlines[1].innerText : ""; // 두 번째 요소
+      
+      let urlR = jobItem.querySelectorAll(".job-file").innerText;
+      
       let postData = {
           sche_title: company,
           sche_content: title,
           sche_dt: enddt,
-          sche_tm: endtm
+          sche_tm: endtm,
+          sche_file: urlR
       };
 
       // 서버에 데이터 전송

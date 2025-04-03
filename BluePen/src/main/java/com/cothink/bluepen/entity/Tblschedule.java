@@ -26,7 +26,7 @@ public class Tblschedule {
 
 	// 선택적으로 비워둘 수 있는 필드들
 	private String scheContent;
-	private String scheFile = "";
+	private String scheFile;
 	private String alertSetting = "off";
 	private String scheStatus = "active";
 

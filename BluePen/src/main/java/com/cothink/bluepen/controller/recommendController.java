@@ -48,7 +48,7 @@ public class recommendController {
                 Map<String, String> planMap = new HashMap<>();
                 Matcher companyMatch = Pattern.compile("회사:(.*?) 공고명:").matcher(plan);
                 Matcher titleMatch = Pattern.compile("공고명:(.*?) 마감일:").matcher(plan);
-                Matcher enddtMatch = Pattern.compile("마감일:(.*)").matcher(plan);
+                Matcher enddtMatch = Pattern.compile("마감일:(.*?) 공고링크:").matcher(plan);
                 Matcher urlRMatch = Pattern.compile("공고링크:(.*)").matcher(plan);
 
                 if (companyMatch.find()) {
@@ -113,6 +113,8 @@ public class recommendController {
 		        String scheContent = requestData.get("sche_content");
 		        String scheDtStr = requestData.get("sche_dt");
 		        String scheTmStr = requestData.get("sche_tm");
+		        String scheFile = requestData.get("sche_file");
+		        
 
 		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -128,10 +130,11 @@ public class recommendController {
 		        sc.setUserId(userId);
 		        sc.setScheDt(sqlDate);
 		        sc.setScheTm(sqlTime);
+		        sc.setScheFile(scheFile);
+		        
 		        
 		        // 기본값 NULL 처리
 		        sc.setScheColor(null);
-		        sc.setScheFile(null);
 		        sc.setScheType(null);
 		        sc.setScheStatus(null);
 
