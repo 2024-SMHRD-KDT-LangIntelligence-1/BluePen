@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Noto Sans KR", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 105vw;
+    height: 100vh;
+    background-color: white;
+    flex-direction: column;
+    overflow: hidden;
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+    padding: 5vh 5vw; /* 좌우 여유 공간 추가 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.logo {
+font-size: 24px;
+color: #3b6fd9;
+font-weight: bold;
+margin-bottom: 15px;
+text-align: center; /* 중앙 정렬 */
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.logo-container img {
+    height: 50px;
+}
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+.next-btn {
+    background-color: #4675C0;
+    color: white;
+    border: none;
+    padding: 18px;
+    width: 93%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.next-btn:hover {
+    background-color: #335bb5;
+}
+.category {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.selection-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 110%;
+}
+.options-wrapper {
+    display: flex;
+    align-items: center;
+    width: 85%; /* 여유 공간을 위해 조정 */
+    overflow: hidden;
+}
+.options {
+    display: flex;
+    gap: 15px; /* 박스 간격 조정 */
+    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.option {
+    background-color: #ddd;
+    width: 19.2%; /* 4개만 보이도록 조정 */
+    height: 120px;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 120px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.option.selected {
+    background-color: #4675C0;
+    color: white;
+}
+.arrow {
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(10, 10, 10);
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px; /* 여유 공간 유지 */
+}
