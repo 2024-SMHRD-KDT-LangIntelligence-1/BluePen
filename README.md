@@ -83,13 +83,20 @@
 ## 🖥 화면 구성
 
 ### 로그인/회원가입
-<br>
+![Image](https://github.com/user-attachments/assets/13cdd2e6-0982-4112-ac93-db7c51b66a49)<br>
+![Image](https://github.com/user-attachments/assets/c7dae79a-5cbd-43c8-be65-fd6935d37217)<br>
 
 ### 제로파티데이터터/마이페이지
-<br>
+![Image](https://github.com/user-attachments/assets/fb4c8c8f-a351-47aa-8f23-250a24a1c8d4)<br>
+![Image](https://github.com/user-attachments/assets/57526a2b-10c2-46bc-9dff-fdb615675a9b)<br>
 
-### 메인페이지/추천페이지/리스트/캘린더
+### 메인페이지/추천페이지/리스트/캘린더/이력서첨삭
+![Image](https://github.com/user-attachments/assets/ff743179-0ea9-41eb-8ea7-3739ee08f0ec)<br>
 <br>
+![Image](https://github.com/user-attachments/assets/c5fcf9ab-7d9e-4e3d-a31b-732d07292ec2)<br>
+![Image](https://github.com/user-attachments/assets/b0237a94-6736-49dd-8ee0-0b02e7ecfd4c)<br>
+![Image](https://github.com/user-attachments/assets/0ed14d43-7661-444e-932f-5e919fbf7698)<br>
+
 
 ## 👨‍👩‍👦‍👦 팀원 역할
 <table>
