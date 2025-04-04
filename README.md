@@ -69,26 +69,26 @@
 <br>
 
 ## ⚙ 시스템 아키텍처(구조) 예시 
-<br>
+![Image](https://github.com/user-attachments/assets/5f7a42bb-05a0-4d5a-a8d5-8499e1ef296e)<br>
 
 ## 📌 SW유스케이스
-<br>
+![Image](https://github.com/user-attachments/assets/f93f1cc7-b03e-41e8-8041-2b8e6ab1feb5)<br>
 
 ## 📌 서비스 흐름도
-<br>
+[서비스흐름도(CoThink팀).pdf](https://github.com/user-attachments/files/19599211/CoThink.pdf)<br>
 
 ## 📌 ER다이어그램
-<br>
+![Image](https://github.com/user-attachments/assets/135e468b-b089-4b90-85c3-7607dea65904)<br>
 
 ## 🖥 화면 구성
 
 ### 로그인/회원가입
 <br>
 
-### 카드등록/계좌등록/마이페이지
+### 제로파티데이터터/마이페이지
 <br>
 
-### 메인페이지/카드추천/캘린더/데일리/검색
+### 메인페이지/추천페이지/리스트/캘린더
 <br>
 
 ## 👨‍👩‍👦‍👦 팀원 역할
@@ -126,7 +126,7 @@
 	<ul>
 	<li></li>
 	<li></li>
-	<li>D</li>
+	<li></li>
 	</ul>
     </td>
     <td align="left">
