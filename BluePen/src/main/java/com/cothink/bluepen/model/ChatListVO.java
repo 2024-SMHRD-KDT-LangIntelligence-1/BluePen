@@ -9,6 +9,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class ChatListVO {
 	private Integer promptIdx;
-	private String firstMessage;
+	private String chatContent;
 	private Timestamp createdAt;
 }

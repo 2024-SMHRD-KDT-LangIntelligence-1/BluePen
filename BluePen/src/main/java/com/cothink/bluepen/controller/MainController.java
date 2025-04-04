@@ -78,6 +78,12 @@ public class MainController {
 		return "editing";
 	}
 
+	@GetMapping("/upload")
+	public String upload() {
+
+		return "upload";
+	}
+
 //	@GetMapping("/mypage")
 //	public String mypage() {
 //
