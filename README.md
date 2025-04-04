@@ -75,7 +75,7 @@
 ![Image](https://github.com/user-attachments/assets/f93f1cc7-b03e-41e8-8041-2b8e6ab1feb5)<br>
 
 ## 📌 서비스 흐름도
-[서비스흐름도(CoThink팀).pdf](https://github.com/user-attachments/files/19599211/CoThink.pdf)<br>
+![Image](https://github.com/user-attachments/assets/92c3d82e-3073-44ae-8cb4-a4ff200badaa)<br>
 
 ## 📌 ER다이어그램
 ![Image](https://github.com/user-attachments/assets/135e468b-b089-4b90-85c3-7607dea65904)<br>
@@ -156,7 +156,7 @@
 	* 해결 방법<br>
 
 
-* 문제 상황 2<br>
+* 문제 상황 2 <br>
 
 
 	* 문제 원인<br>
