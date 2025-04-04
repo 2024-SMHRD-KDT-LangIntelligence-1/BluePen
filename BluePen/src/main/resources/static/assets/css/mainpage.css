@@ -190,3 +190,28 @@ form {
   margin-left: 0;
   width: 100%;
 }
+
+#side-task-list1 li {
+  display: flex;
+  justify-content: space-between;  /* ❗ 글자와 버튼 양쪽으로 */
+  align-items: center;
+  padding: 4px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+#side-task-list1 li span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;  /* 버튼과 텍스트 간격 */
+}
+

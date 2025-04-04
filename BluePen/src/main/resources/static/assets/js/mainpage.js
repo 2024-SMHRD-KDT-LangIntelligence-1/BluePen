@@ -74,3 +74,37 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 500);
    }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const userInput = document.getElementById("user-input");
+  const sideList = document.getElementById("side-task-list1");
+
+
+  userInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const value = userInput.value.trim();
+      if (value === "") return;
+
+      const li = document.createElement("li");
+
+      const textSpan = document.createElement("span");
+      textSpan.textContent = value.length > 14 ? value.substring(0, 14) : value;
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "✖";
+      delBtn.className = "delete-btn";
+	  delBtn.onclick = function () {
+	    const confirmDelete = confirm("삭제하시겠습니까?");
+	    if (confirmDelete) {
+	      li.remove(); // 확인 누르면 삭제!!
+	    }
+	  };
+
+      li.appendChild(textSpan);
+      li.appendChild(delBtn);
+
+      sideList.prepend(li);
+      userInput.value = "";
+    }
+  });
+});
