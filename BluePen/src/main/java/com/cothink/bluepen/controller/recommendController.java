@@ -112,7 +112,7 @@ public class recommendController {
 		        String scheTitle = requestData.get("sche_title");
 		        String scheContent = requestData.get("sche_content");
 		        String scheDtStr = requestData.get("sche_dt");
-		        String scheTmStr = requestData.get("sche_tm");
+		        String scheTmStr = "08:30:00";
 		        String scheFile = requestData.get("sche_file");
 		        
 
@@ -134,8 +134,8 @@ public class recommendController {
 		        
 		        
 		        // 기본값 NULL 처리
-		        sc.setScheColor("#5F8B4C");
-		        sc.setScheType("자격증");
+		        sc.setScheColor("#FF9A9A");
+		        sc.setScheType("취업");
 		        sc.setScheStatus(null);
 
 		        scheduleRepo.save(sc);

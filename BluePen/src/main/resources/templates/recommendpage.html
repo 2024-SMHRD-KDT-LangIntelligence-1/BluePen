@@ -11,56 +11,52 @@
 <link rel="stylesheet" href="assets/css/list.css" />
 </head>
 <body>
-    <!--사이드바 -->
-    <header class="topbar" th:replace="~{topbar}"></header>
-    <div class="container">
-      <div class="buttons">
-        <button onclick="confirmDeleteAll()">전체삭제</button>
-        <select id="itemsPerPage" onchange="updateItemsPerPage()">
-          <option value="5" selected>5개씩</option>
-          <option value="10">10개씩</option>
-          <option value="15">15개씩</option>
-          <option value="20">20개씩</option>
-        </select>
-      </div>
+	<!--사이드바 -->
+	<header class="topbar" th:replace="~{topbar}"></header>
+	<div class="container">
+		<div class="buttons">
+			<button onclick="confirmDeleteAll()">전체삭제</button>
+			<select id="itemsPerPage" onchange="updateItemsPerPage()">
+				<option value="5" selected>5개씩</option>
+				<option value="10">10개씩</option>
+				<option value="15">15개씩</option>
+				<option value="20">20개씩</option>
+			</select>
+		</div>
 
-        <!-- 일정 리스트 -->
-        <div class="job-list" id="schedule-list">
-            <!-- 추천된 일정들을 반복해서 출력 -->
-            <div class="job-item" th:each="plan : ${parsedPlans}">
-                <div class="job-category" th:text="${plan.sche_type}">기타</div> <!-- 일정 타입 -->
-                <div class="company-name"></div> <!-- 회사명 (옵션) -->
-                
-                <div class="job-info">
-                    <div class="job-details">
-                        <div class="job-title" th:text="${plan.sche_title}">공고명</div> <!-- 공고명 -->
-                        <div class="job-meta" th:text="'날짜: ' + ${plan.sche_dt} + ' 시간: ' + ${plan.sche_tm}">날짜 및 시간</div> <!-- 날짜 및 시간 -->
-                    </div>
+		<!-- 일정 리스트 -->
+		<div class="job-list" id="schedule-list">
+			<!-- 추천된 일정들을 반복해서 출력 -->
+			<div class="job-item" th:each="plan : ${parsedPlans}">
+				<div class="company-name" th:text="${plan.company}">회사명</div>
+				<div class="job-info">
+					<div class="job-details">
+						<div class="job-title" th:text="${plan.title}">공고명</div>
+						<div class="job-extra">추천된 공고</div>
+					</div>
 
-                    <!-- 공고 내용과 링크 -->
-                    <div class="job-extra">
-                        <div class="job-content" th:text="${plan.sche_content}">공고 내용</div> <!-- 공고 내용 -->
-                        
-                        <!-- 공고 파일 링크 -->
-                        <div th:if="${plan.sche_file != null and plan.sche_file != ''}">
-                            <a th:href="${plan.sche_file}" target="_blank" style="font-size: 13px; color: #007bff; text-decoration: underline;">
-                                공고페이지로 이동
-                            </a>
-                        </div>
-                    </div>
+					<div class="job-content">
+						<div class="job-file" th:text="${plan.urlR}"></div>
+					</div>
 
-                    <!-- 마감일자 -->
-                    <div class="job-deadline" th:text="'마감일자: ' + ${plan.sche_dt}">마감일자</div> <!-- 마감일자 -->
-                </div>
+					<!-- <div class="job-content" th:text="${plan.urlR}">공고 내용</div>
+					<div th:if="${plan.urlR != null and plan.urlR != ''}">
+						<a th:href="${plan.urlR}" target="_blank"
+							style="font-size: 13px; color: #007bff; text-decoration: underline;">
+							공고페이지로 이동 </a>
+					</div> -->
 
-                <!-- 삭제 버튼 -->
-                <button class="apply-btn delete-btn homepage" th:attr="onclick='confirmDelete(' + ${plan.scheIdx} + ')'">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-<script>
+					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
+					<div class="job-deadline" th:text="${plan.endtm}"></div>
+				</div>
+				<button class="add-schedule" onclick="addToDatabase(this)">
+					<i class="fa-solid fa-plus"></i>
+				</button>
+			</div>
+
+		</div>
+	</div>
+	<script>
   function addToDatabase(button) {
       // 부모 요소(.job-item)에서 데이터 가져오기
       let jobItem = button.closest(".job-item");

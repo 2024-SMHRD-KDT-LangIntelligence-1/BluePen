@@ -55,7 +55,7 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
       uploadBtn.disabled = false; // 버튼 활성화
 
       // 파일 업로드 처리
-      const formData = new FormData();
+      /*const formData = new FormData();
       formData.append("resumeFile", file);
 
       fetch("http://localhost:8085/upload", {
@@ -69,6 +69,6 @@ document.getElementById("resumeFile").addEventListener("change", function(event)
          .catch(error => {
             console.error("파일 업로드 실패:", error);
             alert("파일 업로드 중 오류가 발생했습니다.");
-         });
+         });*/
    }
 });
