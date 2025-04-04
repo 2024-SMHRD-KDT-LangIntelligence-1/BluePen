@@ -221,4 +221,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ✅ 창 크기 바뀔 때마다 감지해서 실행
   window.addEventListener("resize", handleResponsiveSidebar);
+  
+  // ✅ 8글자만 자르기 추가
+  title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;
+  
+  const title = document.createElement("span");
+  title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;
+  
+  
 });
