@@ -1,0 +1,174 @@
+# LLM기반의 RAG 기술을 활용한 개인 맞춤 취업 일정 관리 서비스 BLUE PEN (팀명: CoThink)
+
+
+## 👀 서비스 소개
+* 서비스명 : LLM기반의 RAG 기술을 활용한 개인 맞춤 취업 일정 관리 서비스
+* 서비스설명
+   <p>1. 서비스</P>
+   <p>2. 서비스</p>
+<br>
+
+## 📅 프로젝트 기간
+2025.02.26 ~ 2025.04.09
+<br>
+
+## ⭐ 주요 기능
+* 제로파티데이터
+* AI 챗봇 대화
+* 이력서 첨삭
+* 일정 자동관리
+* 실시간 알림
+<br>
+
+## ⛏ 기술스택
+<table>
+    <tr>
+        <th>구분</th>
+        <th>내용</th>
+    </tr>
+    <tr>
+        <td>Front-end</td>
+        <td>
+            <img src=""/>
+            <img src=""/>
+            <img src=""/>
+        </td>
+    </tr>
+    <tr>
+        <td>Back-end</td>
+        <td>
+            <img src=""/>
+            <img src=""/> 
+        </td>
+    </tr>
+    <tr>
+        <td><Database/td>
+        <td>
+            <img src=""/>
+        </td>
+    </tr>
+    <tr>
+        <td>Framework & Library</td>
+        <td>
+            <img src=""/>
+            <img src=""/>
+            <img src=""/>
+        </td>
+    </tr>
+    <tr>
+        <td>IDE & etc</td>
+        <td>
+            <img src=""/>
+            <img src=""/>
+            <img src=""/>
+        </td>
+    </tr>
+</table>
+
+
+<br>
+
+## ⚙ 시스템 아키텍처(구조) 예시 
+<br>
+
+## 📌 SW유스케이스
+<br>
+
+## 📌 서비스 흐름도
+<br>
+
+## 📌 ER다이어그램
+<br>
+
+## 🖥 화면 구성
+
+### 로그인/회원가입
+<br>
+
+### 카드등록/계좌등록/마이페이지
+<br>
+
+### 메인페이지/카드추천/캘린더/데일리/검색
+<br>
+
+## 👨‍👩‍👦‍👦 팀원 역할
+<table>
+  <tr>
+    <td align="center"><strong>최민지</strong></td>
+    <td align="center"><strong>박승혁</strong></td>
+    <td align="center"><strong>우지연</strong></td>
+    <td align="center"><strong>정규연</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Front-end, Back-end</b></td>
+    <td align="center"><b>Front-end, Back-end</b></td>
+    <td align="center"><b>Front-end, Back-end, Modeling</b></td>
+    <td align="center"><b>Backend, DB 설계,배포</b></td>
+  </tr>
+  <tr>
+    <td align="left">
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+    </td>
+    <td align="left">
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+    </td>
+    <td align="left">
+	<ul>
+	<li></li>
+	<li></li>
+	<li>D</li>
+	</ul>
+    </td>
+    <td align="left">
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+    </td>
+    <td align="left">
+	<ul>
+	<li></li></li>
+	<li></li>
+	<li></li>
+	</ul>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/mingd2" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/parkseroy" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/WJyeon" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/gyuuuu00" target='_blank'>github</a></td>
+  </tr>
+</table>
+
+## 🤾‍♂️ 트러블슈팅
+
+* 문제 상황 1<br>
+프로젝트에서 form 태그 없이 view에서 controller로 데이터를 전송해야 하는 상황에서 어려움을 겪음. 수업에서는 HTML의 form 태그를 사용하여 데이터를 서버로 전송하는 방법을 배웠으나, 입력이 필수로 들어가야 했기에 프로젝트에서는 사용이 부적절하였음.
+
+	* 문제 원인<br>
+	HTML의 form 태그를 사용하지 않으면 데이터를 서버로 전송하는 방법이 제한적이며. 이에 따라 Ajax 비동기 교환 기법을 통해 데이터를 전송하는 방법을 찾아야 했음.
+
+	* 해결 방법<br>
+	JavaScript의 Ajax를 사용하여 view에서 controller로 데이터를 비동기적으로 전송함.
+
+* 문제 상황 2<br>
+프로젝트에서 form 태그 없이 view에서 controller로 데이터를 전송해야 하는 상황에서 어려움을 겪음. 수업에서는 HTML의 form 태그를 사용하여 데이터를 서버로 전송하는 방법을 배웠으나, 입력이 필수로 들어가야 했기에 프로젝트에서는 사용이 부적절하였음.
+
+	* 문제 원인<br>
+	HTML의 form 태그를 사용하지 않으면 데이터를 서버로 전송하는 방법이 제한적이며. 이에 따라 Ajax 비동기 교환 기법을 통해 데이터를 전송하는 방법을 찾아야 했음.
+
+	* 해결 방법<br>
+	JavaScript의 Ajax를 사용하여 view에서 controller로 데이터를 비동기적으로 전송함.
