@@ -29,26 +29,26 @@
     <tr>
         <td>Development Environment</td>
         <td>
-	![Image](https://github.com/user-attachments/assets/63b4891a-33aa-4138-a974-e7912971a053)
+	![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
 	![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
 	![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=flat&logo=eclipseide&logoColor=white)
 	![Naver Cloud](https://img.shields.io/badge/Naver_Cloud-03C75A?style=flat&logo=naver&logoColor=white)
-	![Image](https://github.com/user-attachments/assets/ad20687d-0c02-4af2-b485-40524f6cde03)
+	![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
         </td>
     </tr>
     <tr>
         <tdProgramming Languages</td>
         <td>
-	![Image](https://github.com/user-attachments/assets/877fed72-430e-46fe-8a93-8d3992c9b4b4)
-	![Image](https://github.com/user-attachments/assets/f91f0a86-3246-4666-9d54-63c9f5ccec45)
-	![Image](https://github.com/user-attachments/assets/0ef746c9-9695-4b6c-8ff6-422fac142800)
-	![Image](https://github.com/user-attachments/assets/9bdb1f76-ff39-4d22-a25b-25fde05cd9d1)
+	![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+	![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+	![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+	![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white)
         </td>
     </tr>
     <tr>
         <td>Frameworks & Libraries</td>
         <td>
-	![Spring Boot](https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=springboot&logoColor=white)
+	![Spring](https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white)
 	![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
 	![Chroma](https://img.shields.io/badge/Chroma-FFD700?style=flat&logoColor=black)
         </td>
@@ -62,7 +62,7 @@
     <tr>
         <td>External APIs</td>
         <td>
-	![Public Data Portal](https://img.shields.io/badge/DATA.GO.KR-005BAC?style=flat&logo=data:image/svg+xml;base64,&logoColor=white)
+	![DATA.GO.KR](https://img.shields.io/badge/DATA.GO.KR-005BAC?style=flat&logo=data:image/svg+xml;base64,&logoColor=white)
 	![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F?style=flat&logo=openai&logoColor=white)
 	![Saramin](https://img.shields.io/badge/Saramin-1E90FF?style=flat&logo=data:image/svg+xml;base64,&logoColor=white)
         </td>
