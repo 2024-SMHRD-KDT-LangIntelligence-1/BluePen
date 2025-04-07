@@ -27,43 +27,49 @@
         <th>내용</th>
     </tr>
     <tr>
-        <td>Front-end</td>
-        <td>
-            <img src=""/>
-            <img src=""/>
-            <img src=""/>
-        </td>
-    </tr>
-    <tr>
-        <td>Back-end</td>
-        <td>
-            <img src=""/>
-            <img src=""/> 
-        </td>
-    </tr>
-    <tr>
-        <td><Database/td>
-        <td>
-            <img src=""/>
-        </td>
-    </tr>
-    <tr>
-        <td>Framework & Library</td>
-        <td>
-            <img src=""/>
-            <img src=""/>
-            <img src=""/>
-        </td>
-    </tr>
-    <tr>
-        <td>IDE & etc</td>
-        <td>
-            <img src=""/>
-            <img src=""/>
-            <img src=""/>
-        </td>
-    </tr>
-</table>
+	<table>
+	  <tr>
+	    <td><strong>Development Environment</strong></td>
+	    <td>
+	      <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/Naver_Cloud-03C75A?style=for-the-badge&logo=naver&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td><strong>Programming Languages</strong></td>
+	    <td>
+	      <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+	      <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td><strong>Frameworks & Libraries</strong></td>
+	    <td>
+	      <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/ChromaDB-FFD700?style=for-the-badge&logoColor=black"/>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td><strong>Database</strong></td>
+	    <td>
+	      <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td><strong>External APIs</strong></td>
+	    <td>
+	      <img src="https://img.shields.io/badge/ChatGPT-10A37F?style=for-the-badge&logo=openai&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/Saramin_API-004F9E?style=for-the-badge&logoColor=white"/>
+	      <img src="https://img.shields.io/badge/Public_Data_API-005BAC?style=for-the-badge&logoColor=white"/>
+	    </td>
+	  </tr>
+	</table>
 
 
 <br>
