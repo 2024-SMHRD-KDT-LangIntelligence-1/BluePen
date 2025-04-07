@@ -120,33 +120,41 @@
   <tr>
     <td align="left">
 	<ul>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>시작페이지/메인화면 페이지 구현</li>
+	<li>캘린더 페이지 구현</li>
+	<li>상단바/사이드바 구현</li>
+	<li>공공데이터-채용공고API연동</li>
+	<li>캘린더 DB 연동</li>
 	</ul>
     </td>
     <td align="left">
 	<ul>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>회원가입/로그인 페이지 구</li>
+	<li>마이페이지/리스트/이력서첨삭 페이지 구</li>
+	<li>제로파티데이터 페이지 구현</li>
+	<li>북마크/알림설정 구현</li>
+	<li>마이페이지/제로파티데이터 DB 연동</li>
 	</ul>
     </td>
     <td align="left">
 	<ul>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>추천받기/이력서 첨삭 페이지 구</li>
+	<li>챗봇 및 이력서 첨삭 구현</li>
+	<li>RESTfulAPI 구축 및 연동</li>
+	<li>공공데이터-자격증API연동</li>
+	<li>회원가입/로그인/추천받기 일정 DB연동</li>
+	<li>RAG검색기 구현</li>
+	<li>프롬프트 엔지니어링</li>
+	<li>데이터 모델링 및 전처리</li>
 	</ul>
     </td>
     <td align="left">
 	<ul>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>마이페이지 구현 </li>
+	<li>사람인 - 채용공고 API 연동</li>
+	<li> DB 설계 및 구축</li>
+	<li>SNS - 카카오 로그인 기능</li>
+	<li>NCP 환경 설정 및 서버 배포</li>
 	</ul>
     </td>
   </tr>
