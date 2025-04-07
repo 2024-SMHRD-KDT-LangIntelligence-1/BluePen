@@ -29,42 +29,42 @@
     <tr>
         <td>Development Environment</td>
         <td>
-	![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
-	![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
-	![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=flat&logo=eclipseide&logoColor=white)
-	![Naver Cloud](https://img.shields.io/badge/Naver_Cloud-03C75A?style=flat&logo=naver&logoColor=white)
-	![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+	![Image](https://github.com/user-attachments/assets/60bb9ba7-78f8-4eb3-b891-079fe82c48ac)
+	![Image](https://github.com/user-attachments/assets/0ca87733-47de-4650-bc53-5db916dddf8b)
+	![Image](https://github.com/user-attachments/assets/6762adb4-ed78-45d0-9ee5-85e791cfefd4)
+	![Image](https://github.com/user-attachments/assets/ec2b5e96-276c-42a4-b0ed-b3234fc48079)
+	![Image](https://github.com/user-attachments/assets/ff43ce33-65e4-48a9-ade7-f8c50b53940d)
         </td>
     </tr>
     <tr>
-        <tdProgramming Languages</td>
+        <td>Programming Languages</td>
         <td>
-	![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-	![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-	![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-	![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white)
+	![Image](https://github.com/user-attachments/assets/5191e476-cf48-43c0-949a-e5492ef30098)
+	![Image](https://github.com/user-attachments/assets/2227ed14-1d8c-4127-90cd-14c4c31ef82c)
+	![Image](https://github.com/user-attachments/assets/079ff4d3-6514-431d-8c35-bf82db673dbf)
+	![Image](https://github.com/user-attachments/assets/2046886b-3c5b-4711-9537-11d70d19edd8)
         </td>
     </tr>
     <tr>
         <td>Frameworks & Libraries</td>
         <td>
-	![Spring](https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white)
-	![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
-	![Chroma](https://img.shields.io/badge/Chroma-FFD700?style=flat&logoColor=black)
+	![Image](https://github.com/user-attachments/assets/46278e75-9c65-44e0-9a05-ab4c9db2894a)
+	![Image](https://github.com/user-attachments/assets/2c3dc3a7-1a2d-4aff-9ff4-35d076be0505)
+	![Image](https://github.com/user-attachments/assets/1f52e812-653b-420f-aff5-ad2576b6ef47)
         </td>
     </tr>
     <tr>
         <td>Database</td>
         <td>
-	![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+	![Image](https://github.com/user-attachments/assets/c79ddfe4-8845-45c0-afa4-e4997696ccae)
         </td>
     </tr>
     <tr>
         <td>External APIs</td>
         <td>
-	![DATA.GO.KR](https://img.shields.io/badge/DATA.GO.KR-005BAC?style=flat&logo=data:image/svg+xml;base64,&logoColor=white)
-	![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F?style=flat&logo=openai&logoColor=white)
-	![Saramin](https://img.shields.io/badge/Saramin-1E90FF?style=flat&logo=data:image/svg+xml;base64,&logoColor=white)
+	![Image](https://github.com/user-attachments/assets/903a1718-e171-451a-82b7-95f530883b22)
+	![Image](https://github.com/user-attachments/assets/30c7bd5b-6a1f-4418-8cea-6df9c59d551d)
+	![Image](https://github.com/user-attachments/assets/fdf048c2-a694-424d-9e2e-d59dd58b276e)
         </td>
     </tr>
 </table>
