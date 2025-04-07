@@ -18,36 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cothink.bluepen.entity.TblUser;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/upload")
 public class RecruitUploadController {
-	
-	
-	 private static final String FASTAPI_URL = "http://localhost:8000/upload"; // FastAPI 서버 URL
-	
-	 @PostMapping
-	    public ResponseEntity<String> uploadResume(@RequestParam("resumeFile") MultipartFile file) throws IOException {
-	        if (file.isEmpty()) {
-	            return ResponseEntity.badRequest().body("파일이 없습니다.");
-	        }
 
-	        // PDF 파일만 허용
-	        if (!file.getContentType().equals("application/pdf")) {
-	            return ResponseEntity.badRequest().body("PDF 파일만 업로드 가능합니다.");
-	        }
+	private static final String FASTAPI_URL = "http://localhost:8000/upload"; // FastAPI 서버 URL
 
-	        // FastAPI로 파일을 바로 전송
-	        RestTemplate restTemplate = new RestTemplate();
-	        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-	        body.add("file", file.getResource()); // 파일 리소스를 직접 전송
+	@PostMapping
+	public ResponseEntity<String> uploadResume(@RequestParam("resumeFile") MultipartFile file, HttpSession session) throws IOException {
+		TblUser uid = (TblUser) session.getAttribute("user");
+		String userid = uid.getUserId();
+		
+		if (file.isEmpty()) {
+			return ResponseEntity.badRequest().body("파일이 없습니다.");
+		}
 
-	        HttpHeaders headers = new HttpHeaders();
-	        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+		// PDF 파일만 허용
+		if (!file.getContentType().equals("application/pdf")) {
+			return ResponseEntity.badRequest().body("PDF 파일만 업로드 가능합니다.");
+		}
 
-	        ResponseEntity<String> response = restTemplate.postForEntity(FASTAPI_URL, requestEntity, String.class);
+		// FastAPI로 파일을 바로 전송
+		RestTemplate restTemplate = new RestTemplate();
+		MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+		body.add("file", file.getResource()); // 파일 리소스를 직접 전송
+		body.add("userid", userid);
 
-	        return ResponseEntity.ok("FastAPI 응답: " + response.getBody());
-	    }
-	
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+		ResponseEntity<String> response = restTemplate.postForEntity(FASTAPI_URL, requestEntity, String.class);
+
+		return ResponseEntity.ok("FastAPI 응답: " + response.getBody());
+	}
+
 }

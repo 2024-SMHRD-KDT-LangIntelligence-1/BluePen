@@ -36,15 +36,13 @@
 					</div>
 
 					<div class="job-content">
-						<div class="job-file" th:text="${plan.urlR}"></div>
-					</div>
-
-					<!-- <div class="job-content" th:text="${plan.urlR}">공고 내용</div>
-					<div th:if="${plan.urlR != null and plan.urlR != ''}">
+						
+					<div  class="job-file" th:if="${plan.urlR != null and plan.urlR != ''}">
 						<a th:href="${plan.urlR}" target="_blank"
 							style="font-size: 13px; color: #007bff; text-decoration: underline;">
 							공고페이지로 이동 </a>
-					</div> -->
+					</div>
+					</div>
 
 					<div class="job-deadline" th:text="${plan.enddt}">마감일</div>
 					<div class="job-deadline" th:text="${plan.endtm}"></div>
