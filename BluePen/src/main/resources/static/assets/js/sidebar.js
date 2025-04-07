@@ -223,10 +223,10 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", handleResponsiveSidebar);
   
   // ✅ 8글자만 자르기 추가
-  title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;
+  /*title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;
   
   const title = document.createElement("span");
-  title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;
+  title.textContent = chat.firstMessage.length > 8 ? chat.firstMessage.substring(0, 8) : chat.firstMessage;*/
   
   
 });

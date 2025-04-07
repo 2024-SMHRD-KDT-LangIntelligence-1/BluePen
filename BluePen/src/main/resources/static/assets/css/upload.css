@@ -128,7 +128,6 @@ body {
 
 /* 기존 챗박스 말풍선 */
 .chat-message.bot-message:first-child {
-  display: none;  /* 처음 시작 시 보이지 않게 */
   margin-top: 10px; /* 💥 대화 시작 시 위에 딱 붙는 걸 방지 */
 }
 
@@ -152,8 +151,8 @@ body {
 
 .bot-message {
   align-self: flex-start;
-  background-color: none;
-  color: #1a1a1a;
+  background-color: #e6f0ff;
+  color: #19335a;
   border-bottom-left-radius: 0;
 }
 

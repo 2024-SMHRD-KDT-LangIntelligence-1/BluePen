@@ -1,54 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BLUEPEN EDITING</title>
-    <!-- Font Awesome CDN 추가 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/upload.css" />
-  </head>
-  <body>
-    <!-- 상단바, 사이드바 -->
-    <header class="topbar" th:replace="~{/topbar}"></header>
-    <div class="sidebar" th:replace="~{/sidebar}"></div>
-    <div class="cover">
-      <div class="resume-container">
-        <div class="wrapper hidden">
-          대화 프롬프트
-          <div class="chat-interface">
-            <div th:if="${session.user} != null">
-              <h2
-                class="welcome-message"
-                th:text="${session.user.userId} + '님 첨삭중으로 잠시만 기다려주세요:)'"
-              ></h2>
-            </div>
-            <div class="chat-box" id="chat-box">
-              <div class="chat-message bot-message"></div>
-            </div>
-            <div class="user-input-container">
-              <form>
-                <input
-                  type="text"
-                  id="user-input"
-                  name="text"
-                  placeholder="무엇이든 물어보세요"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BLUEPEN EDITING</title>
+<!-- Font Awesome CDN 추가 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/upload.css" />
+</head>
+<body>
+	<!-- 상단바, 사이드바 -->
+	<header class="topbar" th:replace="~{topbar}"></header>
+	<div class="sidebar" th:replace="~{sidebar}"></div>
+	<div class="cover">
+		<div class="resume-container">
+			대화 프롬프트
+			<div class="chat-interface">
 
-    <script src="assets/js/upload.js"></script>
-  </body>
+				<div class="chat-box" id="chat-box">
+					<div th:if="${answer} != null">
+						<div class="chat-message bot-message" id="bot-response"
+							th:data-answer="${answer}"></div>
+					</div>
+				</div>
+				<div class="user-input-container">
+					<form>
+						<input type="text" id="user-input" name="text"
+							placeholder="무엇이든 물어보세요" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/js/upload.js"></script>
+</body>
 </html>
 
