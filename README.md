@@ -183,12 +183,24 @@
 
 	* 해결 방법<br>
 
- * 문제 상황 3 <br>
+* 문제 상황 1 <br>
+  RAG의 검색 단계 구현 시, 벡터 db에서 관련 정보를 검색하는 객체인 retriever를 통해서 단일 컬렉션이 아닌, 여러 컬렉션에서 어떻게 데이터를 검색해야 할지 문제를 겪음. <br>
 
+	* 채용공고의 임베딩데이터가 저장된 recruit_collection <br/>
+	  자격증의 임베딩데이터가 저장된 license_collection <br/>
+	  이 collection은 전혀 다른 의미를 가지는 데이터이므로 하나의 collection으로 통합하게 되면 검색 정확도 저하 발생<br/>
+	  서로 다른 collection에서 데이터를 검색하고 응답을 줄 때 반영해야 하기 위해선 retriever를 각각 생성해야 함<br/>
+   
+	* 해결 : Ensemble retriever(앙상블 리트리버) <br/>
+	  여러개의 retriever(벡터db를 검색하는 객체)를 한번에 사용할 수 있게해주는 검색도구 사용 </br>
+   	  ![image.png](attachment:99dfd0e0-761e-469b-97d6-56766f5e849f:image.png) </br>
+      
+    	  채용공고를 검색하는 recruit_retriever, 자격증을 검색하는 license_retriever  이 두개의 retriever를 Ensembel retriever를 통해 결합</br>
+          ![image.png](attachment:db22076d-6290-47db-8c58-656c9649c382:image.png) </br>
 
-	* 문제 원인<br>
-
-	* 해결 방법<br>
+   	  답변을 구조화하기 위한 chain생성시 검색기로 결합된 retriever 설정 </br>
+	  ![image.png](attachment:dcf09fbd-af7b-4e2a-9247-015ea3e8e0bc:image.png) </br>
+	  따라 채용공고와 자격증에서 검색을 수행하고 응답할 때 검색 결과를 반영하여 응답할 수 있음</br>
 
  * 문제 상황 4 <br>
 
