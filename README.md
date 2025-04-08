@@ -184,7 +184,7 @@
    	  답변을 구조화하기 위한 chain생성시 검색기로 결합된 retriever 설정 </br>
 
 
- * 문제 상황 4 <br>
+ * 문제 상황 2 <br>
 
 
 	* 문제 원인<br>
@@ -192,5 +192,11 @@
    		
 	* 해결 방법<br>
  		- 서버 문제라 생각해서 ACG(방화벽 설정) 체크 - 8000포트, 8085포트, 22포트, 3307포트(SQL) 전부 연결
-   		- 
+   		- 컨트롤러 또는 API 로직 점검 - 에러가 발생하는 화면의 컨트롤러 정상 작동
+   		- 애플리케이션 설정 - application.properies 확인 - 데이터 베이스 연결, 외부 서비스 통신 체크
+   		- 서버 로그 확인 - log.txt 생성으로 로그 확인
+   			- /var/log 경로에서 Thymeleaf 템플릿 관련 오류 발생
+        		 org.thymeleaf.exceptions.TemplateInputException: Error resolving template [topbar], template might not exist or might not be accessible
+        		- 문법 오류 찾아 해결
+	<br> log 파악을 우선시하고, 서버 문제 이외 백엔드 코드, 프론트 코드까지 점검하는 습관의 중요성을 느끼고 범위를 좁혀가며 오류를 찾아 해결하는 방법을 알게됨 </br>
 
