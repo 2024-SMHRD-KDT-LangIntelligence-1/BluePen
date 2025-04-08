@@ -29,9 +29,50 @@ document.getElementById("new-chat-btn").addEventListener("click", async function
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // 알람 토글 함수
+function renderAlrams() {
+  const alramPopup = document.getElementById("alramPopup");
+  alramPopup.innerHTML = ""; // 초기화
+
+  const alarms = [
+    {
+      title: "취업 일정 알림",
+      time: "D-3",
+      body: "삼성전자 면접이 3일 남았습니다. 준비하세요!"
+    },
+    {
+      title: "취업 일정 알림",
+      time: "D-5",
+      body: "네이버 서류 마감이 5일 남았습니다."
+    },
+    {
+      title: "취업 일정 알림",
+      time: "D-7",
+      body: "LG CNS 코딩 테스트가 7일 후 예정입니다."
+    },
+  ];
+
+  alarms.forEach(alarm => {
+    const alramItem = document.createElement("div");
+    alramItem.className = "alram-item";
+
+    alramItem.innerHTML = `
+      <div class="alram-title">${alarm.title}</div>
+      <div class="alram-time">${alarm.time}</div>
+      <div class="alram-body">${alarm.body}</div>
+    `;
+
+    alramPopup.appendChild(alramItem);
+  });
+}
+
 function toggleAlram() {
-  const alramContainer = document.getElementById('alramContainer'); // 알람 목록 컨테이너 선택
-  alramContainer.style.display = alramContainer.style.display === 'none' || alramContainer.style.display === '' ? 'block' : 'none'; // 보이거나 숨기기
+  const alramContainer = document.getElementById("alramContainer");
+  if (alramContainer.style.display === "block") {
+    alramContainer.style.display = "none";
+  } else {
+    alramContainer.style.display = "block";
+    renderAlrams(); // 알람 표시
+  }
 }
 
 // 알람 데이터
@@ -225,3 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.renderBookmarks = renderBookmarks;  // 렌더 함수도 공유!
   renderBookmarks(); // 초기 렌더링
 });
+
+function toggleBookmarkPopup() {
+  const popup = document.getElementById("bookmarkPopup");
+  popup.classList.toggle("visible");
+}

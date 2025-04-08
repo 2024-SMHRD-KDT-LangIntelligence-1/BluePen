@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
    }
 });
 
-/*document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const userInput = document.getElementById("user-input");
   const sideList = document.getElementById("side-task-list1");
 
@@ -107,4 +107,4 @@ document.addEventListener("DOMContentLoaded", function () {
       userInput.value = "";
     }
   });
-});*/
+});
